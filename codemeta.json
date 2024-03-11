@@ -1,0 +1,115 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "identifier": "cocoon",
+  "description": "Provides functions that format statistical output in a way that can be inserted into R Markdown documents. This is analogous to the `apa_print()` functions in the papaja package but prints Markdown or LaTeX syntax.",
+  "name": "cocoon: Extract, Format, and Print Statistical Output",
+  "relatedLink": "https://jeffreyrstevens.github.io/cocoon/",
+  "codeRepository": "https://github.com/JeffreyRStevens/cocoon",
+  "issueTracker": "https://github.com/JeffreyRStevens/cocoon/issues",
+  "license": "https://spdx.org/licenses/GPL-3.0",
+  "version": "0.0.0.9000",
+  "programmingLanguage": {
+    "@type": "ComputerLanguage",
+    "name": "R",
+    "url": "https://r-project.org"
+  },
+  "runtimePlatform": "R version 4.3.3 (2024-02-29)",
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Jeffrey R.",
+      "familyName": "Stevens",
+      "email": "jeffrey.r.stevens@protonmail.com",
+      "@id": "https://orcid.org/0000-0003-2375-1360"
+    }
+  ],
+  "copyrightHolder": [
+    {
+      "@type": "Person",
+      "givenName": "Jeffrey R.",
+      "familyName": "Stevens",
+      "email": "jeffrey.r.stevens@protonmail.com",
+      "@id": "https://orcid.org/0000-0003-2375-1360"
+    }
+  ],
+  "maintainer": [
+    {
+      "@type": "Person",
+      "givenName": "Jeffrey R.",
+      "familyName": "Stevens",
+      "email": "jeffrey.r.stevens@protonmail.com",
+      "@id": "https://orcid.org/0000-0003-2375-1360"
+    }
+  ],
+  "softwareSuggestions": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "knitr",
+      "name": "knitr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=knitr"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "rmarkdown",
+      "name": "rmarkdown",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rmarkdown"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "testthat",
+      "name": "testthat",
+      "version": ">= 3.0.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=testthat"
+    }
+  ],
+  "softwareRequirements": {
+    "1": {
+      "@type": "SoftwareApplication",
+      "identifier": "BayesFactor",
+      "name": "BayesFactor",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=BayesFactor"
+    },
+    "2": {
+      "@type": "SoftwareApplication",
+      "identifier": "dplyr",
+      "name": "dplyr",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=dplyr"
+    },
+    "SystemRequirements": null
+  },
+  "fileSize": "85.064KB",
+  "readme": "https://github.com/JeffreyRStevens/cocoon/blob/main/README.md",
+  "contIntegration": "https://app.codecov.io/gh/JeffreyRStevens/cocoon?branch=main",
+  "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html#experimental"
+}
