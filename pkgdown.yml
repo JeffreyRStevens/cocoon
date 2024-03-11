@@ -2,9 +2,9 @@ pandoc: 3.1.11
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
-  formatstats: formatstats.html
-last_built: 2024-03-11T19:20Z
+  cocoon: cocoon.html
+last_built: 2024-03-11T20:00Z
 urls:
-  reference: https://jeffreyrstevens.github.io/formatstats/reference
-  article: https://jeffreyrstevens.github.io/formatstats/articles
+  reference: https://jeffreyrstevens.github.io/cocoon/reference
+  article: https://jeffreyrstevens.github.io/cocoon/articles
 

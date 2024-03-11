@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://jeffreyrstevens.github.io/formatstats/404.html</loc>
+    <loc>https://jeffreyrstevens.github.io/cocoon/404.html</loc>
   </url>
   <url>
-    <loc>https://jeffreyrstevens.github.io/formatstats/LICENSE.html</loc>
+    <loc>https://jeffreyrstevens.github.io/cocoon/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://jeffreyrstevens.github.io/formatstats/articles/formatstats.html</loc>
+    <loc>https://jeffreyrstevens.github.io/cocoon/articles/cocoon.html</loc>
   </url>
   <url>
-    <loc>https://jeffreyrstevens.github.io/formatstats/articles/index.html</loc>
+    <loc>https://jeffreyrstevens.github.io/cocoon/articles/index.html</loc>
   </url>
   <url>
-    <loc>https://jeffreyrstevens.github.io/formatstats/authors.html</loc>
+    <loc>https://jeffreyrstevens.github.io/cocoon/authors.html</loc>
   </url>
   <url>
-    <loc>https://jeffreyrstevens.github.io/formatstats/index.html</loc>
+    <loc>https://jeffreyrstevens.github.io/cocoon/index.html</loc>
   </url>
   <url>
-    <loc>https://jeffreyrstevens.github.io/formatstats/reference/format_bf.html</loc>
+    <loc>https://jeffreyrstevens.github.io/cocoon/reference/format_bf.html</loc>
   </url>
   <url>
-    <loc>https://jeffreyrstevens.github.io/formatstats/reference/format_corr.html</loc>
+    <loc>https://jeffreyrstevens.github.io/cocoon/reference/format_corr.html</loc>
   </url>
   <url>
-    <loc>https://jeffreyrstevens.github.io/formatstats/reference/format_num.html</loc>
+    <loc>https://jeffreyrstevens.github.io/cocoon/reference/format_num.html</loc>
   </url>
   <url>
-    <loc>https://jeffreyrstevens.github.io/formatstats/reference/format_p.html</loc>
+    <loc>https://jeffreyrstevens.github.io/cocoon/reference/format_p.html</loc>
   </url>
   <url>
-    <loc>https://jeffreyrstevens.github.io/formatstats/reference/format_scientific.html</loc>
+    <loc>https://jeffreyrstevens.github.io/cocoon/reference/format_scientific.html</loc>
   </url>
   <url>
-    <loc>https://jeffreyrstevens.github.io/formatstats/reference/format_summary.html</loc>
+    <loc>https://jeffreyrstevens.github.io/cocoon/reference/format_summary.html</loc>
   </url>
   <url>
-    <loc>https://jeffreyrstevens.github.io/formatstats/reference/format_ttest.html</loc>
+    <loc>https://jeffreyrstevens.github.io/cocoon/reference/format_ttest.html</loc>
   </url>
   <url>
-    <loc>https://jeffreyrstevens.github.io/formatstats/reference/index.html</loc>
+    <loc>https://jeffreyrstevens.github.io/cocoon/reference/index.html</loc>
   </url>
 </urlset>
