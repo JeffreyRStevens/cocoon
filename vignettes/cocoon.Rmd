@@ -1,8 +1,8 @@
 ---
-title: "formatstats"
+title: "cocoon"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{formatstats}
+  %\VignetteIndexEntry{cocoon}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,18 +15,18 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup-real, echo = FALSE, message = FALSE}
-library(formatstats)
+library(cocoon)
 # devtools::load_all(".")
 ```
 
 ```{r setup-show, eval = FALSE}
-library(formatstats)
+library(cocoon)
 ```
 
 One of the most useful features of the [`{papaja}`](https://github.com/crsh/papaja) package is the [`apa_print()`](https://frederikaust.com/papaja_man/reporting.html#statistical-models-and-tests)
 function, which takes a statistical object and formats the output to print the statistical information inline in R Markdown documents. The `apa_print()` function is an easy way to extract and format this statistical information for documents following APA style. However, APA style has some rather strange quirks, and users may want some flexibility in how their statistics are formatted. Moreover, `apa_print()` uses LaTeX syntax, which works great for PDFs but generates images for mathematical symbols when outputting to Word documents. 
 
-The `{formatstats}` package uses APA style as the default, but allows more flexible formatting such as including the leading 0 before numbers with maximum values of 1. All functions accept a `type` argument that specifies either `"md"` for Markdown (default) or `"latex"` for LaTeX. This package can format statistical objects, statistical values, and numbers more generally.
+The `{cocoon}` package uses APA style as the default, but allows more flexible formatting such as including the leading 0 before numbers with maximum values of 1. All functions accept a `type` argument that specifies either `"md"` for Markdown (default) or `"latex"` for LaTeX. This package can format statistical objects, statistical values, and numbers more generally.
 
 
 ## Formatting statistical values
@@ -34,9 +34,9 @@ The `{formatstats}` package uses APA style as the default, but allows more flexi
 ### Central tendency and error
 
 #### Data vectors
-Often, we need to include simple descriptive statistics in our documents, such as measures of central tendency and error. `{formatstats}` includes a suite of functions that can calculate different summary measures of central tendency (mean or median) and error (confidence interval, standard error, standard deviation, interquartile range) from a numeric data vector. With the base function `format_summary()`, you can specify central tendency with the `summary` argument and error with the `error` argument. For instance, `format_summary(vec, summary = "mean", error = "se")` calculates mean and standard error.
+Often, we need to include simple descriptive statistics in our documents, such as measures of central tendency and error. `{cocoon}` includes a suite of functions that can calculate different summary measures of central tendency (mean or median) and error (confidence interval, standard error, standard deviation, interquartile range) from a numeric data vector. With the base function `format_summary()`, you can specify central tendency with the `summary` argument and error with the `error` argument. For instance, `format_summary(vec, summary = "mean", error = "se")` calculates mean and standard error.
 
-`{formatstats}` includes a number of wrapper functions that cover common measures of central tendency and error including:
+`{cocoon}` includes a number of wrapper functions that cover common measures of central tendency and error including:
 
 * `format_meanci()`
 * `format_meanse()`
