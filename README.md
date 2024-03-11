@@ -16,8 +16,8 @@ statistical output in a way that can be inserted into R Markdown or
 Quarto documents. This is analogous to the
 [`apa_print()`](https://frederikaust.com/papaja_man/reporting.html#statistical-models-and-tests)
 functions in the [`{papaja}`](https://github.com/crsh/papaja) package,
-but functions in `{cocoon}` can print Markdown or LaTeX syntax. If
-your output document is a PDF, this doesn’t matter. But if your output
+but functions in `{cocoon}` can print Markdown or LaTeX syntax. If your
+output document is a PDF, this doesn’t matter. But if your output
 document is a Word document (as required by many journal publishers),
 Markdown syntax generates editable output instead of an image of output.
 The default style for statistical output follows [American Psychological
@@ -103,18 +103,18 @@ Fuel efficiency and engine displacement were highly correlated (r =
 
 To cite `{cocoon}`, use:
 
-> Stevens, Jeffrey R. (2024). cocoon: Format and print statistical
-> output. (version 0.0.0.9000)
+> Stevens, Jeffrey R. (2024). cocoon: Extract, format, and print
+> statistical output. (version 0.0.0.9000)
 > <https://github.com/JeffreyRStevens/cocoon>
 
 ## Related packages
 
-- [papaja](https://github.com/crsh/papaja) - This package uses the
+- [`{papaja}`](https://github.com/crsh/papaja) - This package uses the
   `apa_print()` function to convert a number of R statistical objects
   into R Markdown output. However, it only outputs LaTeX syntax and only
   generates APA formatted output with minimal flexibility to alter the
   output.
-- [apa](https://github.com/dgromer/apa) - This package also converts
+- [`{apa}`](https://github.com/dgromer/apa) - This package also converts
   some R statistical objects to R Markdown output. While it allows other
   output format such as Markdown, it also only generates APA formatted
   output with minimal flexibility to alter the output.

@@ -99,12 +99,12 @@ Fuel efficiency and engine displacement were highly correlated
 
 To cite `{cocoon}`, use:
 
-> Stevens, Jeffrey R. (2024). cocoon: Format and print statistical output.
+> Stevens, Jeffrey R. (2024). cocoon: Extract, format, and print statistical output.
 > (version 0.0.0.9000)
 > <https://github.com/JeffreyRStevens/cocoon>
 
 
 ## Related packages
 
-* [papaja](https://github.com/crsh/papaja) - This package uses the `apa_print()` function to convert a number of R statistical objects into R Markdown output. However, it only outputs LaTeX syntax and only generates APA formatted output with minimal flexibility to alter the output.
-* [apa](https://github.com/dgromer/apa) - This package also converts some R statistical objects to R Markdown output. While it allows other output format such as Markdown, it also only generates APA formatted output with minimal flexibility to alter the output.
+* [`{papaja}`](https://github.com/crsh/papaja) - This package uses the `apa_print()` function to convert a number of R statistical objects into R Markdown output. However, it only outputs LaTeX syntax and only generates APA formatted output with minimal flexibility to alter the output.
+* [`{apa}`](https://github.com/dgromer/apa) - This package also converts some R statistical objects to R Markdown output. While it allows other output format such as Markdown, it also only generates APA formatted output with minimal flexibility to alter the output.
