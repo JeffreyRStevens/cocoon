@@ -1,4 +1,4 @@
-Package: formatstats
+Package: cocoon
 Title: Format and Print Statistical Output
 Version: 0.0.0.9000
 Authors@R: 
@@ -22,6 +22,6 @@ Config/testthat/edition: 3
 Imports: 
     BayesFactor,
     dplyr
-URL: https://github.com/JeffreyRStevens/formatstats, https://jeffreyrstevens.github.io/formatstats/
-BugReports: https://github.com/JeffreyRStevens/formatstats/issues
+URL: https://github.com/JeffreyRStevens/cocoon, https://jeffreyrstevens.github.io/cocoon/
+BugReports: https://github.com/JeffreyRStevens/cocoon/issues
 VignetteBuilder: knitr
