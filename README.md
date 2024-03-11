@@ -1,22 +1,22 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# formatstats
+# cocoon
 
 <!-- badges: start -->
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![Codecov test
-coverage](https://codecov.io/gh/JeffreyRStevens/formatstats/branch/main/graph/badge.svg)](https://app.codecov.io/gh/JeffreyRStevens/formatstats?branch=main)
+coverage](https://codecov.io/gh/JeffreyRStevens/cocoon/branch/main/graph/badge.svg)](https://app.codecov.io/gh/JeffreyRStevens/cocoon?branch=main)
 <!-- badges: end -->
 
-The goal of `{formatstats}` is to provide functions that flexibly format
+The goal of `{cocoon}` is to provide functions that flexibly format
 statistical output in a way that can be inserted into R Markdown or
 Quarto documents. This is analogous to the
 [`apa_print()`](https://frederikaust.com/papaja_man/reporting.html#statistical-models-and-tests)
 functions in the [`{papaja}`](https://github.com/crsh/papaja) package,
-but functions in `{formatstats}` can print Markdown or LaTeX syntax. If
+but functions in `{cocoon}` can print Markdown or LaTeX syntax. If
 your output document is a PDF, this doesn’t matter. But if your output
 document is a Word document (as required by many journal publishers),
 Markdown syntax generates editable output instead of an image of output.
@@ -26,12 +26,12 @@ over-ridden to flexibly format output.
 
 ## Installation
 
-You can install the development version of `{formatstats}` from
+You can install the development version of `{cocoon}` from
 [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
-remotes::install_github("JeffreyRStevens/formatstats")
+remotes::install_github("JeffreyRStevens/cocoon")
 ```
 
 ## Example
@@ -39,7 +39,7 @@ remotes::install_github("JeffreyRStevens/formatstats")
 For an example, we’ll create a correlation from the `mtcars` data set.
 
 ``` r
-library(formatstats)
+library(cocoon)
 (cars_corr <- cor.test(mtcars$mpg, mtcars$disp))
 #> 
 #>  Pearson's product-moment correlation
@@ -101,11 +101,11 @@ Fuel efficiency and engine displacement were highly correlated (r =
 
 ## Citation
 
-To cite `{formatstats}`, use:
+To cite `{cocoon}`, use:
 
-> Stevens, Jeffrey R. (2024). formatstats: Format and print statistical
+> Stevens, Jeffrey R. (2024). cocoon: Format and print statistical
 > output. (version 0.0.0.9000)
-> <https://github.com/JeffreyRStevens/formatstats>
+> <https://github.com/JeffreyRStevens/cocoon>
 
 ## Related packages
 

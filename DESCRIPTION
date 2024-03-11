@@ -1,5 +1,5 @@
 Package: cocoon
-Title: Format and Print Statistical Output
+Title: Extract, Format, and Print Statistical Output
 Version: 0.0.0.9000
 Authors@R: 
     person("Jeffrey R.", "Stevens", , "jeffrey.r.stevens@protonmail.com", 
