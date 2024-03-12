@@ -4,8 +4,8 @@
 #' @description
 #' With `format_corr()` you can format correlation statistics generated from
 #' `cor.test()` output. This detects whether the object is from a Pearson,
-#' Kendall, or Spearman correlation and reports the appropriate correlation
-#' label (r, τ, ρ). The default output is APA formatted, but numbers of digits,
+#' Spearman, or Kendall correlation and reports the appropriate correlation
+#' label (r, tau, rho). The default output is APA formatted, but numbers of digits,
 #' leading zeros, the presence of confidence intervals, and italics are all
 #' customizable.
 #'
@@ -79,10 +79,10 @@ format_corr <- function(x,
   # Build label
   r_lab <- dplyr::case_when(
     !italics & identical(corr_method, "pearson") ~ paste0("r"),
-    !italics & identical(corr_method, "kendall") & identical(type, "md") ~ paste0("\u03C4"),
-    !italics & identical(corr_method, "kendall") & identical(type, "latex") ~ paste0("\\tau"),
     !italics & identical(corr_method, "spearman") & identical(type, "md") ~ paste0("\u03C1"),
     !italics & identical(corr_method, "spearman") & identical(type, "latex") ~ paste0("\\rho"),
+    !italics & identical(corr_method, "kendall") & identical(type, "md") ~ paste0("\u03C4"),
+    !italics & identical(corr_method, "kendall") & identical(type, "latex") ~ paste0("\\tau"),
     identical(corr_method, "pearson") ~ paste0(format_chr("r", italics = italics, type = type)),
     identical(corr_method, "kendall") ~ paste0(format_chr("\u03C4", italics = italics, type = type)),
     identical(corr_method, "spearman") ~ paste0(format_chr("\u03C1", italics = italics, type = type)),
