@@ -16,21 +16,21 @@ knitr::opts_chunk$set(
 )
 ```
 
-# formatstats
+# cocoon
 
 <!-- badges: start -->
 
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![Codecov test coverage](https://codecov.io/gh/JeffreyRStevens/formatstats/branch/main/graph/badge.svg)](https://app.codecov.io/gh/JeffreyRStevens/formatstats?branch=main)
 <!-- badges: end -->
 
-The goal of `{formatstats}` is to provide functions that flexibly format 
+The goal of `{cocoon}` is to provide functions that flexibly format 
 statistical output in a way that can be inserted into R Markdown or Quarto documents. 
 This is analogous to the
 [`apa_print()`](https://frederikaust.com/papaja_man/reporting.html#statistical-models-and-tests)
 functions in the [`{papaja}`](https://github.com/crsh/papaja) package, but 
-functions in `{formatstats}` can print Markdown or LaTeX syntax. If your output 
+functions in `{cocoon}` can print Markdown or LaTeX syntax. If your output 
 document is a PDF, this doesn't matter. But if your output document is a Word
 document (as required by many journal publishers), Markdown syntax generates
 editable output instead of an image of output. 
@@ -40,12 +40,12 @@ defaults can be over-ridden to flexibly format output.
 
 ## Installation
 
-You can install the development version of `{formatstats}` from
+You can install the development version of `{cocoon}` from
 [GitHub](https://github.com/) with:
 
 ```{r eval = FALSE}
 # install.packages("remotes")
-remotes::install_github("JeffreyRStevens/formatstats")
+remotes::install_github("JeffreyRStevens/cocoon")
 ```
 
 ## Example
@@ -53,7 +53,7 @@ remotes::install_github("JeffreyRStevens/formatstats")
 For an example, we'll create a correlation from the `mtcars` data set.
 
 ```{r example}
-library(formatstats)
+library(cocoon)
 (cars_corr <- cor.test(mtcars$mpg, mtcars$disp))
 ```
 
@@ -95,16 +95,32 @@ Fuel efficiency and engine displacement were highly correlated
 * Other numbers
 
 
-## Citation
-
-To cite `{formatstats}`, use:
-
-> Stevens, Jeffrey R. (2024). formatstats: Format and print statistical output.
-> (version 0.0.0.9000)
-> <https://github.com/JeffreyRStevens/formatstats>
-
-
 ## Related packages
 
-* [papaja](https://github.com/crsh/papaja) - This package uses the `apa_print()` function to convert a number of R statistical objects into R Markdown output. However, it only outputs LaTeX syntax and only generates APA formatted output with minimal flexibility to alter the output.
-* [apa](https://github.com/dgromer/apa) - This package also converts some R statistical objects to R Markdown output. While it allows other output format such as Markdown, it also only generates APA formatted output with minimal flexibility to alter the output.
+* [`{papaja}`](https://github.com/crsh/papaja) - This package uses the `apa_print()` function to convert a number of R statistical objects into R Markdown output. However, it only outputs LaTeX syntax and only generates APA formatted output with minimal flexibility to alter the output.
+* [`{apa}`](https://github.com/dgromer/apa) - This package also converts some R statistical objects to R Markdown output. While it allows other output format such as Markdown, it also only generates APA formatted output with minimal flexibility to alter the output.
+
+
+## Citation
+
+To cite `{cocoon}`, use:
+
+> Stevens, Jeffrey R. (2024). cocoon: Extract, format, and print statistical output.
+> (version 0.0.0.9000)
+> <https://github.com/JeffreyRStevens/cocoon>
+
+
+## Contributing
+
+[Contributions](CONTRIBUTING.md) to `{cocoon}` are most welcome! Feel free to check out [open issues](https://github.com/JeffreyRStevens/cocoon/issues) for ideas. And [pull requests](https://github.com/JeffreyRStevens/cocoon/pulls) are encouraged, but you may want to [raise an issue](https://github.com/JeffreyRStevens/cocoon/issues/new/choose) or [contact the maintainer](mailto:jeffrey.r.stevens@protonmail.com) first.
+
+Please note that the cocoon project is released with a [Contributor Code of Conduct](https://jeffreyrstevens.github.io/cocoon/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
+
+## Package name
+
+The package name `{cocoon}` captures the main goal of transforming statistical inputs into nicely formatted outputs. This mirrors cocoons, which are the locations where caterpillars transform into beautiful adult insects. Cocoons are formally [defined](https://en.wikipedia.org/wiki/Pupa) as a silk case that the larvae of moths spin around their pupa. So cocoons are specific to moths and some other insects but not butterflies. 
+
+![](man/figures/moth_cocoons.png)
+
+Photo by <a href="https://unsplash.com/@tamaracycman?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Gabriela Tamara Cycman</a> on <a href="https://unsplash.com/photos/brown-and-red-wooden-fish-wall-decor-I-EiXkwo1fU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+  
