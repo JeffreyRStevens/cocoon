@@ -3,7 +3,7 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   cocoon: cocoon.html
-last_built: 2024-03-11T20:27Z
+last_built: 2024-03-12T19:42Z
 urls:
   reference: https://jeffreyrstevens.github.io/cocoon/reference
   article: https://jeffreyrstevens.github.io/cocoon/articles

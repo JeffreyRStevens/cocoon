@@ -4,6 +4,12 @@
     <loc>https://jeffreyrstevens.github.io/cocoon/404.html</loc>
   </url>
   <url>
+    <loc>https://jeffreyrstevens.github.io/cocoon/CODE_OF_CONDUCT.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffreyrstevens.github.io/cocoon/CONTRIBUTING.html</loc>
+  </url>
+  <url>
     <loc>https://jeffreyrstevens.github.io/cocoon/LICENSE.html</loc>
   </url>
   <url>
@@ -19,7 +25,13 @@
     <loc>https://jeffreyrstevens.github.io/cocoon/index.html</loc>
   </url>
   <url>
+    <loc>https://jeffreyrstevens.github.io/cocoon/reference/cocoon-package.html</loc>
+  </url>
+  <url>
     <loc>https://jeffreyrstevens.github.io/cocoon/reference/format_bf.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffreyrstevens.github.io/cocoon/reference/format_chr.html</loc>
   </url>
   <url>
     <loc>https://jeffreyrstevens.github.io/cocoon/reference/format_corr.html</loc>
@@ -32,6 +44,9 @@
   </url>
   <url>
     <loc>https://jeffreyrstevens.github.io/cocoon/reference/format_scientific.html</loc>
+  </url>
+  <url>
+    <loc>https://jeffreyrstevens.github.io/cocoon/reference/format_sub.html</loc>
   </url>
   <url>
     <loc>https://jeffreyrstevens.github.io/cocoon/reference/format_summary.html</loc>
