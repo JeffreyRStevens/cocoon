@@ -1,0 +1,8 @@
+bibentry(
+  bibtype  = "Manual",
+  title    = "cocoon: Extract, format, and print statistical output",
+  author = "Jeffrey R. Stevens",
+  year = "2024",
+  note = "R package version 0.0.0.9000",
+  url = "https://github.com/JeffreyRStevens/cocoon"
+)

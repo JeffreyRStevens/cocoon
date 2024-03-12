@@ -3,7 +3,7 @@
   "@type": "SoftwareSourceCode",
   "identifier": "cocoon",
   "description": "Provides functions that format statistical output in a way that can be inserted into R Markdown documents. This is analogous to the `apa_print()` functions in the papaja package but prints Markdown or LaTeX syntax.",
-  "name": "cocoon: Format and Print Statistical Output",
+  "name": "cocoon: Extract, Format, and Print Statistical Output",
   "relatedLink": "https://jeffreyrstevens.github.io/cocoon/",
   "codeRepository": "https://github.com/JeffreyRStevens/cocoon",
   "issueTracker": "https://github.com/JeffreyRStevens/cocoon/issues",

@@ -124,3 +124,5 @@ The package name `{cocoon}` captures the main goal of transforming statistical i
 
 Photo by <a href="https://unsplash.com/@tamaracycman?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Gabriela Tamara Cycman</a> on <a href="https://unsplash.com/photos/brown-and-red-wooden-fish-wall-decor-I-EiXkwo1fU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
   
+* [`{papaja}`](https://github.com/crsh/papaja) - This package uses the `apa_print()` function to convert a number of R statistical objects into R Markdown output. However, it only outputs LaTeX syntax and only generates APA formatted output with minimal flexibility to alter the output.
+* [`{apa}`](https://github.com/dgromer/apa) - This package also converts some R statistical objects to R Markdown output. While it allows other output format such as Markdown, it also only generates APA formatted output with minimal flexibility to alter the output.

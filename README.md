@@ -102,6 +102,14 @@ Fuel efficiency and engine displacement were highly correlated (r =
 - Scientific notation
 - Other numbers
 
+## Citation
+
+To cite `{cocoon}`, use:
+
+> Stevens, Jeffrey R. (2024). cocoon: Extract, format, and print
+> statistical output. (version 0.0.0.9000)
+> <https://github.com/JeffreyRStevens/cocoon>
+
 ## Related packages
 
 - [`{papaja}`](https://github.com/crsh/papaja) - This package uses the
