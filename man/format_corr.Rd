@@ -24,12 +24,14 @@ intervals, and correlation coefficients}
 \item{pdigits}{Number of digits after the decimal for p-values, ranging
 between 1-5 (also controls cutoff for small p-values)}
 
-\item{pzero}{Logical indicator of whether to include leading zero for
-p-values}
+\item{pzero}{Logical value (default = FALSE) for whether to include
+leading zero for p-values}
 
-\item{ci}{Logical indicator of whether to print 95\% confidence intervals}
+\item{ci}{Logical value (default = TRUE) for whether to print
+95\% confidence intervals}
 
-\item{italics}{Logical for whether \emph{p} label should be italicized}
+\item{italics}{Logical value (default = TRUE) for whether \emph{p} label should be
+italicized}
 
 \item{type}{Type of formatting ("md" = markdown, "latex" = LaTeX)}
 }
@@ -39,8 +41,8 @@ A character string of statistical information formatted in Markdown or LaTeX.
 \description{
 With \code{format_corr()} you can format correlation statistics generated from
 \code{cor.test()} output. This detects whether the object is from a Pearson,
-Kendall, or Spearman correlation and reports the appropriate correlation
-label (r, τ, ρ). The default output is APA formatted, but numbers of digits,
+Spearman, or Kendall correlation and reports the appropriate correlation
+label (r, tau, rho). The default output is APA formatted, but numbers of digits,
 leading zeros, the presence of confidence intervals, and italics are all
 customizable.
 }

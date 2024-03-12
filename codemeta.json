@@ -108,8 +108,8 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "85.064KB",
+  "fileSize": "3178.134KB",
   "readme": "https://github.com/JeffreyRStevens/cocoon/blob/main/README.md",
   "contIntegration": "https://app.codecov.io/gh/JeffreyRStevens/cocoon?branch=main",
-  "developmentStatus": "https://lifecycle.r-lib.org/articles/stages.html#experimental"
+  "developmentStatus": ["https://www.repostatus.org/#active", "https://lifecycle.r-lib.org/articles/stages.html#stable"]
 }

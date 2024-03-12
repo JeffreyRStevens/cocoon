@@ -8,4 +8,5 @@
 ^docs$
 ^pkgdown$
 ^\.github$
+^CODE_OF_CONDUCT\.md$
 ^codemeta\.json$
