@@ -136,6 +136,10 @@ test_that("format_bf() works properly", {
     "Input is not numeric or of class BFBayesFactor"
   ))
   suppressMessages(expect_error(
+    format_bf(test_corr),
+    "Input is not numeric or of class BFBayesFactor"
+  ))
+  suppressMessages(expect_error(
     format_bf(123.4567, digits1 = "xxx"),
     "Argument `digits1` must be a non-negative numeric vector"
   ))
