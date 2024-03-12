@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(formatstats)
+library(cocoon)
 
-test_check("formatstats")
+test_check("cocoon")

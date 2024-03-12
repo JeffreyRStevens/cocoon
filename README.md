@@ -11,7 +11,7 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![Codecov test
-coverage](https://codecov.io/gh/JeffreyRStevens/formatstats/branch/main/graph/badge.svg)](https://app.codecov.io/gh/JeffreyRStevens/formatstats?branch=main)
+coverage](https://codecov.io/gh/JeffreyRStevens/cocoon/branch/main/graph/badge.svg)](https://app.codecov.io/gh/JeffreyRStevens/cocoon?branch=main)
 <!-- badges: end -->
 
 The goal of `{cocoon}` is to provide functions that flexibly format
@@ -133,9 +133,8 @@ issue](https://github.com/JeffreyRStevens/cocoon/issues/new/choose) or
 [contact the maintainer](mailto:jeffrey.r.stevens@protonmail.com) first.
 
 Please note that the cocoon project is released with a [Contributor Code
-of
-Conduct](https://jeffreyrstevens.github.io/cocoon/CODE_OF_CONDUCT.html).
-By contributing to this project, you agree to abide by its terms.
+of Conduct](CODE_OF_CONDUCT.md). By contributing to this project, you
+agree to abide by its terms.
 
 ## Package name
 
