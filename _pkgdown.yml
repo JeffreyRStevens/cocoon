@@ -5,10 +5,12 @@ template:
   theme: nord
 
 reference:
-- title: Format numbers
+- title: Format numbers/characters
   contents:
   - format_num
   - format_scientific
+  - format_chr
+  - format_sub
 - title: Format statistics
   contents:
   - format_summary

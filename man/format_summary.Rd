@@ -131,7 +131,8 @@ limits}
 \item{tendlabel}{Formatting for tendency label ("abbr" = M, "word" = Mean,
 "none" = no label)}
 
-\item{italics}{Logical for whether mean label should be italicized}
+\item{italics}{Logical value (default = TRUE) for whether mean label should
+be italicized}
 
 \item{subscript}{Character string to include as subscript with mean label}
 
@@ -144,7 +145,7 @@ do not display error)}
 \item{cilevel}{Numeric scalar from 0-1 defining confidence level
 (defaults to 0.95)}
 
-\item{errorlabel}{Logical for whether error label (e.g., 95\% CI) should be
+\item{errorlabel}{Logical value (default = TRUE) for whether error label (e.g., 95\% CI) should be
 included}
 
 \item{type}{Type of formatting ("md" = markdown, "latex" = LaTeX)}

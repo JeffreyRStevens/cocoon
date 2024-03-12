@@ -5,8 +5,11 @@
 
 <!-- badges: start -->
 
+[![Project Status: Active – The project has reached a stable, usable
+state and is being actively
+developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![Codecov test
 coverage](https://codecov.io/gh/JeffreyRStevens/cocoon/branch/main/graph/badge.svg)](https://app.codecov.io/gh/JeffreyRStevens/cocoon?branch=main)
 <!-- badges: end -->
@@ -118,3 +121,42 @@ To cite `{cocoon}`, use:
   some R statistical objects to R Markdown output. While it allows other
   output format such as Markdown, it also only generates APA formatted
   output with minimal flexibility to alter the output.
+
+## Citation
+
+To cite `{cocoon}`, use:
+
+> Stevens, Jeffrey R. (2024). cocoon: Extract, format, and print
+> statistical output. (version 0.0.0.9000)
+> <https://github.com/JeffreyRStevens/cocoon>
+
+## Contributing
+
+[Contributions](CONTRIBUTING.md) to `{cocoon}` are most welcome! Feel
+free to check out [open
+issues](https://github.com/JeffreyRStevens/cocoon/issues) for ideas. And
+[pull requests](https://github.com/JeffreyRStevens/cocoon/pulls) are
+encouraged, but you may want to [raise an
+issue](https://github.com/JeffreyRStevens/cocoon/issues/new/choose) or
+[contact the maintainer](mailto:jeffrey.r.stevens@protonmail.com) first.
+
+Please note that the cocoon project is released with a [Contributor Code
+of Conduct](CODE_OF_CONDUCT.md). By contributing to this project, you
+agree to abide by its terms.
+
+## Package name
+
+The package name `{cocoon}` captures the main goal of transforming
+statistical inputs into nicely formatted outputs. This mirrors cocoons,
+which are the locations where caterpillars transform into beautiful
+adult insects. Cocoons are formally
+[defined](https://en.wikipedia.org/wiki/Pupa) as a silk case that the
+larvae of moths spin around their pupa. So cocoons are specific to moths
+and some other insects but not butterflies.
+
+![](man/figures/moth_cocoons.png)
+
+Photo by
+<a href="https://unsplash.com/@tamaracycman?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Gabriela
+Tamara Cycman</a> on
+<a href="https://unsplash.com/photos/brown-and-red-wooden-fish-wall-decor-I-EiXkwo1fU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>

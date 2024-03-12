@@ -2,8 +2,8 @@
 #'
 #' @param x Number
 #' @param digits Number of digits after the decimal
-#' @param pzero Logical indicator of whether to include leading zero numbers
-#' less than 1
+#' @param pzero Logical value (default = TRUE) for whether to include leading
+#' zero numbers less than 1
 #'
 #' @return
 #' A character string formatting the number with specified number of digits
@@ -69,9 +69,31 @@ format_scientific <- function(x,
   num
 }
 
+#' Format character strings with italics and type
+#'
+#' @param x Character string
+#' @param italics Logical value (default = TRUE) for whether text should be
+#' italicized
+#' @param type Type of formatting (`"md"` = markdown, `"latex"` = LaTeX)
+#'
+#' @return
+#' A character string that has either Markdown or LaTeX formatting for italics
+#' or not.
+#' @export
+#'
+#' @examples
+#' format_chr("Hello world!")
+#' # Format in LaTeX syntax
+#' format_chr("Hello world!", type = "latex")
+#' # Remove italics
+#' format_chr("Hello world!", italics = FALSE)
 format_chr <- function(x,
                        italics = TRUE,
                        type = "md") {
+  # Check arguments
+  stopifnot("Input must be a character string." = is.character(x))
+  stopifnot("Argument `italics` must be TRUE or FALSE." = is.logical(italics))
+  stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
   dplyr::case_when(
     italics & type == "md" ~ paste0("_", x, "_"),
     italics & type == "latex" ~ paste0("$", x, "$"),
@@ -80,9 +102,25 @@ format_chr <- function(x,
 }
 
 
-
+#' Format subscript text
+#'
+#' @param subscript Character string or NULL
+#' @param type Type of formatting (`"md"` = markdown, `"latex"` = LaTeX)
+#'
+#' @return
+#' A character string that is formatted as subscript for either Markdown or
+#' LaTeX.
+#' @export
+#'
+#' @examples
+#' format_sub("Hello world!")
+#' # Format in LaTeX syntax
+#' format_sub("Hello world!", type = "latex")
 format_sub <- function(subscript = NULL,
                        type = "md") {
+  # Check arguments
+  stopifnot("Input must be a character string or NULL." = is.character(subscript) | is.null(subscript))
+  stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
   dplyr::case_when(
     subscript == "" ~ "",
     !is.null(subscript) & type == "md" ~ paste0("~", subscript, "~"),

@@ -25,13 +25,14 @@ intervals, and t-statistics}
 \item{pdigits}{Number of digits after the decimal for p-values, ranging
 between 1-5 (also controls cutoff for small p-values)}
 
-\item{pzero}{Logical indicator of whether to include leading zero for
-p-values}
+\item{pzero}{Logical value (default = FALSE) for whether to include
+leading zero for p-values}
 
-\item{full}{Logical indicator of whether to include means and confidence
-intervals or just t-statistic and p-value}
+\item{full}{Logical value (default = TRUE) for whether to include means
+and confidence intervals or just t-statistic and p-value}
 
-\item{italics}{Logical for whether \emph{p} label should be italicized}
+\item{italics}{Logical value (default = TRUE) for whether \emph{p} label should be
+italicized}
 
 \item{dfs}{Formatting for degrees of freedom ("par" = parenthetical,
 "sub" = subscript, "none" = do not print degrees of freedom)}

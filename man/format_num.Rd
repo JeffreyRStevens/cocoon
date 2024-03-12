@@ -11,8 +11,8 @@ format_num(x, digits = 1, pzero = TRUE)
 
 \item{digits}{Number of digits after the decimal}
 
-\item{pzero}{Logical indicator of whether to include leading zero numbers
-less than 1}
+\item{pzero}{Logical value (default = TRUE) for whether to include leading
+zero numbers less than 1}
 }
 \value{
 A character string formatting the number with specified number of digits
