@@ -39,7 +39,6 @@
 #' format_corr(mtcars_corr, pdigits = 2)
 #' # Add leading zero to p-value and don't print confidence intervals
 #' format_corr(mtcars_corr, pzero = TRUE, ci = FALSE)
-
 format_corr <- function(x,
                         digits = 2,
                         pdigits = 3,
@@ -60,9 +59,11 @@ format_corr <- function(x,
   stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
 
   # Format numbers
-  corr_method <- dplyr::case_when(grepl("Pearson", x$method) ~ "pearson",
-                                  grepl("Kendall", x$method) ~ "kendall",
-                                  grepl("Spearman", x$method) ~ "spearman")
+  corr_method <- dplyr::case_when(
+    grepl("Pearson", x$method) ~ "pearson",
+    grepl("Kendall", x$method) ~ "kendall",
+    grepl("Spearman", x$method) ~ "spearman"
+  )
   corr <- format_num(x$estimate, digits = digits, pzero = pzero)
   if (corr_method == "pearson") {
     cis <- format_num(x$conf.int, digits = digits)
@@ -70,23 +71,28 @@ format_corr <- function(x,
     cis <- NULL
     ci <- FALSE
   }
-  pvalue <- format_p(x$p.value, digits = pdigits, pzero = pzero,
-                     italics = italics, type = type)
+  pvalue <- format_p(x$p.value,
+    digits = pdigits, pzero = pzero,
+    italics = italics, type = type
+  )
 
   # Build label
-  r_lab <- dplyr::case_when(!italics & identical(corr_method, "pearson") ~ paste0("r"),
-                            !italics & identical(corr_method, "kendall") & identical(type, "md")~ paste0("\u03C4"),
-                            !italics & identical(corr_method, "kendall") & identical(type, "latex")~ paste0("\\tau"),
-                            !italics & identical(corr_method, "spearman") & identical(type, "md")~ paste0("\u03C1"),
-                            !italics & identical(corr_method, "spearman") & identical(type, "latex")~ paste0("\\rho"),
-                            identical(corr_method, "pearson") ~ paste0(format_chr("r", italics = italics, type = type)),
-                            identical(corr_method, "kendall") ~ paste0(format_chr("\u03C4", italics = italics, type = type)),
-                            identical(corr_method, "spearman") ~ paste0(format_chr("\u03C1", italics = italics, type = type)),
+  r_lab <- dplyr::case_when(
+    !italics & identical(corr_method, "pearson") ~ paste0("r"),
+    !italics & identical(corr_method, "kendall") & identical(type, "md") ~ paste0("\u03C4"),
+    !italics & identical(corr_method, "kendall") & identical(type, "latex") ~ paste0("\\tau"),
+    !italics & identical(corr_method, "spearman") & identical(type, "md") ~ paste0("\u03C1"),
+    !italics & identical(corr_method, "spearman") & identical(type, "latex") ~ paste0("\\rho"),
+    identical(corr_method, "pearson") ~ paste0(format_chr("r", italics = italics, type = type)),
+    identical(corr_method, "kendall") ~ paste0(format_chr("\u03C4", italics = italics, type = type)),
+    identical(corr_method, "spearman") ~ paste0(format_chr("\u03C1", italics = italics, type = type)),
   )
 
   # Create statistics string
-  full_lab <- dplyr::case_when(ci & corr_method == "pearson" ~ paste0(r_lab, " = ", corr, ", 95% CI [", cis[1], ", ", cis[2], "], ", pvalue),
-                               !ci ~ paste0(r_lab, " = ", corr, ", ", pvalue))
+  full_lab <- dplyr::case_when(
+    ci & corr_method == "pearson" ~ paste0(r_lab, " = ", corr, ", 95% CI [", cis[1], ", ", cis[2], "], ", pvalue),
+    !ci ~ paste0(r_lab, " = ", corr, ", ", pvalue)
+  )
   return(full_lab)
 }
 
@@ -156,8 +162,10 @@ format_ttest <- function(x,
   stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
 
   # Format numbers
-  ttest_method <- dplyr::case_when(grepl("t-test", x$method) ~ "student",
-                                   grepl("Wilcoxon", x$method) ~ "wilcoxon")
+  ttest_method <- dplyr::case_when(
+    grepl("t-test", x$method) ~ "student",
+    grepl("Wilcoxon", x$method) ~ "wilcoxon"
+  )
 
   if (ttest_method == "student") { # format data for Student's t-test
     if (length(x$estimate) == 2) {
@@ -167,7 +175,8 @@ format_ttest <- function(x,
     }
     cis <- format_num(x$conf.int, digits = digits)
     df <- dplyr::case_when(round(x$parameter, 1) == round(x$parameter) ~ format_num(x$parameter, digits = 0),
-                           .default = format_num(x$parameter, digits = digits))
+      .default = format_num(x$parameter, digits = digits)
+    )
     statlab <- "t"
   } else { # format data for Wilcoxon tests
     full <- FALSE
@@ -176,23 +185,28 @@ format_ttest <- function(x,
     statlab <- attr(x$statistic, "name")
   }
   tstat <- format_num(x$statistic, digits = digits)
-  pvalue <- format_p(x$p.value, digits = pdigits, pzero = pzero,
-                     italics = italics, type = type)
+  pvalue <- format_p(x$p.value,
+    digits = pdigits, pzero = pzero,
+    italics = italics, type = type
+  )
 
   # Build label
-  t_lab <- dplyr::case_when(!italics ~ paste0(statlab),
-                            identical(type, "md") ~ paste0("_", statlab, "_"),
-                            identical(type, "latex") ~ paste0("$", statlab, "$")
+  t_lab <- dplyr::case_when(
+    !italics ~ paste0(statlab),
+    identical(type, "md") ~ paste0("_", statlab, "_"),
+    identical(type, "latex") ~ paste0("$", statlab, "$")
   )
   tlab <- dplyr::case_when(identical(dfs, "par") ~ paste0(t_lab, "(", df, ")"),
-                           identical(dfs, "sub") & identical(type, "md") ~ paste0(t_lab, "~", df, "~"),
-                           identical(dfs, "sub") & identical(type, "latex") ~ paste0(t_lab, "$_{", df, "}$"),
-                           .default = t_lab)[1]
+    identical(dfs, "sub") & identical(type, "md") ~ paste0(t_lab, "~", df, "~"),
+    identical(dfs, "sub") & identical(type, "latex") ~ paste0(t_lab, "$_{", df, "}$"),
+    .default = t_lab
+  )[1]
 
   # Create statistics string
   if (full) {
-    mean_lab <- dplyr::case_when(identical(mean, "abbr") ~ paste0(format_chr("M", italics = italics, type = type), " = "),
-                                 identical(mean, "word") ~ paste0(format_chr("Mean", italics = italics, type = type), " = ")
+    mean_lab <- dplyr::case_when(
+      identical(mean, "abbr") ~ paste0(format_chr("M", italics = italics, type = type), " = "),
+      identical(mean, "word") ~ paste0(format_chr("Mean", italics = italics, type = type), " = ")
     )
     paste0(mean_lab, mean_val, ", 95% CI [", cis[1], ", ", cis[2], "], ", tlab, " = ", tstat, ", ", pvalue)
   } else {
@@ -293,7 +307,7 @@ format_bf <- function(x,
   if (is.null(cutoff)) {
     bf_value <- dplyr::case_when(
       bf >= 1000 ~ format_scientific(bf, digits = digits1, type = type),
-      bf <= 1 / 10 ^ digits2 ~ format_scientific(bf, digits = digits1, type = type),
+      bf <= 1 / 10^digits2 ~ format_scientific(bf, digits = digits1, type = type),
       bf >= 1 ~ format_num(bf, digits = digits1),
       bf < 1 ~ format_num(bf, digits = digits2)
     )
@@ -301,14 +315,14 @@ format_bf <- function(x,
     bf_value <- dplyr::case_when(
       bf >= cutoff ~ as.character(cutoff),
       bf <= 1 / cutoff ~ as.character(1 / cutoff),
-      bf <= 1 / 10 ^ digits2 ~ as.character(1 / 10 ^ digits2),
+      bf <= 1 / 10^digits2 ~ as.character(1 / 10^digits2),
       bf >= 1 & bf <= cutoff ~ format_num(bf, digits = digits1),
       bf < 1 & bf >= 1 / cutoff ~ format_num(bf, digits = digits2)
     )
     operator <- dplyr::case_when(
       bf > cutoff ~ " > ",
       bf < 1 / cutoff ~ " < ",
-      bf < 1 / 1 / 10 ^ digits2 ~ " < ",
+      bf < 1 / 1 / 10^digits2 ~ " < ",
       .default = operator
     )
   }
@@ -451,18 +465,18 @@ format_p <- function(x,
 #' # Print three-digit mean with subscript in LaTeX
 #' format_summary(mtcars$mpg, digits = 3, subscript = "control", display = "none", type = "latex")
 format_summary <- function(x = NULL,
-                             tendency = "mean",
-                             error = "ci",
-                             values = NULL,
-                             digits = 1,
-                             tendlabel = "abbr",
-                             italics = TRUE,
-                             subscript = NULL,
-                             units = NULL,
-                             display = "limits",
-                             cilevel = 0.95,
-                             errorlabel = TRUE,
-                             type = "md") {
+                           tendency = "mean",
+                           error = "ci",
+                           values = NULL,
+                           digits = 1,
+                           tendlabel = "abbr",
+                           italics = TRUE,
+                           subscript = NULL,
+                           units = NULL,
+                           display = "limits",
+                           cilevel = 0.95,
+                           errorlabel = TRUE,
+                           type = "md") {
   # Check arguments
   if (!is.null(x)) {
     stopifnot("Argument `x` must be a numeric vector." = is.numeric(x))
@@ -474,7 +488,7 @@ format_summary <- function(x = NULL,
     )
     xn <- sum(!is.na(x))
     stopifnot("Less than two non-missing values in vector, so no confidence interval can be computed." = xn > 1)
-    xlimit <- 1- (1 - cilevel) / 2
+    xlimit <- 1 - (1 - cilevel) / 2
     xsd <- stats::sd(x, na.rm = TRUE)
     xse <- xsd / sqrt(xn)
     xci <- stats::qt(xlimit, df = (xn - 1)) * xse
@@ -485,7 +499,7 @@ format_summary <- function(x = NULL,
       identical(error, "se") ~ xtendency - xse,
       identical(error, "iqr") ~ xtendency - xiqr
     )
-    xupper <-  dplyr::case_when(
+    xupper <- dplyr::case_when(
       identical(error, "ci") ~ xtendency + xci,
       identical(error, "sd") ~ xtendency + xsd,
       identical(error, "se") ~ xtendency + xse,
@@ -546,7 +560,7 @@ format_summary <- function(x = NULL,
     identical(display, "pm") ~ paste0(" \u00b1 ", format_num(xinterval, digits = digits)),
     identical(display, "par") ~ paste0(" ", "(", error_lab, " = ", format_num(xinterval, digits = digits), ")"),
     .default = ""
-    )
+  )
   paste0(full_mean, full_error)
 }
 
@@ -648,4 +662,3 @@ format_medianiqr <- function(x = NULL,
                              type = "md") {
   format_summary(x = x, tendency = tendency, error = error, values = values, digits = digits, tendlabel = tendlabel, italics = italics, subscript = subscript, units = units, display = display, errorlabel = errorlabel, type = type)
 }
-
