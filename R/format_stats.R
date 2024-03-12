@@ -14,10 +14,12 @@
 #' intervals, and correlation coefficients
 #' @param pdigits Number of digits after the decimal for p-values, ranging
 #' between 1-5 (also controls cutoff for small p-values)
-#' @param pzero Logical indicator of whether to include leading zero for
-#' p-values
-#' @param ci Logical indicator of whether to print 95% confidence intervals
-#' @param italics Logical for whether _p_ label should be italicized
+#' @param pzero Logical value (default = FALSE) for whether to include
+#' leading zero for p-values
+#' @param ci Logical value (default = TRUE) for whether to print
+#' 95% confidence intervals
+#' @param italics Logical value (default = TRUE) for whether _p_ label should be
+#' italicized
 #' @param type Type of formatting ("md" = markdown, "latex" = LaTeX)
 #'
 #' @return
@@ -102,11 +104,12 @@ format_corr <- function(x,
 #' intervals, and t-statistics
 #' @param pdigits Number of digits after the decimal for p-values, ranging
 #' between 1-5 (also controls cutoff for small p-values)
-#' @param pzero Logical indicator of whether to include leading zero for
-#' p-values
-#' @param full Logical indicator of whether to include means and confidence
-#' intervals or just t-statistic and p-value
-#' @param italics Logical for whether _p_ label should be italicized
+#' @param pzero Logical value (default = FALSE) for whether to include
+#' leading zero for p-values
+#' @param full Logical value (default = TRUE) for whether to include means
+#' and confidence intervals or just t-statistic and p-value
+#' @param italics Logical value (default = TRUE) for whether _p_ label should be
+#' italicized
 #' @param dfs Formatting for degrees of freedom ("par" = parenthetical,
 #' "sub" = subscript, "none" = do not print degrees of freedom)
 #' @param mean Formatting for mean label ("abbr" = M, "word" = Mean)
@@ -219,7 +222,8 @@ format_ttest <- function(x,
 #' @param label Character string for label before Bayes factor. Default is BF.
 #' Set `label = ""` to return just the formatted Bayes factor value with no
 #' label or operator (`=`, `<`, `>`)
-#' @param italics Logical for whether label should be italicized (_BF_ or BF)
+#' @param italics Logical value (default = TRUE) for whether label should be
+#' italicized (_BF_ or BF)
 #' @param subscript Subscript to include with _BF_ label (`"10"`, `"01"`, or
 #' `""` for no subscript)
 #' @param type Type of formatting (`"md"` = markdown, `"latex"` = LaTeX)
@@ -323,12 +327,13 @@ format_bf <- function(x,
 #' @param x Number representing p-value
 #' @param digits Number of digits after the decimal for p-values, ranging
 #' between 1-5 (also controls cutoff for small p-values)
-#' @param pzero Logical indicator of whether to include leading zero for
-#' p-values
+#' @param pzero Logical value (default = FALSE) for whether to include leading
+#' zero for p-values
 #' @param label Character string for label before p value. Default is p.
 #' Set `label = ""` to return just the formatted p value with no
 #' label or operator (`=`, `<`, `>`)
-#' @param italics Logical for whether label should be italicized (_p_)
+#' @param italics Logical value (default = TRUE) for whether label should be
+#' italicized (_p_)
 #' @param type Type of formatting ("md" = markdown, "latex" = LaTeX)
 #'
 #' @return
@@ -411,7 +416,8 @@ format_p <- function(x,
 #' @param digits Number of digits after the decimal for means and error
 #' @param tendlabel Formatting for tendency label ("abbr" = M, "word" = Mean,
 #' "none" = no label)
-#' @param italics Logical for whether mean label should be italicized
+#' @param italics Logical value (default = TRUE) for whether mean label should
+#' be italicized
 #' @param subscript Character string to include as subscript with mean label
 #' @param units Character string that gives units to include after mean value
 #' @param display Character vector specifying how to display error ("limits" =
@@ -419,7 +425,7 @@ format_p <- function(x,
 #' do not display error)
 #' @param cilevel Numeric scalar from 0-1 defining confidence level
 #' (defaults to 0.95)
-#' @param errorlabel Logical for whether error label (e.g., 95% CI) should be
+#' @param errorlabel Logical value (default = TRUE) for whether error label (e.g., 95% CI) should be
 #' included
 #' @param type Type of formatting ("md" = markdown, "latex" = LaTeX)
 #'

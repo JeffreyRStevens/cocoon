@@ -29,7 +29,8 @@ format_bf(
 Set \code{label = ""} to return just the formatted Bayes factor value with no
 label or operator (\code{=}, \code{<}, \code{>})}
 
-\item{italics}{Logical for whether label should be italicized (\emph{BF} or BF)}
+\item{italics}{Logical value (default = TRUE) for whether label should be
+italicized (\emph{BF} or BF)}
 
 \item{subscript}{Subscript to include with \emph{BF} label (\code{"10"}, \code{"01"}, or
 \code{""} for no subscript)}

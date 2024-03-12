@@ -24,12 +24,14 @@ intervals, and correlation coefficients}
 \item{pdigits}{Number of digits after the decimal for p-values, ranging
 between 1-5 (also controls cutoff for small p-values)}
 
-\item{pzero}{Logical indicator of whether to include leading zero for
-p-values}
+\item{pzero}{Logical value (default = FALSE) for whether to include
+leading zero for p-values}
 
-\item{ci}{Logical indicator of whether to print 95\% confidence intervals}
+\item{ci}{Logical value (default = TRUE) for whether to print
+95\% confidence intervals}
 
-\item{italics}{Logical for whether \emph{p} label should be italicized}
+\item{italics}{Logical value (default = TRUE) for whether \emph{p} label should be
+italicized}
 
 \item{type}{Type of formatting ("md" = markdown, "latex" = LaTeX)}
 }

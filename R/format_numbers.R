@@ -2,8 +2,8 @@
 #'
 #' @param x Number
 #' @param digits Number of digits after the decimal
-#' @param pzero Logical indicator of whether to include leading zero numbers
-#' less than 1
+#' @param pzero Logical value (default = TRUE) for whether to include leading
+#' zero numbers less than 1
 #'
 #' @return
 #' A character string formatting the number with specified number of digits
@@ -72,7 +72,8 @@ format_scientific <- function(x,
 #' Format character strings with italics and type
 #'
 #' @param x Character string
-#' @param italics Logical for whether text should be italicized
+#' @param italics Logical value (default = TRUE) for whether text should be
+#' italicized
 #' @param type Type of formatting (`"md"` = markdown, `"latex"` = LaTeX)
 #'
 #' @return
