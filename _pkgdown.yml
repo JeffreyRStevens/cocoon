@@ -3,6 +3,9 @@ template:
   bootstrap: 5
   bootswatch: minty
   theme: nord
+  bslib:
+    bg: "#212529"
+    fg: "#f8f9fa"
 
 reference:
 - title: Format numbers/characters
