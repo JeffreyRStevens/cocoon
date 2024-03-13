@@ -1,7 +1,7 @@
 url: https://jeffreyrstevens.github.io/cocoon/
 template:
   bootstrap: 5
-  bootswatch: superhero
+  bootswatch: minty
   theme: nord
 
 reference:
