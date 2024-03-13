@@ -42,7 +42,7 @@ A character string of statistical information formatted in Markdown or LaTeX.
 With \code{format_corr()} you can format correlation statistics generated from
 \code{cor.test()} output. This detects whether the object is from a Pearson,
 Spearman, or Kendall correlation and reports the appropriate correlation
-label (r, tau, rho). The default output is APA formatted, but numbers of digits,
+label (r, \eqn{\tau}, \eqn{\rho}). The default output is APA formatted, but numbers of digits,
 leading zeros, the presence of confidence intervals, and italics are all
 customizable.
 }
