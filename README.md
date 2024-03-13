@@ -12,6 +12,7 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![Codecov test
 coverage](https://codecov.io/gh/JeffreyRStevens/cocoon/branch/main/graph/badge.svg)](https://app.codecov.io/gh/JeffreyRStevens/cocoon?branch=main)
+[![R-CMD-check](https://github.com/JeffreyRStevens/cocoon/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/JeffreyRStevens/cocoon/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of `{cocoon}` is to provide functions that flexibly format
@@ -88,27 +89,22 @@ italicized.
 Fuel efficiency and engine displacement were highly correlated (r =
 -0.85, p \< 0.001).
 
-## Formatting types
+## Functions and formatting types
 
-- Correlations (output from `cor.test()`, including Pearson’s,
-  Kendall’s, and Spearman’s correlations)
-- Student t-tests and Wilcoxon rank sum and signed rank tests (output
-  from `t.test()` and `wilcox.test()`, including one-sample, two-sample
-  independent, and paired tests)
-- Means and error (calculates from vector or uses vector of mean and
-  error interval or mean, lower error limit, and upper error limit)
-- P-values
-- Bayes factors (output from BayesFactor objects or scalar number)
-- Scientific notation
-- Other numbers
-
-## Citation
-
-To cite `{cocoon}`, use:
-
-> Stevens, Jeffrey R. (2024). cocoon: Extract, format, and print
-> statistical output. (version 0.0.0.9000)
-> <https://github.com/JeffreyRStevens/cocoon>
+- `format_corr()`: Correlations (output from `cor.test()`, including
+  Pearson’s, Kendall’s, and Spearman’s correlations)
+- `format_ttest()`: Student t-tests and Wilcoxon rank sum and signed
+  rank tests (output from `t.test()` and `wilcox.test()`, including
+  one-sample, two-sample independent, and paired tests)
+- `format_summary()`: Means and error (calculates from vector or uses
+  vector of mean and error interval or mean, lower error limit, and
+  upper error limit)
+- `format_p()`: P-values
+- `format_bf()`: Bayes factors (output from BayesFactor objects or
+  scalar number)
+- `format_scientific()`: Scientific notation
+- `format_num()`: Other numbers
+- `format_chr()`: Italicize character strings
 
 ## Related packages
 
@@ -121,19 +117,24 @@ To cite `{cocoon}`, use:
   some R statistical objects to R Markdown output. While it allows other
   output format such as Markdown, it also only generates APA formatted
   output with minimal flexibility to alter the output.
+- [`{insight}`](https://easystats.github.io/insight/) - This package
+  extracts information from model objects. It includes `format_p()` and
+  `format_bf()` functions that achieves similar goals as in this
+  package, but they do not allow as much control over formatting of the
+  labels or values.
 
 ## Citation
 
 To cite `{cocoon}`, use:
 
 > Stevens, Jeffrey R. (2024). cocoon: Extract, format, and print
-> statistical output. (version 0.0.0.9000)
+> statistical output. (version 0.0.1)
 > <https://github.com/JeffreyRStevens/cocoon>
 
 ## Contributing
 
-[Contributions](CONTRIBUTING.md) to `{cocoon}` are most welcome! Feel
-free to check out [open
+[Contributions](.github/CONTRIBUTING.md) to `{cocoon}` are most welcome!
+Feel free to check out [open
 issues](https://github.com/JeffreyRStevens/cocoon/issues) for ideas. And
 [pull requests](https://github.com/JeffreyRStevens/cocoon/pulls) are
 encouraged, but you may want to [raise an
@@ -148,11 +149,11 @@ agree to abide by its terms.
 
 The package name `{cocoon}` captures the main goal of transforming
 statistical inputs into nicely formatted outputs. This mirrors cocoons,
-which are the locations where caterpillars transform into beautiful
-adult insects. Cocoons are formally
-[defined](https://en.wikipedia.org/wiki/Pupa) as a silk case that the
-larvae of moths spin around their pupa. So cocoons are specific to moths
-and some other insects but not butterflies.
+which caterpillars build to transform into beautiful adult insects.
+Cocoons are formally [defined](https://en.wikipedia.org/wiki/Pupa) as a
+case that the larvae of moths spin around their pupa. So cocoons are
+cases built by moths and some other insects, whereas butterflies produce
+a chrysalis, which forms from their skin.
 
 ![](man/figures/moth_cocoons.png)
 
