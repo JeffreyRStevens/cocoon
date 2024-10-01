@@ -2,7 +2,7 @@ url: https://jeffreyrstevens.github.io/cocoon/
 template:
   bootstrap: 5
   bootswatch: minty
-  theme: nord
+  theme: zenburn
   bslib:
     bg: "#212529"
     fg: "#f8f9fa"
