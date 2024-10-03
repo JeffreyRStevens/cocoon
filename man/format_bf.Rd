@@ -76,6 +76,9 @@ format_bf(12.4444, label = "")
 \seealso{
 Other functions for printing statistical objects: 
 \code{\link{format_corr}()},
+\code{\link{format_stats}()},
+\code{\link{format_stats.BFBayesFactor}()},
+\code{\link{format_stats.htest}()},
 \code{\link{format_ttest}()}
 }
 \concept{functions for printing statistical objects}

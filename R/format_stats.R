@@ -1,3 +1,187 @@
+
+# Create format_stats.easycorrelation
+
+
+
+
+#' Format statistical results
+#'
+#' A generic function that takes objects from various statistical methods to
+#' create formatted character strings to insert into R Markdown or Quarto
+#' documents. Currently, the generic function takes the htest objects of
+#' correlations, t-tests, and Wilcoxon tests as well as Bayes factors from the
+#' BayesFactor package. The function invokes specific methods that depend
+#' on the class of the first argument.
+#'
+#' @param x Statistical object.
+#' @param ... Additional arguments passed to methods. For method-specific
+#' arguments, see `format_stats.htest()` for htest correlations, t-tests,
+#' and Wilcoxon tests and `formatstat.BayesFactor()` for Bayes factors from
+#' the [{BayesFactor}](https://cran.r-project.org/package=BayesFactor) package.
+#'
+#' @return
+#' A character string of statistical information formatted in Markdown or LaTeX.
+#' @export
+#'
+#' @family functions for printing statistical objects
+#'
+#' @examples
+#' format_stats(cor.test(mtcars$mpg, mtcars$cyl))
+#' format_stats(t.test(mtcars$vs, mtcars$am))
+format_stats <- function(x, ...) {
+  UseMethod("format_stats", x)
+}
+
+#' @method format_stats default
+#' @export
+format_stats.default <- function(x, ...) {
+  if (inherits(x, "numeric")) {
+    stop(
+      "Numerics are not supported by `format_stats()`.",
+      "\n See `format_num()`, `format_bf()`, `format_p()`, or `format_summary()` for formatting numerics."
+      , call. = FALSE
+    )
+  } else if (inherits(x, "character")) {
+    stop(
+      "Character strings are not supported by `format_stats()`.",
+      call. = FALSE
+    )
+  } else if (inherits(x, "data.frame")) {
+    stop(
+      "Data frames are not supported by `format_stats()`.",
+      call. = FALSE
+    )
+  } else {
+    stop(
+      "Objects of class '",
+      class(x),
+      "' are currently not supported (no method defined).",
+      "\n Visit https://github.com/JeffreyRStevens/cocoon/issues to request support for this class.",
+      call. = FALSE
+    )
+  }
+}
+
+#' Format hypothesis test statistics
+#'
+#'
+#'
+#'
+#'
+#'
+#' @param x t-test object
+#' @param digits Number of digits after the decimal for means, confidence
+#' intervals, and test statistics
+#' @param pdigits Number of digits after the decimal for p-values, ranging
+#' between 1-5 (also controls cutoff for small p-values)
+#' @param pzero Logical value (default = FALSE) for whether to include
+#' leading zero for p-values
+#' @param full Logical value (default = TRUE) for whether to include means
+#' and confidence intervals or just test statistic and p-value
+#' @param italics Logical value (default = TRUE) for whether _p_ label should be
+#' italicized
+#' @param dfs Formatting for degrees of freedom ("par" = parenthetical,
+#' "sub" = subscript, "none" = do not print degrees of freedom)
+#' @param mean Formatting for mean label ("abbr" = M, "word" = Mean)
+#' @param type Type of formatting ("md" = markdown, "latex" = LaTeX)
+#'
+#' @details
+#' ## Correlations
+#' With `format_corr()` you can format correlation statistics generated from
+#' `cor.test()` output. This detects whether the object is from a Pearson,
+#' Spearman, or Kendall correlation and reports the appropriate correlation
+#' label (r, \eqn{\tau}, \eqn{\rho}). The default output is APA formatted, but numbers of digits,
+#' leading zeros, the presence of confidence intervals, and italics are all
+#' customizable.
+#' ## T-tests
+#' With `format_ttest()` you can format t-tests generated from `t.test()` and
+#' `wilcox.test()` output. The default output is APA formatted, but numbers of
+#' digits, leading zeros, the presence of means and confidence intervals,
+#' italics, degrees of freedom, and mean labels are all customizable.
+#'
+#' @method format_stats htest
+#' @family functions for printing statistical objects
+#' @export
+#'
+#' @examples
+#' format_stats(cor.test(mtcars$mpg, mtcars$cyl))
+#' format_stats(t.test(mtcars$vs, mtcars$am))
+format_stats.htest <- function(x,
+                               digits = NULL,
+                               pdigits = 3,
+                               pzero = FALSE,
+                               full = TRUE,
+                               italics = TRUE,
+                               dfs = "par",
+                               mean = "abbr",
+                               type = "md") {
+  # Validate arguments
+  if (!is.null(digits)) {
+    stopifnot("Argument `digits` must be a non-negative numeric vector." = is.numeric(digits))
+    stopifnot("Argument `digits` must be a non-negative numeric vector." = digits >= 0)
+  }
+  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = is.numeric(pdigits))
+  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits > 0)
+  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits < 6)
+  stopifnot("Argument `pzero` must be TRUE or FALSE." = is.logical(pzero))
+  stopifnot("Argument `full` must be TRUE or FALSE." = is.logical(full))
+  stopifnot("Argument `italics` must be TRUE or FALSE." = is.logical(italics))
+  stopifnot("Argument `dfs` must be 'par', 'sub', or 'none'." = dfs %in% c("par", "sub", "none"))
+  stopifnot("Argument `mean` must be 'abbr' or 'word'." = mean %in% c("abbr", "word"))
+  stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
+
+  if (grepl("correlation", x$method)) {
+    if (is.null(digits)) {
+      digits <- 2
+    } else {
+      digits <- digits
+    }
+    format_corr(x,
+                digits = digits,
+                pdigits = pdigits,
+                pzero = pzero,
+                full = full,
+                italics = italics,
+                type = type)
+  } else if (grepl("t-test", x$method) | grepl("Wilcoxon", x$method)) {
+    if (is.null(digits)) {
+      digits <- 1
+    } else {
+      digits <- digits
+    }
+    format_ttest(x,
+                 digits = digits,
+                 pdigits = pdigits,
+                 pzero = pzero,
+                 full = full,
+                 italics = italics,
+                 dfs = dfs,
+                 mean = mean,
+                 type = type)
+  } else {
+    stop(
+      "Objects of method '"
+      , x$method
+      , "' are currently not supported."
+      , "\nVisit https://github.com/JeffreyRStevens/cocoon/issues to request support for this method."
+      , call. = FALSE
+    )
+  }
+}
+
+#' Format Bayes factors
+#'
+#'
+#'
+#' @method format_stats BFBayesFactor
+#' @family functions for printing statistical objects
+#' @export
+format_stats.BFBayesFactor <- function(x, ...) {
+  format_bf(x, ...)
+}
+
+
+
 #' Format correlation statistics
 #'
 #' @encoding UTF-8
@@ -9,18 +193,7 @@
 #' leading zeros, the presence of confidence intervals, and italics are all
 #' customizable.
 #'
-#' @param x Correlation object
-#' @param digits Number of digits after the decimal for means, confidence
-#' intervals, and correlation coefficients
-#' @param pdigits Number of digits after the decimal for p-values, ranging
-#' between 1-5 (also controls cutoff for small p-values)
-#' @param pzero Logical value (default = FALSE) for whether to include
-#' leading zero for p-values
-#' @param ci Logical value (default = TRUE) for whether to print
-#' 95% confidence intervals
-#' @param italics Logical value (default = TRUE) for whether _p_ label should be
-#' italicized
-#' @param type Type of formatting ("md" = markdown, "latex" = LaTeX)
+#' @inheritParams format_stats.htest
 #'
 #' @return
 #' A character string of statistical information formatted in Markdown or LaTeX.
@@ -30,33 +203,26 @@
 #'
 #' @examples
 #' # Prepare data
-#' mtcars_corr <- cor.test(mtcars$mpg, mtcars$disp)
 #' # Print statistics
-#' format_corr(mtcars_corr)
+#' # format_stats(mtcars_corr)
 #' # Change digits
-#' format_corr(mtcars_corr, digits = 3)
+#' # format_stats(mtcars_corr, digits = 3)
 #' # Change cutoff digits for p-value
-#' format_corr(mtcars_corr, pdigits = 2)
+#' # format_stats(mtcars_corr, pdigits = 2)
 #' # Add leading zero to p-value and don't print confidence intervals
-#' format_corr(mtcars_corr, pzero = TRUE, ci = FALSE)
-format_corr <- function(x,
-                        digits = 2,
-                        pdigits = 3,
-                        pzero = FALSE,
-                        ci = TRUE,
-                        italics = TRUE,
-                        type = "md") {
+#' # format_stats(mtcars_corr, pzero = TRUE, ci = FALSE)
+format_corr <- function(x, digits, pdigits, pzero, full, italics, type) {
   # Check arguments
-  stopifnot("Input must be a correlation object." = inherits(x, what = "htest") && grepl("correlation", x$method))
-  stopifnot("Argument `digits` must be a non-negative numeric vector." = is.numeric(digits))
-  stopifnot("Argument `digits` must be a non-negative numeric vector." = digits >= 0)
-  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = is.numeric(pdigits))
-  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits > 0)
-  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits < 6)
-  stopifnot("Argument `pzero` must be TRUE or FALSE." = is.logical(pzero))
-  stopifnot("Argument `ci` must be TRUE or FALSE." = is.logical(ci))
-  stopifnot("Argument `italics` must be TRUE or FALSE." = is.logical(italics))
-  stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
+  # stopifnot("Input must be a correlation object." = inherits(x, what = "htest") && grepl("correlation", x$method))
+  # stopifnot("Argument `digits` must be a non-negative numeric vector." = is.numeric(digits))
+  # stopifnot("Argument `digits` must be a non-negative numeric vector." = digits >= 0)
+  # stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = is.numeric(pdigits))
+  # stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits > 0)
+  # stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits < 6)
+  # stopifnot("Argument `pzero` must be TRUE or FALSE." = is.logical(pzero))
+  # stopifnot("Argument `full` must be TRUE or FALSE." = is.logical(full))
+  # stopifnot("Argument `italics` must be TRUE or FALSE." = is.logical(italics))
+  # stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
 
   # Format numbers
   corr_method <- dplyr::case_when(
@@ -69,11 +235,11 @@ format_corr <- function(x,
     cis <- format_num(x$conf.int, digits = digits)
   } else {
     cis <- NULL
-    ci <- FALSE
+    full <- FALSE
   }
   pvalue <- format_p(x$p.value,
-    digits = pdigits, pzero = pzero,
-    italics = italics, type = type
+                     digits = pdigits, pzero = pzero,
+                     italics = italics, type = type
   )
 
   # Build label
@@ -90,8 +256,8 @@ format_corr <- function(x,
 
   # Create statistics string
   full_lab <- dplyr::case_when(
-    ci & corr_method == "pearson" ~ paste0(r_lab, " = ", corr, ", 95% CI [", cis[1], ", ", cis[2], "], ", pvalue),
-    !ci ~ paste0(r_lab, " = ", corr, ", ", pvalue)
+    full & corr_method == "pearson" ~ paste0(r_lab, " = ", corr, ", 95% CI [", cis[1], ", ", cis[2], "], ", pvalue),
+    !full ~ paste0(r_lab, " = ", corr, ", ", pvalue)
   )
   return(full_lab)
 }
@@ -105,21 +271,7 @@ format_corr <- function(x,
 #' digits, leading zeros, the presence of means and confidence intervals,
 #' italics, degrees of freedom, and mean labels are all customizable.
 #'
-#' @param x t-test object
-#' @param digits Number of digits after the decimal for means, confidence
-#' intervals, and t-statistics
-#' @param pdigits Number of digits after the decimal for p-values, ranging
-#' between 1-5 (also controls cutoff for small p-values)
-#' @param pzero Logical value (default = FALSE) for whether to include
-#' leading zero for p-values
-#' @param full Logical value (default = TRUE) for whether to include means
-#' and confidence intervals or just t-statistic and p-value
-#' @param italics Logical value (default = TRUE) for whether _p_ label should be
-#' italicized
-#' @param dfs Formatting for degrees of freedom ("par" = parenthetical,
-#' "sub" = subscript, "none" = do not print degrees of freedom)
-#' @param mean Formatting for mean label ("abbr" = M, "word" = Mean)
-#' @param type Type of formatting ("md" = markdown, "latex" = LaTeX)
+#' @inheritParams format_stats.htest
 #'
 #' @return
 #' A character string of statistical information formatted in Markdown or LaTeX.
@@ -131,36 +283,22 @@ format_corr <- function(x,
 #' # Prepare data
 #' mtcars_tt <- t.test(formula = mtcars$mpg ~ mtcars$vs)
 #' # Print statistics
-#' format_ttest(mtcars_tt)
+#' format_stats(mtcars_tt)
 #' # Change digits
-#' format_ttest(mtcars_tt, digits = 2)
+#' format_stats(mtcars_tt, digits = 2)
 #' # Change cutoff digits for p-value
-#' format_ttest(mtcars_tt, pdigits = 2)
+#' format_stats(mtcars_tt, pdigits = 2)
 #' # Add leading zero to p-value and don't print confidence intervals
-#' format_ttest(mtcars_tt, pzero = TRUE, full = FALSE)
+#' format_stats(mtcars_tt, pzero = TRUE, full = FALSE)
 format_ttest <- function(x,
-                         digits = 1,
-                         pdigits = 3,
-                         pzero = FALSE,
-                         full = TRUE,
-                         italics = TRUE,
-                         dfs = "par",
-                         mean = "abbr",
-                         type = "md") {
-  # Check arguments
-  stopifnot("Input must be a correlation object." = inherits(x, what = "htest") && (grepl("t-test", x$method) | grepl("Wilcoxon", x$method)))
-  stopifnot("Argument `digits` must be a non-negative numeric vector." = is.numeric(digits))
-  stopifnot("Argument `digits` must be a non-negative numeric vector." = digits >= 0)
-  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = is.numeric(pdigits))
-  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits > 0)
-  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits < 6)
-  stopifnot("Argument `pzero` must be TRUE or FALSE." = is.logical(pzero))
-  stopifnot("Argument `full` must be TRUE or FALSE." = is.logical(full))
-  stopifnot("Argument `italics` must be TRUE or FALSE." = is.logical(italics))
-  stopifnot("Argument `dfs` must be 'par', 'sub', or 'none'." = dfs %in% c("par", "sub", "none"))
-  stopifnot("Argument `mean` must be 'abbr' or 'word'." = mean %in% c("abbr", "word"))
-  stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
-
+                         digits,
+                         pdigits,
+                         pzero,
+                         full,
+                         italics,
+                         dfs,
+                         mean,
+                         type) {
   # Format numbers
   ttest_method <- dplyr::case_when(
     grepl("t-test", x$method) ~ "student",
@@ -175,7 +313,7 @@ format_ttest <- function(x,
     }
     cis <- format_num(x$conf.int, digits = digits)
     df <- dplyr::case_when(round(x$parameter, 1) == round(x$parameter) ~ format_num(x$parameter, digits = 0),
-      .default = format_num(x$parameter, digits = digits)
+                           .default = format_num(x$parameter, digits = digits)
     )
     statlab <- "t"
   } else { # format data for Wilcoxon tests
@@ -186,8 +324,8 @@ format_ttest <- function(x,
   }
   tstat <- format_num(x$statistic, digits = digits)
   pvalue <- format_p(x$p.value,
-    digits = pdigits, pzero = pzero,
-    italics = italics, type = type
+                     digits = pdigits, pzero = pzero,
+                     italics = italics, type = type
   )
 
   # Build label
@@ -197,9 +335,9 @@ format_ttest <- function(x,
     identical(type, "latex") ~ paste0("$", statlab, "$")
   )
   tlab <- dplyr::case_when(identical(dfs, "par") ~ paste0(t_lab, "(", df, ")"),
-    identical(dfs, "sub") & identical(type, "md") ~ paste0(t_lab, "~", df, "~"),
-    identical(dfs, "sub") & identical(type, "latex") ~ paste0(t_lab, "$_{", df, "}$"),
-    .default = t_lab
+                           identical(dfs, "sub") & identical(type, "md") ~ paste0(t_lab, "~", df, "~"),
+                           identical(dfs, "sub") & identical(type, "latex") ~ paste0(t_lab, "$_{", df, "}$"),
+                           .default = t_lab
   )[1]
 
   # Create statistics string
@@ -213,7 +351,6 @@ format_ttest <- function(x,
     paste0(tlab, " = ", tstat, ", ", pvalue)
   }
 }
-
 
 #' Format Bayes factors
 #'
@@ -662,3 +799,6 @@ format_medianiqr <- function(x = NULL,
                              type = "md") {
   format_summary(x = x, tendency = tendency, error = error, values = values, digits = digits, tendlabel = tendlabel, italics = italics, subscript = subscript, units = units, display = display, errorlabel = errorlabel, type = type)
 }
+
+
+

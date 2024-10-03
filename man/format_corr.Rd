@@ -5,21 +5,13 @@
 \alias{format_corr}
 \title{Format correlation statistics}
 \usage{
-format_corr(
-  x,
-  digits = 2,
-  pdigits = 3,
-  pzero = FALSE,
-  ci = TRUE,
-  italics = TRUE,
-  type = "md"
-)
+format_corr(x, digits, pdigits, pzero, full, italics, type)
 }
 \arguments{
-\item{x}{Correlation object}
+\item{x}{t-test object}
 
 \item{digits}{Number of digits after the decimal for means, confidence
-intervals, and correlation coefficients}
+intervals, and test statistics}
 
 \item{pdigits}{Number of digits after the decimal for p-values, ranging
 between 1-5 (also controls cutoff for small p-values)}
@@ -27,8 +19,8 @@ between 1-5 (also controls cutoff for small p-values)}
 \item{pzero}{Logical value (default = FALSE) for whether to include
 leading zero for p-values}
 
-\item{ci}{Logical value (default = TRUE) for whether to print
-95\% confidence intervals}
+\item{full}{Logical value (default = TRUE) for whether to include means
+and confidence intervals or just test statistic and p-value}
 
 \item{italics}{Logical value (default = TRUE) for whether \emph{p} label should be
 italicized}
@@ -48,19 +40,21 @@ customizable.
 }
 \examples{
 # Prepare data
-mtcars_corr <- cor.test(mtcars$mpg, mtcars$disp)
 # Print statistics
-format_corr(mtcars_corr)
+# format_stats(mtcars_corr)
 # Change digits
-format_corr(mtcars_corr, digits = 3)
+# format_stats(mtcars_corr, digits = 3)
 # Change cutoff digits for p-value
-format_corr(mtcars_corr, pdigits = 2)
+# format_stats(mtcars_corr, pdigits = 2)
 # Add leading zero to p-value and don't print confidence intervals
-format_corr(mtcars_corr, pzero = TRUE, ci = FALSE)
+# format_stats(mtcars_corr, pzero = TRUE, ci = FALSE)
 }
 \seealso{
 Other functions for printing statistical objects: 
 \code{\link{format_bf}()},
+\code{\link{format_stats}()},
+\code{\link{format_stats.BFBayesFactor}()},
+\code{\link{format_stats.htest}()},
 \code{\link{format_ttest}()}
 }
 \concept{functions for printing statistical objects}

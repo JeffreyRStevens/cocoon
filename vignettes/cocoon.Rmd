@@ -127,7 +127,7 @@ Running a statistical test in R typically returns a list with lots of informatio
 
 ### Correlations
 
-The `format_corr()` function inputs objects returned by the `cor.test()` function and detects whether the object is from a Pearson, Kendall, or Spearman correlation. It then reports and formats the appropriate correlation coefficient and p-value.
+The `format_stats()` function inputs objects returned by the `cor.test()` function and detects whether the object is from a Pearson, Kendall, or Spearman correlation. It then reports and formats the appropriate correlation coefficient and p-value.
 
 Let's start by creating a few different correlations.
 
@@ -137,30 +137,30 @@ mpg_disp_corr_spearman <- cor.test(mtcars$mpg, mtcars$disp, method = "spearman",
 mpg_disp_corr_kendall <- cor.test(mtcars$mpg, mtcars$disp, method = "kendall", exact = FALSE)
 ```
 
-For Pearson correlations, we get the correlation coefficient and the confidence intervals. Since Spearman and Kendall correlations are non-parametric, confidence intervals are not returned. Confidence intervals can be omitted from Pearson correlations by setting `ci = FALSE`.
+For Pearson correlations, we get the correlation coefficient and the confidence intervals. Since Spearman and Kendall correlations are non-parametric, confidence intervals are not returned. Confidence intervals can be omitted from Pearson correlations by setting `full = FALSE`.
 
 | Code | Output |
 |-------|-----|
-| `format_corr(mpg_disp_corr_pearson)` | `r format_corr(mpg_disp_corr_pearson)` |
-| `format_corr(mpg_disp_corr_pearson, ci = FALSE)` | `r format_corr(mpg_disp_corr_pearson, ci = FALSE)` |
-| `format_corr(mpg_disp_corr_spearman)` | `r format_corr(mpg_disp_corr_spearman)` |
-| `format_corr(mpg_disp_corr_kendall)` | `r format_corr(mpg_disp_corr_kendall)` |
+| `format_stats(mpg_disp_corr_pearson)` | `r format_stats(mpg_disp_corr_pearson)` |
+| `format_stats(mpg_disp_corr_pearson, full = FALSE)` | `r format_stats(mpg_disp_corr_pearson, full = FALSE)` |
+| `format_stats(mpg_disp_corr_spearman)` | `r format_stats(mpg_disp_corr_spearman)` |
+| `format_stats(mpg_disp_corr_kendall)` | `r format_stats(mpg_disp_corr_kendall)` |
 
 Format the number of digits of coefficients with `digits` and digits of p-values with `pdigits`. Include the leading zeros for coefficients and p-values with `pzero = TRUE`. Remove italics with  `italics = FALSE`.
 
 | Code | Output |
 |---------|------|
-| `format_corr(mpg_disp_corr_pearson)` | `r format_corr(mpg_disp_corr_pearson)` |
-| `format_corr(mpg_disp_corr_pearson, digits = 1, pdigits = 2)` | `r format_corr(mpg_disp_corr_pearson, digits = 1, pdigits = 2)` |
-| `format_corr(mpg_disp_corr_pearson, pzero = TRUE)` | `r format_corr(mpg_disp_corr_pearson, pzero = TRUE)` |
-| `format_corr(mpg_disp_corr_pearson, italics = FALSE)` | `r format_corr(mpg_disp_corr_pearson, italics = FALSE)` |
-| `format_corr(mpg_disp_corr_spearman, italics = FALSE)` | `r format_corr(mpg_disp_corr_spearman, italics = FALSE)` |
-| `format_corr(mpg_disp_corr_kendall, italics = FALSE)` | `r format_corr(mpg_disp_corr_kendall, italics = FALSE)` |
+| `format_stats(mpg_disp_corr_pearson)` | `r format_stats(mpg_disp_corr_pearson)` |
+| `format_stats(mpg_disp_corr_pearson, digits = 1, pdigits = 2)` | `r format_stats(mpg_disp_corr_pearson, digits = 1, pdigits = 2)` |
+| `format_stats(mpg_disp_corr_pearson, pzero = TRUE)` | `r format_stats(mpg_disp_corr_pearson, pzero = TRUE)` |
+| `format_stats(mpg_disp_corr_pearson, italics = FALSE)` | `r format_stats(mpg_disp_corr_pearson, italics = FALSE)` |
+| `format_stats(mpg_disp_corr_spearman, italics = FALSE)` | `r format_stats(mpg_disp_corr_spearman, italics = FALSE)` |
+| `format_stats(mpg_disp_corr_kendall, italics = FALSE)` | `r format_stats(mpg_disp_corr_kendall, italics = FALSE)` |
 
 
 ### T-tests
 
-The `format_ttest()` function inputs objects returned by the `t.test()` or `wilcox.test()` functions and detects whether the object is from a Student's or Wilcoxon t-test, including one-sample, independent-sample, and paired-sample versions. It then reports and formats the mean value (or mean difference), confidence intervals for mean value/difference, appropriate test statistic, degrees of freedom (for parametric tests), and p-value.
+The `format_stats()` function inputs objects returned by the `t.test()` or `wilcox.test()` functions and detects whether the object is from a Student's or Wilcoxon t-test, including one-sample, independent-sample, and paired-sample versions. It then reports and formats the mean value (or mean difference), confidence intervals for mean value/difference, appropriate test statistic, degrees of freedom (for parametric tests), and p-value.
 
 Let's start by creating a few different t-tests
 
@@ -177,24 +177,24 @@ For Student's t-tests, we get the mean value or difference and the confidence in
 
 | Code | Output |
 |-------|-----|
-| `format_ttest(mpg_disp_ttest_gear_carb)` | `r format_ttest(mpg_disp_ttest_gear_carb)` |
-| `format_ttest(mpg_disp_ttest_gear_carb_paired)` | `r format_ttest(mpg_disp_ttest_gear_carb_paired)` |
-| `format_ttest(mpg_disp_ttest_gear_carb_onesample)` | `r format_ttest(mpg_disp_ttest_gear_carb_onesample)` |
-| `format_ttest(mpg_disp_ttest_gear_carb_onesample, full = FALSE)` | `r format_ttest(mpg_disp_ttest_gear_carb_onesample, full = FALSE)` |
-| `format_ttest(mpg_disp_wtest_gear_carb)` | `r format_ttest(mpg_disp_wtest_gear_carb)` |
-| `format_ttest(mpg_disp_wtest_gear_carb_paired)` | `r format_ttest(mpg_disp_wtest_gear_carb_paired)` |
-| `format_ttest(mpg_disp_wtest_gear_carb_onesample)` | `r format_ttest(mpg_disp_wtest_gear_carb_onesample)` |
+| `format_stats(mpg_disp_ttest_gear_carb)` | `r format_stats(mpg_disp_ttest_gear_carb)` |
+| `format_stats(mpg_disp_ttest_gear_carb_paired)` | `r format_stats(mpg_disp_ttest_gear_carb_paired)` |
+| `format_stats(mpg_disp_ttest_gear_carb_onesample)` | `r format_stats(mpg_disp_ttest_gear_carb_onesample)` |
+| `format_stats(mpg_disp_ttest_gear_carb_onesample, full = FALSE)` | `r format_stats(mpg_disp_ttest_gear_carb_onesample, full = FALSE)` |
+| `format_stats(mpg_disp_wtest_gear_carb)` | `r format_stats(mpg_disp_wtest_gear_carb)` |
+| `format_stats(mpg_disp_wtest_gear_carb_paired)` | `r format_stats(mpg_disp_wtest_gear_carb_paired)` |
+| `format_stats(mpg_disp_wtest_gear_carb_onesample)` | `r format_stats(mpg_disp_wtest_gear_carb_onesample)` |
 
 Format the number of digits of coefficients with `digits` and digits of p-values with `pdigits`. Include the leading zeros for coefficients and p-values with `pzero = TRUE`. Remove italics with  `italics = FALSE`.
 
 | Code | Output |
 |---------|------|
-| `format_ttest(mpg_disp_ttest_gear_carb)` | `r format_ttest(mpg_disp_ttest_gear_carb)` |
-| `format_ttest(mpg_disp_ttest_gear_carb, digits = 2, pdigits = 2)` | `r format_ttest(mpg_disp_ttest_gear_carb, digits = 2, pdigits = 2)` |
-| `format_ttest(mpg_disp_ttest_gear_carb, pzero = TRUE)` | `r format_ttest(mpg_disp_ttest_gear_carb, pzero = TRUE)` |
-| `format_ttest(mpg_disp_ttest_gear_carb, italics = FALSE)` | `r format_ttest(mpg_disp_ttest_gear_carb, italics = FALSE)` |
-| `format_ttest(mpg_disp_wtest_gear_carb)` | `r format_ttest(mpg_disp_wtest_gear_carb)` |
-| `format_ttest(mpg_disp_wtest_gear_carb, italics = FALSE)` | `r format_ttest(mpg_disp_wtest_gear_carb, italics = FALSE)` |
+| `format_stats(mpg_disp_ttest_gear_carb)` | `r format_stats(mpg_disp_ttest_gear_carb)` |
+| `format_stats(mpg_disp_ttest_gear_carb, digits = 2, pdigits = 2)` | `r format_stats(mpg_disp_ttest_gear_carb, digits = 2, pdigits = 2)` |
+| `format_stats(mpg_disp_ttest_gear_carb, pzero = TRUE)` | `r format_stats(mpg_disp_ttest_gear_carb, pzero = TRUE)` |
+| `format_stats(mpg_disp_ttest_gear_carb, italics = FALSE)` | `r format_stats(mpg_disp_ttest_gear_carb, italics = FALSE)` |
+| `format_stats(mpg_disp_wtest_gear_carb)` | `r format_stats(mpg_disp_wtest_gear_carb)` |
+| `format_stats(mpg_disp_wtest_gear_carb, italics = FALSE)` | `r format_stats(mpg_disp_wtest_gear_carb, italics = FALSE)` |
 
 ## Formatting numbers
 
