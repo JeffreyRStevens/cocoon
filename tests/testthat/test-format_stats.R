@@ -7,12 +7,34 @@ test_ttest2 <- t.test(df$a, c(df$b, 120))
 test_ttest3 <- suppressWarnings(wilcox.test(df$a, mu = 5))
 test_ttest4 <- suppressWarnings(wilcox.test(df$a, df$b))
 test_ttest5 <- suppressWarnings(wilcox.test(df$a, c(df$b, 120)))
+test_chisq <- chisq.test(as.table(rbind(c(762, 327, 468), c(484, 239, 477))))
+test_bf <- BayesFactor::ttestBF(df$a, mu = 5)
 
-test_that("formatting correlations works properly", {
-  # suppressMessages(expect_error(
-  #   format_stats("xxx"),
-  #   "Input must be a correlation object"
-  # ))
+test_that("unavailable methods are properly aborted", {
+  suppressMessages(expect_error(
+    format_stats(123),
+    "Numerics are not supported by"
+  ))
+  suppressMessages(expect_error(
+    format_stats("xxx"),
+    "Character strings are not supported by"
+  ))
+  suppressMessages(expect_error(
+    format_stats(df),
+    "Data frames are not supported by"
+  ))
+  suppressMessages(expect_error(
+    format_stats(TRUE),
+    "Objects of class"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_chisq),
+    "Objects of method"
+  ))
+
+})
+
+  test_that("formatting correlations works properly", {
   suppressMessages(expect_error(
     format_stats(test_corr, digits = "xxx"),
     "Argument `digits` must be a non-negative numeric vector"
@@ -130,7 +152,48 @@ test_that("formatting t-tests works properly", {
   suppressMessages(expect_equal(format_stats(test_ttest5), "_W_ = 40.5, _p_ = .323"))
 })
 
-test_that("format_bf() works properly", {
+test_that("format_stats() works properly for htest and BayesFactor objects", {
+  expect_no_error(format_stats(test_corr))
+  expect_no_error(format_stats(test_ttest))
+  expect_no_error(format_stats(test_bf))
+})
+
+test_that("format_stats.BFBayesFactor() validates arguments properly", {
+  suppressMessages(expect_error(
+    format_stats(test_bf, digits1 = "xxx"),
+    "Argument `digits1` must be a non-negative numeric vector"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_bf, digits1 = -1),
+    "Argument `digits1` must be a non-negative numeric vector"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_bf, digits2 = "xxx"),
+    "Argument `digits2` must be a non-negative numeric vector"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_bf, digits2 = -1),
+    "Argument `digits2` must be a non-negative numeric vector"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_bf, cutoff = 0.5),
+    "Argument `cutoff` must be a numeric vector greater than 1 or NULL"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_bf, cutoff = "xxx"),
+    "Argument `cutoff` must be a numeric vector greater than 1 or NULL"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_bf, italics = "xxx"),
+    "Argument `italics` must be TRUE or FALSE"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_bf, type = "xxx"),
+    "Argument `type` must be 'md' or 'latex'"
+  ))
+})
+
+test_that("format_bf() validates arguments properly", {
   suppressMessages(expect_error(
     format_bf("0.0012"),
     "Input is not numeric or of class BFBayesFactor"
@@ -171,6 +234,9 @@ test_that("format_bf() works properly", {
     format_bf(123.4567, type = "xxx"),
     "Argument `type` must be 'md' or 'latex'"
   ))
+})
+
+test_that("format_bf() works properly", {
   expect_equal(format_bf(123.4567), "_BF_~10~ = 123.5")
   expect_equal(format_bf(123.4567, digits1 = 2), "_BF_~10~ = 123.46")
   expect_equal(format_bf(1234.567), "_BF_~10~ = 1.2×10^3^")
