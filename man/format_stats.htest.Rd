@@ -17,7 +17,7 @@
 )
 }
 \arguments{
-\item{x}{t-test object}
+\item{x}{An \code{htest} object}
 
 \item{digits}{Number of digits after the decimal for means, confidence
 intervals, and test statistics}
@@ -41,31 +41,28 @@ italicized}
 
 \item{type}{Type of formatting ("md" = markdown, "latex" = LaTeX)}
 }
+\value{
+A character string of statistical information formatted in Markdown or LaTeX.
+}
 \description{
-Format hypothesis test statistics
-}
-\details{
-\subsection{Correlations}{
-
-With \code{format_corr()} you can format correlation statistics generated from
-\code{cor.test()} output. This detects whether the object is from a Pearson,
+This method formats hypothesis test statistics from the class \code{htest}.
+Currently, this includes correlations from \code{\link[=cor.test]{cor.test()}} and t-tests and
+Wilcoxon tests from \code{\link[=t.test]{t.test()}} and \code{\link[=wilcox.test]{wilcox.test()}}. For correlations, the
+function detects whether the object is from a Pearson,
 Spearman, or Kendall correlation and reports the appropriate correlation
-label (r, \eqn{\tau}, \eqn{\rho}). The default output is APA formatted, but numbers of digits,
-leading zeros, the presence of confidence intervals, and italics are all
-customizable.
-}
-
-\subsection{T-tests}{
-
-With \code{format_ttest()} you can format t-tests generated from \code{t.test()} and
-\code{wilcox.test()} output. The default output is APA formatted, but numbers of
+label (r, \eqn{\tau}, \eqn{\rho}). The default output is APA formatted, but
+this function allows control over numbers of
 digits, leading zeros, the presence of means and confidence intervals,
-italics, degrees of freedom, and mean labels are all customizable.
-}
+italics, degrees of freedom, and mean labels, and output format of
+Markdown or LaTeX.
 }
 \examples{
 format_stats(cor.test(mtcars$mpg, mtcars$cyl))
+format_stats(cor.test(mtcars$mpg, mtcars$cyl), digits = 2, pdigits = 4, pzero = TRUE)
+format_stats(cor.test(mtcars$mpg, mtcars$cyl, method = "kendall"))
 format_stats(t.test(mtcars$vs, mtcars$am))
+format_stats(t.test(mtcars$vs, mtcars$am), dfs = "none", mean = "word")
+format_stats(wilcox.test(mtcars$vs, mtcars$am), type = "latex")
 }
 \seealso{
 Other functions for printing statistical objects: 

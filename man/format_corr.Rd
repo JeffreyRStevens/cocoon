@@ -8,7 +8,7 @@
 format_corr(x, digits, pdigits, pzero, full, italics, type)
 }
 \arguments{
-\item{x}{t-test object}
+\item{x}{An \code{htest} object}
 
 \item{digits}{Number of digits after the decimal for means, confidence
 intervals, and test statistics}

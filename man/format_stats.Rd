@@ -10,9 +10,9 @@ format_stats(x, ...)
 \item{x}{Statistical object.}
 
 \item{...}{Additional arguments passed to methods. For method-specific
-arguments, see \code{format_stats.htest()} for htest correlations, t-tests,
-and Wilcoxon tests and \code{formatstat.BayesFactor()} for Bayes factors from
-the {BayesFactor} package.}
+arguments, see \code{\link[=format_stats.htest]{format_stats.htest()}} for htest correlations, t-tests,
+and Wilcoxon tests and \code{\link[=format_stats.BFBayesFactor]{format_stats.BFBayesFactor()}} for Bayes factors from
+the \{\href{https://cran.r-project.org/package=BayesFactor}{BayesFactor}\} package.}
 }
 \value{
 A character string of statistical information formatted in Markdown or LaTeX.
@@ -22,7 +22,8 @@ A generic function that takes objects from various statistical methods to
 create formatted character strings to insert into R Markdown or Quarto
 documents. Currently, the generic function takes the htest objects of
 correlations, t-tests, and Wilcoxon tests as well as Bayes factors from the
-BayesFactor package. The function invokes specific methods that depend
+\{\href{https://cran.r-project.org/package=BayesFactor}{BayesFactor}\} package.
+The function invokes specific methods that depend
 on the class of the first argument.
 }
 \examples{
