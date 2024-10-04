@@ -10,14 +10,15 @@
 #' create formatted character strings to insert into R Markdown or Quarto
 #' documents. Currently, the generic function takes the htest objects of
 #' correlations, t-tests, and Wilcoxon tests as well as Bayes factors from the
-#' BayesFactor package. The function invokes specific methods that depend
+#' \{[BayesFactor](https://cran.r-project.org/package=BayesFactor)\} package.
+#' The function invokes specific methods that depend
 #' on the class of the first argument.
 #'
 #' @param x Statistical object.
 #' @param ... Additional arguments passed to methods. For method-specific
-#' arguments, see `format_stats.htest()` for htest correlations, t-tests,
-#' and Wilcoxon tests and `formatstat.BayesFactor()` for Bayes factors from
-#' the [{BayesFactor}](https://cran.r-project.org/package=BayesFactor) package.
+#' arguments, see [format_stats.htest()] for htest correlations, t-tests,
+#' and Wilcoxon tests and [formatstat.BayesFactor()] for Bayes factors from
+#' the \{[BayesFactor](https://cran.r-project.org/package=BayesFactor)\} package.
 #'
 #' @return
 #' A character string of statistical information formatted in Markdown or LaTeX.
@@ -64,12 +65,18 @@ format_stats.default <- function(x, ...) {
 
 #' Format hypothesis test statistics
 #'
+#' This method formats hypothesis test statistics from the class `htest`.
+#' Currently, this includes correlations from [cor.test()] and t-tests and
+#' Wilcoxon tests from [t.test()] and [wilcox.test()]. For correlations, the
+#' function detects whether the object is from a Pearson,
+#' Spearman, or Kendall correlation and reports the appropriate correlation
+#' label (r, \eqn{\tau}, \eqn{\rho}). The default output is APA formatted, but
+#' this function allows control over numbers of
+#' digits, leading zeros, the presence of means and confidence intervals,
+#' italics, degrees of freedom, and mean labels, and output format of
+#' Markdown or LaTeX.
 #'
-#'
-#'
-#'
-#'
-#' @param x t-test object
+#' @param x An `htest` object
 #' @param digits Number of digits after the decimal for means, confidence
 #' intervals, and test statistics
 #' @param pdigits Number of digits after the decimal for p-values, ranging
@@ -85,19 +92,8 @@ format_stats.default <- function(x, ...) {
 #' @param mean Formatting for mean label ("abbr" = M, "word" = Mean)
 #' @param type Type of formatting ("md" = markdown, "latex" = LaTeX)
 #'
-#' @details
-#' ## Correlations
-#' With `format_corr()` you can format correlation statistics generated from
-#' `cor.test()` output. This detects whether the object is from a Pearson,
-#' Spearman, or Kendall correlation and reports the appropriate correlation
-#' label (r, \eqn{\tau}, \eqn{\rho}). The default output is APA formatted, but numbers of digits,
-#' leading zeros, the presence of confidence intervals, and italics are all
-#' customizable.
-#' ## T-tests
-#' With `format_ttest()` you can format t-tests generated from `t.test()` and
-#' `wilcox.test()` output. The default output is APA formatted, but numbers of
-#' digits, leading zeros, the presence of means and confidence intervals,
-#' italics, degrees of freedom, and mean labels are all customizable.
+#' @return
+#' A character string of statistical information formatted in Markdown or LaTeX.
 #'
 #' @method format_stats htest
 #' @family functions for printing statistical objects
@@ -105,7 +101,11 @@ format_stats.default <- function(x, ...) {
 #'
 #' @examples
 #' format_stats(cor.test(mtcars$mpg, mtcars$cyl))
+#' format_stats(cor.test(mtcars$mpg, mtcars$cyl), digits = 2, pdigits = 4, pzero = TRUE)
+#' format_stats(cor.test(mtcars$mpg, mtcars$cyl, method = "kendall"))
 #' format_stats(t.test(mtcars$vs, mtcars$am))
+#' format_stats(t.test(mtcars$vs, mtcars$am), dfs = "none", mean = "word")
+#' format_stats(wilcox.test(mtcars$vs, mtcars$am), type = "latex")
 format_stats.htest <- function(x,
                                digits = NULL,
                                pdigits = 3,
@@ -230,7 +230,7 @@ format_corr <- function(x, digits, pdigits, pzero, full, italics, type) {
     grepl("Kendall", x$method) ~ "kendall",
     grepl("Spearman", x$method) ~ "spearman"
   )
-  corr <- format_num(x$estimate, digits = digits, pzero = pzero)
+  stat_value <- format_num(x$estimate, digits = digits, pzero = pzero)
   if (corr_method == "pearson") {
     cis <- format_num(x$conf.int, digits = digits)
   } else {
@@ -243,7 +243,7 @@ format_corr <- function(x, digits, pdigits, pzero, full, italics, type) {
   )
 
   # Build label
-  r_lab <- dplyr::case_when(
+  stat_label <- dplyr::case_when(
     !italics & identical(corr_method, "pearson") ~ paste0("r"),
     !italics & identical(corr_method, "spearman") & identical(type, "md") ~ paste0("\u03C1"),
     !italics & identical(corr_method, "spearman") & identical(type, "latex") ~ paste0("\\rho"),
@@ -255,11 +255,11 @@ format_corr <- function(x, digits, pdigits, pzero, full, italics, type) {
   )
 
   # Create statistics string
-  full_lab <- dplyr::case_when(
-    full & corr_method == "pearson" ~ paste0(r_lab, " = ", corr, ", 95% CI [", cis[1], ", ", cis[2], "], ", pvalue),
-    !full ~ paste0(r_lab, " = ", corr, ", ", pvalue)
-  )
-  return(full_lab)
+  build_string(cis = cis,
+               stat_label = stat_label,
+               stat_value = stat_value,
+               pvalue = pvalue,
+               full = full)
 }
 
 
@@ -307,9 +307,9 @@ format_ttest <- function(x,
 
   if (ttest_method == "student") { # format data for Student's t-test
     if (length(x$estimate) == 2) {
-      mean_val <- format_num(x$estimate[1] - x$estimate[2], digits = digits)
+      mean_value <- format_num(x$estimate[1] - x$estimate[2], digits = digits)
     } else if (length(x$estimate) == 1) {
-      mean_val <- format_num(x$estimate, digits = digits)
+      mean_value <- format_num(x$estimate, digits = digits)
     }
     cis <- format_num(x$conf.int, digits = digits)
     df <- dplyr::case_when(round(x$parameter, 1) == round(x$parameter) ~ format_num(x$parameter, digits = 0),
@@ -322,34 +322,42 @@ format_ttest <- function(x,
     df <- ""
     statlab <- attr(x$statistic, "name")
   }
-  tstat <- format_num(x$statistic, digits = digits)
+  stat_value <- format_num(x$statistic, digits = digits)
   pvalue <- format_p(x$p.value,
                      digits = pdigits, pzero = pzero,
                      italics = italics, type = type
   )
 
   # Build label
-  t_lab <- dplyr::case_when(
+  stat_label <- dplyr::case_when(
     !italics ~ paste0(statlab),
     identical(type, "md") ~ paste0("_", statlab, "_"),
     identical(type, "latex") ~ paste0("$", statlab, "$")
   )
-  tlab <- dplyr::case_when(identical(dfs, "par") ~ paste0(t_lab, "(", df, ")"),
-                           identical(dfs, "sub") & identical(type, "md") ~ paste0(t_lab, "~", df, "~"),
-                           identical(dfs, "sub") & identical(type, "latex") ~ paste0(t_lab, "$_{", df, "}$"),
-                           .default = t_lab
+  stat_label <- dplyr::case_when(identical(dfs, "par") ~ paste0(stat_label, "(", df, ")"),
+                                 identical(dfs, "sub") & identical(type, "md") ~ paste0(stat_label, "~", df, "~"),
+                                 identical(dfs, "sub") & identical(type, "latex") ~ paste0(stat_label, "$_{", df, "}$"),
+                                 .default = stat_label
   )[1]
 
   # Create statistics string
   if (full) {
-    mean_lab <- dplyr::case_when(
+    mean_label <- dplyr::case_when(
       identical(mean, "abbr") ~ paste0(format_chr("M", italics = italics, type = type), " = "),
       identical(mean, "word") ~ paste0(format_chr("Mean", italics = italics, type = type), " = ")
     )
-    paste0(mean_lab, mean_val, ", 95% CI [", cis[1], ", ", cis[2], "], ", tlab, " = ", tstat, ", ", pvalue)
   } else {
-    paste0(tlab, " = ", tstat, ", ", pvalue)
+    mean_label <- mean_value <- cis <- NULL
   }
+
+  build_string(mean_label = mean_label,
+               mean_value = mean_value,
+               cis = cis,
+               stat_label = stat_label,
+               stat_value = stat_value,
+               pvalue = pvalue,
+               full = full)
+
 }
 
 #' Format Bayes factors
@@ -798,6 +806,23 @@ format_medianiqr <- function(x = NULL,
                              errorlabel = TRUE,
                              type = "md") {
   format_summary(x = x, tendency = tendency, error = error, values = values, digits = digits, tendlabel = tendlabel, italics = italics, subscript = subscript, units = units, display = display, errorlabel = errorlabel, type = type)
+}
+
+
+#' @keywords internal
+build_string <- function(mean_label = NULL,
+                         mean_value = NULL,
+                         cis = NULL,
+                         stat_label,
+                         stat_value,
+                         pvalue,
+                         full) {
+  dplyr::case_when(full & !is.null(mean_label) & !is.null(mean_value) & !is.null(cis) ~
+                     paste0(mean_label, mean_value, ", 95% CI [", cis[1], ", ", cis[2], "], ", stat_label, " = ", stat_value, ", ", pvalue),
+                   full & is.null(mean_label) & is.null(mean_value) & !is.null(cis) ~
+                     paste0(stat_label, " = ", stat_value, ", 95% CI [", cis[1], ", ", cis[2], "], ", pvalue),
+                   !full | (is.null(mean_label) & !is.null(mean_value) & !is.null(cis)) ~
+                     paste0(stat_label, " = ", stat_value, ", ", pvalue))
 }
 
 
