@@ -8,8 +8,9 @@
 #'
 #' A generic function that takes objects from various statistical methods to
 #' create formatted character strings to insert into R Markdown or Quarto
-#' documents. Currently, the generic function takes the htest objects of
-#' correlations, t-tests, and Wilcoxon tests as well as Bayes factors from the
+#' documents. Currently, the generic function works with the following objects:
+#' 1. htest objects of correlations, t-tests, and Wilcoxon tests
+#' 1. Bayes factors from the
 #' \{[BayesFactor](https://cran.r-project.org/package=BayesFactor)\} package.
 #' The function invokes specific methods that depend
 #' on the class of the first argument.
@@ -47,11 +48,11 @@ format_stats.default <- function(x, ...) {
       "Character strings are not supported by `format_stats()`.",
       call. = FALSE
     )
-  } else if (inherits(x, "data.frame")) {
-    stop(
-      "Data frames are not supported by `format_stats()`.",
-      call. = FALSE
-    )
+  # } else if (inherits(x, "data.frame")) {
+  #   stop(
+  #     "Data frames are not supported by `format_stats()`.",
+  #     call. = FALSE
+  #   )
   } else {
     stop(
       "Objects of class '",
@@ -169,6 +170,56 @@ format_stats.htest <- function(x,
   }
 }
 
+#' @export
+format_stats.easycorrelation <- function(x,
+                                         digits = 2,
+                                         pdigits = 3,
+                                         pzero = FALSE,
+                                         full = TRUE,
+                                         italics = TRUE,
+                                         mean = "abbr",
+                                         type = "md") {
+  # Validate arguments
+  if (!is.null(digits)) {
+    stopifnot("Argument `digits` must be a non-negative numeric vector." = is.numeric(digits))
+    stopifnot("Argument `digits` must be a non-negative numeric vector." = digits >= 0)
+  }
+  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = is.numeric(pdigits))
+  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits > 0)
+  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits < 6)
+  stopifnot("Argument `pzero` must be TRUE or FALSE." = is.logical(pzero))
+  stopifnot("Argument `full` must be TRUE or FALSE." = is.logical(full))
+  stopifnot("Argument `italics` must be TRUE or FALSE." = is.logical(italics))
+  stopifnot("Argument `mean` must be 'abbr' or 'word'." = mean %in% c("abbr", "word"))
+  stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
+
+  if ("r" %in% names(x)) {
+    method <- "Pearson correlation"
+  } else if ("rho" %in% names(x)) {
+    method <- "Spearman correlation"
+  }  else if ("rho" %in% names(x)) {
+    method <- "Kendall correlation"
+  } else {
+    stop("Correlation method is not Pearson, Spearman, or Kendall.")
+  }
+
+  y <- list(statistic = x$t,
+            parameter = x$df_error,
+            p.value = x$p,
+            estimate = x$r,
+            data.name = paste0(x$Parameter1, " and ", x$Parameter2),
+            method = method,
+            conf.int = c(x$CI_low, x$CI_high))
+  class(y) <- "htest"
+  format_corr(y,
+              digits = digits,
+              pdigits = pdigits,
+              pzero = pzero,
+              full = full,
+              italics = italics,
+              type = type)
+}
+
 #' Format Bayes factors
 #'
 #' This method formats Bayes factors from the
@@ -261,7 +312,10 @@ format_corr <- function(x,
                         full,
                         italics,
                         type) {
-  # Check arguments
+  # Check input type
+  stopifnot("Input must be a correlation object." = (inherits(x, what = "htest") && grepl("correlation", x$method)) | inherits(x, what = "easycorrelation"))
+
+  # Validate arguments
   # stopifnot("Input must be a correlation object." = inherits(x, what = "htest") && grepl("correlation", x$method))
   # stopifnot("Argument `digits` must be a non-negative numeric vector." = is.numeric(digits))
   # stopifnot("Argument `digits` must be a non-negative numeric vector." = digits >= 0)
@@ -272,7 +326,7 @@ format_corr <- function(x,
   # stopifnot("Argument `full` must be TRUE or FALSE." = is.logical(full))
   # stopifnot("Argument `italics` must be TRUE or FALSE." = is.logical(italics))
   # stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
-
+print(x$method)
   # Format numbers
   corr_method <- dplyr::case_when(
     grepl("Pearson", x$method) ~ "pearson",
