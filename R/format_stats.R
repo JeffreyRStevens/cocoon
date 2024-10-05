@@ -1,19 +1,16 @@
 
-# Create format_stats.easycorrelation
-
-
-
-
 #' Format statistical results
 #'
 #' A generic function that takes objects from various statistical methods to
 #' create formatted character strings to insert into R Markdown or Quarto
 #' documents. Currently, the generic function works with the following objects:
 #' 1. htest objects of correlations, t-tests, and Wilcoxon tests
+#' 1. correlations from the
+#' \{[correlation](https://cran.r-project.org/package=correlation)\} package.
 #' 1. Bayes factors from the
 #' \{[BayesFactor](https://cran.r-project.org/package=BayesFactor)\} package.
-#' The function invokes specific methods that depend
-#' on the class of the first argument.
+#' The function invokes specific methods that depend on the class of the
+#' first argument.
 #'
 #' @param x Statistical object.
 #' @param ... Additional arguments passed to methods. For method-specific
@@ -37,6 +34,9 @@ format_stats <- function(x, ...) {
 #' @method format_stats default
 #' @export
 format_stats.default <- function(x, ...) {
+  # if (inherits(x, "easycorrelation")) {
+  #   format_stats.easycorrelation(x, ...)
+  #} else
   if (inherits(x, "numeric")) {
     stop(
       "Numerics are not supported by `format_stats()`.",
@@ -48,11 +48,11 @@ format_stats.default <- function(x, ...) {
       "Character strings are not supported by `format_stats()`.",
       call. = FALSE
     )
-  # } else if (inherits(x, "data.frame")) {
-  #   stop(
-  #     "Data frames are not supported by `format_stats()`.",
-  #     call. = FALSE
-  #   )
+  } else if (inherits(x, "data.frame")) {
+    stop(
+      "Data frames are not supported by `format_stats()`.",
+      call. = FALSE
+    )
   } else {
     stop(
       "Objects of class '",
@@ -92,6 +92,7 @@ format_stats.default <- function(x, ...) {
 #' "sub" = subscript, "none" = do not print degrees of freedom)
 #' @param mean Formatting for mean label ("abbr" = M, "word" = Mean)
 #' @param type Type of formatting ("md" = markdown, "latex" = LaTeX)
+#' @param ... Additional arguments passed to methods.
 #'
 #' @return
 #' A character string of statistical information formatted in Markdown or LaTeX.
@@ -115,7 +116,8 @@ format_stats.htest <- function(x,
                                italics = TRUE,
                                dfs = "par",
                                mean = "abbr",
-                               type = "md") {
+                               type = "md",
+                               ...) {
   # Validate arguments
   if (!is.null(digits)) {
     stopifnot("Argument `digits` must be a non-negative numeric vector." = is.numeric(digits))
@@ -170,15 +172,35 @@ format_stats.htest <- function(x,
   }
 }
 
+#' Format correlation statistics
+#'
+#' @description
+#' This functions formats correlation statistics generated from the
+#' \{[correlation](https://cran.r-project.org/package=correlation)\} package.
+#' This detects whether the object is from a Pearson, Spearman, or Kendall
+#' correlation and reports the appropriate correlation label
+#' (r, \eqn{\tau}, \eqn{\rho}). The default output is APA formatted, but
+#' numbers of digits, leading zeros, the presence of confidence intervals,
+#' and italics are all customizable.
+
+#' @inheritParams format_stats.htest
+#'
+#' @method format_stats easycorrelation
+#' @family functions for printing statistical objects
+
 #' @export
+#'
+#' @examples
+#' test_easycorr <- correlation::correlation(mtcars, select = "mpg", select2 = "disp")
+#' format_stats(test_easycorr)
 format_stats.easycorrelation <- function(x,
                                          digits = 2,
                                          pdigits = 3,
                                          pzero = FALSE,
                                          full = TRUE,
                                          italics = TRUE,
-                                         mean = "abbr",
-                                         type = "md") {
+                                         type = "md",
+                                         ...) {
   # Validate arguments
   if (!is.null(digits)) {
     stopifnot("Argument `digits` must be a non-negative numeric vector." = is.numeric(digits))
@@ -190,7 +212,6 @@ format_stats.easycorrelation <- function(x,
   stopifnot("Argument `pzero` must be TRUE or FALSE." = is.logical(pzero))
   stopifnot("Argument `full` must be TRUE or FALSE." = is.logical(full))
   stopifnot("Argument `italics` must be TRUE or FALSE." = is.logical(italics))
-  stopifnot("Argument `mean` must be 'abbr' or 'word'." = mean %in% c("abbr", "word"))
   stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
 
   if ("r" %in% names(x)) {
@@ -244,6 +265,7 @@ format_stats.easycorrelation <- function(x,
 #' @param subscript Subscript to include with _BF_ label (`"10"`, `"01"`, or
 #' `""` for no subscript)
 #' @param type Type of formatting (`"md"` = markdown, `"latex"` = LaTeX)
+#' @param ... Additional arguments passed to methods.
 #'
 #'
 #' @method format_stats BFBayesFactor
@@ -262,7 +284,8 @@ format_stats.BFBayesFactor <- function(x,
                                        label = "BF",
                                        italics = TRUE,
                                        subscript = "10",
-                                       type = "md") {
+                                       type = "md",
+                                       ...) {
 
   format_bf(x,
             digits1 = digits1,
@@ -311,7 +334,8 @@ format_corr <- function(x,
                         pzero,
                         full,
                         italics,
-                        type) {
+                        type,
+                        ...) {
   # Check input type
   stopifnot("Input must be a correlation object." = (inherits(x, what = "htest") && grepl("correlation", x$method)) | inherits(x, what = "easycorrelation"))
 
@@ -326,7 +350,7 @@ format_corr <- function(x,
   # stopifnot("Argument `full` must be TRUE or FALSE." = is.logical(full))
   # stopifnot("Argument `italics` must be TRUE or FALSE." = is.logical(italics))
   # stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
-print(x$method)
+
   # Format numbers
   corr_method <- dplyr::case_when(
     grepl("Pearson", x$method) ~ "pearson",

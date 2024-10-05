@@ -2,6 +2,7 @@
 
 S3method(format_stats,BFBayesFactor)
 S3method(format_stats,default)
+S3method(format_stats,easycorrelation)
 S3method(format_stats,htest)
 export(format_bf)
 export(format_chr)
