@@ -1,6 +1,7 @@
 df <- data.frame(a = 1:10, b = 2:11, c = c(1, 8, 3, 7, 8, 2, 4, 1, 4, 5))
 test_corr <- cor.test(df$a, df$b)
 test_corr2 <- cor.test(df$a, df$c)
+test_easycorr <- correlation::correlation(df, select = "a", select2 = "c")
 test_ttest1 <- t.test(df$a, mu = 5)
 test_ttest <- t.test(df$a, df$b)
 test_ttest2 <- t.test(df$a, c(df$b, 120))
@@ -34,7 +35,7 @@ test_that("unavailable methods are properly aborted", {
 
 })
 
-  test_that("formatting correlations works properly", {
+test_that("htest correlations are validated properly", {
   suppressMessages(expect_error(
     format_stats(test_corr, digits = "xxx"),
     "Argument `digits` must be a non-negative numeric vector"
@@ -71,6 +72,48 @@ test_that("unavailable methods are properly aborted", {
     format_stats(test_corr, type = "xxx"),
     "Argument `type` must be 'md' or 'latex'"
   ))
+})
+
+test_that("correlation correlations are validated properly", {
+  suppressMessages(expect_error(
+    format_stats(test_easycorr, digits = "xxx"),
+    "Argument `digits` must be a non-negative numeric vector"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_easycorr, digits = -1),
+    "Argument `digits` must be a non-negative numeric vector"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_easycorr, pdigits = "xxx"),
+    "Argument `pdigits` must be a numeric between 1 and 5"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_easycorr, pdigits = 0),
+    "Argument `pdigits` must be a numeric between 1 and 5"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_easycorr, pdigits = 7),
+    "Argument `pdigits` must be a numeric between 1 and 5"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_easycorr, pzero = "xxx"),
+    "Argument `pzero` must be TRUE or FALSE"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_easycorr, full = "xxx"),
+    "Argument `full` must be TRUE or FALSE"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_easycorr, italics = "xxx"),
+    "Argument `italics` must be TRUE or FALSE"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_easycorr, type = "xxx"),
+    "Argument `type` must be 'md' or 'latex'"
+  ))
+})
+
+test_that("formatting correlations works properly", {
   expect_equal(format_stats(test_corr), "_r_ = 1.00, 95% CI [1.00, 1.00], _p_ < .001")
   expect_equal(format_stats(test_corr, digits = 3), "_r_ = 1.000, 95% CI [1.000, 1.000], _p_ < .001")
   expect_equal(format_stats(test_corr, pdigits = 2), "_r_ = 1.00, 95% CI [1.00, 1.00], _p_ < .01")
@@ -84,12 +127,7 @@ test_that("unavailable methods are properly aborted", {
   expect_equal(format_stats(cor.test(df$a, df$b, method = "spearman")), "_ρ_ = 1.00, _p_ < .001")
 })
 
-
-test_that("formatting t-tests works properly", {
-  # suppressMessages(expect_error(
-  #   format_stats("xxx"),
-  #   "Input must be a correlation object"
-  # ))
+test_that("htest t-tests are validated properly", {
   suppressMessages(expect_error(
     format_stats(test_ttest, digits = "xxx"),
     "Argument `digits` must be a non-negative numeric vector"
@@ -134,6 +172,9 @@ test_that("formatting t-tests works properly", {
     format_stats(test_ttest, type = "xxx"),
     "Argument `type` must be 'md' or 'latex'"
   ))
+})
+
+test_that("formatting t-tests works properly", {
   expect_equal(format_stats(test_ttest1), "_M_ = 5.5, 95% CI [3.3, 7.7], _t_(9) = 0.5, _p_ = .614")
   expect_equal(format_stats(test_ttest), "_M_ = -1.0, 95% CI [-3.8, 1.8], _t_(18) = -0.7, _p_ = .470")
   expect_equal(format_stats(test_ttest2), "_M_ = -11.3, 95% CI [-34.4, 11.8], _t_(10.2) = -1.1, _p_ = .302")
@@ -153,8 +194,9 @@ test_that("formatting t-tests works properly", {
 })
 
 test_that("format_stats() works properly for htest and BayesFactor objects", {
-  expect_no_error(format_stats(test_corr))
   expect_no_error(format_stats(test_ttest))
+  expect_no_error(format_stats(test_corr))
+  expect_no_error(format_stats(test_easycorr))
   expect_no_error(format_stats(test_bf))
 })
 
