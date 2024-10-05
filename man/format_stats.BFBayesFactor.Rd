@@ -12,7 +12,8 @@
   label = "BF",
   italics = TRUE,
   subscript = "10",
-  type = "md"
+  type = "md",
+  ...
 )
 }
 \arguments{
@@ -36,6 +37,8 @@ italicized (\emph{BF} or BF)}
 \code{""} for no subscript)}
 
 \item{type}{Type of formatting (\code{"md"} = markdown, \code{"latex"} = LaTeX)}
+
+\item{...}{Additional arguments passed to methods.}
 }
 \description{
 This method formats Bayes factors from the
@@ -58,6 +61,7 @@ Other functions for printing statistical objects:
 \code{\link{format_bf}()},
 \code{\link{format_corr}()},
 \code{\link{format_stats}()},
+\code{\link{format_stats.easycorrelation}()},
 \code{\link{format_stats.htest}()},
 \code{\link{format_ttest}()}
 }

@@ -58,6 +58,7 @@ Other functions for printing statistical objects:
 \code{\link{format_corr}()},
 \code{\link{format_stats}()},
 \code{\link{format_stats.BFBayesFactor}()},
+\code{\link{format_stats.easycorrelation}()},
 \code{\link{format_stats.htest}()}
 }
 \concept{functions for printing statistical objects}

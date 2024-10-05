@@ -20,11 +20,16 @@ A character string of statistical information formatted in Markdown or LaTeX.
 \description{
 A generic function that takes objects from various statistical methods to
 create formatted character strings to insert into R Markdown or Quarto
-documents. Currently, the generic function takes the htest objects of
-correlations, t-tests, and Wilcoxon tests as well as Bayes factors from the
+documents. Currently, the generic function works with the following objects:
+\enumerate{
+\item htest objects of correlations, t-tests, and Wilcoxon tests
+\item correlations from the
+\{\href{https://cran.r-project.org/package=correlation}{correlation}\} package.
+\item Bayes factors from the
 \{\href{https://cran.r-project.org/package=BayesFactor}{BayesFactor}\} package.
-The function invokes specific methods that depend
-on the class of the first argument.
+The function invokes specific methods that depend on the class of the
+first argument.
+}
 }
 \examples{
 format_stats(cor.test(mtcars$mpg, mtcars$cyl))
@@ -35,6 +40,7 @@ Other functions for printing statistical objects:
 \code{\link{format_bf}()},
 \code{\link{format_corr}()},
 \code{\link{format_stats.BFBayesFactor}()},
+\code{\link{format_stats.easycorrelation}()},
 \code{\link{format_stats.htest}()},
 \code{\link{format_ttest}()}
 }

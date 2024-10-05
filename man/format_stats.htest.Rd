@@ -13,7 +13,8 @@
   italics = TRUE,
   dfs = "par",
   mean = "abbr",
-  type = "md"
+  type = "md",
+  ...
 )
 }
 \arguments{
@@ -40,6 +41,8 @@ italicized}
 \item{mean}{Formatting for mean label ("abbr" = M, "word" = Mean)}
 
 \item{type}{Type of formatting ("md" = markdown, "latex" = LaTeX)}
+
+\item{...}{Additional arguments passed to methods.}
 }
 \value{
 A character string of statistical information formatted in Markdown or LaTeX.
@@ -70,6 +73,7 @@ Other functions for printing statistical objects:
 \code{\link{format_corr}()},
 \code{\link{format_stats}()},
 \code{\link{format_stats.BFBayesFactor}()},
+\code{\link{format_stats.easycorrelation}()},
 \code{\link{format_ttest}()}
 }
 \concept{functions for printing statistical objects}

@@ -5,7 +5,7 @@
 \alias{format_corr}
 \title{Format correlation statistics}
 \usage{
-format_corr(x, digits, pdigits, pzero, full, italics, type)
+format_corr(x, digits, pdigits, pzero, full, italics, type, ...)
 }
 \arguments{
 \item{x}{An \code{htest} object}
@@ -26,6 +26,8 @@ and confidence intervals or just test statistic and p-value}
 italicized}
 
 \item{type}{Type of formatting ("md" = markdown, "latex" = LaTeX)}
+
+\item{...}{Additional arguments passed to methods.}
 }
 \value{
 A character string of statistical information formatted in Markdown or LaTeX.
@@ -54,6 +56,7 @@ Other functions for printing statistical objects:
 \code{\link{format_bf}()},
 \code{\link{format_stats}()},
 \code{\link{format_stats.BFBayesFactor}()},
+\code{\link{format_stats.easycorrelation}()},
 \code{\link{format_stats.htest}()},
 \code{\link{format_ttest}()}
 }
