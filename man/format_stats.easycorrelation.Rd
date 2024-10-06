@@ -38,7 +38,6 @@ italicized}
 \item{...}{Additional arguments passed to methods.}
 }
 \description{
-#' @description
 This functions formats correlation statistics generated from the
 \{\href{https://cran.r-project.org/package=correlation}{correlation}\} package.
 This detects whether the object is from a Pearson, Spearman, or Kendall

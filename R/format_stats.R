@@ -218,8 +218,10 @@ format_stats.easycorrelation <- function(x,
     method <- "Pearson correlation"
   } else if ("rho" %in% names(x)) {
     method <- "Spearman correlation"
-  }  else if ("rho" %in% names(x)) {
+    x$r <- x$rho
+  }  else if ("tau" %in% names(x)) {
     method <- "Kendall correlation"
+    x$r <- x$tau
   } else {
     stop("Correlation method is not Pearson, Spearman, or Kendall.")
   }
