@@ -5,68 +5,43 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="cocoon">
 <title>cocoon • cocoon</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="cocoon">
-<meta property="og:description" content="cocoon">
-<meta property="og:image" content="https://jeffreyrstevens.github.io/cocoon/logo.png">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="cocoon">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
 
-    <nav class="navbar fixed-top navbar-dark navbar-expand-lg bg-primary"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-primary" data-bs-theme="dark" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">cocoon</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="active nav-item">
-  <a class="nav-link" href="../articles/cocoon.html">Get started</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Reference</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
-</li>
+<li class="active nav-item"><a class="nav-link" href="../articles/cocoon.html">Get started</a></li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav">
-<li class="nav-item">
-  <a class="external-link nav-link" href="https://github.com/JeffreyRStevens/cocoon/" aria-label="github">
-    <span class="fab fa fab fa-github fa-lg"></span>
-     
-  </a>
-</li>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/JeffreyRStevens/cocoon/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-article">
 
@@ -78,7 +53,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>cocoon</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/JeffreyRStevens/cocoon/blob/HEAD/vignettes/cocoon.Rmd" class="external-link"><code>vignettes/cocoon.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/JeffreyRStevens/cocoon/blob/main/vignettes/cocoon.Rmd" class="external-link"><code>vignettes/cocoon.Rmd</code></a></small>
       <div class="d-none name"><code>cocoon.Rmd</code></div>
     </div>
 
@@ -104,6 +79,338 @@ numbers with maximum values of 1. All functions accept a
 Markdown (default) or <code>"latex"</code> for LaTeX. This package can
 format statistical objects, statistical values, and numbers more
 generally.</p>
+<div class="section level2">
+<h2 id="formatting-statistical-objects">Formatting statistical objects<a class="anchor" aria-label="anchor" href="#formatting-statistical-objects"></a>
+</h2>
+<p>Running a statistical test in R typically returns a list with lots of
+information about the test, often including things like statistical test
+values and p-values. The aim of the <code><a href="../reference/format_stats.html">format_stats()</a></code> function
+is to extract and format statistics for a suite of commonly used
+statistical objects (correlation and t-tests).</p>
+<div class="section level3">
+<h3 id="correlations">Correlations<a class="anchor" aria-label="anchor" href="#correlations"></a>
+</h3>
+<p>The <code><a href="../reference/format_stats.html">format_stats()</a></code> function can input objects returned
+by the <code><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test()</a></code> or
+<code><a href="https://easystats.github.io/correlation/reference/correlation.html" class="external-link">correlation::correlation()</a></code> function and detects whether the
+object is from a Pearson, Kendall, or Spearman correlation. It then
+reports and formats the appropriate correlation coefficient and
+p-value.</p>
+<p>Let’s start by creating a few different correlations.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mpg_disp_corr_pearson</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">disp</span>, method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span></span>
+<span><span class="va">mpg_disp_corr_spearman</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">disp</span>, method <span class="op">=</span> <span class="st">"spearman"</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">mpg_disp_corr_kendall</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">disp</span>, method <span class="op">=</span> <span class="st">"kendall"</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p>For Pearson correlations, we get the correlation coefficient and the
+confidence intervals. Since Spearman and Kendall correlations are
+non-parametric, confidence intervals are not returned. Confidence
+intervals can be omitted from Pearson correlations by setting
+<code>full = FALSE</code>.</p>
+<table class="table">
+<colgroup>
+<col width="58%">
+<col width="41%">
+</colgroup>
+<thead><tr class="header">
+<th>Code</th>
+<th>Output</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>format_stats(mpg_disp_corr_pearson)</code></td>
+<td>
+<em>r</em> = -.85, 95% CI [-0.92, -0.71], <em>p</em> &lt; .001</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(mpg_disp_corr_pearson, full = FALSE)</code></td>
+<td>
+<em>r</em> = -.85, <em>p</em> &lt; .001</td>
+</tr>
+<tr class="odd">
+<td><code>format_stats(mpg_disp_corr_spearman)</code></td>
+<td>
+<em>ρ</em> = -.91, <em>p</em> &lt; .001</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(mpg_disp_corr_kendall)</code></td>
+<td>
+<em>τ</em> = -.77, <em>p</em> &lt; .001</td>
+</tr>
+</tbody>
+</table>
+<p>Format the number of digits of coefficients with <code>digits</code>
+and digits of p-values with <code>pdigits</code>. Include the leading
+zeros for coefficients and p-values with <code>pzero = TRUE</code>.
+Remove italics with <code>italics = FALSE</code>.</p>
+<table class="table">
+<colgroup>
+<col width="60%">
+<col width="40%">
+</colgroup>
+<thead><tr class="header">
+<th>Code</th>
+<th>Output</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>format_stats(mpg_disp_corr_pearson)</code></td>
+<td>
+<em>r</em> = -.85, 95% CI [-0.92, -0.71], <em>p</em> &lt; .001</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(mpg_disp_corr_pearson, digits = 1, pdigits = 2)</code></td>
+<td>
+<em>r</em> = -.8, 95% CI [-0.9, -0.7], <em>p</em> &lt; .01</td>
+</tr>
+<tr class="odd">
+<td><code>format_stats(mpg_disp_corr_pearson, pzero = TRUE)</code></td>
+<td>
+<em>r</em> = -0.85, 95% CI [-0.92, -0.71], <em>p</em> &lt;
+0.001</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(mpg_disp_corr_pearson, italics = FALSE)</code></td>
+<td>r = -.85, 95% CI [-0.92, -0.71], p &lt; .001</td>
+</tr>
+<tr class="odd">
+<td><code>format_stats(mpg_disp_corr_spearman, italics = FALSE)</code></td>
+<td>ρ = -.91, p &lt; .001</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(mpg_disp_corr_kendall, italics = FALSE)</code></td>
+<td>τ = -.77, p &lt; .001</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level3">
+<h3 id="t-tests">T-tests<a class="anchor" aria-label="anchor" href="#t-tests"></a>
+</h3>
+<p>The <code><a href="../reference/format_stats.html">format_stats()</a></code> function can also input objects
+returned by the <code><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test()</a></code> or <code><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test()</a></code>
+functions and detect whether the object is from a Student’s or Wilcoxon
+t-test, including one-sample, independent-sample, and paired-sample
+versions. It then reports and formats the mean value (or mean
+difference), confidence intervals for mean value/difference, appropriate
+test statistic, degrees of freedom (for parametric tests), and
+p-value.</p>
+<p>Let’s start by creating a few different t-tests</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mpg_disp_ttest_gear_carb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">carb</span><span class="op">)</span></span>
+<span><span class="va">mpg_disp_ttest_gear_carb_paired</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">carb</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">mpg_disp_ttest_gear_carb_onesample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, mu <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="va">mpg_disp_wtest_gear_carb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">carb</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">mpg_disp_wtest_gear_carb_paired</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">carb</span>, paired <span class="op">=</span> <span class="cn">TRUE</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">mpg_disp_wtest_gear_carb_onesample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, mu <span class="op">=</span> <span class="fl">4</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p>For Student’s t-tests, we get the mean value or difference and the
+confidence intervals. Means and confidence intervals can be omitted by
+setting <code>full = FALSE</code>.</p>
+<table class="table">
+<colgroup>
+<col width="58%">
+<col width="41%">
+</colgroup>
+<thead><tr class="header">
+<th>Code</th>
+<th>Output</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>format_stats(mpg_disp_ttest_gear_carb)</code></td>
+<td>
+<em>M</em> = 0.9, 95% CI [0.2, 1.5], <em>t</em>(43.4) = 2.8,
+<em>p</em> = .008</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(mpg_disp_ttest_gear_carb_paired)</code></td>
+<td>
+<em>M</em> = 0.9, 95% CI [0.3, 1.4], <em>t</em>(31) = 3.1,
+<em>p</em> = .004</td>
+</tr>
+<tr class="odd">
+<td><code>format_stats(mpg_disp_ttest_gear_carb_onesample)</code></td>
+<td>
+<em>M</em> = 3.7, 95% CI [3.4, 4.0], <em>t</em>(31) = -2.4,
+<em>p</em> = .023</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(mpg_disp_ttest_gear_carb_onesample, full = FALSE)</code></td>
+<td>
+<em>t</em>(31) = -2.4, <em>p</em> = .023</td>
+</tr>
+<tr class="odd">
+<td><code>format_stats(mpg_disp_wtest_gear_carb)</code></td>
+<td>
+<em>W</em> = 727.5, <em>p</em> = .003</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(mpg_disp_wtest_gear_carb_paired)</code></td>
+<td>
+<em>V</em> = 267.0, <em>p</em> = .004</td>
+</tr>
+<tr class="odd">
+<td><code>format_stats(mpg_disp_wtest_gear_carb_onesample)</code></td>
+<td>
+<em>V</em> = 52.5, <em>p</em> = .027</td>
+</tr>
+</tbody>
+</table>
+<p>Format the number of digits of coefficients with <code>digits</code>
+and digits of p-values with <code>pdigits</code>. Include the leading
+zeros for coefficients and p-values with <code>pzero = TRUE</code>.
+Remove italics with <code>italics = FALSE</code>.</p>
+<table class="table">
+<colgroup>
+<col width="60%">
+<col width="40%">
+</colgroup>
+<thead><tr class="header">
+<th>Code</th>
+<th>Output</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>format_stats(mpg_disp_ttest_gear_carb)</code></td>
+<td>
+<em>M</em> = 0.9, 95% CI [0.2, 1.5], <em>t</em>(43.4) = 2.8,
+<em>p</em> = .008</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(mpg_disp_ttest_gear_carb, digits = 2, pdigits = 2)</code></td>
+<td>
+<em>M</em> = 0.88, 95% CI [0.24, 1.51], <em>t</em>(43.40) = 2.79,
+<em>p</em> &lt; .01</td>
+</tr>
+<tr class="odd">
+<td><code>format_stats(mpg_disp_ttest_gear_carb, pzero = TRUE)</code></td>
+<td>
+<em>M</em> = 0.9, 95% CI [0.2, 1.5], <em>t</em>(43.4) = 2.8,
+<em>p</em> = 0.008</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(mpg_disp_ttest_gear_carb, italics = FALSE)</code></td>
+<td>M = 0.9, 95% CI [0.2, 1.5], t(43.4) = 2.8, p = .008</td>
+</tr>
+<tr class="odd">
+<td><code>format_stats(mpg_disp_wtest_gear_carb)</code></td>
+<td>
+<em>W</em> = 727.5, <em>p</em> = .003</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(mpg_disp_wtest_gear_carb, italics = FALSE)</code></td>
+<td>W = 727.5, p = .003</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level3">
+<h3 id="bayes-factors">Bayes factors<a class="anchor" aria-label="anchor" href="#bayes-factors"></a>
+</h3>
+<p>The <code><a href="../reference/format_stats.html">format_stats()</a></code> function can also extract and format
+Bayes factors from a <code>BFBayesFactor</code> object from the <a href="https://cran.r-project.org/package=BayesFactor" class="external-link"><code>{BayesFactor}</code></a>
+package. Bayes factors are not as standardized in how they are
+formatted. One issue is that Bayes factors can be referenced from either
+the alternative hypothesis (H<sub>1</sub>) or the null hypothesis
+(H<sub>0</sub>). Also, as a ratio, digits after the decimal are more
+important below 1 than above 1.</p>
+<p>To respond to the digits issue, the <code><a href="../reference/format_stats.html">format_stats()</a></code>
+function controls digits for Bayes factors less than 1
+(<code>digits1</code>) separately from those greater than 1
+(<code>digits2</code>). In fact, the defaults are different for these
+two arguments. Further, Bayes factors can be very large or very small
+when evidence strongly favors one hypothesis over another. Therefore,
+the <code>cutoff</code> argument set a threshold above which (or below
+1/cutoff) the returned value is truncated (e.g., BF &gt; 1000).</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">bf_corr</span> <span class="op">&lt;-</span> <span class="fu">BayesFactor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BayesFactor/man/correlationBF.html" class="external-link">correlationBF</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">disp</span><span class="op">)</span></span>
+<span><span class="va">bf_ttest</span> <span class="op">&lt;-</span> <span class="fu">BayesFactor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BayesFactor/man/ttestBF.html" class="external-link">ttestBF</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">vs</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">am</span><span class="op">)</span></span>
+<span><span class="va">bf_lm</span> <span class="op">&lt;-</span> <span class="fu">BayesFactor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BayesFactor/man/lmBF.html" class="external-link">lmBF</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">am</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th>Code</th>
+<th>Output</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>format_stats(bf_lm)</code></td>
+<td>
+<em>BF</em><sub>10</sub> = 87.3</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(bf_lm, digits1 = 2)</code></td>
+<td>
+<em>BF</em><sub>10</sub> = 87.30</td>
+</tr>
+<tr class="odd">
+<td><code>format_stats(bf_corr)</code></td>
+<td>
+<em>BF</em><sub>10</sub> = 2.7×10<sup>6</sup>
+</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(bf_corr, cutoff = 1000)</code></td>
+<td>
+<em>BF</em><sub>10</sub> &gt; 1000</td>
+</tr>
+<tr class="odd">
+<td><code>format_stats(bf_ttest)</code></td>
+<td>
+<em>BF</em><sub>10</sub> = 0.26</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(bf_ttest, digits2 = 3)</code></td>
+<td>
+<em>BF</em><sub>10</sub> = 0.262</td>
+</tr>
+<tr class="odd">
+<td><code>format_stats(bf_ttest, cutoff = 3)</code></td>
+<td>
+<em>BF</em><sub>10</sub> &lt; 0.33</td>
+</tr>
+</tbody>
+</table>
+<p>The default label for Bayes factors is <em>BF</em><sub>10</sub>. The
+text of the label can be changed with the <code>label</code> argument,
+where setting <code>label = ""</code> omits the label. Italics can be
+removed with <code>italics = FALSE</code>, and the subscript can be set
+to 01 (<code>subscript = "01"</code>) or removed
+(<code>subscript = ""</code>).</p>
+<table class="table">
+<colgroup>
+<col width="61%">
+<col width="38%">
+</colgroup>
+<thead><tr class="header">
+<th>Code</th>
+<th>Output</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>format_stats(bf_lm)</code></td>
+<td>
+<em>BF</em><sub>10</sub> = 87.3</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(bf_lm, italics = FALSE)</code></td>
+<td>BF<sub>10</sub> = 87.3</td>
+</tr>
+<tr class="odd">
+<td><code>format_stats(bf_lm, subscript = "")</code></td>
+<td>
+<em>BF</em> = 87.3</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(bf_lm, label = "Bayes factor", italics = FALSE, subscript = "")</code></td>
+<td>Bayes factor = 87.3</td>
+</tr>
+<tr class="odd">
+<td><code>format_stats(bf_lm, label = "")</code></td>
+<td>87.3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 <div class="section level2">
 <h2 id="formatting-statistical-values">Formatting statistical values<a class="anchor" aria-label="anchor" href="#formatting-statistical-values"></a>
 </h2>
@@ -339,25 +646,18 @@ case, italicized <em>p</em>. Non-italicized can be defined with
 </table>
 </div>
 <div class="section level3">
-<h3 id="bayes-factors">Bayes factors<a class="anchor" aria-label="anchor" href="#bayes-factors"></a>
+<h3 id="bayes-factors-1">Bayes factors<a class="anchor" aria-label="anchor" href="#bayes-factors-1"></a>
 </h3>
-<p>The <code><a href="../reference/format_bf.html">format_bf()</a></code> function can either format a vector of
-numeric values or extract and format Bayes factors from a
-<code>BFBayesFactor</code> object from the <a href="https://cran.r-project.org/package=BayesFactor" class="external-link"><code>{BayesFactor}</code></a>
-package. Bayes factors are not as standardized in how they are
-formatted. One issue is that Bayes factors can be referenced from either
-the alternative hypothesis (H<sub>1</sub>) or the null hypothesis
-(H<sub>0</sub>). Also, as a ratio, digits after the decimal are more
-important below 1 than above 1.</p>
-<p>To respond to the digits issue, the <code><a href="../reference/format_bf.html">format_bf()</a></code> function
-controls digits for Bayes factor less than 1 (<code>digits1</code>)
-separately from those greater than 1 (<code>digits2</code>). In fact,
-the defaults are different for these two arguments. Further, Bayes
-factors can be very large or very small when evidence strongly favors
-one hypothesis over another. Therefore, the <code>cutoff</code> argument
-set a threshold above which (or below 1/cutoff) the returned value is
-truncated (e.g., BF &gt; 1000).</p>
+<p>Though the <code><a href="../reference/format_stats.html">format_stats()</a></code> function extracts and formats
+Bayes factors from the <a href="https://cran.r-project.org/package=BayesFactor" class="external-link"><code>{BayesFactor}</code></a>
+package, sometimes you may have Bayes factors from other sources. The
+<code><a href="../reference/format_bf.html">format_bf()</a></code> function formats Bayes factors from numeric
+values (either single scalar elements or vectors).</p>
 <table class="table">
+<colgroup>
+<col width="57%">
+<col width="42%">
+</colgroup>
 <thead><tr class="header">
 <th>Code</th>
 <th>Output</th>
@@ -393,274 +693,34 @@ truncated (e.g., BF &gt; 1000).</p>
 <tr class="even">
 <td><code>format_bf(0.04321, cutoff = 10)</code></td>
 <td>
-<em>BF</em><sub>10</sub> &lt; 0.1</td>
+<em>BF</em><sub>10</sub> &lt; 0.10</td>
 </tr>
-</tbody>
-</table>
-<p>The default label for Bayes factors is <em>BF</em><sub>10</sub>. The
-text of the label can be changed with the <code>label</code> argument,
-where setting <code>label = ""</code> omits the label. Italics can be
-removed with <code>italics = FALSE</code>, and the subscript can be set
-to 01 (<code>subscript = "01"</code>) or removed
-(<code>subscript = ""</code>).</p>
-<table class="table">
-<colgroup>
-<col width="61%">
-<col width="38%">
-</colgroup>
-<thead><tr class="header">
-<th>Code</th>
-<th>Output</th>
-</tr></thead>
-<tbody>
 <tr class="odd">
-<td><code>format_bf(4321)</code></td>
-<td>
-<em>BF</em><sub>10</sub> = 4.3×10<sup>3</sup>
-</td>
-</tr>
-<tr class="even">
 <td><code>format_bf(4321, italics = FALSE)</code></td>
 <td>BF<sub>10</sub> = 4.3×10<sup>3</sup>
 </td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>format_bf(4321, subscript = "")</code></td>
 <td>
 <em>BF</em> = 4.3×10<sup>3</sup>
 </td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>format_bf(4321, label = "Bayes factor", italics = FALSE, subscript = "")</code></td>
 <td>Bayes factor = 4.3×10<sup>3</sup>
 </td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>format_bf(4321, label = "")</code></td>
 <td>4.3×10<sup>3</sup>
 </td>
 </tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="section level2">
-<h2 id="formatting-statistical-objects">Formatting statistical objects<a class="anchor" aria-label="anchor" href="#formatting-statistical-objects"></a>
-</h2>
-<p>Running a statistical test in R typically returns a list with lots of
-information about the test, often including things like statistical test
-values and p-values. The aim of this set of functions is to extract and
-format statistics for a suite of commonly used statistical objects
-(correlation and t-tests).</p>
-<div class="section level3">
-<h3 id="correlations">Correlations<a class="anchor" aria-label="anchor" href="#correlations"></a>
-</h3>
-<p>The <code><a href="../reference/format_corr.html">format_corr()</a></code> function inputs objects returned by
-the <code><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test()</a></code> function and detects whether the object is
-from a Pearson, Kendall, or Spearman correlation. It then reports and
-formats the appropriate correlation coefficient and p-value.</p>
-<p>Let’s start by creating a few different correlations.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mpg_disp_corr_pearson</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">disp</span>, method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span></span>
-<span><span class="va">mpg_disp_corr_spearman</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">disp</span>, method <span class="op">=</span> <span class="st">"spearman"</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="va">mpg_disp_corr_kendall</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">disp</span>, method <span class="op">=</span> <span class="st">"kendall"</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p>For Pearson correlations, we get the correlation coefficient and the
-confidence intervals. Since Spearman and Kendall correlations are
-non-parametric, confidence intervals are not returned. Confidence
-intervals can be omitted from Pearson correlations by setting
-<code>ci = FALSE</code>.</p>
-<table class="table">
-<colgroup>
-<col width="58%">
-<col width="41%">
-</colgroup>
-<thead><tr class="header">
-<th>Code</th>
-<th>Output</th>
-</tr></thead>
-<tbody>
 <tr class="odd">
-<td><code>format_corr(mpg_disp_corr_pearson)</code></td>
+<td><code>format_bf(c(4321, 0.04321))</code></td>
 <td>
-<em>r</em> = -.85, 95% CI [-0.92, -0.71], <em>p</em> &lt; .001</td>
-</tr>
-<tr class="even">
-<td><code>format_corr(mpg_disp_corr_pearson, ci = FALSE)</code></td>
-<td>
-<em>r</em> = -.85, <em>p</em> &lt; .001</td>
-</tr>
-<tr class="odd">
-<td><code>format_corr(mpg_disp_corr_spearman)</code></td>
-<td>
-<em>ρ</em> = -.91, <em>p</em> &lt; .001</td>
-</tr>
-<tr class="even">
-<td><code>format_corr(mpg_disp_corr_kendall)</code></td>
-<td>
-<em>τ</em> = -.77, <em>p</em> &lt; .001</td>
-</tr>
-</tbody>
-</table>
-<p>Format the number of digits of coefficients with <code>digits</code>
-and digits of p-values with <code>pdigits</code>. Include the leading
-zeros for coefficients and p-values with <code>pzero = TRUE</code>.
-Remove italics with <code>italics = FALSE</code>.</p>
-<table class="table">
-<colgroup>
-<col width="60%">
-<col width="40%">
-</colgroup>
-<thead><tr class="header">
-<th>Code</th>
-<th>Output</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td><code>format_corr(mpg_disp_corr_pearson)</code></td>
-<td>
-<em>r</em> = -.85, 95% CI [-0.92, -0.71], <em>p</em> &lt; .001</td>
-</tr>
-<tr class="even">
-<td><code>format_corr(mpg_disp_corr_pearson, digits = 1, pdigits = 2)</code></td>
-<td>
-<em>r</em> = -.8, 95% CI [-0.9, -0.7], <em>p</em> &lt; .01</td>
-</tr>
-<tr class="odd">
-<td><code>format_corr(mpg_disp_corr_pearson, pzero = TRUE)</code></td>
-<td>
-<em>r</em> = -0.85, 95% CI [-0.92, -0.71], <em>p</em> &lt;
-0.001</td>
-</tr>
-<tr class="even">
-<td><code>format_corr(mpg_disp_corr_pearson, italics = FALSE)</code></td>
-<td>r = -.85, 95% CI [-0.92, -0.71], p &lt; .001</td>
-</tr>
-<tr class="odd">
-<td><code>format_corr(mpg_disp_corr_spearman, italics = FALSE)</code></td>
-<td>ρ = -.91, p &lt; .001</td>
-</tr>
-<tr class="even">
-<td><code>format_corr(mpg_disp_corr_kendall, italics = FALSE)</code></td>
-<td>τ = -.77, p &lt; .001</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="section level3">
-<h3 id="t-tests">T-tests<a class="anchor" aria-label="anchor" href="#t-tests"></a>
-</h3>
-<p>The <code><a href="../reference/format_ttest.html">format_ttest()</a></code> function inputs objects returned by
-the <code><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test()</a></code> or <code><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test()</a></code> functions and
-detects whether the object is from a Student’s or Wilcoxon t-test,
-including one-sample, independent-sample, and paired-sample versions. It
-then reports and formats the mean value (or mean difference), confidence
-intervals for mean value/difference, appropriate test statistic, degrees
-of freedom (for parametric tests), and p-value.</p>
-<p>Let’s start by creating a few different t-tests</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mpg_disp_ttest_gear_carb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">carb</span><span class="op">)</span></span>
-<span><span class="va">mpg_disp_ttest_gear_carb_paired</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">carb</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="va">mpg_disp_ttest_gear_carb_onesample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, mu <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
-<span><span class="va">mpg_disp_wtest_gear_carb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">carb</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="va">mpg_disp_wtest_gear_carb_paired</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">carb</span>, paired <span class="op">=</span> <span class="cn">TRUE</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="va">mpg_disp_wtest_gear_carb_onesample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, mu <span class="op">=</span> <span class="fl">4</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p>For Student’s t-tests, we get the mean value or difference and the
-confidence intervals. Means and confidence intervals can be omitted by
-setting <code>full = FALSE</code>.</p>
-<table class="table">
-<colgroup>
-<col width="58%">
-<col width="41%">
-</colgroup>
-<thead><tr class="header">
-<th>Code</th>
-<th>Output</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td><code>format_ttest(mpg_disp_ttest_gear_carb)</code></td>
-<td>
-<em>M</em> = 0.9, 95% CI [0.2, 1.5], <em>t</em>(43.4) = 2.8,
-<em>p</em> = .008</td>
-</tr>
-<tr class="even">
-<td><code>format_ttest(mpg_disp_ttest_gear_carb_paired)</code></td>
-<td>
-<em>M</em> = 0.9, 95% CI [0.3, 1.4], <em>t</em>(31) = 3.1,
-<em>p</em> = .004</td>
-</tr>
-<tr class="odd">
-<td><code>format_ttest(mpg_disp_ttest_gear_carb_onesample)</code></td>
-<td>
-<em>M</em> = 3.7, 95% CI [3.4, 4.0], <em>t</em>(31) = -2.4,
-<em>p</em> = .023</td>
-</tr>
-<tr class="even">
-<td><code>format_ttest(mpg_disp_ttest_gear_carb_onesample, full = FALSE)</code></td>
-<td>
-<em>t</em>(31) = -2.4, <em>p</em> = .023</td>
-</tr>
-<tr class="odd">
-<td><code>format_ttest(mpg_disp_wtest_gear_carb)</code></td>
-<td>
-<em>W</em> = 727.5, <em>p</em> = .003</td>
-</tr>
-<tr class="even">
-<td><code>format_ttest(mpg_disp_wtest_gear_carb_paired)</code></td>
-<td>
-<em>V</em> = 267.0, <em>p</em> = .004</td>
-</tr>
-<tr class="odd">
-<td><code>format_ttest(mpg_disp_wtest_gear_carb_onesample)</code></td>
-<td>
-<em>V</em> = 52.5, <em>p</em> = .027</td>
-</tr>
-</tbody>
-</table>
-<p>Format the number of digits of coefficients with <code>digits</code>
-and digits of p-values with <code>pdigits</code>. Include the leading
-zeros for coefficients and p-values with <code>pzero = TRUE</code>.
-Remove italics with <code>italics = FALSE</code>.</p>
-<table class="table">
-<colgroup>
-<col width="60%">
-<col width="40%">
-</colgroup>
-<thead><tr class="header">
-<th>Code</th>
-<th>Output</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td><code>format_ttest(mpg_disp_ttest_gear_carb)</code></td>
-<td>
-<em>M</em> = 0.9, 95% CI [0.2, 1.5], <em>t</em>(43.4) = 2.8,
-<em>p</em> = .008</td>
-</tr>
-<tr class="even">
-<td><code>format_ttest(mpg_disp_ttest_gear_carb, digits = 2, pdigits = 2)</code></td>
-<td>
-<em>M</em> = 0.88, 95% CI [0.24, 1.51], <em>t</em>(43.40) = 2.79,
-<em>p</em> &lt; .01</td>
-</tr>
-<tr class="odd">
-<td><code>format_ttest(mpg_disp_ttest_gear_carb, pzero = TRUE)</code></td>
-<td>
-<em>M</em> = 0.9, 95% CI [0.2, 1.5], <em>t</em>(43.4) = 2.8,
-<em>p</em> = 0.008</td>
-</tr>
-<tr class="even">
-<td><code>format_ttest(mpg_disp_ttest_gear_carb, italics = FALSE)</code></td>
-<td>M = 0.9, 95% CI [0.2, 1.5], t(43.4) = 2.8, p = .008</td>
-</tr>
-<tr class="odd">
-<td><code>format_ttest(mpg_disp_wtest_gear_carb)</code></td>
-<td>
-<em>W</em> = 727.5, <em>p</em> = .003</td>
-</tr>
-<tr class="even">
-<td><code>format_ttest(mpg_disp_wtest_gear_carb, italics = FALSE)</code></td>
-<td>W = 727.5, p = .003</td>
+<em>BF</em><sub>10</sub> = 4.3×10<sup>3</sup>,
+<em>BF</em><sub>10</sub> = 0.04</td>
 </tr>
 </tbody>
 </table>
@@ -723,28 +783,26 @@ number of <code>digits</code> as well as whether output
 </tbody>
 </table>
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
 
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p>
-<p>Developed by <a href="https://jeffreyrstevens.github.io/" class="external-link">Jeffrey R. Stevens</a>.</p>
+  <p>Developed by <a href="https://jeffreyrstevens.github.io/" class="external-link">Jeffrey R. Stevens</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>
