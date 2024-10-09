@@ -22,7 +22,7 @@ A generic function that takes objects from various statistical methods to
 create formatted character strings to insert into R Markdown or Quarto
 documents. Currently, the generic function works with the following objects:
 \enumerate{
-\item htest objects of correlations, t-tests, and Wilcoxon tests
+\item \code{htest} objects of correlations, t-tests, and Wilcoxon tests
 \item correlations from the
 \{\href{https://cran.r-project.org/package=correlation}{correlation}\} package.
 \item Bayes factors from the
@@ -32,8 +32,17 @@ first argument.
 }
 }
 \examples{
+# Format cor.test() object
 format_stats(cor.test(mtcars$mpg, mtcars$cyl))
+
+# Format correlation::correlation() object
+format_stats(correlation::correlation(data = mtcars, select = "mpg", select2 = "cyl"))
+
+# Format t.test() object
 format_stats(t.test(mtcars$vs, mtcars$am))
+
+# Format BFBayesFactor object from {BayesFactor} package
+format_stats(BayesFactor::ttestBF(mtcars$vs, mtcars$am))
 }
 \seealso{
 Other functions for printing statistical objects: 

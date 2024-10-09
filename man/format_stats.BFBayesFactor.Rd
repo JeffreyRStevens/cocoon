@@ -51,10 +51,23 @@ cutoffs (e.g., BF > 1000 or BF < 0.001). Numbers of digits, cutoffs,
 italics, and label subscripts are all customizable.
 }
 \examples{
+# Prepare statistical object
 test_bf <- BayesFactor::ttestBF(mtcars$vs, mtcars$am)
+
+# Format Bayes factor
 format_stats(test_bf)
+
+# Control cutoff for output
 format_stats(test_bf, cutoff = 3)
+
+# Change digits, remove italics and subscript
 format_stats(test_bf, digits2 = 1, italics = FALSE, subscript = "")
+
+# Return only Bayes factor value (no label)
+format_stats(test_bf, label = "")
+
+# Format for LaTeX
+format_stats(test_bf, type = "latex")
 }
 \seealso{
 Other functions for printing statistical objects: 

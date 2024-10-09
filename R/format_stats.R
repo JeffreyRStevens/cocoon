@@ -4,7 +4,7 @@
 #' A generic function that takes objects from various statistical methods to
 #' create formatted character strings to insert into R Markdown or Quarto
 #' documents. Currently, the generic function works with the following objects:
-#' 1. htest objects of correlations, t-tests, and Wilcoxon tests
+#' 1. `htest` objects of correlations, t-tests, and Wilcoxon tests
 #' 1. correlations from the
 #' \{[correlation](https://cran.r-project.org/package=correlation)\} package.
 #' 1. Bayes factors from the
@@ -25,8 +25,17 @@
 #' @family functions for printing statistical objects
 #'
 #' @examples
+#' # Format cor.test() object
 #' format_stats(cor.test(mtcars$mpg, mtcars$cyl))
+#'
+#' # Format correlation::correlation() object
+#' format_stats(correlation::correlation(data = mtcars, select = "mpg", select2 = "cyl"))
+#'
+#' # Format t.test() object
 #' format_stats(t.test(mtcars$vs, mtcars$am))
+#'
+#' # Format BFBayesFactor object from {BayesFactor} package
+#' format_stats(BayesFactor::ttestBF(mtcars$vs, mtcars$am))
 format_stats <- function(x, ...) {
   UseMethod("format_stats", x)
 }
@@ -34,9 +43,6 @@ format_stats <- function(x, ...) {
 #' @method format_stats default
 #' @export
 format_stats.default <- function(x, ...) {
-  # if (inherits(x, "easycorrelation")) {
-  #   format_stats.easycorrelation(x, ...)
-  #} else
   if (inherits(x, "numeric")) {
     stop(
       "Numerics are not supported by `format_stats()`.",
@@ -102,12 +108,35 @@ format_stats.default <- function(x, ...) {
 #' @export
 #'
 #' @examples
-#' format_stats(cor.test(mtcars$mpg, mtcars$cyl))
-#' format_stats(cor.test(mtcars$mpg, mtcars$cyl), digits = 2, pdigits = 4, pzero = TRUE)
-#' format_stats(cor.test(mtcars$mpg, mtcars$cyl, method = "kendall"))
-#' format_stats(t.test(mtcars$vs, mtcars$am))
-#' format_stats(t.test(mtcars$vs, mtcars$am), dfs = "none", mean = "word")
-#' format_stats(wilcox.test(mtcars$vs, mtcars$am), type = "latex")
+#' # Prepare statistical objects
+#' test_corr <- cor.test(mtcars$mpg, mtcars$cyl)
+#' test_corr2 <- cor.test(mtcars$mpg, mtcars$cyl, method = "kendall")
+#' test_ttest <- t.test(mtcars$vs, mtcars$am)
+#' test_ttest2 <- wilcox.test(mtcars$vs, mtcars$am)
+#'
+#' # Format correlation
+#' format_stats(test_corr)
+#'
+#' # Remove confidence intervals and italics
+#' format_stats(test_corr, full = FALSE, italics = FALSE)
+#'
+#' # Change digits and add leading zero to p-value
+#' format_stats(test_corr, digits = 3, pdigits = 4, pzero = TRUE)
+#'
+#' # Format Kendall's tau
+#' format_stats(test_corr2)
+#'
+#' # Format t-test
+#'   format_stats(test_ttest)
+#'
+#' # Remove mean and confidence interval
+#' format_stats(test_ttest, full = FALSE)
+#'
+#' # Remove degrees of freedom and spell out "Mean"
+#' format_stats(test_ttest, dfs = "none", mean = "word")
+#'
+#' # Format for LaTeX
+#' format_stats(test_ttest2, type = "latex")
 format_stats.htest <- function(x,
                                digits = NULL,
                                pdigits = 3,
@@ -191,8 +220,21 @@ format_stats.htest <- function(x,
 #' @export
 #'
 #' @examples
-#' test_easycorr <- correlation::correlation(mtcars, select = "mpg", select2 = "disp")
-#' format_stats(test_easycorr)
+#' # Prepare statistical objects
+#' test_corr <- correlation::correlation(mtcars, select = "mpg", select2 = "disp")
+#' test_corr2 <- correlation::correlation(mtcars, select = "mpg", select2 = "disp", method = "kendall")
+#'
+#' # Format correlation
+#' format_stats(test_corr)
+#'
+#' # Remove confidence intervals and italics
+#' format_stats(test_corr, full = FALSE, italics = FALSE)
+#'
+#' # Change digits and add leading zero to p-value
+#' format_stats(test_corr, digits = 3, pdigits = 4, pzero = TRUE)
+#'
+#' # Format Kendall's tau for LaTeX
+#' format_stats(test_corr2, type = "latex")
 format_stats.easycorrelation <- function(x,
                                          digits = 2,
                                          pdigits = 3,
@@ -275,10 +317,23 @@ format_stats.easycorrelation <- function(x,
 #' @export
 #'
 #' @examples
+#' # Prepare statistical object
 #' test_bf <- BayesFactor::ttestBF(mtcars$vs, mtcars$am)
+#'
+#' # Format Bayes factor
 #' format_stats(test_bf)
+#'
+#' # Control cutoff for output
 #' format_stats(test_bf, cutoff = 3)
+#'
+#' # Change digits, remove italics and subscript
 #' format_stats(test_bf, digits2 = 1, italics = FALSE, subscript = "")
+#'
+#' # Return only Bayes factor value (no label)
+#' format_stats(test_bf, label = "")
+#'
+#' # Format for LaTeX
+#' format_stats(test_bf, type = "latex")
 format_stats.BFBayesFactor <- function(x,
                                        digits1 = 1,
                                        digits2 = 2,
@@ -306,11 +361,8 @@ format_stats.BFBayesFactor <- function(x,
 #' @encoding UTF-8
 #' @description
 #' With `format_corr()` you can format correlation statistics generated from
-#' `cor.test()` output. This detects whether the object is from a Pearson,
-#' Spearman, or Kendall correlation and reports the appropriate correlation
-#' label (r, \eqn{\tau}, \eqn{\rho}). The default output is APA formatted, but numbers of digits,
-#' leading zeros, the presence of confidence intervals, and italics are all
-#' customizable.
+#' [cor.test()] output.
+#' This is an internal function. Use [format_stats()] instead.
 #'
 #' @inheritParams format_stats.htest
 #'
@@ -321,15 +373,7 @@ format_stats.BFBayesFactor <- function(x,
 #' @family functions for printing statistical objects
 #'
 #' @examples
-#' # Prepare data
-#' # Print statistics
-#' # format_stats(mtcars_corr)
-#' # Change digits
-#' # format_stats(mtcars_corr, digits = 3)
-#' # Change cutoff digits for p-value
-#' # format_stats(mtcars_corr, pdigits = 2)
-#' # Add leading zero to p-value and don't print confidence intervals
-#' # format_stats(mtcars_corr, pzero = TRUE, ci = FALSE)
+#' # format_stats(cor.test(mtcars$mpg, mtcars$cyl))
 format_corr <- function(x,
                         digits,
                         pdigits,
@@ -342,16 +386,16 @@ format_corr <- function(x,
   stopifnot("Input must be a correlation object." = (inherits(x, what = "htest") && grepl("correlation", x$method)) | inherits(x, what = "easycorrelation"))
 
   # Validate arguments
-  # stopifnot("Input must be a correlation object." = inherits(x, what = "htest") && grepl("correlation", x$method))
-  # stopifnot("Argument `digits` must be a non-negative numeric vector." = is.numeric(digits))
-  # stopifnot("Argument `digits` must be a non-negative numeric vector." = digits >= 0)
-  # stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = is.numeric(pdigits))
-  # stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits > 0)
-  # stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits < 6)
-  # stopifnot("Argument `pzero` must be TRUE or FALSE." = is.logical(pzero))
-  # stopifnot("Argument `full` must be TRUE or FALSE." = is.logical(full))
-  # stopifnot("Argument `italics` must be TRUE or FALSE." = is.logical(italics))
-  # stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
+  stopifnot("Input must be a correlation object." = inherits(x, what = "htest") && grepl("correlation", x$method))
+  stopifnot("Argument `digits` must be a non-negative numeric vector." = is.numeric(digits))
+  stopifnot("Argument `digits` must be a non-negative numeric vector." = digits >= 0)
+  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = is.numeric(pdigits))
+  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits > 0)
+  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits < 6)
+  stopifnot("Argument `pzero` must be TRUE or FALSE." = is.logical(pzero))
+  stopifnot("Argument `full` must be TRUE or FALSE." = is.logical(full))
+  stopifnot("Argument `italics` must be TRUE or FALSE." = is.logical(italics))
+  stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
 
   # Format numbers
   corr_method <- dplyr::case_when(
@@ -395,10 +439,9 @@ format_corr <- function(x,
 #' Format t-test statistics
 #'
 #' @description
-#' With `format_ttest()` you can format t-tests generated from `t.test()` and
-#' `wilcox.test()` output. The default output is APA formatted, but numbers of
-#' digits, leading zeros, the presence of means and confidence intervals,
-#' italics, degrees of freedom, and mean labels are all customizable.
+#' With `format_ttest()` you can format t-tests generated from [t.test()] and
+#' [wilcox.test()] output.
+#' This is an internal function. Use [format_stats()] instead.
 #'
 #' @inheritParams format_stats.htest
 #'
@@ -409,16 +452,7 @@ format_corr <- function(x,
 #' @family functions for printing statistical objects
 #'
 #' @examples
-#' # Prepare data
-#' mtcars_tt <- t.test(formula = mtcars$mpg ~ mtcars$vs)
-#' # Print statistics
-#' format_stats(mtcars_tt)
-#' # Change digits
-#' format_stats(mtcars_tt, digits = 2)
-#' # Change cutoff digits for p-value
-#' format_stats(mtcars_tt, pdigits = 2)
-#' # Add leading zero to p-value and don't print confidence intervals
-#' format_stats(mtcars_tt, pzero = TRUE, full = FALSE)
+#' format_stats(t.test(formula = mtcars$mpg ~ mtcars$vs))
 format_ttest <- function(x,
                          digits,
                          pdigits,
@@ -513,24 +547,38 @@ format_ttest <- function(x,
 #' @family functions for printing statistical objects
 #'
 #' @examples
+#' # Format BFBayesfactor objects from {BayesFactor} package
+#' format_bf(BayesFactor::lmBF(mpg ~ am, data = mtcars))
+#'
 #' # Format Bayes factors > 1
 #' format_bf(12.4444)
+#'
 #' # Bayes factors > 1000 will use scientific notation
 #' format_bf(1244.44)
+#'
 #' # Control digits for Bayes factors > 1 with digits1
 #' format_bf(1244.44, digits1 = 3)
+#'
 #' # Control cutoff for output
 #' format_bf(1244.44, cutoff = 10000)
+#'
 #' # Format Bayes factors < 1
 #' format_bf(0.111)
+#'
 #' # Bayes factors < 0.001 will use scientific notation
 #' format_bf(0.0001)
+#'
 #' # Control digits for Bayes factors < 1 with digits2
 #' format_bf(0.111, digits2 = 3)
+#'
 #' # Control cutoff for output
 #' format_bf(0.001, cutoff = 100)
+#'
 #' # Return only Bayes factor value (no label)
 #' format_bf(12.4444, label = "")
+#'
+#' # Format for LaTeX
+#' format_bf(12.4444, type = "latex")
 format_bf <- function(x,
                       digits1 = 1,
                       digits2 = 2,
@@ -623,17 +671,29 @@ format_bf <- function(x,
 #' @export
 #'
 #' @examples
+#' # Format p-value
 #' format_p(0.001)
+#'
+#' # Format p-value vector
+#' format_p(c(0.001, 0.01))
+#'
 #' # Round digits for p-values greater than cutoff
 #' format_p(0.111, digits = 2)
+#'
 #' # Default cutoff is p < 0.001
 #' format_p(0.0001)
+#'
 #' # Set cutoff with digits
 #' format_p(0.0001, digits = 2)
+#'
 #' # Include leading zero
 #' format_p(0.001, pzero = TRUE)
+#'
 #' # Return only Bayes factor value (no label)
 #' format_p(0.001, label = "")
+#'
+#' # Format for LaTeX
+#' format_p(0.001, type = "latex")
 format_p <- function(x,
                      digits = 3,
                      pzero = FALSE,
@@ -680,10 +740,10 @@ format_p <- function(x,
 #' error limits. Error measures include confidence intervals, standard
 #' deviation, and standard error of the mean. Each of those has a specific
 #' function that formats means and those error measures using APA (7th edition)
-#' style. So `format_meanci()`, `format_meansd()`, `format_meanse()`, and
-#' `format_medianiqr()` are wrappers around `format_summary()` for specific
+#' style. So [format_meanci()], [format_meansd()], [format_meanse()], and
+#' [format_medianiqr()] are wrappers around [format_summary()] for specific
 #' error measures with a default style. To just format the mean or median with
-#' no error, use `format_mean()` or `format_median()`. All measures ignore NAs.
+#' no error, use [format_mean()] or [format_median()]. All measures ignore NAs.
 #'
 #' @param x Numeric vector of data to calculate mean and error
 #' @param tendency Character vector specifying measure of central
@@ -716,18 +776,25 @@ format_p <- function(x,
 #' @examples
 #' # Print mean and 95% confidence limits for fuel efficiency
 #' format_meanci(mtcars$mpg)
+#'
 #' # Print mean and standard deviation
 #' format_meansd(mtcars$mpg)
+#'
 #' # Print mean and standard error of the mean
 #' format_meanse(mtcars$mpg)
+#'
 #' # Print mean
 #' format_mean(mtcars$mpg)
+#'
 #' # Print mean and 95% confidence limits with no label for "95% CI"
 #' format_meanci(mtcars$mpg, errorlabel = FALSE)
+#'
 #' # Print mean and standard error of the mean as plus/minus interval
 #' format_meanse(mtcars$mpg, error = "se", display = "pm")
+#'
 #' # Print mean and 90% confidence limits with units
 #' format_meanci(mtcars$mpg, units = "cm", cilevel = 0.9)
+#'
 #' # Print three-digit mean with subscript in LaTeX
 #' format_summary(mtcars$mpg, digits = 3, subscript = "control", display = "none", type = "latex")
 format_summary <- function(x = NULL,

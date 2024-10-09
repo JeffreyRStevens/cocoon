@@ -35,22 +35,12 @@ italicized}
 A character string of statistical information formatted in Markdown or LaTeX.
 }
 \description{
-With \code{format_ttest()} you can format t-tests generated from \code{t.test()} and
-\code{wilcox.test()} output. The default output is APA formatted, but numbers of
-digits, leading zeros, the presence of means and confidence intervals,
-italics, degrees of freedom, and mean labels are all customizable.
+With \code{format_ttest()} you can format t-tests generated from \code{\link[=t.test]{t.test()}} and
+\code{\link[=wilcox.test]{wilcox.test()}} output.
+This is an internal function. Use \code{\link[=format_stats]{format_stats()}} instead.
 }
 \examples{
-# Prepare data
-mtcars_tt <- t.test(formula = mtcars$mpg ~ mtcars$vs)
-# Print statistics
-format_stats(mtcars_tt)
-# Change digits
-format_stats(mtcars_tt, digits = 2)
-# Change cutoff digits for p-value
-format_stats(mtcars_tt, pdigits = 2)
-# Add leading zero to p-value and don't print confidence intervals
-format_stats(mtcars_tt, pzero = TRUE, full = FALSE)
+format_stats(t.test(formula = mtcars$mpg ~ mtcars$vs))
 }
 \seealso{
 Other functions for printing statistical objects: 

@@ -54,24 +54,38 @@ BF < 0.001). Numbers of digits, cutoffs, italics, and label subscripts are
 all customizable.
 }
 \examples{
+# Format BFBayesfactor objects from {BayesFactor} package
+format_bf(BayesFactor::lmBF(mpg ~ am, data = mtcars))
+
 # Format Bayes factors > 1
 format_bf(12.4444)
+
 # Bayes factors > 1000 will use scientific notation
 format_bf(1244.44)
+
 # Control digits for Bayes factors > 1 with digits1
 format_bf(1244.44, digits1 = 3)
+
 # Control cutoff for output
 format_bf(1244.44, cutoff = 10000)
+
 # Format Bayes factors < 1
 format_bf(0.111)
+
 # Bayes factors < 0.001 will use scientific notation
 format_bf(0.0001)
+
 # Control digits for Bayes factors < 1 with digits2
 format_bf(0.111, digits2 = 3)
+
 # Control cutoff for output
 format_bf(0.001, cutoff = 100)
+
 # Return only Bayes factor value (no label)
 format_bf(12.4444, label = "")
+
+# Format for LaTeX
+format_bf(12.4444, type = "latex")
 }
 \seealso{
 Other functions for printing statistical objects: 

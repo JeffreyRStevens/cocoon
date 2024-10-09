@@ -60,12 +60,35 @@ italics, degrees of freedom, and mean labels, and output format of
 Markdown or LaTeX.
 }
 \examples{
-format_stats(cor.test(mtcars$mpg, mtcars$cyl))
-format_stats(cor.test(mtcars$mpg, mtcars$cyl), digits = 2, pdigits = 4, pzero = TRUE)
-format_stats(cor.test(mtcars$mpg, mtcars$cyl, method = "kendall"))
-format_stats(t.test(mtcars$vs, mtcars$am))
-format_stats(t.test(mtcars$vs, mtcars$am), dfs = "none", mean = "word")
-format_stats(wilcox.test(mtcars$vs, mtcars$am), type = "latex")
+# Prepare statistical objects
+test_corr <- cor.test(mtcars$mpg, mtcars$cyl)
+test_corr2 <- cor.test(mtcars$mpg, mtcars$cyl, method = "kendall")
+test_ttest <- t.test(mtcars$vs, mtcars$am)
+test_ttest2 <- wilcox.test(mtcars$vs, mtcars$am)
+
+# Format correlation
+format_stats(test_corr)
+
+# Remove confidence intervals and italics
+format_stats(test_corr, full = FALSE, italics = FALSE)
+
+# Change digits and add leading zero to p-value
+format_stats(test_corr, digits = 3, pdigits = 4, pzero = TRUE)
+
+# Format Kendall's tau
+format_stats(test_corr2)
+
+# Format t-test
+  format_stats(test_ttest)
+
+# Remove mean and confidence interval
+format_stats(test_ttest, full = FALSE)
+
+# Remove degrees of freedom and spell out "Mean"
+format_stats(test_ttest, dfs = "none", mean = "word")
+
+# Format for LaTeX
+format_stats(test_ttest2, type = "latex")
 }
 \seealso{
 Other functions for printing statistical objects: 

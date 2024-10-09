@@ -34,22 +34,11 @@ A character string of statistical information formatted in Markdown or LaTeX.
 }
 \description{
 With \code{format_corr()} you can format correlation statistics generated from
-\code{cor.test()} output. This detects whether the object is from a Pearson,
-Spearman, or Kendall correlation and reports the appropriate correlation
-label (r, \eqn{\tau}, \eqn{\rho}). The default output is APA formatted, but numbers of digits,
-leading zeros, the presence of confidence intervals, and italics are all
-customizable.
+\code{\link[=cor.test]{cor.test()}} output.
+This is an internal function. Use \code{\link[=format_stats]{format_stats()}} instead.
 }
 \examples{
-# Prepare data
-# Print statistics
-# format_stats(mtcars_corr)
-# Change digits
-# format_stats(mtcars_corr, digits = 3)
-# Change cutoff digits for p-value
-# format_stats(mtcars_corr, pdigits = 2)
-# Add leading zero to p-value and don't print confidence intervals
-# format_stats(mtcars_corr, pzero = TRUE, ci = FALSE)
+# format_stats(cor.test(mtcars$mpg, mtcars$cyl))
 }
 \seealso{
 Other functions for printing statistical objects: 

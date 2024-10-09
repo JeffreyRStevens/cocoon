@@ -43,15 +43,27 @@ output is APA formatted, but numbers of digits, cutoffs, leading zeros, and
 italics are all customizable.
 }
 \examples{
+# Format p-value
 format_p(0.001)
+
+# Format p-value vector
+format_p(c(0.001, 0.01))
+
 # Round digits for p-values greater than cutoff
 format_p(0.111, digits = 2)
+
 # Default cutoff is p < 0.001
 format_p(0.0001)
+
 # Set cutoff with digits
 format_p(0.0001, digits = 2)
+
 # Include leading zero
 format_p(0.001, pzero = TRUE)
+
 # Return only Bayes factor value (no label)
 format_p(0.001, label = "")
+
+# Format for LaTeX
+format_p(0.001, type = "latex")
 }

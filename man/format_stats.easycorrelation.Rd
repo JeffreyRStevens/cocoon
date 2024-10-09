@@ -47,8 +47,21 @@ numbers of digits, leading zeros, the presence of confidence intervals,
 and italics are all customizable.
 }
 \examples{
-test_easycorr <- correlation::correlation(mtcars, select = "mpg", select2 = "disp")
-format_stats(test_easycorr)
+# Prepare statistical objects
+test_corr <- correlation::correlation(mtcars, select = "mpg", select2 = "disp")
+test_corr2 <- correlation::correlation(mtcars, select = "mpg", select2 = "disp", method = "kendall")
+
+# Format correlation
+format_stats(test_corr)
+
+# Remove confidence intervals and italics
+format_stats(test_corr, full = FALSE, italics = FALSE)
+
+# Change digits and add leading zero to p-value
+format_stats(test_corr, digits = 3, pdigits = 4, pzero = TRUE)
+
+# Format Kendall's tau for LaTeX
+format_stats(test_corr2, type = "latex")
 }
 \seealso{
 Other functions for printing statistical objects: 
