@@ -14,7 +14,13 @@ reference:
   - format_scientific
   - format_chr
   - format_sub
-- title: Format statistics
+- title: Format statistical objects
+  contents:
+  - format_stats
+  - format_stats.htest
+  - format_stats.easycorrelation
+  - format_stats.BFBayesFactor
+- title: Format statistical values
   contents:
   - format_summary
   - format_p
