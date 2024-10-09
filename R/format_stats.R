@@ -214,6 +214,9 @@ format_stats.htest <- function(x,
 
 #' @inheritParams format_stats.htest
 #'
+#' @return
+#' A character string of statistical information formatted in Markdown or LaTeX.
+#'
 #' @method format_stats easycorrelation
 #' @family functions for printing statistical objects
 
@@ -311,6 +314,9 @@ format_stats.easycorrelation <- function(x,
 #' @param type Type of formatting (`"md"` = markdown, `"latex"` = LaTeX)
 #' @param ... Additional arguments passed to methods.
 #'
+#'
+#' @return
+#' A character string of statistical information formatted in Markdown or LaTeX.
 #'
 #' @method format_stats BFBayesFactor
 #' @family functions for printing statistical objects
