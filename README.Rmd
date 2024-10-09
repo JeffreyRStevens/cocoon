@@ -129,7 +129,14 @@ Please note that the cocoon project is released with a [Contributor Code of Cond
 
 The package name `{cocoon}` captures the main goal of transforming statistical inputs into nicely formatted outputs. This mirrors cocoons, which caterpillars build to transform into beautiful adult insects. [Cocoons](https://en.wikipedia.org/wiki/Pupa) are formally defined as a case that the larvae of moths spin around their pupa. So cocoons are cases built by moths and some other insects, whereas butterflies produce a chrysalis, which forms from their skin. 
 
-![](man/figures/silkmoths.png)
+
+```{r}
+#| echo: false
+#| fig.alt: Three white moths on fuzzy white cocoons.
+#| out.width: 600
+knitr::include_graphics("man/figures/silkmoths.png")
+```
+
 
 Photo source: Silk moths from [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:6_Monster_Silk_Moths.jpg)
   

@@ -159,7 +159,7 @@ case that the larvae of moths spin around their pupa. So cocoons are
 cases built by moths and some other insects, whereas butterflies produce
 a chrysalis, which forms from their skin.
 
-![](man/figures/silkmoths.png)
+<img src="man/figures/silkmoths.png" alt="Three white moths on fuzzy white cocoons." width="600" />
 
 Photo source: Silk moths from [Wikimedia
 Commons](https://commons.wikimedia.org/wiki/File:6_Monster_Silk_Moths.jpg)
