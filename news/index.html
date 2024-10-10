@@ -34,11 +34,26 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.0" id="cocoon-010">cocoon 0.1.0<a class="anchor" aria-label="anchor" href="#cocoon-010"></a></h2>
+<div class="section level4">
+<h4 id="new-features-0-1-0">NEW FEATURES<a class="anchor" aria-label="anchor" href="#new-features-0-1-0"></a></h4>
+<ul><li>Added <code><a href="../reference/format_stats.html">format_stats()</a></code> function to apply to accepted statistical objects (correlations, t-tests, Bayes factors). This is a generic function that recognizes the object class and uses the appropriate method, so it supercedes <code><a href="../reference/format_corr.html">format_corr()</a></code> and <code><a href="../reference/format_ttest.html">format_ttest()</a></code>. <code><a href="../reference/format_bf.html">format_bf()</a></code> can still be used to format numeric type Bayes factors.</li>
+<li>Added ability to format output from <code><a href="https://easystats.github.io/correlation/reference/correlation.html" class="external-link">correlation::correlation()</a></code>.</li>
+</ul></div>
+<div class="section level4">
+<h4 id="documentation-updates-0-1-0">DOCUMENTATION UPDATES<a class="anchor" aria-label="anchor" href="#documentation-updates-0-1-0"></a></h4>
+<ul><li>Reorder sections in vignette.</li>
+<li>Improve spacing and comments in examples.</li>
+<li>Add alt text to images.</li>
+</ul></div>
+<div class="section level4">
+<h4 id="package-development-0-1-0">PACKAGE DEVELOPMENT<a class="anchor" aria-label="anchor" href="#package-development-0-1-0"></a></h4>
+<ul><li>Move string building to internal <code>build_string()</code> function.</li>
+<li>Split functions into separate format_stats, format_statvalues, and format_summary scripts</li>
+</ul></div>
 </div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.1" id="cocoon-001">cocoon 0.0.1<a class="anchor" aria-label="anchor" href="#cocoon-001"></a></h2>
-<ul><li>Initial release of <a href="https://github.com/JeffreyRStevens/cocoon" class="external-link">cocoon</a>
-</li>
+<ul><li>Initial release of <a href="https://github.com/JeffreyRStevens/cocoon" class="external-link">cocoon</a>.</li>
 </ul></div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
