@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Provides functions that format statistical output in a way that can be inserted into R Markdown documents. This is analogous to the `apa_print()` functions in the papaja package but prints Markdown or LaTeX syntax.
+Provides functions that format statistical output in a way that can be inserted into R Markdown documents. This is analogous to the apa_print() functions in the 'papaja' package but prints Markdown or LaTeX syntax.
 }
 \seealso{
 Useful links:

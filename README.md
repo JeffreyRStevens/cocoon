@@ -58,13 +58,13 @@ library(cocoon)
 #> -0.8475514
 ```
 
-Now we can apply the `format_corr()` function to `cars_corr` to create a
-Markdown-formatted character string for the statistical results. We can
-embed this as inline R Markdown code to generate the results.
+Now we can apply the `format_stats()` function to `cars_corr` to create
+a Markdown-formatted character string for the statistical results. We
+can embed this as inline R Markdown code to generate the results.
 
 #### Code
 
-`` Fuel efficiency and engine displacement were highly correlated (`r format_corr(cars_corr)`). ``
+`` Fuel efficiency and engine displacement were highly correlated (`r format_stats(cars_corr)`). ``
 
 #### Output
 
@@ -82,7 +82,7 @@ italicized.
 
 #### Code
 
-`` Fuel efficiency and engine displacement were highly correlated (`r format_corr(cars_corr, pzero = TRUE, ci = FALSE, italics = FALSE)`). ``
+`` Fuel efficiency and engine displacement were highly correlated (`r format_stats(cars_corr, pzero = TRUE, full = FALSE, italics = FALSE)`). ``
 
 #### Output
 
@@ -91,17 +91,21 @@ Fuel efficiency and engine displacement were highly correlated (r =
 
 ## Functions and formatting types
 
-- `format_corr()`: Correlations (output from `cor.test()`, including
-  Pearson’s, Kendall’s, and Spearman’s correlations)
-- `format_ttest()`: Student t-tests and Wilcoxon rank sum and signed
-  rank tests (output from `t.test()` and `wilcox.test()`, including
-  one-sample, two-sample independent, and paired tests)
+- `format_stats()`: Statistical objects
+  - Correlations (output from `cor.test()` and
+    `correlation::correlation()`, including Pearson’s, Kendall’s, and
+    Spearman’s correlations)
+  - Student t-tests, Wilcoxon rank sum, and signed rank tests (output
+    from `t.test()` and `wilcox.test()`, including one-sample,
+    two-sample independent, and paired tests)
+  - Bayes factors (output from
+    [`{BayesFactor}`](https://cran.r-project.org/package=BayesFactor)
+    package)
 - `format_summary()`: Means and error (calculates from vector or uses
   vector of mean and error interval or mean, lower error limit, and
   upper error limit)
 - `format_p()`: P-values
-- `format_bf()`: Bayes factors (output from BayesFactor objects or
-  scalar number)
+- `format_bf()`: Bayes factors (numerics)
 - `format_scientific()`: Scientific notation
 - `format_num()`: Other numbers
 - `format_chr()`: Italicize character strings
@@ -128,7 +132,7 @@ Fuel efficiency and engine displacement were highly correlated (r =
 To cite `{cocoon}`, use:
 
 > Stevens, Jeffrey R. (2024). cocoon: Extract, format, and print
-> statistical output. (version 0.0.1)
+> statistical output. (version 0.1.0)
 > <https://github.com/JeffreyRStevens/cocoon>
 
 ## Contributing
@@ -150,12 +154,12 @@ agree to abide by its terms.
 The package name `{cocoon}` captures the main goal of transforming
 statistical inputs into nicely formatted outputs. This mirrors cocoons,
 which caterpillars build to transform into beautiful adult insects.
-Cocoons are formally [defined](https://en.wikipedia.org/wiki/Pupa) as a
+[Cocoons](https://en.wikipedia.org/wiki/Pupa) are formally defined as a
 case that the larvae of moths spin around their pupa. So cocoons are
 cases built by moths and some other insects, whereas butterflies produce
 a chrysalis, which forms from their skin.
 
-![](man/figures/silkmoths.png)
+<img src="man/figures/silkmoths.png" alt="Three white moths on fuzzy white cocoons." width="600" />
 
 Photo source: Silk moths from [Wikimedia
 Commons](https://commons.wikimedia.org/wiki/File:6_Monster_Silk_Moths.jpg)
