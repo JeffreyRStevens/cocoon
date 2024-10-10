@@ -37,6 +37,9 @@ italicized}
 
 \item{...}{Additional arguments passed to methods.}
 }
+\value{
+A character string of statistical information formatted in Markdown or LaTeX.
+}
 \description{
 This functions formats correlation statistics generated from the
 \{\href{https://cran.r-project.org/package=correlation}{correlation}\} package.

@@ -40,6 +40,9 @@ italicized (\emph{BF} or BF)}
 
 \item{...}{Additional arguments passed to methods.}
 }
+\value{
+A character string of statistical information formatted in Markdown or LaTeX.
+}
 \description{
 This method formats Bayes factors from the
 \{\href{https://cran.r-project.org/package=BayesFactor}{BayesFactor}\} package.
