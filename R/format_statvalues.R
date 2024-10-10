@@ -4,6 +4,7 @@
 #' @encoding UTF-8
 #' @description
 #' `r lifecycle::badge("superseded")`
+#'
 #' With `format_corr()` you can format correlation statistics generated from
 #' [cor.test()] output.
 #' This is now an internal function superceded by [format_stats()], which we
@@ -85,6 +86,7 @@ format_corr <- function(x,
 #'
 #' @description
 #' `r lifecycle::badge("superseded")`
+#'
 #' With `format_ttest()` you can format t-tests generated from [t.test()] and
 #' [wilcox.test()] output.
 #' This is now an internal function superceded by [format_stats()], which we
