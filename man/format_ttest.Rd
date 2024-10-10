@@ -35,9 +35,11 @@ italicized}
 A character string of statistical information formatted in Markdown or LaTeX.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 With \code{format_ttest()} you can format t-tests generated from \code{\link[=t.test]{t.test()}} and
 \code{\link[=wilcox.test]{wilcox.test()}} output.
-This is an internal function. Use \code{\link[=format_stats]{format_stats()}} instead.
+This is now an internal function superceded by \code{\link[=format_stats]{format_stats()}}, which we
+recommend using instead.
 }
 \examples{
 format_stats(t.test(formula = mtcars$mpg ~ mtcars$vs))

@@ -33,9 +33,11 @@ italicized}
 A character string of statistical information formatted in Markdown or LaTeX.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 With \code{format_corr()} you can format correlation statistics generated from
 \code{\link[=cor.test]{cor.test()}} output.
-This is an internal function. Use \code{\link[=format_stats]{format_stats()}} instead.
+This is now an internal function superceded by \code{\link[=format_stats]{format_stats()}}, which we
+recommend using instead.
 }
 \examples{
 # format_stats(cor.test(mtcars$mpg, mtcars$cyl))
