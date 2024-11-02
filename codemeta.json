@@ -2,19 +2,19 @@
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
   "identifier": "cocoon",
-  "description": "Provides functions that format statistical output in a way that can be inserted into R Markdown documents. This is analogous to the `apa_print()` functions in the papaja package but prints Markdown or LaTeX syntax.",
+  "description": "Provides functions that format statistical output in a way that can be inserted into R Markdown documents. This is analogous to the apa_print() functions in the 'papaja' package but prints Markdown or LaTeX syntax.",
   "name": "cocoon: Extract, Format, and Print Statistical Output",
   "relatedLink": "https://jeffreyrstevens.github.io/cocoon/",
   "codeRepository": "https://github.com/JeffreyRStevens/cocoon",
   "issueTracker": "https://github.com/JeffreyRStevens/cocoon/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.3.3 (2024-02-29)",
+  "runtimePlatform": "R version 4.4.1 (2024-06-14)",
   "author": [
     {
       "@type": "Person",
@@ -43,6 +43,30 @@
     }
   ],
   "softwareSuggestions": [
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "BayesFactor",
+      "name": "BayesFactor",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=BayesFactor"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "correlation",
+      "name": "correlation",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=correlation"
+    },
     {
       "@type": "SoftwareApplication",
       "identifier": "knitr",
@@ -84,18 +108,6 @@
   "softwareRequirements": {
     "1": {
       "@type": "SoftwareApplication",
-      "identifier": "BayesFactor",
-      "name": "BayesFactor",
-      "provider": {
-        "@id": "https://cran.r-project.org",
-        "@type": "Organization",
-        "name": "Comprehensive R Archive Network (CRAN)",
-        "url": "https://cran.r-project.org"
-      },
-      "sameAs": "https://CRAN.R-project.org/package=BayesFactor"
-    },
-    "2": {
-      "@type": "SoftwareApplication",
       "identifier": "dplyr",
       "name": "dplyr",
       "provider": {
@@ -106,9 +118,21 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=dplyr"
     },
+    "2": {
+      "@type": "SoftwareApplication",
+      "identifier": "lifecycle",
+      "name": "lifecycle",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=lifecycle"
+    },
     "SystemRequirements": null
   },
-  "fileSize": "3179.245KB",
+  "fileSize": "4674.862KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -122,10 +146,11 @@
       ],
       "name": "cocoon: Extract, format, and print statistical output",
       "url": "https://github.com/JeffreyRStevens/cocoon",
-      "description": "R package version 0.0.1"
+      "description": "R package version 0.1.0"
     }
   ],
+  "releaseNotes": "https://github.com/JeffreyRStevens/cocoon/blob/master/NEWS.md",
   "readme": "https://github.com/JeffreyRStevens/cocoon/blob/main/README.md",
-  "contIntegration": "https://app.codecov.io/gh/JeffreyRStevens/cocoon?branch=main",
+  "contIntegration": ["https://app.codecov.io/gh/JeffreyRStevens/cocoon?branch=main", "https://github.com/JeffreyRStevens/cocoon/actions/workflows/R-CMD-check.yaml"],
   "developmentStatus": ["https://www.repostatus.org/#active", "https://lifecycle.r-lib.org/articles/stages.html#stable"]
 }
