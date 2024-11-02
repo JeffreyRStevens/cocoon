@@ -10,3 +10,5 @@
 ^\.github$
 ^CODE_OF_CONDUCT\.md$
 ^codemeta\.json$
+^CRAN-SUBMISSION$
+^cran-comments\.md$
