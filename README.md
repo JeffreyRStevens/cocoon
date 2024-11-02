@@ -137,8 +137,8 @@ To cite `{cocoon}`, use:
 
 ## Contributing
 
-[Contributions](.github/CONTRIBUTING.md) to `{cocoon}` are most welcome!
-Feel free to check out [open
+[Contributions](https://jeffreyrstevens.github.io/cocoon/CONTRIBUTING.html)
+to `{cocoon}` are most welcome! Feel free to check out [open
 issues](https://github.com/JeffreyRStevens/cocoon/issues) for ideas. And
 [pull requests](https://github.com/JeffreyRStevens/cocoon/pulls) are
 encouraged, but you may want to [raise an
@@ -146,8 +146,9 @@ issue](https://github.com/JeffreyRStevens/cocoon/issues/new/choose) or
 [contact the maintainer](mailto:jeffrey.r.stevens@protonmail.com) first.
 
 Please note that the cocoon project is released with a [Contributor Code
-of Conduct](CODE_OF_CONDUCT.md). By contributing to this project, you
-agree to abide by its terms.
+of
+Conduct](https://jeffreyrstevens.github.io/cocoon/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
 
 ## Package name
 
