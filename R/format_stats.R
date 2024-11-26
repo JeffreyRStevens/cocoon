@@ -288,6 +288,106 @@ format_stats.easycorrelation <- function(x,
               type = type)
 }
 
+#' Title
+#'
+#' @param x An `aov` object
+#' @param term Character string for row name of term to extract statistics for.
+#' This must be the exact string returned in the `summary()` output from the
+#' `aov` object
+#' @param digits Number of digits after the decimal for means, confidence
+#' intervals, and test statistics
+#' @param pdigits Number of digits after the decimal for p-values, ranging
+#' between 1-5 (also controls cutoff for small p-values)
+#' @param pzero Logical value (default = FALSE) for whether to include
+#' leading zero for p-values
+#' @param italics Logical value (default = TRUE) for whether _p_ label should be
+#' italicized
+#' @param dfs Formatting for degrees of freedom ("par" = parenthetical,
+#' "sub" = subscript, "none" = do not print degrees of freedom)
+#' @param type Type of formatting ("md" = markdown, "latex" = LaTeX)
+#' @param ... Additional arguments passed to methods.
+#'
+#' @return
+#' A character string of statistical information formatted in Markdown or LaTeX.
+#'
+#' @method format_stats aov
+#' @family functions for printing statistical objects
+
+#' @export
+#'
+#' @examples
+#' test_aov <- aov(mpg ~ cyl, data = mtcars)
+format_stats.aov <- function(x,
+                             term,
+                             digits = 1,
+                             pdigits = 3,
+                             pzero = FALSE,
+                             # full = TRUE,
+                             italics = TRUE,
+                             dfs = "par",
+                             # mean = "abbr",
+                             type = "md",
+                             ...) {
+  # Validate arguments
+  if (!is.null(digits)) {
+    stopifnot("Argument `digits` must be a non-negative numeric vector." = is.numeric(digits))
+    stopifnot("Argument `digits` must be a non-negative numeric vector." = digits >= 0)
+  }
+  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = is.numeric(pdigits))
+  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits > 0)
+  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits < 6)
+  stopifnot("Argument `pzero` must be TRUE or FALSE." = is.logical(pzero))
+  # stopifnot("Argument `full` must be TRUE or FALSE." = is.logical(full))
+  stopifnot("Argument `italics` must be TRUE or FALSE." = is.logical(italics))
+  stopifnot("Argument `dfs` must be 'par', 'sub', or 'none'." = dfs %in% c("par", "sub", "none"))
+  # stopifnot("Argument `mean` must be 'abbr' or 'word'." = mean %in% c("abbr", "word"))
+  stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
+
+  terms <- attr(x$terms, "term.labels")
+  stopifnot("Argument `term` not found in model terms." = term %in% terms)
+  term_num <- which(terms == term)
+
+  summ <- summary(x)
+
+  f_stat <- summ[[1]][["F value"]][term_num]
+  df1 <- summ[[1]][["Df"]][term_num]
+  df2 <- x$df.residual
+  p_value <- summ[[1]][["Pr(>F)"]][term_num]
+
+  stat_value <- format_num(f_stat, digits = digits, pzero = TRUE)
+  pvalue <- format_p(p_value,
+                     digits = pdigits, pzero = pzero,
+                     italics = italics, type = type
+  )
+
+  # Build label
+  statlab <- "F"
+  stat_label <- dplyr::case_when(
+    !italics ~ paste0(statlab),
+    identical(type, "md") ~ paste0("_", statlab, "_"),
+    identical(type, "latex") ~ paste0("$", statlab, "$")
+  )
+  stat_label <- dplyr::case_when(identical(dfs, "par") ~ paste0(stat_label, "(", df1, ", ", df2, ")"),
+                                 identical(dfs, "sub") & identical(type, "md") ~ paste0(stat_label, "~", df1, ", ", df2, "~"),
+                                 identical(dfs, "sub") & identical(type, "latex") ~ paste0(stat_label, "$_{", df1, ", ", df2, "}$"),
+                                 .default = stat_label
+  )[1]
+
+  # Create statistics string
+
+  build_string(mean_label = NULL,
+               mean_value = NULL,
+               cis = FALSE,
+               stat_label = stat_label,
+               stat_value = stat_value,
+               pvalue = pvalue,
+               full = FALSE)
+}
+
+
+
+
+
 #' Format Bayes factors
 #'
 #' This method formats Bayes factors from the
