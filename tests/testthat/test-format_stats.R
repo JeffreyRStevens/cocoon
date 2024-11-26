@@ -22,6 +22,18 @@ test_that("unavailable format_stats() methods are aborted", {
 
 })
 
+
+test_that("format_stats() works properly for accepted objects", {
+  expect_no_error(format_stats(test_ttest))
+  expect_no_error(format_stats(test_corr))
+  expect_no_error(format_stats(test_easycorr))
+  expect_no_error(format_stats(test_easycorr2))
+  expect_no_error(format_stats(test_easycorr3))
+  expect_no_error(format_stats(test_aov, "a"))
+  expect_no_error(format_stats(test_bf))
+})
+
+
 test_that("htest correlations are validated properly", {
   suppressMessages(expect_error(
     format_stats(test_corr, digits = "xxx"),
@@ -60,6 +72,7 @@ test_that("htest correlations are validated properly", {
     "Argument `type` must be 'md' or 'latex'"
   ))
 })
+
 
 test_that("correlation correlations are validated properly", {
   suppressMessages(expect_error(
@@ -100,6 +113,7 @@ test_that("correlation correlations are validated properly", {
   ))
 })
 
+
 test_that("formatting correlations works properly", {
   expect_equal(format_stats(test_corr), "_r_ = 1.00, 95% CI [1.00, 1.00], _p_ < .001")
   expect_equal(format_stats(test_corr, digits = 3), "_r_ = 1.000, 95% CI [1.000, 1.000], _p_ < .001")
@@ -113,6 +127,7 @@ test_that("formatting correlations works properly", {
   expect_equal(format_stats(cor.test(df$a, df$b, method = "kendall")), "_τ_ = 1.00, _p_ < .001")
   expect_equal(format_stats(cor.test(df$a, df$b, method = "spearman")), "_ρ_ = 1.00, _p_ < .001")
 })
+
 
 test_that("htest t-tests are validated properly", {
   suppressMessages(expect_error(
@@ -161,6 +176,7 @@ test_that("htest t-tests are validated properly", {
   ))
 })
 
+
 test_that("formatting t-tests works properly", {
   expect_equal(format_stats(test_ttest1), "_M_ = 5.5, 95% CI [3.3, 7.7], _t_(9) = 0.5, _p_ = .614")
   expect_equal(format_stats(test_ttest), "_M_ = -1.0, 95% CI [-3.8, 1.8], _t_(18) = -0.7, _p_ = .470")
@@ -180,14 +196,59 @@ test_that("formatting t-tests works properly", {
   suppressMessages(expect_equal(format_stats(test_ttest5), "_W_ = 40.5, _p_ = .323"))
 })
 
-test_that("format_stats() works properly for htest and BayesFactor objects", {
-  expect_no_error(format_stats(test_ttest))
-  expect_no_error(format_stats(test_corr))
-  expect_no_error(format_stats(test_easycorr))
-  expect_no_error(format_stats(test_easycorr2))
-  expect_no_error(format_stats(test_easycorr3))
-  expect_no_error(format_stats(test_bf))
+
+test_that("aov ANOVAs are validated properly", {
+  suppressMessages(expect_error(
+    format_stats(test_aov, digits = "xxx"),
+    "Argument `digits` must be a non-negative numeric vector"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_aov, digits = -1),
+    "Argument `digits` must be a non-negative numeric vector"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_aov, pdigits = "xxx"),
+    "Argument `pdigits` must be a numeric between 1 and 5"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_aov, pdigits = 0),
+    "Argument `pdigits` must be a numeric between 1 and 5"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_aov, pdigits = 7),
+    "Argument `pdigits` must be a numeric between 1 and 5"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_aov, pzero = "xxx"),
+    "Argument `pzero` must be TRUE or FALSE"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_aov, italics = "xxx"),
+    "Argument `italics` must be TRUE or FALSE"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_aov, dfs = "xxx"),
+    "Argument `dfs` must be 'par', 'sub', or 'none'"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_aov, type = "xxx"),
+    "Argument `type` must be 'md' or 'latex'"
+  ))
 })
+
+
+test_that("formatting ANOVAs works properly", {
+  expect_equal(format_stats(test_aov, "a"), "_F_(1, 8) = 0.1, _p_ = .748")
+  expect_equal(format_stats(test_aov, "a", digits = 2), "_F_(1, 8) = 0.11, _p_ = .748")
+  expect_equal(format_stats(test_aov, "a", pdigits = 2), "_F_(1, 8) = 0.1, _p_ = .75")
+  expect_equal(format_stats(test_aov, "a", pzero = TRUE), "_F_(1, 8) = 0.1, _p_ = 0.748")
+  expect_equal(format_stats(test_aov, "a", italics = FALSE), "F(1, 8) = 0.1, p = .748")
+  expect_equal(format_stats(test_aov, "a", dfs = "sub"), "_F_~1, 8~ = 0.1, _p_ = .748")
+  expect_equal(format_stats(test_aov, "a", dfs = "none"), "_F_ = 0.1, _p_ = .748")
+  expect_equal(format_stats(test_aov, "a", type = "latex"), "$F$(1, 8) = 0.1, $p$ = .748")
+  expect_equal(format_stats(test_aov, "a", type = "latex", dfs = "sub"), "$F$$_{1, 8}$ = 0.1, $p$ = .748")
+})
+
 
 test_that("format_stats.BFBayesFactor() validates arguments properly", {
   suppressMessages(expect_error(
