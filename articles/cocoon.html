@@ -6,10 +6,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>cocoon • cocoon</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="cocoon">
 </head>
 <body>
@@ -196,12 +202,12 @@ test statistic, degrees of freedom (for parametric tests), and
 p-value.</p>
 <p>Let’s start by creating a few different t-tests</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mpg_disp_ttest_gear_carb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">carb</span><span class="op">)</span></span>
-<span><span class="va">mpg_disp_ttest_gear_carb_paired</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">carb</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="va">mpg_disp_ttest_gear_carb_onesample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, mu <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
-<span><span class="va">mpg_disp_wtest_gear_carb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">carb</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="va">mpg_disp_wtest_gear_carb_paired</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">carb</span>, paired <span class="op">=</span> <span class="cn">TRUE</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="va">mpg_disp_wtest_gear_carb_onesample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, mu <span class="op">=</span> <span class="fl">4</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">ttest_gear_carb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">carb</span><span class="op">)</span></span>
+<span><span class="va">ttest_gear_carb_paired</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">carb</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">ttest_gear_carb_onesample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, mu <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="va">wtest_gear_carb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">carb</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">wtest_gear_carb_paired</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">carb</span>, paired <span class="op">=</span> <span class="cn">TRUE</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">wtest_gear_carb_onesample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, mu <span class="op">=</span> <span class="fl">4</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>For Student’s t-tests, we get the mean value or difference and the
 confidence intervals. Means and confidence intervals can be omitted by
 setting <code>full = FALSE</code>.</p>
@@ -216,40 +222,40 @@ setting <code>full = FALSE</code>.</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td><code>format_stats(mpg_disp_ttest_gear_carb)</code></td>
+<td><code>format_stats(ttest_gear_carb)</code></td>
 <td>
 <em>M</em> = 0.9, 95% CI [0.2, 1.5], <em>t</em>(43.4) = 2.8,
 <em>p</em> = .008</td>
 </tr>
 <tr class="even">
-<td><code>format_stats(mpg_disp_ttest_gear_carb_paired)</code></td>
+<td><code>format_stats(ttest_gear_carb_paired)</code></td>
 <td>
 <em>M</em> = 0.9, 95% CI [0.3, 1.4], <em>t</em>(31) = 3.1,
 <em>p</em> = .004</td>
 </tr>
 <tr class="odd">
-<td><code>format_stats(mpg_disp_ttest_gear_carb_onesample)</code></td>
+<td><code>format_stats(ttest_gear_carb_onesample)</code></td>
 <td>
 <em>M</em> = 3.7, 95% CI [3.4, 4.0], <em>t</em>(31) = -2.4,
 <em>p</em> = .023</td>
 </tr>
 <tr class="even">
-<td><code>format_stats(mpg_disp_ttest_gear_carb_onesample, full = FALSE)</code></td>
+<td><code>format_stats(ttest_gear_carb_onesample, full = FALSE)</code></td>
 <td>
 <em>t</em>(31) = -2.4, <em>p</em> = .023</td>
 </tr>
 <tr class="odd">
-<td><code>format_stats(mpg_disp_wtest_gear_carb)</code></td>
+<td><code>format_stats(wtest_gear_carb)</code></td>
 <td>
 <em>W</em> = 727.5, <em>p</em> = .003</td>
 </tr>
 <tr class="even">
-<td><code>format_stats(mpg_disp_wtest_gear_carb_paired)</code></td>
+<td><code>format_stats(wtest_gear_carb_paired)</code></td>
 <td>
 <em>V</em> = 267.0, <em>p</em> = .004</td>
 </tr>
 <tr class="odd">
-<td><code>format_stats(mpg_disp_wtest_gear_carb_onesample)</code></td>
+<td><code>format_stats(wtest_gear_carb_onesample)</code></td>
 <td>
 <em>V</em> = 52.5, <em>p</em> = .027</td>
 </tr>
@@ -270,35 +276,104 @@ Remove italics with <code>italics = FALSE</code>.</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td><code>format_stats(mpg_disp_ttest_gear_carb)</code></td>
+<td><code>format_stats(ttest_gear_carb)</code></td>
 <td>
 <em>M</em> = 0.9, 95% CI [0.2, 1.5], <em>t</em>(43.4) = 2.8,
 <em>p</em> = .008</td>
 </tr>
 <tr class="even">
-<td><code>format_stats(mpg_disp_ttest_gear_carb, digits = 2, pdigits = 2)</code></td>
+<td><code>format_stats(ttest_gear_carb, digits = 2, pdigits = 2)</code></td>
 <td>
 <em>M</em> = 0.88, 95% CI [0.24, 1.51], <em>t</em>(43.40) = 2.79,
 <em>p</em> &lt; .01</td>
 </tr>
 <tr class="odd">
-<td><code>format_stats(mpg_disp_ttest_gear_carb, pzero = TRUE)</code></td>
+<td><code>format_stats(ttest_gear_carb, pzero = TRUE)</code></td>
 <td>
 <em>M</em> = 0.9, 95% CI [0.2, 1.5], <em>t</em>(43.4) = 2.8,
 <em>p</em> = 0.008</td>
 </tr>
 <tr class="even">
-<td><code>format_stats(mpg_disp_ttest_gear_carb, italics = FALSE)</code></td>
+<td><code>format_stats(ttest_gear_carb, italics = FALSE)</code></td>
 <td>M = 0.9, 95% CI [0.2, 1.5], t(43.4) = 2.8, p = .008</td>
 </tr>
 <tr class="odd">
-<td><code>format_stats(mpg_disp_wtest_gear_carb)</code></td>
+<td><code>format_stats(wtest_gear_carb)</code></td>
 <td>
 <em>W</em> = 727.5, <em>p</em> = .003</td>
 </tr>
 <tr class="even">
-<td><code>format_stats(mpg_disp_wtest_gear_carb, italics = FALSE)</code></td>
+<td><code>format_stats(wtest_gear_carb, italics = FALSE)</code></td>
 <td>W = 727.5, p = .003</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level3">
+<h3 id="anovas">ANOVAs<a class="anchor" aria-label="anchor" href="#anovas"></a>
+</h3>
+<p>The <code><a href="../reference/format_stats.html">format_stats()</a></code> function can also input objects
+returned by the <code><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov()</a></code> function. It then reports and formats
+the F statistic, degrees of freedom, and p-value.</p>
+<p>Let’s start by creating an ANOVA</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">aov_mpg_cyl_hp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span> <span class="op">*</span> <span class="va">hp</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">aov_mpg_cyl_hp</span><span class="op">)</span></span>
+<span><span class="co">#&gt;             Df Sum Sq Mean Sq F value   Pr(&gt;F)    </span></span>
+<span><span class="co">#&gt; cyl          1  817.7   817.7  92.472 2.27e-10 ***</span></span>
+<span><span class="co">#&gt; hp           1   16.4    16.4   1.850   0.1846    </span></span>
+<span><span class="co">#&gt; cyl:hp       1   44.4    44.4   5.018   0.0332 *  </span></span>
+<span><span class="co">#&gt; Residuals   28  247.6     8.8                     </span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span></code></pre></div>
+<p>To use <code><a href="../reference/format_stats.html">format_stats()</a></code> on ANOVAs, you must pass the
+<code>aov</code> object and a character string describing which term to
+extract. Apply <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> to your <code>aov</code> object
+and copy the text of the term you want to extract. Then you can format
+the number of digits of coefficients with <code>digits</code> and digits
+of p-values with <code>pdigits</code>. Include the leading zeros for
+coefficients and p-values with <code>pzero = TRUE</code>. Remove italics
+with <code>italics = FALSE</code>. With <code>dfs</code>, format degrees
+of freedom as parenthetical (<code>par</code>) or subscripts
+(<code>sub</code>) or remove them (<code>none</code>).</p>
+<table class="table">
+<colgroup>
+<col width="68%">
+<col width="31%">
+</colgroup>
+<thead><tr class="header">
+<th>Code</th>
+<th>Output</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>format_stats(aov_mpg_cyl_hp, term = "cyl")</code></td>
+<td>
+<em>F</em>(1, 28) = 92.5, <em>p</em> &lt; .001</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(aov_mpg_cyl_hp, term = "cyl:hp")</code></td>
+<td>
+<em>F</em>(1, 28) = 5.0, <em>p</em> = .033</td>
+</tr>
+<tr class="odd">
+<td><code>format_stats(aov_mpg_cyl_hp, term = "cyl", digits = 2, pdigits = 2)</code></td>
+<td>
+<em>F</em>(1, 28) = 92.47, <em>p</em> &lt; .01</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(aov_mpg_cyl_hp, term = "cyl", pzero = TRUE)</code></td>
+<td>
+<em>F</em>(1, 28) = 92.5, <em>p</em> &lt; 0.001</td>
+</tr>
+<tr class="odd">
+<td><code>format_stats(aov_mpg_cyl_hp, term = "cyl", italics = FALSE)</code></td>
+<td>F(1, 28) = 92.5, p &lt; .001</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(aov_mpg_cyl_hp, term = "cyl", dfs = "sub")</code></td>
+<td>
+<em>F</em><sub>1,28</sub> = 92.5, <em>p</em> &lt; .001</td>
 </tr>
 </tbody>
 </table>
@@ -321,7 +396,7 @@ two arguments. Further, Bayes factors can be very large or very small
 when evidence strongly favors one hypothesis over another. Therefore,
 the <code>cutoff</code> argument set a threshold above which (or below
 1/cutoff) the returned value is truncated (e.g., BF &gt; 1000).</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bf_corr</span> <span class="op">&lt;-</span> <span class="fu">BayesFactor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BayesFactor/man/correlationBF.html" class="external-link">correlationBF</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">disp</span><span class="op">)</span></span>
 <span><span class="va">bf_ttest</span> <span class="op">&lt;-</span> <span class="fu">BayesFactor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BayesFactor/man/ttestBF.html" class="external-link">ttestBF</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">vs</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">am</span><span class="op">)</span></span>
 <span><span class="va">bf_lm</span> <span class="op">&lt;-</span> <span class="fu">BayesFactor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BayesFactor/man/lmBF.html" class="external-link">lmBF</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">am</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span></code></pre></div>
