@@ -40,15 +40,6 @@ format_corr <- function(x,
   check_bool(italics)
   check_string(type)
   check_match(type, c("md", "latex"))
-  # stopifnot("Argument `digits` must be a non-negative numeric vector." = is.numeric(digits))
-  # stopifnot("Argument `digits` must be a non-negative numeric vector." = digits >= 0)
-  # stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = is.numeric(pdigits))
-  # stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits > 0)
-  # stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits < 6)
-  # stopifnot("Argument `pzero` must be TRUE or FALSE." = is.logical(pzero))
-  # stopifnot("Argument `full` must be TRUE or FALSE." = is.logical(full))
-  # stopifnot("Argument `italics` must be TRUE or FALSE." = is.logical(italics))
-  # stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
 
   # Format numbers
   corr_method <- dplyr::case_when(
@@ -261,15 +252,6 @@ format_bf <- function(x,
   check_string(type)
   check_match(type, c("md", "latex"))
 
-  # stopifnot("Argument `digits1` must be a non-negative numeric vector." = is.numeric(digits1))
-  # stopifnot("Argument `digits1` must be a non-negative numeric vector." = digits1 >= 0)
-  # stopifnot("Argument `digits2` must be a non-negative numeric vector." = is.numeric(digits2))
-  # stopifnot("Argument `digits2` must be a non-negative numeric vector." = digits2 >= 0)
-  # stopifnot("Argument `cutoff` must be a numeric vector greater than 1 or NULL." = (is.numeric(cutoff) & cutoff > 1) | is.null(cutoff))
-  # stopifnot("Argument `italics` must be TRUE or FALSE." = is.logical(italics))
-  # stopifnot("Argument `subscript` must be a character string (usually '10', '01', or '')." = is.character(subscript))
-  # stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
-
   # Build label
   if (label != "") {
     bf_lab <- paste0(format_chr(label, italics = italics, type = type), format_sub(subscript, type = type))
@@ -371,13 +353,6 @@ format_p <- function(x,
   check_bool(italics)
   check_string(type)
   check_match(type, c("md", "latex"))
-  # stopifnot("Input must be a numeric vector." = is.numeric(x))
-  # stopifnot("Argument `digits` must be a numeric between 1 and 5." = is.numeric(digits))
-  # stopifnot("Argument `digits` must be a numeric between 1 and 5." = digits > 0)
-  # stopifnot("Argument `digits` must be a numeric between 1 and 5." = digits < 6)
-  # stopifnot("Argument `pzero` must be TRUE or FALSE." = is.logical(pzero))
-  # stopifnot("Argument `italics` must be TRUE or FALSE." = is.logical(italics))
-  # stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
 
   # Build label
   if (label != "") {
