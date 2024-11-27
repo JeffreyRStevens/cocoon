@@ -1,9 +1,12 @@
 ---
 title: "cocoon"
-output: rmarkdown::html_vignette
+format: 
+  html:
+    toc: true
+    html-math-method: mathjax
 vignette: >
   %\VignetteIndexEntry{cocoon}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{quarto::html}
   %\VignetteEncoding{UTF-8}
 ---
 
@@ -127,7 +130,6 @@ To use `format_stats()` on ANOVAs, you must pass the `aov` object and a characte
 | `format_stats(aov_mpg_cyl_hp, term = "cyl", italics = FALSE)` | `r format_stats(aov_mpg_cyl_hp, term = "cyl", italics = FALSE)` |
 | `format_stats(aov_mpg_cyl_hp, term = "cyl", dfs = "sub")` | `r format_stats(aov_mpg_cyl_hp, term = "cyl", dfs = "sub")` |
 
-F~1, 28~ = 92.5, p < .001
 
 ### Bayes factors
 
