@@ -18,7 +18,6 @@ Suggests:
     BayesFactor,
     correlation,
     knitr,
-    quarto,
     rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
@@ -29,4 +28,4 @@ Imports:
 URL: https://github.com/JeffreyRStevens/cocoon, https://jeffreyrstevens.github.io/cocoon/
 BugReports: https://github.com/JeffreyRStevens/cocoon/issues
 VignetteBuilder: 
-    quarto
+    knitr
