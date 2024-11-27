@@ -25,6 +25,7 @@ documents. Currently, the generic function works with the following objects:
 \item \code{htest} objects of correlations, t-tests, and Wilcoxon tests
 \item correlations from the
 \{\href{https://cran.r-project.org/package=correlation}{correlation}\} package.
+\item \code{aov} objects for ANOVAs
 \item Bayes factors from the
 \{\href{https://cran.r-project.org/package=BayesFactor}{BayesFactor}\} package.
 The function invokes specific methods that depend on the class of the
