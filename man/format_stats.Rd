@@ -25,6 +25,7 @@ documents. Currently, the generic function works with the following objects:
 \item \code{htest} objects of correlations, t-tests, and Wilcoxon tests
 \item correlations from the
 \{\href{https://cran.r-project.org/package=correlation}{correlation}\} package.
+\item \code{aov} objects for ANOVAs
 \item Bayes factors from the
 \{\href{https://cran.r-project.org/package=BayesFactor}{BayesFactor}\} package.
 The function invokes specific methods that depend on the class of the
@@ -49,6 +50,7 @@ Other functions for printing statistical objects:
 \code{\link{format_bf}()},
 \code{\link{format_corr}()},
 \code{\link{format_stats.BFBayesFactor}()},
+\code{\link{format_stats.aov}()},
 \code{\link{format_stats.easycorrelation}()},
 \code{\link{format_stats.htest}()},
 \code{\link{format_ttest}()}

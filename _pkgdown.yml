@@ -2,7 +2,7 @@ url: https://jeffreyrstevens.github.io/cocoon/
 template:
   bootstrap: 5
   bootswatch: minty
-  theme: nord
+  theme: zenburn
   bslib:
     bg: "#212529"
     fg: "#f8f9fa"
@@ -17,9 +17,10 @@ reference:
 - title: Format statistical objects
   contents:
   - format_stats
-  - format_stats.htest
-  - format_stats.easycorrelation
+  - format_stats.aov
   - format_stats.BFBayesFactor
+  - format_stats.easycorrelation
+  - format_stats.htest
 - title: Format statistical values
   contents:
   - format_summary

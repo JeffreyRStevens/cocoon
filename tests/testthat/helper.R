@@ -11,5 +11,7 @@ test_ttest3 <- suppressWarnings(wilcox.test(df$a, mu = 5))
 test_ttest4 <- suppressWarnings(wilcox.test(df$a, df$b))
 test_ttest5 <- suppressWarnings(wilcox.test(df$a, c(df$b, 120)))
 test_chisq <- chisq.test(as.table(rbind(c(762, 327, 468), c(484, 239, 477))))
+test_aov <- aov(c ~ a, data = df)
 test_bf <- BayesFactor::ttestBF(df$a, mu = 5)
 
+library(rlang)

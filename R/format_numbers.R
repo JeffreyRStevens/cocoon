@@ -17,9 +17,8 @@ format_num <- function(x,
                        digits = 1,
                        pzero = TRUE) {
   # Check arguments
-  stopifnot("Input must be a numeric vector." = is.numeric(x))
-  stopifnot("Argument `digits` must be a non-negative numeric vector." = is.numeric(digits))
-  stopifnot("Argument `digits` must be a non-negative numeric vector." = digits >= 0)
+  check_numeric(x)
+  check_number_whole(digits, min = 0)
 
   # Format number
   dplyr::case_when(
@@ -48,10 +47,9 @@ format_scientific <- function(x,
                               digits = 1,
                               type = "md") {
   # Check arguments
-  stopifnot("Input must be a numeric vector." = is.numeric(x))
-  stopifnot("Argument `digits` must be a non-negative numeric vector." = is.numeric(digits))
-  stopifnot("Argument `digits` must be a non-negative numeric vector." = digits >= 0)
-  stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
+  check_numeric(x)
+  check_number_whole(digits, min = 1)
+  check_match(type, c("md", "latex"))
 
   # Format number
   num <- formatC(x, digits = digits, format = "e")
@@ -91,9 +89,9 @@ format_chr <- function(x,
                        italics = TRUE,
                        type = "md") {
   # Check arguments
-  stopifnot("Input must be a character string." = is.character(x))
-  stopifnot("Argument `italics` must be TRUE or FALSE." = is.logical(italics))
-  stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
+  check_string(x)
+  check_bool(italics)
+  check_match(type, c("md", "latex"))
   dplyr::case_when(
     italics & type == "md" ~ paste0("_", x, "_"),
     italics & type == "latex" ~ paste0("$", x, "$"),
@@ -119,8 +117,8 @@ format_chr <- function(x,
 format_sub <- function(subscript = NULL,
                        type = "md") {
   # Check arguments
-  stopifnot("Input must be a character string or NULL." = is.character(subscript) | is.null(subscript))
-  stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
+  check_string(subscript, allow_null = TRUE)
+  check_match(type, c("md", "latex"))
   dplyr::case_when(
     subscript == "" ~ "",
     !is.null(subscript) & type == "md" ~ paste0("~", subscript, "~"),

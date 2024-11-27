@@ -1,39 +1,43 @@
 test_that("format_summary() works properly", {
   suppressMessages(expect_error(
     format_summary(x = "xxx"),
-    "Argument `x` must be a numeric vector"
+    '`x` must be a numeric vector, not the string "xxx"'
   ))
   suppressMessages(expect_error(
-    format_summary(error = "xxx"),
-    "You must include either the `x` or `values` argument"
+    format_summary(tendency = "xxx"),
+    'You must include either the `x` or `values` argument'
+  ))
+  suppressMessages(expect_error(
+    format_summary(x = 1:3, tendency = "xxx"),
+    '`tendency` must be "mean" or "median", not the string "xxx"'
   ))
   suppressMessages(expect_error(
     format_summary(x = 1:3, error = "xxx"),
-    'Specify `error` as "ci", "sd", "se", or "iqr"'
+    '`error` must be "ci", "sd", "se", or "iqr", not the string "xxx"'
   ))
   suppressMessages(expect_error(
     format_summary(values = "xxx"),
-    "Argument `values` must be a numeric vector"
+    '`values` must be a numeric vector, not the string "xxx"'
   ))
   suppressMessages(expect_error(
     format_summary(values = 1:4),
-    "Argument `values` must be a vector with two or three elements"
+    'Argument `values` must be a vector with two or three elements'
   ))
   suppressMessages(expect_error(
     format_summary(values = c(2, 4, 1)),
-    "Argument `values` must include the mean followed by the lower CI limit then the upper CI limit"
+    'Argument `values` must include the mean followed by the lower CI limit then the upper CI limit'
   ))
   suppressMessages(expect_error(
     format_summary(x = 1:3, tendlabel = "xxx"),
-    'Specify `tendlabel` as "abbr", "word", or "none"'
+    '`tendlabel` must be "abbr", "word", or "none", not the string "xxx"'
   ))
   suppressMessages(expect_error(
     format_summary(x = 1:3, units = 2),
-    "The `units` argument must be a character vector or NULL"
+    '`units` must be a character vector or `NULL`, not the number 2'
   ))
   suppressMessages(expect_error(
     format_summary(x = 1:3, display = "xxx"),
-    'Specify `display` as "limits", "pm", "par", or "none"'
+    '`display` must be "limits", "pm", "par", or "none", not the string "xxx"'
   ))
   expect_equal(format_summary(x = 1:10), "_M_ = 5.5, 95% CI [3.3, 7.7]")
   expect_equal(format_summary(values = c(5.5, 1.2)), "_M_ = 5.5, 95% CI [4.3, 6.7]")

@@ -12,6 +12,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+library(rlang)
 ```
 
 ```{r setup-real, echo = FALSE, message = FALSE}
@@ -73,36 +74,59 @@ The `format_stats()` function can also input objects returned by the `t.test()` 
 Let's start by creating a few different t-tests
 
 ```{r}
-mpg_disp_ttest_gear_carb <- t.test(mtcars$gear, mtcars$carb)
-mpg_disp_ttest_gear_carb_paired <- t.test(mtcars$gear, mtcars$carb, paired = TRUE)
-mpg_disp_ttest_gear_carb_onesample <- t.test(mtcars$gear, mu = 4)
-mpg_disp_wtest_gear_carb <- wilcox.test(mtcars$gear, mtcars$carb, exact = FALSE)
-mpg_disp_wtest_gear_carb_paired <- wilcox.test(mtcars$gear, mtcars$carb, paired = TRUE, exact = FALSE)
-mpg_disp_wtest_gear_carb_onesample <- wilcox.test(mtcars$gear, mu = 4, exact = FALSE)
+ttest_gear_carb <- t.test(mtcars$gear, mtcars$carb)
+ttest_gear_carb_paired <- t.test(mtcars$gear, mtcars$carb, paired = TRUE)
+ttest_gear_carb_onesample <- t.test(mtcars$gear, mu = 4)
+wtest_gear_carb <- wilcox.test(mtcars$gear, mtcars$carb, exact = FALSE)
+wtest_gear_carb_paired <- wilcox.test(mtcars$gear, mtcars$carb, paired = TRUE, exact = FALSE)
+wtest_gear_carb_onesample <- wilcox.test(mtcars$gear, mu = 4, exact = FALSE)
 ```
 
 For Student's t-tests, we get the mean value or difference and the confidence intervals. Means and confidence intervals can be omitted by setting `full = FALSE`.
 
 | Code | Output |
 |-------|-----|
-| `format_stats(mpg_disp_ttest_gear_carb)` | `r format_stats(mpg_disp_ttest_gear_carb)` |
-| `format_stats(mpg_disp_ttest_gear_carb_paired)` | `r format_stats(mpg_disp_ttest_gear_carb_paired)` |
-| `format_stats(mpg_disp_ttest_gear_carb_onesample)` | `r format_stats(mpg_disp_ttest_gear_carb_onesample)` |
-| `format_stats(mpg_disp_ttest_gear_carb_onesample, full = FALSE)` | `r format_stats(mpg_disp_ttest_gear_carb_onesample, full = FALSE)` |
-| `format_stats(mpg_disp_wtest_gear_carb)` | `r format_stats(mpg_disp_wtest_gear_carb)` |
-| `format_stats(mpg_disp_wtest_gear_carb_paired)` | `r format_stats(mpg_disp_wtest_gear_carb_paired)` |
-| `format_stats(mpg_disp_wtest_gear_carb_onesample)` | `r format_stats(mpg_disp_wtest_gear_carb_onesample)` |
+| `format_stats(ttest_gear_carb)` | `r format_stats(ttest_gear_carb)` |
+| `format_stats(ttest_gear_carb_paired)` | `r format_stats(ttest_gear_carb_paired)` |
+| `format_stats(ttest_gear_carb_onesample)` | `r format_stats(ttest_gear_carb_onesample)` |
+| `format_stats(ttest_gear_carb_onesample, full = FALSE)` | `r format_stats(ttest_gear_carb_onesample, full = FALSE)` |
+| `format_stats(wtest_gear_carb)` | `r format_stats(wtest_gear_carb)` |
+| `format_stats(wtest_gear_carb_paired)` | `r format_stats(wtest_gear_carb_paired)` |
+| `format_stats(wtest_gear_carb_onesample)` | `r format_stats(wtest_gear_carb_onesample)` |
 
 Format the number of digits of coefficients with `digits` and digits of p-values with `pdigits`. Include the leading zeros for coefficients and p-values with `pzero = TRUE`. Remove italics with  `italics = FALSE`.
 
 | Code | Output |
 |---------|------|
-| `format_stats(mpg_disp_ttest_gear_carb)` | `r format_stats(mpg_disp_ttest_gear_carb)` |
-| `format_stats(mpg_disp_ttest_gear_carb, digits = 2, pdigits = 2)` | `r format_stats(mpg_disp_ttest_gear_carb, digits = 2, pdigits = 2)` |
-| `format_stats(mpg_disp_ttest_gear_carb, pzero = TRUE)` | `r format_stats(mpg_disp_ttest_gear_carb, pzero = TRUE)` |
-| `format_stats(mpg_disp_ttest_gear_carb, italics = FALSE)` | `r format_stats(mpg_disp_ttest_gear_carb, italics = FALSE)` |
-| `format_stats(mpg_disp_wtest_gear_carb)` | `r format_stats(mpg_disp_wtest_gear_carb)` |
-| `format_stats(mpg_disp_wtest_gear_carb, italics = FALSE)` | `r format_stats(mpg_disp_wtest_gear_carb, italics = FALSE)` |
+| `format_stats(ttest_gear_carb)` | `r format_stats(ttest_gear_carb)` |
+| `format_stats(ttest_gear_carb, digits = 2, pdigits = 2)` | `r format_stats(ttest_gear_carb, digits = 2, pdigits = 2)` |
+| `format_stats(ttest_gear_carb, pzero = TRUE)` | `r format_stats(ttest_gear_carb, pzero = TRUE)` |
+| `format_stats(ttest_gear_carb, italics = FALSE)` | `r format_stats(ttest_gear_carb, italics = FALSE)` |
+| `format_stats(wtest_gear_carb)` | `r format_stats(wtest_gear_carb)` |
+| `format_stats(wtest_gear_carb, italics = FALSE)` | `r format_stats(wtest_gear_carb, italics = FALSE)` |
+
+### ANOVAs
+
+The `format_stats()` function can also input objects returned by the `aov()` function. It then reports and formats the F statistic, degrees of freedom, and p-value.
+
+Let's start by creating an ANOVA
+
+```{r}
+aov_mpg_cyl_hp <- aov(mpg ~ cyl * hp, data = mtcars)
+summary(aov_mpg_cyl_hp)
+```
+
+To use `format_stats()` on ANOVAs, you must pass the `aov` object and a character string describing which term to extract. Apply `summary()` to your `aov` object and copy the text of the term you want to extract. Then you can format the number of digits of coefficients with `digits` and digits of p-values with `pdigits`. Include the leading zeros for coefficients and p-values with `pzero = TRUE`. Remove italics with  `italics = FALSE`. With `dfs`, format degrees of freedom as parenthetical (`par`) or subscripts (`sub`) or remove them (`none`).
+
+| Code | Output |
+|-------------|------|
+| `format_stats(aov_mpg_cyl_hp, term = "cyl")` | `r format_stats(aov_mpg_cyl_hp, term = "cyl")` |
+| `format_stats(aov_mpg_cyl_hp, term = "cyl:hp")` | `r format_stats(aov_mpg_cyl_hp, term = "cyl:hp")` |
+| `format_stats(aov_mpg_cyl_hp, term = "cyl", digits = 2, pdigits = 2)` | `r format_stats(aov_mpg_cyl_hp, term = "cyl", digits = 2, pdigits = 2)` |
+| `format_stats(aov_mpg_cyl_hp, term = "cyl", pzero = TRUE)` | `r format_stats(aov_mpg_cyl_hp, term = "cyl", pzero = TRUE)` |
+| `format_stats(aov_mpg_cyl_hp, term = "cyl", italics = FALSE)` | `r format_stats(aov_mpg_cyl_hp, term = "cyl", italics = FALSE)` |
+| `format_stats(aov_mpg_cyl_hp, term = "cyl", dfs = "sub")` | `r format_stats(aov_mpg_cyl_hp, term = "cyl", dfs = "sub")` |
+
 
 ### Bayes factors
 

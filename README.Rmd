@@ -100,6 +100,7 @@ Fuel efficiency and engine displacement were highly correlated
   - Student t-tests, Wilcoxon rank sum, and signed rank tests (output 
 from `t.test()` and `wilcox.test()`, including one-sample, two-sample 
 independent, and paired tests)
+  - ANOVAs from `aov()`
   - Bayes factors (output from [`{BayesFactor}`](https://cran.r-project.org/package=BayesFactor) package)
 * `format_summary()`: Means and error (calculates from vector or uses vector 
 of mean and error interval or mean, lower error limit, and upper error limit)
