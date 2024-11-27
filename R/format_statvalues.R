@@ -33,15 +33,22 @@ format_corr <- function(x,
 
   # Validate arguments
   stopifnot("Input must be a correlation object." = inherits(x, what = "htest") && grepl("correlation", x$method))
-  stopifnot("Argument `digits` must be a non-negative numeric vector." = is.numeric(digits))
-  stopifnot("Argument `digits` must be a non-negative numeric vector." = digits >= 0)
-  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = is.numeric(pdigits))
-  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits > 0)
-  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits < 6)
-  stopifnot("Argument `pzero` must be TRUE or FALSE." = is.logical(pzero))
-  stopifnot("Argument `full` must be TRUE or FALSE." = is.logical(full))
-  stopifnot("Argument `italics` must be TRUE or FALSE." = is.logical(italics))
-  stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
+  check_number_whole(digits, min = 0, allow_null = TRUE)
+  check_number_whole(pdigits, min = 1, max = 5)
+  check_bool(pzero)
+  check_bool(full)
+  check_bool(italics)
+  check_string(type)
+  check_match(type, c("md", "latex"))
+  # stopifnot("Argument `digits` must be a non-negative numeric vector." = is.numeric(digits))
+  # stopifnot("Argument `digits` must be a non-negative numeric vector." = digits >= 0)
+  # stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = is.numeric(pdigits))
+  # stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits > 0)
+  # stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits < 6)
+  # stopifnot("Argument `pzero` must be TRUE or FALSE." = is.logical(pzero))
+  # stopifnot("Argument `full` must be TRUE or FALSE." = is.logical(full))
+  # stopifnot("Argument `italics` must be TRUE or FALSE." = is.logical(italics))
+  # stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
 
   # Format numbers
   corr_method <- dplyr::case_when(
@@ -246,14 +253,22 @@ format_bf <- function(x,
   }
 
   # Validate arguments
-  stopifnot("Argument `digits1` must be a non-negative numeric vector." = is.numeric(digits1))
-  stopifnot("Argument `digits1` must be a non-negative numeric vector." = digits1 >= 0)
-  stopifnot("Argument `digits2` must be a non-negative numeric vector." = is.numeric(digits2))
-  stopifnot("Argument `digits2` must be a non-negative numeric vector." = digits2 >= 0)
-  stopifnot("Argument `cutoff` must be a numeric vector greater than 1 or NULL." = (is.numeric(cutoff) & cutoff > 1) | is.null(cutoff))
-  stopifnot("Argument `italics` must be TRUE or FALSE." = is.logical(italics))
-  stopifnot("Argument `subscript` must be a character string (usually '10', '01', or '')." = is.character(subscript))
-  stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
+  check_number_whole(digits1, min = 0, allow_null = TRUE)
+  check_number_whole(digits2, min = 0, allow_null = TRUE)
+  check_number_decimal(cutoff, min = 1, allow_null = TRUE)
+  check_bool(italics)
+  check_string(subscript)
+  check_string(type)
+  check_match(type, c("md", "latex"))
+
+  # stopifnot("Argument `digits1` must be a non-negative numeric vector." = is.numeric(digits1))
+  # stopifnot("Argument `digits1` must be a non-negative numeric vector." = digits1 >= 0)
+  # stopifnot("Argument `digits2` must be a non-negative numeric vector." = is.numeric(digits2))
+  # stopifnot("Argument `digits2` must be a non-negative numeric vector." = digits2 >= 0)
+  # stopifnot("Argument `cutoff` must be a numeric vector greater than 1 or NULL." = (is.numeric(cutoff) & cutoff > 1) | is.null(cutoff))
+  # stopifnot("Argument `italics` must be TRUE or FALSE." = is.logical(italics))
+  # stopifnot("Argument `subscript` must be a character string (usually '10', '01', or '')." = is.character(subscript))
+  # stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
 
   # Build label
   if (label != "") {
@@ -350,13 +365,19 @@ format_p <- function(x,
                      italics = TRUE,
                      type = "md") {
   # Check arguments
-  stopifnot("Input must be a numeric vector." = is.numeric(x))
-  stopifnot("Argument `digits` must be a numeric between 1 and 5." = is.numeric(digits))
-  stopifnot("Argument `digits` must be a numeric between 1 and 5." = digits > 0)
-  stopifnot("Argument `digits` must be a numeric between 1 and 5." = digits < 6)
-  stopifnot("Argument `pzero` must be TRUE or FALSE." = is.logical(pzero))
-  stopifnot("Argument `italics` must be TRUE or FALSE." = is.logical(italics))
-  stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
+  check_numeric(x)
+  check_number_whole(digits, min = 1, max = 5, allow_null = TRUE)
+  check_bool(pzero)
+  check_bool(italics)
+  check_string(type)
+  check_match(type, c("md", "latex"))
+  # stopifnot("Input must be a numeric vector." = is.numeric(x))
+  # stopifnot("Argument `digits` must be a numeric between 1 and 5." = is.numeric(digits))
+  # stopifnot("Argument `digits` must be a numeric between 1 and 5." = digits > 0)
+  # stopifnot("Argument `digits` must be a numeric between 1 and 5." = digits < 6)
+  # stopifnot("Argument `pzero` must be TRUE or FALSE." = is.logical(pzero))
+  # stopifnot("Argument `italics` must be TRUE or FALSE." = is.logical(italics))
+  # stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
 
   # Build label
   if (label != "") {

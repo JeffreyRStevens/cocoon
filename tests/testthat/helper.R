@@ -14,3 +14,4 @@ test_chisq <- chisq.test(as.table(rbind(c(762, 327, 468), c(484, 239, 477))))
 test_aov <- aov(c ~ a, data = df)
 test_bf <- BayesFactor::ttestBF(df$a, mu = 5)
 
+library(rlang)

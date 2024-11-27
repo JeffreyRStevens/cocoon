@@ -148,19 +148,15 @@ format_stats.htest <- function(x,
                                type = "md",
                                ...) {
   # Validate arguments
-  if (!is.null(digits)) {
-    stopifnot("Argument `digits` must be a non-negative numeric vector." = is.numeric(digits))
-    stopifnot("Argument `digits` must be a non-negative numeric vector." = digits >= 0)
-  }
-  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = is.numeric(pdigits))
-  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits > 0)
-  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits < 6)
-  stopifnot("Argument `pzero` must be TRUE or FALSE." = is.logical(pzero))
-  stopifnot("Argument `full` must be TRUE or FALSE." = is.logical(full))
-  stopifnot("Argument `italics` must be TRUE or FALSE." = is.logical(italics))
-  stopifnot("Argument `dfs` must be 'par', 'sub', or 'none'." = dfs %in% c("par", "sub", "none"))
-  stopifnot("Argument `mean` must be 'abbr' or 'word'." = mean %in% c("abbr", "word"))
-  stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
+  check_number_whole(digits, min = 0, allow_null = TRUE)
+  check_number_whole(pdigits, min = 1, max = 5)
+  check_bool(pzero)
+  check_bool(full)
+  check_bool(italics)
+  check_match(dfs, c("par", "sub", "none"))
+  check_match(mean, c("abbr", "word"))
+  check_string(type)
+  check_match(type, c("md", "latex"))
 
   if (grepl("correlation", x$method)) {
     if (is.null(digits)) {
@@ -247,17 +243,13 @@ format_stats.easycorrelation <- function(x,
                                          type = "md",
                                          ...) {
   # Validate arguments
-  if (!is.null(digits)) {
-    stopifnot("Argument `digits` must be a non-negative numeric vector." = is.numeric(digits))
-    stopifnot("Argument `digits` must be a non-negative numeric vector." = digits >= 0)
-  }
-  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = is.numeric(pdigits))
-  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits > 0)
-  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits < 6)
-  stopifnot("Argument `pzero` must be TRUE or FALSE." = is.logical(pzero))
-  stopifnot("Argument `full` must be TRUE or FALSE." = is.logical(full))
-  stopifnot("Argument `italics` must be TRUE or FALSE." = is.logical(italics))
-  stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
+  check_number_whole(digits, min = 0, allow_null = TRUE)
+  check_number_whole(pdigits, min = 1, max = 5)
+  check_bool(pzero)
+  check_bool(full)
+  check_bool(italics)
+  check_string(type)
+  check_match(type, c("md", "latex"))
 
   if ("r" %in% names(x)) {
     method <- "Pearson correlation"
@@ -322,26 +314,19 @@ format_stats.aov <- function(x,
                              digits = 1,
                              pdigits = 3,
                              pzero = FALSE,
-                             # full = TRUE,
                              italics = TRUE,
                              dfs = "par",
-                             # mean = "abbr",
                              type = "md",
                              ...) {
   # Validate arguments
-  if (!is.null(digits)) {
-    stopifnot("Argument `digits` must be a non-negative numeric vector." = is.numeric(digits))
-    stopifnot("Argument `digits` must be a non-negative numeric vector." = digits >= 0)
-  }
-  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = is.numeric(pdigits))
-  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits > 0)
-  stopifnot("Argument `pdigits` must be a numeric between 1 and 5." = pdigits < 6)
-  stopifnot("Argument `pzero` must be TRUE or FALSE." = is.logical(pzero))
-  # stopifnot("Argument `full` must be TRUE or FALSE." = is.logical(full))
-  stopifnot("Argument `italics` must be TRUE or FALSE." = is.logical(italics))
-  stopifnot("Argument `dfs` must be 'par', 'sub', or 'none'." = dfs %in% c("par", "sub", "none"))
-  # stopifnot("Argument `mean` must be 'abbr' or 'word'." = mean %in% c("abbr", "word"))
-  stopifnot("Argument `type` must be 'md' or 'latex'." = type %in% c("md", "latex"))
+  check_character(term)
+  check_number_whole(digits, min = 0, allow_null = TRUE)
+  check_number_whole(pdigits, min = 1, max = 5)
+  check_bool(pzero)
+  check_bool(italics)
+  check_match(dfs, c("par", "sub", "none"))
+  check_string(type)
+  check_match(type, c("md", "latex"))
 
   terms <- attr(x$terms, "term.labels")
   stopifnot("Argument `term` not found in model terms." = term %in% terms)

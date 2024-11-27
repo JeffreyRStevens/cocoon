@@ -78,15 +78,15 @@ format_summary <- function(x = NULL,
                            type = "md") {
   # Check arguments
   if (!is.null(x)) {
-    stopifnot("Argument `x` must be a numeric vector." = is.numeric(x))
-    stopifnot('Specify `tendency` as "mean" or "median".' = tendency %in% c("mean", "median"))
-    stopifnot('Specify `error` as "ci", "sd", "se", or "iqr".' = error %in% c("ci", "sd", "se", "iqr"))
+    check_numeric(x)
+    check_match(tendency, c("mean", "median"))
+    check_match(error, c("ci", "sd", "se", "iqr"))
     xtendency <- dplyr::case_when(
       identical(tendency, "mean") ~ mean(x, na.rm = TRUE),
       identical(tendency, "median") ~ median(x, na.rm = TRUE)
     )
     xn <- sum(!is.na(x))
-    stopifnot("Less than two non-missing values in vector, so no confidence interval can be computed." = xn > 1)
+    stopifnot("Less than two values in vector, so no confidence interval can be computed." = xn > 1)
     xlimit <- 1 - (1 - cilevel) / 2
     xsd <- stats::sd(x, na.rm = TRUE)
     xse <- xsd / sqrt(xn)
@@ -106,7 +106,7 @@ format_summary <- function(x = NULL,
     )
     xinterval <- xtendency - xlower
   } else if (!is.null(values)) {
-    stopifnot("Argument `values` must be a numeric vector." = is.numeric(values))
+    check_numeric(values)
     stopifnot("Argument `values` must be a vector with two or three elements." = length(values) %in% c(2, 3))
     if (length(values) == 2) {
       xtendency <- values[1]
@@ -123,12 +123,11 @@ format_summary <- function(x = NULL,
   } else {
     stop("You must include either the `x` or `values` argument.")
   }
-  stopifnot('Specify `tendlabel` as "abbr", "word", or "none".' = tendlabel %in% c("abbr", "word", "none"))
-  stopifnot("The `units` argument must be a character vector or NULL" = is.character(units) | is.null(units))
-  stopifnot('Specify `display` as "limits", "pm", "par", or "none".' = display %in% c("limits", "pm", "par", "none"))
+  check_match(tendlabel, c("abbr", "word", "none"))
+  check_character(units, allow_null = TRUE)
+  check_match(display, c("limits", "pm", "par", "none"))
 
   # Build mean
-  # subname <- ifelse(!is.null(subscript), subscript, "")
   unit <- dplyr::case_when(
     !is.null(units) ~ paste0(" ", units),
     .default = ""

@@ -1,23 +1,23 @@
 test_that("unavailable format_stats() methods are aborted", {
   suppressMessages(expect_error(
     format_stats(123),
-    "Numerics are not supported by"
+    'Numerics are not supported by'
   ))
   suppressMessages(expect_error(
     format_stats("xxx"),
-    "Character strings are not supported by"
+    'Character strings are not supported by'
   ))
   suppressMessages(expect_error(
     format_stats(df),
-    "Data frames are not supported by"
+    'Data frames are not supported by'
   ))
   suppressMessages(expect_error(
     format_stats(TRUE),
-    "Objects of class"
+    'Objects of class'
   ))
   suppressMessages(expect_error(
     format_stats(test_chisq),
-    "Objects of method"
+    'Objects of method'
   ))
 
 })
@@ -37,39 +37,43 @@ test_that("format_stats() works properly for accepted objects", {
 test_that("htest correlations are validated properly", {
   suppressMessages(expect_error(
     format_stats(test_corr, digits = "xxx"),
-    "Argument `digits` must be a non-negative numeric vector"
+    '`digits` must be a whole number or `NULL`, not the string "xxx"'
   ))
   suppressMessages(expect_error(
     format_stats(test_corr, digits = -1),
-    "Argument `digits` must be a non-negative numeric vector"
+    '`digits` must be a whole number larger than or equal to 0 or `NULL`, not the number -1'
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_corr, digits = 1.5),
+    '`digits` must be a whole number or `NULL`, not the number 1.5'
   ))
   suppressMessages(expect_error(
     format_stats(test_corr, pdigits = "xxx"),
-    "Argument `pdigits` must be a numeric between 1 and 5"
+    '`pdigits` must be a whole number, not the string "xxx"'
   ))
   suppressMessages(expect_error(
     format_stats(test_corr, pdigits = 0),
-    "Argument `pdigits` must be a numeric between 1 and 5"
+    '`pdigits` must be a whole number between 1 and 5, not the number 0'
   ))
   suppressMessages(expect_error(
     format_stats(test_corr, pdigits = 7),
-    "Argument `pdigits` must be a numeric between 1 and 5"
+    '`pdigits` must be a whole number between 1 and 5, not the number 7'
   ))
   suppressMessages(expect_error(
     format_stats(test_corr, pzero = "xxx"),
-    "Argument `pzero` must be TRUE or FALSE"
+    '`pzero` must be `TRUE` or `FALSE`, not the string "xxx"'
   ))
   suppressMessages(expect_error(
     format_stats(test_corr, full = "xxx"),
-    "Argument `full` must be TRUE or FALSE"
+    '`full` must be `TRUE` or `FALSE`, not the string "xxx"'
   ))
   suppressMessages(expect_error(
     format_stats(test_corr, italics = "xxx"),
-    "Argument `italics` must be TRUE or FALSE"
+    '`italics` must be `TRUE` or `FALSE`, not the string "xxx"'
   ))
   suppressMessages(expect_error(
     format_stats(test_corr, type = "xxx"),
-    "Argument `type` must be 'md' or 'latex'"
+    '`type` must be "md" or "latex", not the string "xxx"'
   ))
 })
 
@@ -77,39 +81,43 @@ test_that("htest correlations are validated properly", {
 test_that("correlation correlations are validated properly", {
   suppressMessages(expect_error(
     format_stats(test_easycorr, digits = "xxx"),
-    "Argument `digits` must be a non-negative numeric vector"
+    '`digits` must be a whole number or `NULL`, not the string "xxx"'
   ))
   suppressMessages(expect_error(
     format_stats(test_easycorr, digits = -1),
-    "Argument `digits` must be a non-negative numeric vector"
+    '`digits` must be a whole number larger than or equal to 0 or `NULL`, not the number -1'
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_easycorr, digits = 1.5),
+    '`digits` must be a whole number or `NULL`, not the number 1.5'
   ))
   suppressMessages(expect_error(
     format_stats(test_easycorr, pdigits = "xxx"),
-    "Argument `pdigits` must be a numeric between 1 and 5"
+    '`pdigits` must be a whole number, not the string "xxx"'
   ))
   suppressMessages(expect_error(
     format_stats(test_easycorr, pdigits = 0),
-    "Argument `pdigits` must be a numeric between 1 and 5"
+    '`pdigits` must be a whole number between 1 and 5, not the number 0'
   ))
   suppressMessages(expect_error(
     format_stats(test_easycorr, pdigits = 7),
-    "Argument `pdigits` must be a numeric between 1 and 5"
+    '`pdigits` must be a whole number between 1 and 5, not the number 7'
   ))
   suppressMessages(expect_error(
     format_stats(test_easycorr, pzero = "xxx"),
-    "Argument `pzero` must be TRUE or FALSE"
+    '`pzero` must be `TRUE` or `FALSE`, not the string "xxx"'
   ))
   suppressMessages(expect_error(
     format_stats(test_easycorr, full = "xxx"),
-    "Argument `full` must be TRUE or FALSE"
+    '`full` must be `TRUE` or `FALSE`, not the string "xxx"'
   ))
   suppressMessages(expect_error(
     format_stats(test_easycorr, italics = "xxx"),
-    "Argument `italics` must be TRUE or FALSE"
+    '`italics` must be `TRUE` or `FALSE`, not the string "xxx"'
   ))
   suppressMessages(expect_error(
     format_stats(test_easycorr, type = "xxx"),
-    "Argument `type` must be 'md' or 'latex'"
+    '`type` must be "md" or "latex", not the string "xxx"'
   ))
 })
 
@@ -132,47 +140,51 @@ test_that("formatting correlations works properly", {
 test_that("htest t-tests are validated properly", {
   suppressMessages(expect_error(
     format_stats(test_ttest, digits = "xxx"),
-    "Argument `digits` must be a non-negative numeric vector"
+    '`digits` must be a whole number or `NULL`, not the string "xxx"'
   ))
   suppressMessages(expect_error(
     format_stats(test_ttest, digits = -1),
-    "Argument `digits` must be a non-negative numeric vector"
+    '`digits` must be a whole number larger than or equal to 0 or `NULL`, not the number -1'
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_ttest, digits = 1.5),
+    '`digits` must be a whole number or `NULL`, not the number 1.5'
   ))
   suppressMessages(expect_error(
     format_stats(test_ttest, pdigits = "xxx"),
-    "Argument `pdigits` must be a numeric between 1 and 5"
+    '`pdigits` must be a whole number, not the string "xxx"'
   ))
   suppressMessages(expect_error(
     format_stats(test_ttest, pdigits = 0),
-    "Argument `pdigits` must be a numeric between 1 and 5"
+    '`pdigits` must be a whole number between 1 and 5, not the number 0'
   ))
   suppressMessages(expect_error(
     format_stats(test_ttest, pdigits = 7),
-    "Argument `pdigits` must be a numeric between 1 and 5"
+    '`pdigits` must be a whole number between 1 and 5, not the number 7'
   ))
   suppressMessages(expect_error(
     format_stats(test_ttest, pzero = "xxx"),
-    "Argument `pzero` must be TRUE or FALSE"
+    '`pzero` must be `TRUE` or `FALSE`, not the string "xxx"'
   ))
   suppressMessages(expect_error(
     format_stats(test_ttest, full = "xxx"),
-    "Argument `full` must be TRUE or FALSE"
+    '`full` must be `TRUE` or `FALSE`, not the string "xxx"'
   ))
   suppressMessages(expect_error(
     format_stats(test_ttest, italics = "xxx"),
-    "Argument `italics` must be TRUE or FALSE"
+    '`italics` must be `TRUE` or `FALSE`, not the string "xxx"'
   ))
   suppressMessages(expect_error(
     format_stats(test_ttest, dfs = "xxx"),
-    "Argument `dfs` must be 'par', 'sub', or 'none'"
+    '`dfs` must be "par", "sub", or "none", not the string "xxx"'
   ))
   suppressMessages(expect_error(
     format_stats(test_ttest, mean = "xxx"),
-    "Argument `mean` must be 'abbr' or 'word'"
+    '`mean` must be "abbr" or "word", not the string "xxx"'
   ))
   suppressMessages(expect_error(
     format_stats(test_ttest, type = "xxx"),
-    "Argument `type` must be 'md' or 'latex'"
+    '`type` must be "md" or "latex", not the string "xxx"'
   ))
 })
 
@@ -199,41 +211,52 @@ test_that("formatting t-tests works properly", {
 
 test_that("aov ANOVAs are validated properly", {
   suppressMessages(expect_error(
-    format_stats(test_aov, digits = "xxx"),
-    "Argument `digits` must be a non-negative numeric vector"
+    format_stats(test_aov),
+    '`term` must be a character vector, not absent'
   ))
   suppressMessages(expect_error(
-    format_stats(test_aov, digits = -1),
-    "Argument `digits` must be a non-negative numeric vector"
+    format_stats(test_aov, term = "c", digits = "xxx"),
+    '`digits` must be a whole number or `NULL`, not the string "xxx"'
   ))
   suppressMessages(expect_error(
-    format_stats(test_aov, pdigits = "xxx"),
-    "Argument `pdigits` must be a numeric between 1 and 5"
+    format_stats(test_aov, term = "c", digits = -1),
+    '`digits` must be a whole number larger than or equal to 0 or `NULL`, not the number -1'
   ))
   suppressMessages(expect_error(
-    format_stats(test_aov, pdigits = 0),
-    "Argument `pdigits` must be a numeric between 1 and 5"
+    format_stats(test_aov, term = "c", digits = 1.5),
+    '`digits` must be a whole number or `NULL`, not the number 1.5'
   ))
   suppressMessages(expect_error(
-    format_stats(test_aov, pdigits = 7),
-    "Argument `pdigits` must be a numeric between 1 and 5"
+    format_stats(test_aov, term = "c", pdigits = "xxx"),
+    '`pdigits` must be a whole number, not the string "xxx"'
   ))
   suppressMessages(expect_error(
-    format_stats(test_aov, pzero = "xxx"),
-    "Argument `pzero` must be TRUE or FALSE"
+    format_stats(test_aov, term = "c", pdigits = 0),
+    '`pdigits` must be a whole number between 1 and 5, not the number 0'
   ))
   suppressMessages(expect_error(
-    format_stats(test_aov, italics = "xxx"),
-    "Argument `italics` must be TRUE or FALSE"
+    format_stats(test_aov, term = "c", pdigits = 7),
+    '`pdigits` must be a whole number between 1 and 5, not the number 7'
   ))
   suppressMessages(expect_error(
-    format_stats(test_aov, dfs = "xxx"),
-    "Argument `dfs` must be 'par', 'sub', or 'none'"
+    format_stats(test_aov, term = "c", pzero = "xxx"),
+    '`pzero` must be `TRUE` or `FALSE`, not the string "xxx"'
   ))
   suppressMessages(expect_error(
-    format_stats(test_aov, type = "xxx"),
-    "Argument `type` must be 'md' or 'latex'"
+    format_stats(test_aov, term = "c", italics = "xxx"),
+    '`italics` must be `TRUE` or `FALSE`, not the string "xxx"'
   ))
+  suppressMessages(expect_error(
+    format_stats(test_aov, term = "c", dfs = "xxx"),
+    '`dfs` must be "par", "sub", or "none", not the string "xxx"'
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_aov, term = "c", type = "xxx"),
+    '`type` must be "md" or "latex", not the string "xxx"'
+  ))
+
+
+
 })
 
 
@@ -253,35 +276,35 @@ test_that("formatting ANOVAs works properly", {
 test_that("format_stats.BFBayesFactor() validates arguments properly", {
   suppressMessages(expect_error(
     format_stats(test_bf, digits1 = "xxx"),
-    "Argument `digits1` must be a non-negative numeric vector"
+    '`digits1` must be a whole number or `NULL`, not the string "xxx"'
   ))
   suppressMessages(expect_error(
     format_stats(test_bf, digits1 = -1),
-    "Argument `digits1` must be a non-negative numeric vector"
+    '`digits1` must be a whole number larger than or equal to 0 or `NULL`, not the number -1'
   ))
   suppressMessages(expect_error(
     format_stats(test_bf, digits2 = "xxx"),
-    "Argument `digits2` must be a non-negative numeric vector"
+    '`digits2` must be a whole number or `NULL`, not the string "xxx"'
   ))
   suppressMessages(expect_error(
     format_stats(test_bf, digits2 = -1),
-    "Argument `digits2` must be a non-negative numeric vector"
+    '`digits2` must be a whole number larger than or equal to 0 or `NULL`, not the number -1'
   ))
   suppressMessages(expect_error(
     format_stats(test_bf, cutoff = 0.5),
-    "Argument `cutoff` must be a numeric vector greater than 1 or NULL"
+    '`cutoff` must be a number larger than or equal to 1 or `NULL`, not the number 0.5'
   ))
   suppressMessages(expect_error(
     format_stats(test_bf, cutoff = "xxx"),
-    "Argument `cutoff` must be a numeric vector greater than 1 or NULL"
+    '`cutoff` must be a number or `NULL`, not the string "xxx"'
   ))
   suppressMessages(expect_error(
     format_stats(test_bf, italics = "xxx"),
-    "Argument `italics` must be TRUE or FALSE"
+    '`italics` must be `TRUE` or `FALSE`, not the string "xxx"'
   ))
   suppressMessages(expect_error(
     format_stats(test_bf, type = "xxx"),
-    "Argument `type` must be 'md' or 'latex'"
+    '`type` must be "md" or "latex", not the string "xxx"'
   ))
 })
 
