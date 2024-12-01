@@ -8,12 +8,6 @@ template:
     fg: "#f8f9fa"
 
 reference:
-- title: Format numbers/characters
-  contents:
-  - format_num
-  - format_scientific
-  - format_chr
-  - format_sub
 - title: Format statistical objects
   contents:
   - format_stats
@@ -21,6 +15,7 @@ reference:
   - format_stats.BFBayesFactor
   - format_stats.easycorrelation
   - format_stats.htest
+  - format_stats.lm
 - title: Format statistical values
   contents:
   - format_summary
@@ -28,6 +23,12 @@ reference:
   - format_bf
   - format_corr
   - format_ttest
+- title: Format numbers/characters
+  contents:
+  - format_num
+  - format_scientific
+  - format_chr
+  - format_sub
 
 authors:
   Jeffrey R. Stevens:

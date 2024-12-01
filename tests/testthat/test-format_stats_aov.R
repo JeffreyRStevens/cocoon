@@ -5,6 +5,10 @@ test_that("aov ANOVAs are validated properly", {
     '`term` must be a character vector, not absent'
   ))
   suppressMessages(expect_error(
+    format_stats(test_aov, term = "d"),
+    'Argument `term` not found in model terms'
+  ))
+  suppressMessages(expect_error(
     format_stats(test_aov, term = "c", digits = "xxx"),
     '`digits` must be a whole number or `NULL`, not the string "xxx"'
   ))
