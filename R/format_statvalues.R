@@ -61,14 +61,16 @@ format_corr <- function(x,
 
   # Build label
   stat_label <- dplyr::case_when(
-    !italics & identical(corr_method, "pearson") ~ paste0("r"),
-    !italics & identical(corr_method, "spearman") & identical(type, "md") ~ paste0("\u03C1"),
-    !italics & identical(corr_method, "spearman") & identical(type, "latex") ~ paste0("\\rho"),
-    !italics & identical(corr_method, "kendall") & identical(type, "md") ~ paste0("\u03C4"),
-    !italics & identical(corr_method, "kendall") & identical(type, "latex") ~ paste0("\\tau"),
-    identical(corr_method, "pearson") ~ paste0(format_chr("r", italics = italics, type = type)),
-    identical(corr_method, "kendall") ~ paste0(format_chr("\u03C4", italics = italics, type = type)),
-    identical(corr_method, "spearman") ~ paste0(format_chr("\u03C1", italics = italics, type = type)),
+    !italics & identical(corr_method, "pearson") ~ "r",
+    !italics & identical(corr_method, "spearman") & identical(type, "md") ~ "\u03C1",
+    !italics & identical(corr_method, "spearman") & identical(type, "latex") ~ "\\textrho",
+    !italics & identical(corr_method, "kendall") & identical(type, "md") ~ "\u03C4",
+    !italics & identical(corr_method, "kendall") & identical(type, "latex") ~ "\\texttau",
+    identical(corr_method, "pearson") ~ format_chr("r", italics = italics, type = type),
+    identical(corr_method, "kendall") & identical(type, "md") ~ format_chr("\u03C4", italics = italics, type = type),
+    identical(corr_method, "kendall") & identical(type, "latex") ~ format_chr("\\rho", italics = italics, type = type),
+    identical(corr_method, "spearman") & identical(type, "md") ~ format_chr("\u03C1", italics = italics, type = type),
+    identical(corr_method, "spearman") & identical(type, "latex") ~ format_chr("\\tau", italics = italics, type = type)
   )
 
   # Create statistics string
