@@ -260,23 +260,3 @@ format_medianiqr <- function(x = NULL,
                              type = "md") {
   format_summary(x = x, tendency = tendency, error = error, values = values, digits = digits, tendlabel = tendlabel, italics = italics, subscript = subscript, units = units, display = display, errorlabel = errorlabel, type = type)
 }
-
-
-#' @keywords internal
-build_string <- function(mean_label = NULL,
-                         mean_value = NULL,
-                         cis = NULL,
-                         stat_label,
-                         stat_value,
-                         pvalue,
-                         full) {
-  dplyr::case_when(full & !is.null(mean_label) & !is.null(mean_value) & !is.null(cis) ~
-                     paste0(mean_label, mean_value, ", 95% CI [", cis[1], ", ", cis[2], "], ", stat_label, " = ", stat_value, ", ", pvalue),
-                   full & is.null(mean_label) & is.null(mean_value) & !is.null(cis) ~
-                     paste0(stat_label, " = ", stat_value, ", 95% CI [", cis[1], ", ", cis[2], "], ", pvalue),
-                   !full | (is.null(mean_label) & !is.null(mean_value) & !is.null(cis)) ~
-                     paste0(stat_label, " = ", stat_value, ", ", pvalue))
-}
-
-
-
