@@ -379,6 +379,158 @@ of freedom as parenthetical (<code>par</code>) or subscripts
 </table>
 </div>
 <div class="section level3">
+<h3 id="linear-models">Linear models<a class="anchor" aria-label="anchor" href="#linear-models"></a>
+</h3>
+<p>The <code><a href="../reference/format_stats.html">format_stats()</a></code> function can also input objects
+returned by the <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code> and <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> functions. It
+can report overall model statistics (e.g., R-squared, AIC) and
+term-specific statistics (e.g., coefficients, p-values).</p>
+<p>Let’s start by creating a linear model and generalized linear
+model:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">lm_mpg_cyl_hp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span> <span class="op">*</span> <span class="va">hp</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lm_mpg_cyl_hp</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; lm(formula = mpg ~ cyl * hp, data = mtcars)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Residuals:</span></span>
+<span><span class="co">#&gt;    Min     1Q Median     3Q    Max </span></span>
+<span><span class="co">#&gt; -4.778 -1.969 -0.228  1.403  6.491 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Coefficients:</span></span>
+<span><span class="co">#&gt;              Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span><span class="co">#&gt; (Intercept) 50.751207   6.511686   7.794 1.72e-08 ***</span></span>
+<span><span class="co">#&gt; cyl         -4.119140   0.988229  -4.168 0.000267 ***</span></span>
+<span><span class="co">#&gt; hp          -0.170680   0.069102  -2.470 0.019870 *  </span></span>
+<span><span class="co">#&gt; cyl:hp       0.019737   0.008811   2.240 0.033202 *  </span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Residual standard error: 2.974 on 28 degrees of freedom</span></span>
+<span><span class="co">#&gt; Multiple R-squared:  0.7801, Adjusted R-squared:  0.7566 </span></span>
+<span><span class="co">#&gt; F-statistic: 33.11 on 3 and 28 DF,  p-value: 2.386e-09</span></span>
+<span><span class="va">glm_am_cyl_hp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">am</span> <span class="op">~</span> <span class="va">cyl</span> <span class="op">*</span> <span class="va">hp</span>, data <span class="op">=</span> <span class="va">mtcars</span>, family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">glm_am_cyl_hp</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Call:</span></span>
+<span><span class="co">#&gt; glm(formula = am ~ cyl * hp, family = binomial, data = mtcars)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Coefficients:</span></span>
+<span><span class="co">#&gt;               Estimate Std. Error z value Pr(&gt;|z|)  </span></span>
+<span><span class="co">#&gt; (Intercept)  6.1841091  4.8991403   1.262   0.2068  </span></span>
+<span><span class="co">#&gt; cyl         -1.7492046  0.8392287  -2.084   0.0371 *</span></span>
+<span><span class="co">#&gt; hp           0.0236170  0.0537369   0.439   0.6603  </span></span>
+<span><span class="co">#&gt; cyl:hp       0.0005349  0.0067365   0.079   0.9367  </span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; (Dispersion parameter for binomial family taken to be 1)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     Null deviance: 43.230  on 31  degrees of freedom</span></span>
+<span><span class="co">#&gt; Residual deviance: 28.619  on 28  degrees of freedom</span></span>
+<span><span class="co">#&gt; AIC: 36.619</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Number of Fisher Scoring iterations: 5</span></span></code></pre></div>
+<p>To extract overall model statistics from <code><a href="../reference/format_stats.html">format_stats()</a></code>,
+pass the <code>lm</code> or <code>glm</code> object but omit any
+terms.</p>
+<table class="table">
+<colgroup>
+<col width="55%">
+<col width="44%">
+</colgroup>
+<thead><tr class="header">
+<th>Code</th>
+<th>Output</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>format_stats(lm_mpg_cyl_hp)</code></td>
+<td>
+<em>R</em><sup>2</sup> = 0.757, <em>F</em>(3, 28) = 33.113,
+<em>p</em> &lt; .001</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(lm_mpg_cyl_hp, full = FALSE)</code></td>
+<td>
+<em>R</em><sup>2</sup> = 0.757, <em>p</em> &lt; .001</td>
+</tr>
+<tr class="odd">
+<td><code>format_stats(glm_am_cyl_hp)</code></td>
+<td>Deviance = 28.619, <em>χ</em><sup>2</sup> = 14.611, AIC =
+36.619</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(glm_am_cyl_hp, full = FALSE)</code></td>
+<td>Deviance = 28.619, AIC = 36.619</td>
+</tr>
+</tbody>
+</table>
+<p>To extract term-specific statistics, pass the object and a character
+string describing which term to extract. Apply <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> to
+your <code>aov</code> object and copy the text of the term you want to
+extract. Then you can format the number of digits of coefficients with
+<code>digits</code> and digits of p-values with <code>pdigits</code>.
+Include the leading zeros for coefficients and p-values with
+<code>pzero = TRUE</code>. Remove italics with
+<code>italics = FALSE</code>. With <code>dfs</code>, format degrees of
+freedom as parenthetical (<code>par</code>) or subscripts
+(<code>sub</code>) or remove them (<code>none</code>).</p>
+<table class="table">
+<colgroup>
+<col width="58%">
+<col width="41%">
+</colgroup>
+<thead><tr class="header">
+<th>Code</th>
+<th>Output</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>format_stats(lm_mpg_cyl_hp, term = "cyl")</code></td>
+<td>
+<em>β</em> = -4.119, SE = 0.988, <em>t</em> = -4.168, <em>p</em>
+&lt; .001</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(lm_mpg_cyl_hp, term = "cyl:hp")</code></td>
+<td>
+<em>β</em> = 0.020, SE = 0.009, <em>t</em> = 2.240, <em>p</em> =
+.033</td>
+</tr>
+<tr class="odd">
+<td><code>format_stats(glm_am_cyl_hp, term = "cyl")</code></td>
+<td>
+<em>β</em> = -1.749, SE = 0.839, <em>z</em> = -2.084, <em>p</em> =
+.037</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(lm_mpg_cyl_hp, term = "cyl", digits = 2, pdigits = 2)</code></td>
+<td>
+<em>β</em> = -4.12, SE = 0.99, <em>t</em> = -4.17, <em>p</em> &lt;
+.01</td>
+</tr>
+<tr class="odd">
+<td><code>format_stats(lm_mpg_cyl_hp, term = "cyl", pzero = TRUE)</code></td>
+<td>
+<em>β</em> = -4.119, SE = 0.988, <em>t</em> = -4.168, <em>p</em>
+&lt; 0.001</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(lm_mpg_cyl_hp, term = "cyl", italics = FALSE)</code></td>
+<td>β = -4.119, SE = 0.988, t = -4.168, p &lt; .001</td>
+</tr>
+<tr class="odd">
+<td><code>format_stats(lm_mpg_cyl_hp, term = "cyl", dfs = "sub")</code></td>
+<td>
+<em>β</em> = -4.119, SE = 0.988, <em>t</em> = -4.168, <em>p</em>
+&lt; .001</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level3">
 <h3 id="bayes-factors">Bayes factors<a class="anchor" aria-label="anchor" href="#bayes-factors"></a>
 </h3>
 <p>The <code><a href="../reference/format_stats.html">format_stats()</a></code> function can also extract and format
@@ -396,7 +548,7 @@ two arguments. Further, Bayes factors can be very large or very small
 when evidence strongly favors one hypothesis over another. Therefore,
 the <code>cutoff</code> argument set a threshold above which (or below
 1/cutoff) the returned value is truncated (e.g., BF &gt; 1000).</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bf_corr</span> <span class="op">&lt;-</span> <span class="fu">BayesFactor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BayesFactor/man/correlationBF.html" class="external-link">correlationBF</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">disp</span><span class="op">)</span></span>
 <span><span class="va">bf_ttest</span> <span class="op">&lt;-</span> <span class="fu">BayesFactor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BayesFactor/man/ttestBF.html" class="external-link">ttestBF</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">vs</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">am</span><span class="op">)</span></span>
 <span><span class="va">bf_lm</span> <span class="op">&lt;-</span> <span class="fu">BayesFactor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BayesFactor/man/lmBF.html" class="external-link">lmBF</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">am</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span></code></pre></div>
