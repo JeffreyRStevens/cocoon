@@ -16,6 +16,7 @@ reference:
   - format_stats.easycorrelation
   - format_stats.htest
   - format_stats.lm
+  - format_stats.merMod
 - title: Format statistical values
   contents:
   - format_summary

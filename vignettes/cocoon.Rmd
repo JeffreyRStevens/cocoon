@@ -130,15 +130,19 @@ To use `format_stats()` on ANOVAs, you must pass the `aov` object and a characte
 
 ### Linear models
 
-The `format_stats()` function can also input objects returned by the `lm()` and `glm()` functions. It can report overall model statistics (e.g., R-squared, AIC) and term-specific statistics (e.g., coefficients, p-values).
+The `format_stats()` function can also input objects returned by the `lm()`, `glm()`, `lme4::lmer()`, and `lme4::glmer()` functions. It can report overall model statistics (e.g., R-squared, AIC) for `lm()` and `glm()` and term-specific statistics (e.g., coefficients, p-values) for all models.
 
-Let's start by creating a linear model and generalized linear model:
+Let's start by creating some models:
 
 ```{r}
 lm_mpg_cyl_hp <- lm(mpg ~ cyl * hp, data = mtcars)
 summary(lm_mpg_cyl_hp)
 glm_am_cyl_hp <- glm(am ~ cyl * hp, data = mtcars, family = binomial)
 summary(glm_am_cyl_hp)
+lmer_mpg_cyl_hp <- lme4::lmer(mpg ~ hp + (1 | cyl), data = mtcars)
+summary(lmer_mpg_cyl_hp)
+glmer_am_cyl_hp <- lme4::glmer(am ~ hp + (1 | cyl), data = mtcars, family = binomial)
+summary(glmer_am_cyl_hp)
 ```
 
 To extract overall model statistics from `format_stats()`, pass the `lm` or `glm` object but omit any terms. 
@@ -151,13 +155,15 @@ To extract overall model statistics from `format_stats()`, pass the `lm` or `glm
 | `format_stats(glm_am_cyl_hp, full = FALSE)` | `r format_stats(glm_am_cyl_hp, full = FALSE)` |
 
 
-To extract term-specific statistics, pass the object and a character string describing which term to extract. Apply `summary()` to your `aov` object and copy the text of the term you want to extract. Then you can format the number of digits of coefficients with `digits` and digits of p-values with `pdigits`. Include the leading zeros for coefficients and p-values with `pzero = TRUE`. Remove italics with  `italics = FALSE`. With `dfs`, format degrees of freedom as parenthetical (`par`) or subscripts (`sub`) or remove them (`none`).
+To extract term-specific statistics, pass the object and a character string describing which term to extract. Apply `summary()` to your `lm`, `glm`, `lmer`, or `glmer` object and copy the text of the term you want to extract. Then you can format the number of digits of coefficients with `digits` and digits of p-values with `pdigits`. Include the leading zeros for coefficients and p-values with `pzero = TRUE`. Remove italics with  `italics = FALSE`. With `dfs`, format degrees of freedom as parenthetical (`par`) or subscripts (`sub`) or remove them (`none`).
 
 | Code | Output |
 |----------|-------|
 | `format_stats(lm_mpg_cyl_hp, term = "cyl")` | `r format_stats(lm_mpg_cyl_hp, term = "cyl")` |
 | `format_stats(lm_mpg_cyl_hp, term = "cyl:hp")` | `r format_stats(lm_mpg_cyl_hp, term = "cyl:hp")` |
 | `format_stats(glm_am_cyl_hp, term = "cyl")` | `r format_stats(glm_am_cyl_hp, term = "cyl")` |
+| `format_stats(lmer_mpg_cyl_hp, term = "hp")` | `r format_stats(lmer_mpg_cyl_hp, term = "hp")` |
+| `format_stats(glmer_am_cyl_hp, term = "hp")` | `r format_stats(glmer_am_cyl_hp, term = "hp")` |
 | `format_stats(lm_mpg_cyl_hp, term = "cyl", digits = 2, pdigits = 2)` | `r format_stats(lm_mpg_cyl_hp, term = "cyl", digits = 2, pdigits = 2)` |
 | `format_stats(lm_mpg_cyl_hp, term = "cyl", pzero = TRUE)` | `r format_stats(lm_mpg_cyl_hp, term = "cyl", pzero = TRUE)` |
 | `format_stats(lm_mpg_cyl_hp, term = "cyl", italics = FALSE)` | `r format_stats(lm_mpg_cyl_hp, term = "cyl", italics = FALSE)` |
