@@ -1,9 +1,9 @@
 #' Format numbers
 #'
-#' @param x Number
-#' @param digits Number of digits after the decimal
+#' @param x Number.
+#' @param digits Number of digits after the decimal.
 #' @param pzero Logical value (default = TRUE) for whether to include leading
-#' zero numbers less than 1
+#' zero numbers less than 1.
 #'
 #' @return
 #' A character string formatting the number with specified number of digits
@@ -30,9 +30,9 @@ format_num <- function(x,
 
 #' Format numbers in scientific notation
 #'
-#' @param x Number
-#' @param digits Number of digits after the decimal
-#' @param type Type of formatting ("md" = markdown, "latex" = LaTeX)
+#' @param x Number.
+#' @param digits Number of digits after the decimal.
+#' @param type Type of formatting ("md" = markdown, "latex" = LaTeX).
 #'
 #' @return
 #' A character string of a number in scientific notation formatted in Markdown
@@ -69,10 +69,10 @@ format_scientific <- function(x,
 
 #' Format character strings with italics and type
 #'
-#' @param x Character string
+#' @param x Character string.
 #' @param italics Logical value (default = TRUE) for whether text should be
-#' italicized
-#' @param type Type of formatting (`"md"` = markdown, `"latex"` = LaTeX)
+#' italicized.
+#' @param type Type of formatting (`"md"` = markdown, `"latex"` = LaTeX).
 #'
 #' @return
 #' A character string that has either Markdown or LaTeX formatting for italics
@@ -102,8 +102,8 @@ format_chr <- function(x,
 
 #' Format subscript text
 #'
-#' @param subscript Character string or NULL
-#' @param type Type of formatting (`"md"` = markdown, `"latex"` = LaTeX)
+#' @param subscript Character string or NULL.
+#' @param type Type of formatting (`"md"` = markdown, `"latex"` = LaTeX).
 #'
 #' @return
 #' A character string that is formatted as subscript for either Markdown or

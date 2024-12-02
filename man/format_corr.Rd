@@ -8,24 +8,24 @@
 format_corr(x, digits, pdigits, pzero, full, italics, type, ...)
 }
 \arguments{
-\item{x}{An \code{htest} object}
+\item{x}{An \code{htest} object from \code{\link[=cor.test]{cor.test()}}, \code{\link[=t.test]{t.test()}}, or \code{\link[=wilcox.test]{wilcox.test()}}.}
 
 \item{digits}{Number of digits after the decimal for means, confidence
-intervals, and test statistics}
+intervals, and test statistics.}
 
 \item{pdigits}{Number of digits after the decimal for p-values, ranging
-between 1-5 (also controls cutoff for small p-values)}
+between 1-5 (also controls cutoff for small p-values).}
 
 \item{pzero}{Logical value (default = FALSE) for whether to include
-leading zero for p-values}
+leading zero for p-values.}
 
 \item{full}{Logical value (default = TRUE) for whether to include means
-and confidence intervals or just test statistic and p-value}
+and confidence intervals or just test statistic and p-value.}
 
 \item{italics}{Logical value (default = TRUE) for whether \emph{p} label should be
-italicized}
+italicized.}
 
-\item{type}{Type of formatting ("md" = markdown, "latex" = LaTeX)}
+\item{type}{Type of formatting ("md" = markdown, "latex" = LaTeX).}
 
 \item{...}{Additional arguments passed to methods.}
 }
@@ -52,6 +52,7 @@ Other functions for printing statistical objects:
 \code{\link{format_stats.easycorrelation}()},
 \code{\link{format_stats.htest}()},
 \code{\link{format_stats.lm}()},
+\code{\link{format_stats.merMod}()},
 \code{\link{format_ttest}()}
 }
 \concept{functions for printing statistical objects}

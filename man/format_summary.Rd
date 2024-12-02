@@ -114,41 +114,41 @@ format_medianiqr(
 )
 }
 \arguments{
-\item{x}{Numeric vector of data to calculate mean and error}
+\item{x}{Numeric vector of data to calculate mean and error.}
 
 \item{tendency}{Character vector specifying measure of central
-tendency ("mean" = mean, "median" = median)}
+tendency ("mean" = mean, "median" = median).}
 
 \item{error}{Character vector specifying error type ("ci" = confidence
 interval, "se" = standard error of the mean, "sd" = standard deviation, "iqr"
-= interquartile range)}
+= interquartile range).}
 
 \item{values}{Numeric vector of mean and interval or mean and lower and upper
-limits}
+limits.}
 
-\item{digits}{Number of digits after the decimal for means and error}
+\item{digits}{Number of digits after the decimal for means and error.}
 
 \item{tendlabel}{Formatting for tendency label ("abbr" = M, "word" = Mean,
-"none" = no label)}
+"none" = no label).}
 
 \item{italics}{Logical value (default = TRUE) for whether mean label should
-be italicized}
+be italicized.}
 
-\item{subscript}{Character string to include as subscript with mean label}
+\item{subscript}{Character string to include as subscript with mean label.}
 
-\item{units}{Character string that gives units to include after mean value}
+\item{units}{Character string that gives units to include after mean value.}
 
 \item{display}{Character vector specifying how to display error ("limits" =
 [lower limit, upper limit], "pm" = ±interval, "par" = (interval), "none" =
-do not display error)}
+do not display error).}
 
 \item{cilevel}{Numeric scalar from 0-1 defining confidence level
-(defaults to 0.95)}
+(defaults to 0.95).}
 
-\item{errorlabel}{Logical value (default = TRUE) for whether error label (e.g., 95\% CI) should be
-included}
+\item{errorlabel}{Logical value (default = TRUE) for whether error label
+(e.g., 95\% CI) should be included.}
 
-\item{type}{Type of formatting ("md" = markdown, "latex" = LaTeX)}
+\item{type}{Type of formatting ("md" = markdown, "latex" = LaTeX).}
 }
 \value{
 A character string of mean and error formatted in Markdown or LaTeX.

@@ -16,8 +16,11 @@
 #' @param x Statistical object.
 #' @param ... Additional arguments passed to methods. For method-specific
 #' arguments, see [format_stats.htest()] for htest correlations, t-tests,
-#' and Wilcoxon tests and [format_stats.BFBayesFactor()] for Bayes factors from
-#' the \{[BayesFactor](https://cran.r-project.org/package=BayesFactor)\} package.
+#' and Wilcoxon tests, [format_stats.easycorrelation()] for easycorrelation
+#' correlations, [format_stats.lm()] for linear models,
+#' [format_stats.merMod()] for linear mixedmodels, and
+#' [format_stats.BFBayesFactor()] for Bayes factors from the
+#' \{[BayesFactor](https://cran.r-project.org/package=BayesFactor)\} package.
 #'
 #' @return
 #' A character string of statistical information formatted in Markdown or LaTeX.
@@ -34,6 +37,17 @@
 #'
 #' # Format t.test() object
 #' format_stats(t.test(mtcars$vs, mtcars$am))
+#'
+#' # Format aov() object
+#' format_stats(aov(mpg ~ cyl * hp, data = mtcars), term = "cyl")
+#'
+#' # Format lm() or glm() object
+#' format_stats(lm(mpg ~ cyl * hp, data = mtcars), term = "cyl")
+#' format_stats(glm(am ~ cyl * hp, data = mtcars, family = binomial), term = "cyl")
+#'
+#' # Format lme4::lmer() or lme4::glmer() object
+#' format_stats(lme4::lmer(mpg ~ hp + (1 | cyl), data = mtcars), term = "hp")
+#' format_stats(lme4::glmer(am ~ hp + (1 | cyl), data = mtcars, family = binomial), term = "hp")
 #'
 #' # Format BFBayesFactor object from {BayesFactor} package
 #' format_stats(BayesFactor::ttestBF(mtcars$vs, mtcars$am))

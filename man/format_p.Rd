@@ -14,22 +14,22 @@ format_p(
 )
 }
 \arguments{
-\item{x}{Number representing p-value}
+\item{x}{Number representing p-value.}
 
 \item{digits}{Number of digits after the decimal for p-values, ranging
-between 1-5 (also controls cutoff for small p-values)}
+between 1-5 (also controls cutoff for small p-values).}
 
 \item{pzero}{Logical value (default = FALSE) for whether to include leading
-zero for p-values}
+zero for p-values.}
 
 \item{label}{Character string for label before p value. Default is p.
 Set \code{label = ""} to return just the formatted p value with no
-label or operator (\code{=}, \code{<}, \code{>})}
+label or operator (\code{=}, \code{<}, \code{>}).}
 
 \item{italics}{Logical value (default = TRUE) for whether label should be
-italicized (\emph{p})}
+italicized (\emph{p}).}
 
-\item{type}{Type of formatting ("md" = markdown, "latex" = LaTeX)}
+\item{type}{Type of formatting ("md" = markdown, "latex" = LaTeX).}
 }
 \value{
 A character string that includes \emph{p} and then the p-value formatted in

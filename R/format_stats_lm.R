@@ -1,8 +1,8 @@
 
-#' Format (generalized) linear regression statistics
+#' Format linear model statistics
 #'
 #' @description
-#' This method formats (generalized) linear regression statistics from the class
+#' This method formats (generalized) linear model statistics from the class
 #' `lm` or `glm`. If no term is specified, overall model statistics are
 #' returned. For linear models (`lm` objects), this includes the R-squared,
 #' F statistic, and p-value. For generalized linear models (`glm` objects),
@@ -11,24 +11,23 @@
 #' control over numbers of digits, leading zeros, italics, degrees of freedom,
 #' and output format of Markdown or LaTeX.
 #'
-#' @param x An `lm` or `glm` object
+#' @param x An `lm` or `glm` object from [stats::lm()] or [stats::glm()].
 #' @param term Character string for row name of term to extract statistics for.
 #' This must be the exact string returned in the `summary()` output from the
-#' `lm` or `glm` object
-#' @param digits Number of digits after the decimal for means, confidence
-#' intervals, and test statistics
+#' `lm` or `glm` object.
+#' @param digits Number of digits after the decimal for test statistics.
 #' @param pdigits Number of digits after the decimal for p-values, ranging
-#' between 1-5 (also controls cutoff for small p-values)
+#' between 1-5 (also controls cutoff for small p-values).
 #' @param pzero Logical value (default = FALSE) for whether to include
-#' leading zero for p-values
+#' leading zero for p-values.
 #' @param full Logical value (default = TRUE) for whether to include extra
 #' info (e.g., standard errors and t-values or z-values for terms)
-#' or just test statistic and p-value
+#' or just test statistic and p-value.
 #' @param italics Logical value (default = TRUE) for whether statistics labels
-#' should be italicized
+#' should be italicized.
 #' @param dfs Formatting for degrees of freedom ("par" = parenthetical,
-#' "sub" = subscript, "none" = do not print degrees of freedom)
-#' @param type Type of formatting ("md" = markdown, "latex" = LaTeX)
+#' "sub" = subscript, "none" = do not print degrees of freedom).
+#' @param type Type of formatting ("md" = markdown, "latex" = LaTeX).
 #' @param ... Additional arguments passed to methods.
 #'
 #' @return
@@ -85,7 +84,7 @@ format_stats.lm <- function(x,
   model_type <- ifelse(inherits(x, "glm"), "glm", "lm")
   summ <- summary(x)
 
-  # Overall statistics for linear regression
+  # Overall statistics for linear model
   if (is.null(term) & model_type == "lm") {
     r2 <- summ$adj.r.squared
     f <- summ$fstatistic
@@ -151,7 +150,7 @@ format_stats.lm <- function(x,
     }
     # Term-specific statistics for linear and generalized linear models
   } else {
-    # For linear regression
+    # For linear model
     if (model_type == "lm") {
       terms <- names(x$coefficients)
       stopifnot("Argument `term` not found in model terms." = term %in% terms)
@@ -162,7 +161,7 @@ format_stats.lm <- function(x,
       z <- summ$coefficients[term_num, "t value"]
       p_value <- summ$coefficients[term_num, "Pr(>|t|)"]
       z_lab <- "t"
-      # For generalized linear regression
+      # For generalized linear model
     } else {
       terms <- rownames(summ$coefficients)
       stopifnot("Argument `term` not found in model terms." = term %in% terms)

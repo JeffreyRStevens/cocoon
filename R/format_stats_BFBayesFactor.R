@@ -10,19 +10,19 @@
 #' cutoffs (e.g., BF > 1000 or BF < 0.001). Numbers of digits, cutoffs,
 #' italics, and label subscripts are all customizable.
 #'
-#' @param x BayesFactor object or vector of numeric Bayes factor values
-#' @param digits1 Number of digits after the decimal for Bayes factors > 1
-#' @param digits2 Number of digits after the decimal for Bayes factors < 1
+#' @param x BayesFactor object or vector of numeric Bayes factor values.
+#' @param digits1 Number of digits after the decimal for Bayes factors > 1.
+#' @param digits2 Number of digits after the decimal for Bayes factors < 1.
 #' @param cutoff Cutoff for using `_BF_~10~ > <cutoff>` or
-#' `_BF_~10~ < 1 / <cutoff>` (value must be > 1)
+#' `_BF_~10~ < 1 / <cutoff>` (value must be > 1).
 #' @param label Character string for label before Bayes factor. Default is BF.
 #' Set `label = ""` to return just the formatted Bayes factor value with no
-#' label or operator (`=`, `<`, `>`)
+#' label or operator (`=`, `<`, `>`).
 #' @param italics Logical value (default = TRUE) for whether label should be
-#' italicized (_BF_ or BF)
+#' italicized (_BF_ or BF).
 #' @param subscript Subscript to include with _BF_ label (`"10"`, `"01"`, or
-#' `""` for no subscript)
-#' @param type Type of formatting (`"md"` = markdown, `"latex"` = LaTeX)
+#' `""` for no subscript).
+#' @param type Type of formatting (`"md"` = markdown, `"latex"` = LaTeX).
 #' @param ... Additional arguments passed to methods.
 #'
 #'
