@@ -382,11 +382,12 @@ of freedom as parenthetical (<code>par</code>) or subscripts
 <h3 id="linear-models">Linear models<a class="anchor" aria-label="anchor" href="#linear-models"></a>
 </h3>
 <p>The <code><a href="../reference/format_stats.html">format_stats()</a></code> function can also input objects
-returned by the <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code> and <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> functions. It
-can report overall model statistics (e.g., R-squared, AIC) and
-term-specific statistics (e.g., coefficients, p-values).</p>
-<p>Let’s start by creating a linear model and generalized linear
-model:</p>
+returned by the <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code>, <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code>,
+<code><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lme4::lmer()</a></code>, and <code><a href="https://rdrr.io/pkg/lme4/man/glmer.html" class="external-link">lme4::glmer()</a></code> functions. It
+can report overall model statistics (e.g., R-squared, AIC) for
+<code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code> and <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> and term-specific statistics
+(e.g., coefficients, p-values) for all models.</p>
+<p>Let’s start by creating some models:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lm_mpg_cyl_hp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span> <span class="op">*</span> <span class="va">hp</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lm_mpg_cyl_hp</span><span class="op">)</span></span>
@@ -431,7 +432,61 @@ model:</p>
 <span><span class="co">#&gt; Residual deviance: 28.619  on 28  degrees of freedom</span></span>
 <span><span class="co">#&gt; AIC: 36.619</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; Number of Fisher Scoring iterations: 5</span></span></code></pre></div>
+<span><span class="co">#&gt; Number of Fisher Scoring iterations: 5</span></span>
+<span><span class="va">lmer_mpg_cyl_hp</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">hp</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">cyl</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lmer_mpg_cyl_hp</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Linear mixed model fit by REML ['lmerMod']</span></span>
+<span><span class="co">#&gt; Formula: mpg ~ hp + (1 | cyl)</span></span>
+<span><span class="co">#&gt;    Data: mtcars</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; REML criterion at convergence: 173.9</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Scaled residuals: </span></span>
+<span><span class="co">#&gt;      Min       1Q   Median       3Q      Max </span></span>
+<span><span class="co">#&gt; -1.57631 -0.66143  0.04006  0.52583  2.20223 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Random effects:</span></span>
+<span><span class="co">#&gt;  Groups   Name        Variance Std.Dev.</span></span>
+<span><span class="co">#&gt;  cyl      (Intercept) 16.184   4.023   </span></span>
+<span><span class="co">#&gt;  Residual              9.917   3.149   </span></span>
+<span><span class="co">#&gt; Number of obs: 32, groups:  cyl, 3</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Fixed effects:</span></span>
+<span><span class="co">#&gt;             Estimate Std. Error t value</span></span>
+<span><span class="co">#&gt; (Intercept) 24.70757    3.13221   7.888</span></span>
+<span><span class="co">#&gt; hp          -0.03047    0.01459  -2.088</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Correlation of Fixed Effects:</span></span>
+<span><span class="co">#&gt;    (Intr)</span></span>
+<span><span class="co">#&gt; hp -0.645</span></span>
+<span><span class="va">glmer_am_cyl_hp</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/glmer.html" class="external-link">glmer</a></span><span class="op">(</span><span class="va">am</span> <span class="op">~</span> <span class="va">hp</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">cyl</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">mtcars</span>, family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">glmer_am_cyl_hp</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Generalized linear mixed model fit by maximum likelihood (Laplace</span></span>
+<span><span class="co">#&gt;   Approximation) [glmerMod]</span></span>
+<span><span class="co">#&gt;  Family: binomial  ( logit )</span></span>
+<span><span class="co">#&gt; Formula: am ~ hp + (1 | cyl)</span></span>
+<span><span class="co">#&gt;    Data: mtcars</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;      AIC      BIC   logLik deviance df.resid </span></span>
+<span><span class="co">#&gt;     44.3     48.7    -19.2     38.3       29 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Scaled residuals: </span></span>
+<span><span class="co">#&gt;     Min      1Q  Median      3Q     Max </span></span>
+<span><span class="co">#&gt; -1.7638 -0.5868 -0.2758  0.6521  1.3884 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Random effects:</span></span>
+<span><span class="co">#&gt;  Groups Name        Variance Std.Dev.</span></span>
+<span><span class="co">#&gt;  cyl    (Intercept) 5.786    2.405   </span></span>
+<span><span class="co">#&gt; Number of obs: 32, groups:  cyl, 3</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Fixed effects:</span></span>
+<span><span class="co">#&gt;             Estimate Std. Error z value Pr(&gt;|z|)</span></span>
+<span><span class="co">#&gt; (Intercept) -3.46102    2.82069  -1.227    0.220</span></span>
+<span><span class="co">#&gt; hp           0.02157    0.01659   1.300    0.194</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Correlation of Fixed Effects:</span></span>
+<span><span class="co">#&gt;    (Intr)</span></span>
+<span><span class="co">#&gt; hp -0.856</span></span></code></pre></div>
 <p>To extract overall model statistics from <code><a href="../reference/format_stats.html">format_stats()</a></code>,
 pass the <code>lm</code> or <code>glm</code> object but omit any
 terms.</p>
@@ -469,7 +524,8 @@ terms.</p>
 </table>
 <p>To extract term-specific statistics, pass the object and a character
 string describing which term to extract. Apply <code><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary()</a></code> to
-your <code>aov</code> object and copy the text of the term you want to
+your <code>lm</code>, <code>glm</code>, <code>lmer</code>, or
+<code>glmer</code> object and copy the text of the term you want to
 extract. Then you can format the number of digits of coefficients with
 <code>digits</code> and digits of p-values with <code>pdigits</code>.
 Include the leading zeros for coefficients and p-values with
@@ -504,6 +560,17 @@ freedom as parenthetical (<code>par</code>) or subscripts
 <td>
 <em>β</em> = -1.749, SE = 0.839, <em>z</em> = -2.084, <em>p</em> =
 .037</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(lmer_mpg_cyl_hp, term = "hp")</code></td>
+<td>
+<em>β</em> = -0.030, SE = 0.015, <em>t</em> = -2.088</td>
+</tr>
+<tr class="odd">
+<td><code>format_stats(glmer_am_cyl_hp, term = "hp")</code></td>
+<td>
+<em>β</em> = 0.022, SE = 0.017, <em>z</em> = 1.300, <em>p</em> =
+.194</td>
 </tr>
 <tr class="even">
 <td><code>format_stats(lm_mpg_cyl_hp, term = "cyl", digits = 2, pdigits = 2)</code></td>

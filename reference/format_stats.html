@@ -86,8 +86,11 @@ first argument.</p></li>
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Additional arguments passed to methods. For method-specific
 arguments, see <code><a href="format_stats.htest.html">format_stats.htest()</a></code> for htest correlations, t-tests,
-and Wilcoxon tests and <code><a href="format_stats.BFBayesFactor.html">format_stats.BFBayesFactor()</a></code> for Bayes factors from
-the {<a href="https://cran.r-project.org/package=BayesFactor" class="external-link">BayesFactor</a>} package.</p></dd>
+and Wilcoxon tests, <code><a href="format_stats.easycorrelation.html">format_stats.easycorrelation()</a></code> for easycorrelation
+correlations, <code><a href="format_stats.lm.html">format_stats.lm()</a></code> for linear models,
+<code><a href="format_stats.merMod.html">format_stats.merMod()</a></code> for linear mixedmodels, and
+<code><a href="format_stats.BFBayesFactor.html">format_stats.BFBayesFactor()</a></code> for Bayes factors from the
+{<a href="https://cran.r-project.org/package=BayesFactor" class="external-link">BayesFactor</a>} package.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -104,6 +107,7 @@ the {<a href="https://cran.r-project.org/package=BayesFactor" class="external-li
 <code><a href="format_stats.easycorrelation.html">format_stats.easycorrelation</a>()</code>,
 <code><a href="format_stats.htest.html">format_stats.htest</a>()</code>,
 <code><a href="format_stats.lm.html">format_stats.lm</a>()</code>,
+<code><a href="format_stats.merMod.html">format_stats.merMod</a>()</code>,
 <code><a href="format_ttest.html">format_ttest</a>()</code></p></div>
     </div>
 
@@ -120,6 +124,22 @@ the {<a href="https://cran.r-project.org/package=BayesFactor" class="external-li
 <span class="r-in"><span><span class="co"># Format t.test() object</span></span></span>
 <span class="r-in"><span><span class="fu">format_stats</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">vs</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">am</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "_M_ = 0.0, 95% CI [-0.2, 0.3], _t_(62) = 0.2, _p_ = .804"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Format aov() object</span></span></span>
+<span class="r-in"><span><span class="fu">format_stats</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span> <span class="op">*</span> <span class="va">hp</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>, term <span class="op">=</span> <span class="st">"cyl"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "_F_(1, 28) = 92.5, _p_ &lt; .001"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Format lm() or glm() object</span></span></span>
+<span class="r-in"><span><span class="fu">format_stats</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span> <span class="op">*</span> <span class="va">hp</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>, term <span class="op">=</span> <span class="st">"cyl"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "_β_ = -4.119, SE = 0.988, _t_ = -4.168, _p_ &lt; .001"</span>
+<span class="r-in"><span><span class="fu">format_stats</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">am</span> <span class="op">~</span> <span class="va">cyl</span> <span class="op">*</span> <span class="va">hp</span>, data <span class="op">=</span> <span class="va">mtcars</span>, family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span>, term <span class="op">=</span> <span class="st">"cyl"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "_β_ = -1.749, SE = 0.839, _z_ = -2.084, _p_ = .037"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Format lme4::lmer() or lme4::glmer() object</span></span></span>
+<span class="r-in"><span><span class="fu">format_stats</span><span class="op">(</span><span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">hp</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">cyl</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>, term <span class="op">=</span> <span class="st">"hp"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "_β_ = -0.030, SE = 0.015, _t_ = -2.088"</span>
+<span class="r-in"><span><span class="fu">format_stats</span><span class="op">(</span><span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/glmer.html" class="external-link">glmer</a></span><span class="op">(</span><span class="va">am</span> <span class="op">~</span> <span class="va">hp</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">cyl</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">mtcars</span>, family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span>, term <span class="op">=</span> <span class="st">"hp"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "_β_ = 0.022, SE = 0.017, _z_ = 1.300, _p_ = .194"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Format BFBayesFactor object from {BayesFactor} package</span></span></span>
 <span class="r-in"><span><span class="fu">format_stats</span><span class="op">(</span><span class="fu">BayesFactor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BayesFactor/man/ttestBF.html" class="external-link">ttestBF</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">vs</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">am</span><span class="op">)</span><span class="op">)</span></span></span>
