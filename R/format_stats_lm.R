@@ -1,8 +1,8 @@
 
-#' Format (generalized) linear regression statistics
+#' Format linear model statistics
 #'
 #' @description
-#' This method formats (generalized) linear regression statistics from the class
+#' This method formats (generalized) linear model statistics from the class
 #' `lm` or `glm`. If no term is specified, overall model statistics are
 #' returned. For linear models (`lm` objects), this includes the R-squared,
 #' F statistic, and p-value. For generalized linear models (`glm` objects),
@@ -85,7 +85,7 @@ format_stats.lm <- function(x,
   model_type <- ifelse(inherits(x, "glm"), "glm", "lm")
   summ <- summary(x)
 
-  # Overall statistics for linear regression
+  # Overall statistics for linear model
   if (is.null(term) & model_type == "lm") {
     r2 <- summ$adj.r.squared
     f <- summ$fstatistic
@@ -151,7 +151,7 @@ format_stats.lm <- function(x,
     }
     # Term-specific statistics for linear and generalized linear models
   } else {
-    # For linear regression
+    # For linear model
     if (model_type == "lm") {
       terms <- names(x$coefficients)
       stopifnot("Argument `term` not found in model terms." = term %in% terms)
@@ -162,7 +162,7 @@ format_stats.lm <- function(x,
       z <- summ$coefficients[term_num, "t value"]
       p_value <- summ$coefficients[term_num, "Pr(>|t|)"]
       z_lab <- "t"
-      # For generalized linear regression
+      # For generalized linear model
     } else {
       terms <- rownames(summ$coefficients)
       stopifnot("Argument `term` not found in model terms." = term %in% terms)

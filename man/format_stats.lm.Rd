@@ -2,7 +2,7 @@
 % Please edit documentation in R/format_stats_lm.R
 \name{format_stats.lm}
 \alias{format_stats.lm}
-\title{Format (generalized) linear regression statistics}
+\title{Format linear model statistics}
 \usage{
 \method{format_stats}{lm}(
   x,
@@ -51,7 +51,7 @@ should be italicized}
 A character string of statistical information formatted in Markdown or LaTeX.
 }
 \description{
-This method formats (generalized) linear regression statistics from the class
+This method formats (generalized) linear model statistics from the class
 \code{lm} or \code{glm}. If no term is specified, overall model statistics are
 returned. For linear models (\code{lm} objects), this includes the R-squared,
 F statistic, and p-value. For generalized linear models (\code{glm} objects),
