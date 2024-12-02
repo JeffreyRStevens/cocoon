@@ -108,8 +108,8 @@ Fuel efficiency and engine displacement were highly correlated (r =
     two-sample independent, and paired tests)
   - ANOVAs from `aov()`
   - Linear models from `lm()`, generalized linear models from `glm()`,
-    linear mixed models from `lme4::lmer()`, and generalized linear
-    mixed models from `lme4::glmer()`
+    linear mixed models from `lme4::lmer()` and `lmerTest::lmer()`, and
+    generalized linear mixed models from `lme4::glmer()`
   - Bayes factors (output from
     [`{BayesFactor}`](https://cran.r-project.org/package=BayesFactor)
     package)
