@@ -11,24 +11,23 @@
 #' control over numbers of digits, leading zeros, italics, degrees of freedom,
 #' and output format of Markdown or LaTeX.
 #'
-#' @param x An `lm` or `glm` object
+#' @param x An `lm` or `glm` object from [stats::lm()] or [stats::glm()].
 #' @param term Character string for row name of term to extract statistics for.
 #' This must be the exact string returned in the `summary()` output from the
-#' `lm` or `glm` object
-#' @param digits Number of digits after the decimal for means, confidence
-#' intervals, and test statistics
+#' `lm` or `glm` object.
+#' @param digits Number of digits after the decimal for test statistics.
 #' @param pdigits Number of digits after the decimal for p-values, ranging
-#' between 1-5 (also controls cutoff for small p-values)
+#' between 1-5 (also controls cutoff for small p-values).
 #' @param pzero Logical value (default = FALSE) for whether to include
-#' leading zero for p-values
+#' leading zero for p-values.
 #' @param full Logical value (default = TRUE) for whether to include extra
 #' info (e.g., standard errors and t-values or z-values for terms)
-#' or just test statistic and p-value
+#' or just test statistic and p-value.
 #' @param italics Logical value (default = TRUE) for whether statistics labels
-#' should be italicized
+#' should be italicized.
 #' @param dfs Formatting for degrees of freedom ("par" = parenthetical,
-#' "sub" = subscript, "none" = do not print degrees of freedom)
-#' @param type Type of formatting ("md" = markdown, "latex" = LaTeX)
+#' "sub" = subscript, "none" = do not print degrees of freedom).
+#' @param type Type of formatting ("md" = markdown, "latex" = LaTeX).
 #' @param ... Additional arguments passed to methods.
 #'
 #' @return

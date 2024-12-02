@@ -7,11 +7,11 @@
 format_scientific(x, digits = 1, type = "md")
 }
 \arguments{
-\item{x}{Number}
+\item{x}{Number.}
 
-\item{digits}{Number of digits after the decimal}
+\item{digits}{Number of digits after the decimal.}
 
-\item{type}{Type of formatting ("md" = markdown, "latex" = LaTeX)}
+\item{type}{Type of formatting ("md" = markdown, "latex" = LaTeX).}
 }
 \value{
 A character string of a number in scientific notation formatted in Markdown

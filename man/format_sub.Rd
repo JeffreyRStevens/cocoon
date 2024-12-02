@@ -7,9 +7,9 @@
 format_sub(subscript = NULL, type = "md")
 }
 \arguments{
-\item{subscript}{Character string or NULL}
+\item{subscript}{Character string or NULL.}
 
-\item{type}{Type of formatting (\code{"md"} = markdown, \code{"latex"} = LaTeX)}
+\item{type}{Type of formatting (\code{"md"} = markdown, \code{"latex"} = LaTeX).}
 }
 \value{
 A character string that is formatted as subscript for either Markdown or

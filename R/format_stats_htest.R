@@ -12,21 +12,21 @@
 #' italics, degrees of freedom, and mean labels, and output format of
 #' Markdown or LaTeX.
 #'
-#' @param x An `htest` object
+#' @param x An `htest` object from [cor.test()], [t.test()], or [wilcox.test()].
 #' @param digits Number of digits after the decimal for means, confidence
-#' intervals, and test statistics
+#' intervals, and test statistics.
 #' @param pdigits Number of digits after the decimal for p-values, ranging
-#' between 1-5 (also controls cutoff for small p-values)
+#' between 1-5 (also controls cutoff for small p-values).
 #' @param pzero Logical value (default = FALSE) for whether to include
-#' leading zero for p-values
+#' leading zero for p-values.
 #' @param full Logical value (default = TRUE) for whether to include means
-#' and confidence intervals or just test statistic and p-value
+#' and confidence intervals or just test statistic and p-value.
 #' @param italics Logical value (default = TRUE) for whether _p_ label should be
-#' italicized
+#' italicized.
 #' @param dfs Formatting for degrees of freedom ("par" = parenthetical,
-#' "sub" = subscript, "none" = do not print degrees of freedom)
-#' @param mean Formatting for mean label ("abbr" = M, "word" = Mean)
-#' @param type Type of formatting ("md" = markdown, "latex" = LaTeX)
+#' "sub" = subscript, "none" = do not print degrees of freedom).
+#' @param mean Formatting for mean label ("abbr" = M, "word" = Mean).
+#' @param type Type of formatting ("md" = markdown, "latex" = LaTeX).
 #' @param ... Additional arguments passed to methods.
 #'
 #' @return

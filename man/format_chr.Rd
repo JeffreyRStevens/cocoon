@@ -7,12 +7,12 @@
 format_chr(x, italics = TRUE, type = "md")
 }
 \arguments{
-\item{x}{Character string}
+\item{x}{Character string.}
 
 \item{italics}{Logical value (default = TRUE) for whether text should be
-italicized}
+italicized.}
 
-\item{type}{Type of formatting (\code{"md"} = markdown, \code{"latex"} = LaTeX)}
+\item{type}{Type of formatting (\code{"md"} = markdown, \code{"latex"} = LaTeX).}
 }
 \value{
 A character string that has either Markdown or LaTeX formatting for italics

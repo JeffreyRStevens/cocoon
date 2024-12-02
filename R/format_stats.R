@@ -16,8 +16,10 @@
 #' @param x Statistical object.
 #' @param ... Additional arguments passed to methods. For method-specific
 #' arguments, see [format_stats.htest()] for htest correlations, t-tests,
-#' and Wilcoxon tests and [format_stats.BFBayesFactor()] for Bayes factors from
-#' the \{[BayesFactor](https://cran.r-project.org/package=BayesFactor)\} package.
+#' and Wilcoxon tests, [format_stats.easycorrelation()] for easycorrelation
+#' correlations, [format_stats.lm()] for linear models, and
+#' [format_stats.BFBayesFactor()] for Bayes factors from the
+#' \{[BayesFactor](https://cran.r-project.org/package=BayesFactor)\} package.
 #'
 #' @return
 #' A character string of statistical information formatted in Markdown or LaTeX.
@@ -34,6 +36,13 @@
 #'
 #' # Format t.test() object
 #' format_stats(t.test(mtcars$vs, mtcars$am))
+#'
+#' # Format aov() object
+#' format_stats(aov(mpg ~ cyl * hp, data = mtcars), term = "cyl")
+#'
+#' # Format lm() or glm() object
+#' format_stats(lm(mpg ~ cyl * hp, data = mtcars), term = "cyl")
+#' format_stats(lm(am ~ cyl * hp, data = mtcars), term = "cyl", family = binomial)
 #'
 #' # Format BFBayesFactor object from {BayesFactor} package
 #' format_stats(BayesFactor::ttestBF(mtcars$vs, mtcars$am))

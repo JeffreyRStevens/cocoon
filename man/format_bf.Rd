@@ -16,26 +16,26 @@ format_bf(
 )
 }
 \arguments{
-\item{x}{BayesFactor object or vector of numeric Bayes factor values}
+\item{x}{BayesFactor object or vector of numeric Bayes factor values.}
 
-\item{digits1}{Number of digits after the decimal for Bayes factors > 1}
+\item{digits1}{Number of digits after the decimal for Bayes factors > 1.}
 
-\item{digits2}{Number of digits after the decimal for Bayes factors < 1}
+\item{digits2}{Number of digits after the decimal for Bayes factors < 1.}
 
 \item{cutoff}{Cutoff for using \verb{_BF_~10~ > <cutoff>} or
-\verb{_BF_~10~ < 1 / <cutoff>} (value must be > 1)}
+\verb{_BF_~10~ < 1 / <cutoff>} (value must be > 1).}
 
 \item{label}{Character string for label before Bayes factor. Default is BF.
 Set \code{label = ""} to return just the formatted Bayes factor value with no
-label or operator (\code{=}, \code{<}, \code{>})}
+label or operator (\code{=}, \code{<}, \code{>}).}
 
 \item{italics}{Logical value (default = TRUE) for whether label should be
-italicized (\emph{BF} or BF)}
+italicized (\emph{BF} or BF).}
 
 \item{subscript}{Subscript to include with \emph{BF} label (\code{"10"}, \code{"01"}, or
-\code{""} for no subscript)}
+\code{""} for no subscript).}
 
-\item{type}{Type of formatting (\code{"md"} = markdown, \code{"latex"} = LaTeX)}
+\item{type}{Type of formatting (\code{"md"} = markdown, \code{"latex"} = LaTeX).}
 }
 \value{
 A character string that includes label (by default \emph{BF}~10~) and then the

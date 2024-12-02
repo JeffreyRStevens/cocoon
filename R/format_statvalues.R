@@ -300,17 +300,17 @@ format_bf <- function(x,
 #' output is APA formatted, but numbers of digits, cutoffs, leading zeros, and
 #' italics are all customizable.
 #'
-#' @param x Number representing p-value
+#' @param x Number representing p-value.
 #' @param digits Number of digits after the decimal for p-values, ranging
-#' between 1-5 (also controls cutoff for small p-values)
+#' between 1-5 (also controls cutoff for small p-values).
 #' @param pzero Logical value (default = FALSE) for whether to include leading
-#' zero for p-values
+#' zero for p-values.
 #' @param label Character string for label before p value. Default is p.
 #' Set `label = ""` to return just the formatted p value with no
-#' label or operator (`=`, `<`, `>`)
+#' label or operator (`=`, `<`, `>`).
 #' @param italics Logical value (default = TRUE) for whether label should be
-#' italicized (_p_)
-#' @param type Type of formatting ("md" = markdown, "latex" = LaTeX)
+#' italicized (_p_).
+#' @param type Type of formatting ("md" = markdown, "latex" = LaTeX).
 #'
 #' @return
 #' A character string that includes _p_ and then the p-value formatted in

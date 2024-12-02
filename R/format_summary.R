@@ -11,29 +11,29 @@
 #' error measures with a default style. To just format the mean or median with
 #' no error, use [format_mean()] or [format_median()]. All measures ignore NAs.
 #'
-#' @param x Numeric vector of data to calculate mean and error
+#' @param x Numeric vector of data to calculate mean and error.
 #' @param tendency Character vector specifying measure of central
-#' tendency ("mean" = mean, "median" = median)
+#' tendency ("mean" = mean, "median" = median).
 #' @param error Character vector specifying error type ("ci" = confidence
 #' interval, "se" = standard error of the mean, "sd" = standard deviation, "iqr"
-#' = interquartile range)
+#' = interquartile range).
 #' @param values Numeric vector of mean and interval or mean and lower and upper
-#' limits
-#' @param digits Number of digits after the decimal for means and error
+#' limits.
+#' @param digits Number of digits after the decimal for means and error.
 #' @param tendlabel Formatting for tendency label ("abbr" = M, "word" = Mean,
-#' "none" = no label)
+#' "none" = no label).
 #' @param italics Logical value (default = TRUE) for whether mean label should
-#' be italicized
-#' @param subscript Character string to include as subscript with mean label
-#' @param units Character string that gives units to include after mean value
+#' be italicized.
+#' @param subscript Character string to include as subscript with mean label.
+#' @param units Character string that gives units to include after mean value.
 #' @param display Character vector specifying how to display error ("limits" =
 #' \[lower limit, upper limit\], "pm" = ±interval, "par" = (interval), "none" =
-#' do not display error)
+#' do not display error).
 #' @param cilevel Numeric scalar from 0-1 defining confidence level
-#' (defaults to 0.95)
-#' @param errorlabel Logical value (default = TRUE) for whether error label (e.g., 95% CI) should be
-#' included
-#' @param type Type of formatting ("md" = markdown, "latex" = LaTeX)
+#' (defaults to 0.95).
+#' @param errorlabel Logical value (default = TRUE) for whether error label
+#' (e.g., 95% CI) should be included.
+#' @param type Type of formatting ("md" = markdown, "latex" = LaTeX).
 #'
 #' @return A character string of mean and error formatted in Markdown or LaTeX.
 #' To return only the mean (no error), set `display = "none"`.
