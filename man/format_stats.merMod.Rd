@@ -56,9 +56,8 @@ control over numbers of digits, leading zeros, italics,
 and output format of Markdown or LaTeX.
 }
 \examples{
-library(lme4)
-test_lmer <- lmer(mpg ~ hp + (1 | cyl), data = mtcars)
-test_glmer <- glmer(am ~ hp + (1 | cyl), data = mtcars, family = binomial)
+test_lmer <- lme4::lmer(mpg ~ hp + (1 | cyl), data = mtcars)
+test_glmer <- lme4::glmer(am ~ hp + (1 | cyl), data = mtcars, family = binomial)
 
 # Format linear mixed model term statistics
 format_stats(test_lmer, term = "hp")
@@ -85,6 +84,7 @@ Other functions for printing statistical objects:
 \code{\link{format_stats.easycorrelation}()},
 \code{\link{format_stats.htest}()},
 \code{\link{format_stats.lm}()},
+\code{\link{format_stats.lmerModLmerTest}()},
 \code{\link{format_ttest}()}
 }
 \concept{functions for printing statistical objects}

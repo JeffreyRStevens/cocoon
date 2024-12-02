@@ -36,9 +36,8 @@
 #' @export
 #'
 #' @examples
-#' library(lme4)
-#' test_lmer <- lmer(mpg ~ hp + (1 | cyl), data = mtcars)
-#' test_glmer <- glmer(am ~ hp + (1 | cyl), data = mtcars, family = binomial)
+#' test_lmer <- lme4::lmer(mpg ~ hp + (1 | cyl), data = mtcars)
+#' test_glmer <- lme4::glmer(am ~ hp + (1 | cyl), data = mtcars, family = binomial)
 #'
 #' # Format linear mixed model term statistics
 #' format_stats(test_lmer, term = "hp")
