@@ -1,9 +1,11 @@
 set.seed(2024)
-df <- data.frame(a = 1:10,
-                 b = 2:11,
-                 c = c(1, 8, 3, 7, 8, 2, 4, 1, 4, 5),
-                 d = sample(0:1, 10, replace = TRUE),
-                 e = rep(1:2, 5))
+df <- data.frame(
+  a = 1:10,
+  b = 2:11,
+  c = c(1, 8, 3, 7, 8, 2, 4, 1, 4, 5),
+  d = sample(0:1, 10, replace = TRUE),
+  e = rep(1:2, 5)
+)
 test_corr <- cor.test(df$a, df$b)
 test_corr2 <- cor.test(df$a, df$c)
 test_easycorr <- correlation::correlation(df, select = "a", select2 = "c")

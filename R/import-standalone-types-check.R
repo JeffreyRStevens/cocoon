@@ -616,4 +616,3 @@ check_data_frame <- function(x,
 }
 
 # nocov end
-

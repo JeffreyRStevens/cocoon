@@ -9,7 +9,7 @@ test_that("format_num() rounds properly", {
   ))
   suppressMessages(expect_error(
     format_num(123.456, digits = -1),
-    '`digits` must be a whole number larger than or equal to 0, not the number -1'
+    "`digits` must be a whole number larger than or equal to 0, not the number -1"
   ))
   expect_equal(format_num(123.456), "123.5")
   expect_equal(format_num(123.456, digits = 2), "123.46")
@@ -27,7 +27,7 @@ test_that("format_scientific() works properly", {
   ))
   suppressMessages(expect_error(
     format_scientific(123.456, digits = -1),
-    '`digits` must be a whole number larger than or equal to 1, not the number -1'
+    "`digits` must be a whole number larger than or equal to 1, not the number -1"
   ))
   suppressMessages(expect_error(
     format_scientific(123.4567, type = "xxx"),
@@ -43,7 +43,7 @@ test_that("format_scientific() works properly", {
 test_that("format_chr() formats properly", {
   suppressMessages(expect_error(
     format_chr(3),
-    '`x` must be a single string, not the number 3'
+    "`x` must be a single string, not the number 3"
   ))
   suppressMessages(expect_error(
     format_chr("xxx", italics = "xxx"),
@@ -62,7 +62,7 @@ test_that("format_chr() formats properly", {
 test_that("format_sub() formats properly", {
   suppressMessages(expect_error(
     format_sub(3),
-    '`subscript` must be a single string or `NULL`, not the number 3'
+    "`subscript` must be a single string or `NULL`, not the number 3"
   ))
   suppressMessages(expect_error(
     format_sub("xxx", type = "xxx"),

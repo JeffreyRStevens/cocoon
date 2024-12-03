@@ -1,4 +1,3 @@
-
 #' Format linear mixed model statistics
 #'
 #' @description
@@ -93,8 +92,8 @@ format_stats.merMod <- function(x,
     p_value <- coeffs[term_num, "Pr(>|z|)"]
     z_lab <- "z"
     pvalue <- format_p(p_value,
-                       digits = pdigits, pzero = pzero,
-                       italics = italics, type = type
+      digits = pdigits, pzero = pzero,
+      italics = italics, type = type
     )
   }
 
@@ -112,11 +111,11 @@ format_stats.merMod <- function(x,
   )
 
   # Create statistics string
-  if(full & model_type == "lmer") {
+  if (full && model_type == "lmer") {
     paste0(stat_label, " = ", stat_value, ", SE = ", se_value, ", ", format_chr(z_lab, italics = italics, type = type), " = ", z_value)
-  } else if(full & model_type == "glmer") {
+  } else if (full && model_type == "glmer") {
     paste0(stat_label, " = ", stat_value, ", SE = ", se_value, ", ", format_chr(z_lab, italics = italics, type = type), " = ", z_value, ", ", pvalue)
-  } else if(!full & model_type == "lmer") {
+  } else if (!full && model_type == "lmer") {
     paste0(stat_label, " = ", stat_value)
   } else {
     paste0(stat_label, " = ", stat_value, ", ", pvalue)

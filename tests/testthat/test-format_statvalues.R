@@ -1,11 +1,11 @@
 test_that("format_bf() validates arguments properly", {
   suppressMessages(expect_error(
     format_bf("0.0012"),
-    'Input is not numeric or of class BFBayesFactor'
+    "Input is not numeric or of class BFBayesFactor"
   ))
   suppressMessages(expect_error(
     format_bf(test_corr),
-    'Input is not numeric or of class BFBayesFactor'
+    "Input is not numeric or of class BFBayesFactor"
   ))
   suppressMessages(expect_error(
     format_bf(123.4567, digits1 = "xxx"),
@@ -13,7 +13,7 @@ test_that("format_bf() validates arguments properly", {
   ))
   suppressMessages(expect_error(
     format_bf(123.4567, digits1 = -1),
-    '`digits1` must be a whole number larger than or equal to 0 or `NULL`, not the number -1'
+    "`digits1` must be a whole number larger than or equal to 0 or `NULL`, not the number -1"
   ))
   suppressMessages(expect_error(
     format_bf(123.4567, digits2 = "xxx"),
@@ -21,11 +21,11 @@ test_that("format_bf() validates arguments properly", {
   ))
   suppressMessages(expect_error(
     format_bf(123.4567, digits2 = -1),
-    '`digits2` must be a whole number larger than or equal to 0 or `NULL`, not the number -1'
+    "`digits2` must be a whole number larger than or equal to 0 or `NULL`, not the number -1"
   ))
   suppressMessages(expect_error(
     format_bf(123.4567, cutoff = 0.5),
-    '`cutoff` must be a number larger than or equal to 1 or `NULL`, not the number 0.5'
+    "`cutoff` must be a number larger than or equal to 1 or `NULL`, not the number 0.5"
   ))
   suppressMessages(expect_error(
     format_bf(123.4567, cutoff = "xxx"),
@@ -78,11 +78,11 @@ test_that("format_p() works properly", {
   ))
   suppressMessages(expect_error(
     format_p(0.0012, digits = 0),
-    '`digits` must be a whole number between 1 and 5 or `NULL`, not the number 0'
+    "`digits` must be a whole number between 1 and 5 or `NULL`, not the number 0"
   ))
   suppressMessages(expect_error(
     format_p(0.0012, digits = 7),
-    '`digits` must be a whole number between 1 and 5 or `NULL`, not the number 7'
+    "`digits` must be a whole number between 1 and 5 or `NULL`, not the number 7"
   ))
   suppressMessages(expect_error(
     format_p(0.0012, pzero = "xxx"),
@@ -105,4 +105,3 @@ test_that("format_p() works properly", {
   expect_equal(format_p(0.0012, label = "P"), "_P_ = .001")
   expect_equal(format_p(0.0012, label = ""), ".001")
 })
-

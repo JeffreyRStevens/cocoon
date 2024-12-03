@@ -1,4 +1,3 @@
-
 #' Format correlation statistics
 #'
 #' @description
@@ -58,26 +57,29 @@ format_stats.easycorrelation <- function(x,
   } else if ("rho" %in% names(x)) {
     method <- "Spearman correlation"
     x$r <- x$rho
-  }  else if ("tau" %in% names(x)) {
+  } else if ("tau" %in% names(x)) {
     method <- "Kendall correlation"
     x$r <- x$tau
   } else {
     stop("Correlation method is not Pearson, Spearman, or Kendall.")
   }
 
-  y <- list(statistic = x$t,
-            parameter = x$df_error,
-            p.value = x$p,
-            estimate = x$r,
-            data.name = paste0(x$Parameter1, " and ", x$Parameter2),
-            method = method,
-            conf.int = c(x$CI_low, x$CI_high))
+  y <- list(
+    statistic = x$t,
+    parameter = x$df_error,
+    p.value = x$p,
+    estimate = x$r,
+    data.name = paste0(x$Parameter1, " and ", x$Parameter2),
+    method = method,
+    conf.int = c(x$CI_low, x$CI_high)
+  )
   class(y) <- "htest"
   format_corr(y,
-              digits = digits,
-              pdigits = pdigits,
-              pzero = pzero,
-              full = full,
-              italics = italics,
-              type = type)
+    digits = digits,
+    pdigits = pdigits,
+    pzero = pzero,
+    full = full,
+    italics = italics,
+    type = type
+  )
 }

@@ -1,4 +1,3 @@
-
 #' Format statistical results
 #'
 #' A generic function that takes objects from various statistical methods to
@@ -65,8 +64,8 @@ format_stats.default <- function(x, ...) {
   if (inherits(x, "numeric")) {
     stop(
       "Numerics are not supported by `format_stats()`.",
-      "\n See `format_num()`, `format_bf()`, `format_p()`, or `format_summary()` for formatting numerics."
-      , call. = FALSE
+      "\n See `format_num()`, `format_bf()`, `format_p()`, or `format_summary()` for formatting numerics.",
+      call. = FALSE
     )
   } else if (inherits(x, "character")) {
     stop(

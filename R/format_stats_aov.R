@@ -1,4 +1,3 @@
-
 #' Format ANOVA statistics
 #'
 #' @description
@@ -77,8 +76,8 @@ format_stats.aov <- function(x,
 
   stat_value <- format_num(f_stat, digits = digits, pzero = TRUE)
   pvalue <- format_p(p_value,
-                     digits = pdigits, pzero = pzero,
-                     italics = italics, type = type
+    digits = pdigits, pzero = pzero,
+    italics = italics, type = type
   )
 
   # Build label
@@ -89,17 +88,19 @@ format_stats.aov <- function(x,
     identical(type, "latex") ~ paste0("$", statlab, "$")
   )
   stat_label <- dplyr::case_when(identical(dfs, "par") ~ paste0(stat_label, "(", df1, ", ", df2, ")"),
-                                 identical(dfs, "sub") & identical(type, "md") ~ paste0(stat_label, "~", df1, ",", df2, "~"),
-                                 identical(dfs, "sub") & identical(type, "latex") ~ paste0(stat_label, "$_{", df1, ",", df2, "}$"),
-                                 .default = stat_label
+    identical(dfs, "sub") & identical(type, "md") ~ paste0(stat_label, "~", df1, ",", df2, "~"),
+    identical(dfs, "sub") & identical(type, "latex") ~ paste0(stat_label, "$_{", df1, ",", df2, "}$"),
+    .default = stat_label
   )[1]
 
   # Create statistics string
-  build_string(mean_label = NULL,
-               mean_value = NULL,
-               cis = FALSE,
-               stat_label = stat_label,
-               stat_value = stat_value,
-               pvalue = pvalue,
-               full = FALSE)
+  build_string(
+    mean_label = NULL,
+    mean_value = NULL,
+    cis = FALSE,
+    stat_label = stat_label,
+    stat_value = stat_value,
+    pvalue = pvalue,
+    full = FALSE
+  )
 }

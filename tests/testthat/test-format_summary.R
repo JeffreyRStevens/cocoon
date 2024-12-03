@@ -5,7 +5,7 @@ test_that("format_summary() works properly", {
   ))
   suppressMessages(expect_error(
     format_summary(tendency = "xxx"),
-    'You must include either the `x` or `values` argument'
+    "You must include either the `x` or `values` argument"
   ))
   suppressMessages(expect_error(
     format_summary(x = 1:3, tendency = "xxx"),
@@ -21,11 +21,11 @@ test_that("format_summary() works properly", {
   ))
   suppressMessages(expect_error(
     format_summary(values = 1:4),
-    'Argument `values` must be a vector with two or three elements'
+    "Argument `values` must be a vector with two or three elements"
   ))
   suppressMessages(expect_error(
     format_summary(values = c(2, 4, 1)),
-    'Argument `values` must include the mean followed by the lower CI limit then the upper CI limit'
+    "Argument `values` must include the mean followed by the lower CI limit then the upper CI limit"
   ))
   suppressMessages(expect_error(
     format_summary(x = 1:3, tendlabel = "xxx"),
@@ -33,7 +33,7 @@ test_that("format_summary() works properly", {
   ))
   suppressMessages(expect_error(
     format_summary(x = 1:3, units = 2),
-    '`units` must be a character vector or `NULL`, not the number 2'
+    "`units` must be a character vector or `NULL`, not the number 2"
   ))
   suppressMessages(expect_error(
     format_summary(x = 1:3, display = "xxx"),

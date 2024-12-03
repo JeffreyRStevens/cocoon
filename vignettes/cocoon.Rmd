@@ -15,12 +15,7 @@ knitr::opts_chunk$set(
 library(rlang)
 ```
 
-```{r setup-real, echo = FALSE, message = FALSE}
-library(cocoon)
-# devtools::load_all(".")
-```
-
-```{r setup-show, eval = FALSE}
+```{r setup-show}
 library(cocoon)
 ```
 

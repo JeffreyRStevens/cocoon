@@ -1,4 +1,3 @@
-
 #' Format correlation statistics
 #'
 #' @encoding UTF-8
@@ -55,8 +54,8 @@ format_corr <- function(x,
     full <- FALSE
   }
   pvalue <- format_p(x$p.value,
-                     digits = pdigits, pzero = pzero,
-                     italics = italics, type = type
+    digits = pdigits, pzero = pzero,
+    italics = italics, type = type
   )
 
   # Build label
@@ -74,11 +73,13 @@ format_corr <- function(x,
   )
 
   # Create statistics string
-  build_string(cis = cis,
-               stat_label = stat_label,
-               stat_value = stat_value,
-               pvalue = pvalue,
-               full = full)
+  build_string(
+    cis = cis,
+    stat_label = stat_label,
+    stat_value = stat_value,
+    pvalue = pvalue,
+    full = full
+  )
 }
 
 
@@ -125,7 +126,7 @@ format_ttest <- function(x,
     }
     cis <- format_num(x$conf.int, digits = digits)
     df <- dplyr::case_when(round(x$parameter, 1) == round(x$parameter) ~ format_num(x$parameter, digits = 0),
-                           .default = format_num(x$parameter, digits = digits)
+      .default = format_num(x$parameter, digits = digits)
     )
     statlab <- "t"
   } else { # format data for Wilcoxon tests
@@ -136,8 +137,8 @@ format_ttest <- function(x,
   }
   stat_value <- format_num(x$statistic, digits = digits)
   pvalue <- format_p(x$p.value,
-                     digits = pdigits, pzero = pzero,
-                     italics = italics, type = type
+    digits = pdigits, pzero = pzero,
+    italics = italics, type = type
   )
 
   # Build label
@@ -147,9 +148,9 @@ format_ttest <- function(x,
     identical(type, "latex") ~ paste0("$", statlab, "$")
   )
   stat_label <- dplyr::case_when(identical(dfs, "par") ~ paste0(stat_label, "(", df, ")"),
-                                 identical(dfs, "sub") & identical(type, "md") ~ paste0(stat_label, "~", df, "~"),
-                                 identical(dfs, "sub") & identical(type, "latex") ~ paste0(stat_label, "$_{", df, "}$"),
-                                 .default = stat_label
+    identical(dfs, "sub") & identical(type, "md") ~ paste0(stat_label, "~", df, "~"),
+    identical(dfs, "sub") & identical(type, "latex") ~ paste0(stat_label, "$_{", df, "}$"),
+    .default = stat_label
   )[1]
 
   # Create statistics string
@@ -162,14 +163,15 @@ format_ttest <- function(x,
     mean_label <- mean_value <- cis <- NULL
   }
 
-  build_string(mean_label = mean_label,
-               mean_value = mean_value,
-               cis = cis,
-               stat_label = stat_label,
-               stat_value = stat_value,
-               pvalue = pvalue,
-               full = full)
-
+  build_string(
+    mean_label = mean_label,
+    mean_value = mean_value,
+    cis = cis,
+    stat_label = stat_label,
+    stat_value = stat_value,
+    pvalue = pvalue,
+    full = full
+  )
 }
 
 #' Format Bayes factors
@@ -377,5 +379,3 @@ format_p <- function(x,
   )
   paste0(p_lab, operator, pvalue)
 }
-
-
