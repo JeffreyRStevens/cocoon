@@ -383,10 +383,11 @@ of freedom as parenthetical (<code>par</code>) or subscripts
 </h3>
 <p>The <code><a href="../reference/format_stats.html">format_stats()</a></code> function can also input objects
 returned by the <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code>, <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code>,
-<code><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lme4::lmer()</a></code>, and <code><a href="https://rdrr.io/pkg/lme4/man/glmer.html" class="external-link">lme4::glmer()</a></code> functions. It
-can report overall model statistics (e.g., R-squared, AIC) for
-<code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code> and <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> and term-specific statistics
-(e.g., coefficients, p-values) for all models.</p>
+<code><a href="https://rdrr.io/pkg/lme4/man/lmer.html" class="external-link">lme4::lmer()</a></code>, <code><a href="https://rdrr.io/pkg/lmerTest/man/lmer.html" class="external-link">lmerTest::lmer()</a></code>, and
+<code><a href="https://rdrr.io/pkg/lme4/man/glmer.html" class="external-link">lme4::glmer()</a></code> functions. It can report overall model
+statistics (e.g., R-squared, AIC) for <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm()</a></code> and
+<code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> and term-specific statistics (e.g., coefficients,
+p-values) for all models.</p>
 <p>Let’s start by creating some models:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lm_mpg_cyl_hp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span> <span class="op">*</span> <span class="va">hp</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
@@ -486,7 +487,36 @@ can report overall model statistics (e.g., R-squared, AIC) for
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Correlation of Fixed Effects:</span></span>
 <span><span class="co">#&gt;    (Intr)</span></span>
-<span><span class="co">#&gt; hp -0.856</span></span></code></pre></div>
+<span><span class="co">#&gt; hp -0.856</span></span>
+<span><span class="va">lmer_mpg_cyl_hp2</span> <span class="op">&lt;-</span> <span class="fu">lmerTest</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lmerTest/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">hp</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">cyl</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lmer_mpg_cyl_hp2</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Linear mixed model fit by REML. t-tests use Satterthwaite's method [</span></span>
+<span><span class="co">#&gt; lmerModLmerTest]</span></span>
+<span><span class="co">#&gt; Formula: mpg ~ hp + (1 | cyl)</span></span>
+<span><span class="co">#&gt;    Data: mtcars</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; REML criterion at convergence: 173.9</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Scaled residuals: </span></span>
+<span><span class="co">#&gt;      Min       1Q   Median       3Q      Max </span></span>
+<span><span class="co">#&gt; -1.57631 -0.66143  0.04006  0.52583  2.20223 </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Random effects:</span></span>
+<span><span class="co">#&gt;  Groups   Name        Variance Std.Dev.</span></span>
+<span><span class="co">#&gt;  cyl      (Intercept) 16.184   4.023   </span></span>
+<span><span class="co">#&gt;  Residual              9.917   3.149   </span></span>
+<span><span class="co">#&gt; Number of obs: 32, groups:  cyl, 3</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Fixed effects:</span></span>
+<span><span class="co">#&gt;             Estimate Std. Error       df t value Pr(&gt;|t|)   </span></span>
+<span><span class="co">#&gt; (Intercept) 24.70757    3.13221  4.28917   7.888  0.00104 **</span></span>
+<span><span class="co">#&gt; hp          -0.03047    0.01459 28.97571  -2.088  0.04568 * </span></span>
+<span><span class="co">#&gt; ---</span></span>
+<span><span class="co">#&gt; Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; Correlation of Fixed Effects:</span></span>
+<span><span class="co">#&gt;    (Intr)</span></span>
+<span><span class="co">#&gt; hp -0.645</span></span></code></pre></div>
 <p>To extract overall model statistics from <code><a href="../reference/format_stats.html">format_stats()</a></code>,
 pass the <code>lm</code> or <code>glm</code> object but omit any
 terms.</p>
@@ -573,22 +603,28 @@ freedom as parenthetical (<code>par</code>) or subscripts
 .194</td>
 </tr>
 <tr class="even">
+<td><code>format_stats(lmer_mpg_cyl_hp2, term = "hp")</code></td>
+<td>
+<em>β</em> = -0.030, SE = 0.015, <em>t</em> = -2.088, <em>p</em> =
+.046</td>
+</tr>
+<tr class="odd">
 <td><code>format_stats(lm_mpg_cyl_hp, term = "cyl", digits = 2, pdigits = 2)</code></td>
 <td>
 <em>β</em> = -4.12, SE = 0.99, <em>t</em> = -4.17, <em>p</em> &lt;
 .01</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>format_stats(lm_mpg_cyl_hp, term = "cyl", pzero = TRUE)</code></td>
 <td>
 <em>β</em> = -4.119, SE = 0.988, <em>t</em> = -4.168, <em>p</em>
 &lt; 0.001</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>format_stats(lm_mpg_cyl_hp, term = "cyl", italics = FALSE)</code></td>
 <td>β = -4.119, SE = 0.988, t = -4.168, p &lt; .001</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>format_stats(lm_mpg_cyl_hp, term = "cyl", dfs = "sub")</code></td>
 <td>
 <em>β</em> = -4.119, SE = 0.988, <em>t</em> = -4.168, <em>p</em>

@@ -88,7 +88,8 @@ first argument.</p></li>
 arguments, see <code><a href="format_stats.htest.html">format_stats.htest()</a></code> for htest correlations, t-tests,
 and Wilcoxon tests, <code><a href="format_stats.easycorrelation.html">format_stats.easycorrelation()</a></code> for easycorrelation
 correlations, <code><a href="format_stats.lm.html">format_stats.lm()</a></code> for linear models,
-<code><a href="format_stats.merMod.html">format_stats.merMod()</a></code> for linear mixedmodels, and
+<code><a href="format_stats.merMod.html">format_stats.merMod()</a></code> and <code><a href="format_stats.lmerModLmerTest.html">format_stats.lmerModLmerTest()</a></code> for
+linear mixed models, and
 <code><a href="format_stats.BFBayesFactor.html">format_stats.BFBayesFactor()</a></code> for Bayes factors from the
 {<a href="https://cran.r-project.org/package=BayesFactor" class="external-link">BayesFactor</a>} package.</p></dd>
 
@@ -107,6 +108,7 @@ correlations, <code><a href="format_stats.lm.html">format_stats.lm()</a></code> 
 <code><a href="format_stats.easycorrelation.html">format_stats.easycorrelation</a>()</code>,
 <code><a href="format_stats.htest.html">format_stats.htest</a>()</code>,
 <code><a href="format_stats.lm.html">format_stats.lm</a>()</code>,
+<code><a href="format_stats.lmerModLmerTest.html">format_stats.lmerModLmerTest</a>()</code>,
 <code><a href="format_stats.merMod.html">format_stats.merMod</a>()</code>,
 <code><a href="format_ttest.html">format_ttest</a>()</code></p></div>
     </div>
@@ -140,6 +142,10 @@ correlations, <code><a href="format_stats.lm.html">format_stats.lm()</a></code> 
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "_β_ = -0.030, SE = 0.015, _t_ = -2.088"</span>
 <span class="r-in"><span><span class="fu">format_stats</span><span class="op">(</span><span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/glmer.html" class="external-link">glmer</a></span><span class="op">(</span><span class="va">am</span> <span class="op">~</span> <span class="va">hp</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">cyl</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">mtcars</span>, family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span>, term <span class="op">=</span> <span class="st">"hp"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "_β_ = 0.022, SE = 0.017, _z_ = 1.300, _p_ = .194"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Format lmerTest::lmer() object</span></span></span>
+<span class="r-in"><span><span class="fu">format_stats</span><span class="op">(</span><span class="fu">lmerTest</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lmerTest/man/lmer.html" class="external-link">lmer</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">hp</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">cyl</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>, term <span class="op">=</span> <span class="st">"hp"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "_β_ = -0.030, SE = 0.015, _t_ = -2.088, _p_ = .046"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Format BFBayesFactor object from {BayesFactor} package</span></span></span>
 <span class="r-in"><span><span class="fu">format_stats</span><span class="op">(</span><span class="fu">BayesFactor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BayesFactor/man/ttestBF.html" class="external-link">ttestBF</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">vs</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">am</span><span class="op">)</span><span class="op">)</span></span></span>
