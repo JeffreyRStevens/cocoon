@@ -13,7 +13,8 @@ format_stats(x, ...)
 arguments, see \code{\link[=format_stats.htest]{format_stats.htest()}} for htest correlations, t-tests,
 and Wilcoxon tests, \code{\link[=format_stats.easycorrelation]{format_stats.easycorrelation()}} for easycorrelation
 correlations, \code{\link[=format_stats.lm]{format_stats.lm()}} for linear models,
-\code{\link[=format_stats.merMod]{format_stats.merMod()}} for linear mixedmodels, and
+\code{\link[=format_stats.merMod]{format_stats.merMod()}} and \code{\link[=format_stats.lmerModLmerTest]{format_stats.lmerModLmerTest()}} for
+linear mixed models, and
 \code{\link[=format_stats.BFBayesFactor]{format_stats.BFBayesFactor()}} for Bayes factors from the
 \{\href{https://cran.r-project.org/package=BayesFactor}{BayesFactor}\} package.}
 }
@@ -56,6 +57,9 @@ format_stats(glm(am ~ cyl * hp, data = mtcars, family = binomial), term = "cyl")
 format_stats(lme4::lmer(mpg ~ hp + (1 | cyl), data = mtcars), term = "hp")
 format_stats(lme4::glmer(am ~ hp + (1 | cyl), data = mtcars, family = binomial), term = "hp")
 
+# Format lmerTest::lmer() object
+format_stats(lmerTest::lmer(mpg ~ hp + (1 | cyl), data = mtcars), term = "hp")
+
 # Format BFBayesFactor object from {BayesFactor} package
 format_stats(BayesFactor::ttestBF(mtcars$vs, mtcars$am))
 }
@@ -68,6 +72,7 @@ Other functions for printing statistical objects:
 \code{\link{format_stats.easycorrelation}()},
 \code{\link{format_stats.htest}()},
 \code{\link{format_stats.lm}()},
+\code{\link{format_stats.lmerModLmerTest}()},
 \code{\link{format_stats.merMod}()},
 \code{\link{format_ttest}()}
 }

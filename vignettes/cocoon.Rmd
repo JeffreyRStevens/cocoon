@@ -130,7 +130,7 @@ To use `format_stats()` on ANOVAs, you must pass the `aov` object and a characte
 
 ### Linear models
 
-The `format_stats()` function can also input objects returned by the `lm()`, `glm()`, `lme4::lmer()`, and `lme4::glmer()` functions. It can report overall model statistics (e.g., R-squared, AIC) for `lm()` and `glm()` and term-specific statistics (e.g., coefficients, p-values) for all models.
+The `format_stats()` function can also input objects returned by the `lm()`, `glm()`, `lme4::lmer()`, `lmerTest::lmer()`, and `lme4::glmer()` functions. It can report overall model statistics (e.g., R-squared, AIC) for `lm()` and `glm()` and term-specific statistics (e.g., coefficients, p-values) for all models.
 
 Let's start by creating some models:
 
@@ -143,6 +143,8 @@ lmer_mpg_cyl_hp <- lme4::lmer(mpg ~ hp + (1 | cyl), data = mtcars)
 summary(lmer_mpg_cyl_hp)
 glmer_am_cyl_hp <- lme4::glmer(am ~ hp + (1 | cyl), data = mtcars, family = binomial)
 summary(glmer_am_cyl_hp)
+lmer_mpg_cyl_hp2 <- lmerTest::lmer(mpg ~ hp + (1 | cyl), data = mtcars)
+summary(lmer_mpg_cyl_hp2)
 ```
 
 To extract overall model statistics from `format_stats()`, pass the `lm` or `glm` object but omit any terms. 
@@ -164,6 +166,7 @@ To extract term-specific statistics, pass the object and a character string desc
 | `format_stats(glm_am_cyl_hp, term = "cyl")` | `r format_stats(glm_am_cyl_hp, term = "cyl")` |
 | `format_stats(lmer_mpg_cyl_hp, term = "hp")` | `r format_stats(lmer_mpg_cyl_hp, term = "hp")` |
 | `format_stats(glmer_am_cyl_hp, term = "hp")` | `r format_stats(glmer_am_cyl_hp, term = "hp")` |
+| `format_stats(lmer_mpg_cyl_hp2, term = "hp")` | `r format_stats(lmer_mpg_cyl_hp2, term = "hp")` |
 | `format_stats(lm_mpg_cyl_hp, term = "cyl", digits = 2, pdigits = 2)` | `r format_stats(lm_mpg_cyl_hp, term = "cyl", digits = 2, pdigits = 2)` |
 | `format_stats(lm_mpg_cyl_hp, term = "cyl", pzero = TRUE)` | `r format_stats(lm_mpg_cyl_hp, term = "cyl", pzero = TRUE)` |
 | `format_stats(lm_mpg_cyl_hp, term = "cyl", italics = FALSE)` | `r format_stats(lm_mpg_cyl_hp, term = "cyl", italics = FALSE)` |

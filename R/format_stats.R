@@ -18,7 +18,8 @@
 #' arguments, see [format_stats.htest()] for htest correlations, t-tests,
 #' and Wilcoxon tests, [format_stats.easycorrelation()] for easycorrelation
 #' correlations, [format_stats.lm()] for linear models,
-#' [format_stats.merMod()] for linear mixedmodels, and
+#' [format_stats.merMod()] and [format_stats.lmerModLmerTest()] for
+#' linear mixed models, and
 #' [format_stats.BFBayesFactor()] for Bayes factors from the
 #' \{[BayesFactor](https://cran.r-project.org/package=BayesFactor)\} package.
 #'
@@ -48,6 +49,9 @@
 #' # Format lme4::lmer() or lme4::glmer() object
 #' format_stats(lme4::lmer(mpg ~ hp + (1 | cyl), data = mtcars), term = "hp")
 #' format_stats(lme4::glmer(am ~ hp + (1 | cyl), data = mtcars, family = binomial), term = "hp")
+#'
+#' # Format lmerTest::lmer() object
+#' format_stats(lmerTest::lmer(mpg ~ hp + (1 | cyl), data = mtcars), term = "hp")
 #'
 #' # Format BFBayesFactor object from {BayesFactor} package
 #' format_stats(BayesFactor::ttestBF(mtcars$vs, mtcars$am))

@@ -93,6 +93,7 @@ Other functions for printing statistical objects:
 \code{\link{format_stats.aov}()},
 \code{\link{format_stats.easycorrelation}()},
 \code{\link{format_stats.htest}()},
+\code{\link{format_stats.lmerModLmerTest}()},
 \code{\link{format_stats.merMod}()},
 \code{\link{format_ttest}()}
 }

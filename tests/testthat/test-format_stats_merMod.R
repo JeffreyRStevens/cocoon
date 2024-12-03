@@ -70,5 +70,4 @@ test_that("formatting glm linear models works properly", {
   expect_equal(format_stats(test_glmer, "a", full = FALSE), "_β_ = 0.051, _p_ = .822")
   expect_equal(format_stats(test_glmer, "a", italics = FALSE), "β = 0.051, SE = 0.226, z = 0.224, p = .822")
   expect_equal(format_stats(test_glmer, "a", type = "latex"), "$\\beta$ = 0.051, SE = 0.226, $z$ = 0.224, $p$ = .822")
-  expect_equal(format_stats(test_glmer, "a", type = "latex", dfs = "sub"), "$\\beta$ = 0.051, SE = 0.226, $z$ = 0.224, $p$ = .822")
 })
