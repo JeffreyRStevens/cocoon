@@ -11,6 +11,8 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/cocoon)](https://cran.r-project.org/package=cocoon)
+[![Total
+Downloads](https://cranlogs.r-pkg.org/badges/grand-total/cocoon)](https://CRAN.R-project.org/package=cocoon)
 [![Codecov test
 coverage](https://codecov.io/gh/JeffreyRStevens/cocoon/branch/main/graph/badge.svg)](https://app.codecov.io/gh/JeffreyRStevens/cocoon?branch=main)
 [![R-CMD-check](https://github.com/JeffreyRStevens/cocoon/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/JeffreyRStevens/cocoon/actions/workflows/R-CMD-check.yaml)
