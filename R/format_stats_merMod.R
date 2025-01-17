@@ -63,6 +63,7 @@ format_stats.merMod <- function(x,
                                 type = "md",
                                 ...) {
   # Validate arguments
+  if (is.null(term)) cli::cli_abort("No general model information is available for this type of model. Enter a term.")
   check_character(term)
   check_number_whole(digits, min = 0, allow_null = TRUE)
   check_number_whole(pdigits, min = 1, max = 5)

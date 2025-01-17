@@ -2,7 +2,11 @@
 test_that("lmer linear mixed models are validated properly", {
   suppressMessages(expect_error(
     format_stats(test_lmer),
-    '`term` must be a character vector, not `NULL`'
+    'No general model information is available for this type of model'
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_lmer, term = 1),
+    '`term` must be a character vector, not the number 1'
   ))
   suppressMessages(expect_error(
     format_stats(test_lmer, term = "d"),
@@ -52,7 +56,7 @@ test_that("lmer linear mixed models are validated properly", {
 
 
 test_that("formatting lm linear models works properly", {
-  expect_equal(format_stats(test_lmer, "a"), "_β_ = -0.103, SE = 0.310, _t_ = -0.333")
+  expect_equal(format_stats(test_lmer, term = "a"), "_β_ = -0.103, SE = 0.310, _t_ = -0.333")
   expect_equal(format_stats(test_lmer, "a", digits = 2), "_β_ = -0.10, SE = 0.31, _t_ = -0.33")
   expect_equal(format_stats(test_lmer, "a", pdigits = 2), "_β_ = -0.103, SE = 0.310, _t_ = -0.333")
   expect_equal(format_stats(test_lmer, "a", pzero = TRUE), "_β_ = -0.103, SE = 0.310, _t_ = -0.333")
