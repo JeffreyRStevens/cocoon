@@ -14,7 +14,7 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 [![Total
 Downloads](https://cranlogs.r-pkg.org/badges/grand-total/cocoon)](https://CRAN.R-project.org/package=cocoon)
 [![Codecov test
-coverage](https://codecov.io/gh/JeffreyRStevens/cocoon/branch/main/graph/badge.svg)](https://app.codecov.io/gh/JeffreyRStevens/cocoon?branch=main)
+coverage](https://codecov.io/gh/JeffreyRStevens/cocoon/graph/badge.svg)](https://app.codecov.io/gh/JeffreyRStevens/cocoon)
 [![R-CMD-check](https://github.com/JeffreyRStevens/cocoon/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/JeffreyRStevens/cocoon/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
@@ -145,9 +145,9 @@ Fuel efficiency and engine displacement were highly correlated (r =
 
 To cite `{cocoon}`, use:
 
-> Stevens, Jeffrey R. (2024). cocoon: Extract, format, and print
-> statistical output. (version 0.1.0)
-> <https://github.com/JeffreyRStevens/cocoon>
+Stevens JR (2025). *cocoon: Extract, format, and print statistical
+output*. R package version 0.1.0.9000,
+<https://github.com/JeffreyRStevens/cocoon>.
 
 ## Contributing
 

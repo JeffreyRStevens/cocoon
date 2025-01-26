@@ -126,9 +126,9 @@ of mean and error interval or mean, lower error limit, and upper error limit)
 
 To cite `{cocoon}`, use:
 
-> Stevens, Jeffrey R. (2024). cocoon: Extract, format, and print statistical output.
-> (version 0.1.0)
-> <https://github.com/JeffreyRStevens/cocoon>
+```{r echo=FALSE, results='asis'}
+print(readCitationFile("inst/CITATION"), style = "text")
+```
 
 
 ## Contributing
