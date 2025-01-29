@@ -146,7 +146,7 @@ Fuel efficiency and engine displacement were highly correlated (r =
 To cite `{cocoon}`, use:
 
 Stevens JR (2025). *cocoon: Extract, format, and print statistical
-output*. R package version 0.1.0.9000,
+output*. R package version 0.2.0,
 <https://github.com/JeffreyRStevens/cocoon>.
 
 ## Contributing

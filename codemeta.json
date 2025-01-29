@@ -8,13 +8,19 @@
   "codeRepository": "https://github.com/JeffreyRStevens/cocoon",
   "issueTracker": "https://github.com/JeffreyRStevens/cocoon/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.4.1 (2024-06-14)",
+  "runtimePlatform": "R version 4.4.2 (2024-10-31)",
+  "provider": {
+    "@id": "https://cran.r-project.org",
+    "@type": "Organization",
+    "name": "Comprehensive R Archive Network (CRAN)",
+    "url": "https://cran.r-project.org"
+  },
   "author": [
     {
       "@type": "Person",
@@ -81,6 +87,30 @@
     },
     {
       "@type": "SoftwareApplication",
+      "identifier": "lme4",
+      "name": "lme4",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=lme4"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "identifier": "lmerTest",
+      "name": "lmerTest",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=lmerTest"
+    },
+    {
+      "@type": "SoftwareApplication",
       "identifier": "rmarkdown",
       "name": "rmarkdown",
       "provider": {
@@ -108,6 +138,18 @@
   "softwareRequirements": {
     "1": {
       "@type": "SoftwareApplication",
+      "identifier": "cli",
+      "name": "cli",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=cli"
+    },
+    "2": {
+      "@type": "SoftwareApplication",
       "identifier": "dplyr",
       "name": "dplyr",
       "provider": {
@@ -118,7 +160,7 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=dplyr"
     },
-    "2": {
+    "3": {
       "@type": "SoftwareApplication",
       "identifier": "lifecycle",
       "name": "lifecycle",
@@ -130,13 +172,26 @@
       },
       "sameAs": "https://CRAN.R-project.org/package=lifecycle"
     },
+    "4": {
+      "@type": "SoftwareApplication",
+      "identifier": "rlang",
+      "name": "rlang",
+      "version": ">= 1.1.0",
+      "provider": {
+        "@id": "https://cran.r-project.org",
+        "@type": "Organization",
+        "name": "Comprehensive R Archive Network (CRAN)",
+        "url": "https://cran.r-project.org"
+      },
+      "sameAs": "https://CRAN.R-project.org/package=rlang"
+    },
     "SystemRequirements": null
   },
-  "fileSize": "4674.862KB",
+  "fileSize": "4813.455KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
-      "datePublished": "2024",
+      "datePublished": "2025",
       "author": [
         {
           "@type": "Person",
@@ -146,11 +201,7 @@
       ],
       "name": "cocoon: Extract, format, and print statistical output",
       "url": "https://github.com/JeffreyRStevens/cocoon",
-      "description": "R package version 0.1.0"
+      "description": "R package version 0.2.0"
     }
-  ],
-  "releaseNotes": "https://github.com/JeffreyRStevens/cocoon/blob/master/NEWS.md",
-  "readme": "https://github.com/JeffreyRStevens/cocoon/blob/main/README.md",
-  "contIntegration": ["https://app.codecov.io/gh/JeffreyRStevens/cocoon?branch=main", "https://github.com/JeffreyRStevens/cocoon/actions/workflows/R-CMD-check.yaml"],
-  "developmentStatus": ["https://www.repostatus.org/#active", "https://lifecycle.r-lib.org/articles/stages.html#stable"]
+  ]
 }
