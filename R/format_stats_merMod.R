@@ -106,18 +106,25 @@ format_stats.merMod <- function(x,
 
   # Build label
   stat_label <- dplyr::case_when(
-    !italics & identical(type, "md") ~ "\u03B2",
-    !italics & identical(type, "latex") ~ "\\textbeta",
-    italics & identical(type, "md") ~ format_chr("\u03B2", italics = TRUE, type = "md"),
-    italics & identical(type, "latex") ~ format_chr("\\beta", italics = TRUE, type = "latex")
+    !italics & identical(type, "md") ~
+      "\u03B2",
+    !italics & identical(type, "latex") ~
+      "\\textbeta",
+    italics & identical(type, "md") ~
+      format_chr("\u03B2", italics = TRUE, type = "md"),
+    italics & identical(type, "latex") ~
+      format_chr("\\beta", italics = TRUE, type = "latex")
   )
 
   # Create statistics string
-  if(full & model_type == "lmer") {
-    paste0(stat_label, " = ", stat_value, ", SE = ", se_value, ", ", format_chr(z_lab, italics = italics, type = type), " = ", z_value)
-  } else if(full & model_type == "glmer") {
-    paste0(stat_label, " = ", stat_value, ", SE = ", se_value, ", ", format_chr(z_lab, italics = italics, type = type), " = ", z_value, ", ", pvalue)
-  } else if(!full & model_type == "lmer") {
+  if (full && model_type == "lmer") {
+    paste0(stat_label, " = ", stat_value, ", SE = ", se_value, ", ",
+           format_chr(z_lab, italics = italics, type = type), " = ", z_value)
+  } else if (full && model_type == "glmer") {
+    paste0(stat_label, " = ", stat_value, ", SE = ", se_value, ", ",
+           format_chr(z_lab, italics = italics, type = type), " = ",
+           z_value, ", ", pvalue)
+  } else if (!full && model_type == "lmer") {
     paste0(stat_label, " = ", stat_value)
   } else {
     paste0(stat_label, " = ", stat_value, ", ", pvalue)

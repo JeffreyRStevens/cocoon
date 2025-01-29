@@ -17,7 +17,6 @@ library(rlang)
 
 ```{r setup-real, echo = FALSE, message = FALSE}
 library(cocoon)
-# devtools::load_all(".")
 ```
 
 ```{r setup-show, eval = FALSE}

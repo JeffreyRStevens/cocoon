@@ -2,15 +2,15 @@
 test_that("lmer linear mixed models are validated properly", {
   suppressMessages(expect_error(
     format_stats(test_lmer),
-    'No general model information is available for this type of model'
+    "No general model information is available for this type of model"
   ))
   suppressMessages(expect_error(
     format_stats(test_lmer, term = 1),
-    '`term` must be a character vector, not the number 1'
+    "`term` must be a character vector, not the number 1"
   ))
   suppressMessages(expect_error(
     format_stats(test_lmer, term = "d"),
-    'Argument `term` not found in model terms'
+    "Argument `term` not found in model terms"
   ))
   suppressMessages(expect_error(
     format_stats(test_lmer, term = "c", digits = "xxx"),
@@ -18,11 +18,11 @@ test_that("lmer linear mixed models are validated properly", {
   ))
   suppressMessages(expect_error(
     format_stats(test_lmer, term = "c", digits = -1),
-    '`digits` must be a whole number larger than or equal to 0 or `NULL`, not the number -1'
+    "`digits` must be a whole number larger than or equal to 0 or `NULL`, not the number -1"
   ))
   suppressMessages(expect_error(
     format_stats(test_lmer, term = "c", digits = 1.5),
-    '`digits` must be a whole number or `NULL`, not the number 1.5'
+    "`digits` must be a whole number or `NULL`, not the number 1.5"
   ))
   suppressMessages(expect_error(
     format_stats(test_lmer, term = "c", pdigits = "xxx"),
@@ -30,11 +30,11 @@ test_that("lmer linear mixed models are validated properly", {
   ))
   suppressMessages(expect_error(
     format_stats(test_lmer, term = "c", pdigits = 0),
-    '`pdigits` must be a whole number between 1 and 5, not the number 0'
+    "`pdigits` must be a whole number between 1 and 5, not the number 0"
   ))
   suppressMessages(expect_error(
     format_stats(test_lmer, term = "c", pdigits = 7),
-    '`pdigits` must be a whole number between 1 and 5, not the number 7'
+    "`pdigits` must be a whole number between 1 and 5, not the number 7"
   ))
   suppressMessages(expect_error(
     format_stats(test_lmer, term = "c", pzero = "xxx"),

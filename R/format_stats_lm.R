@@ -85,7 +85,7 @@ format_stats.lm <- function(x,
   summ <- summary(x)
 
   # Overall statistics for linear model
-  if (is.null(term) & model_type == "lm") {
+  if (is.null(term) && model_type == "lm") {
     r2 <- summ$adj.r.squared
     f <- summ$fstatistic
     f_stat <- f[1]
@@ -95,8 +95,10 @@ format_stats.lm <- function(x,
 
     # Build label
     r2_label <- dplyr::case_when(
-      italics & identical(type, "md") ~ paste0(format_chr("R", italics = italics, type = type), "^2^"),
-      identical(type, "latex") ~ paste0(format_chr("R", italics = italics, type = type), "$^{2}$")
+      italics & identical(type, "md") ~
+        paste0(format_chr("R", italics = italics, type = type), "^2^"),
+      identical(type, "latex") ~
+        paste0(format_chr("R", italics = italics, type = type), "$^{2}$")
     )
     r2_value <- format_num(r2, digits = digits)
 
@@ -106,9 +108,12 @@ format_stats.lm <- function(x,
       identical(type, "md") ~ paste0("_", fstatlab, "_"),
       identical(type, "latex") ~ paste0("$", fstatlab, "$")
     )
-    fstat_label <- dplyr::case_when(identical(dfs, "par") ~ paste0(fstat_label, "(", df1, ", ", df2, ")"),
-                                   identical(dfs, "sub") & identical(type, "md") ~ paste0(fstat_label, "~", df1, ",", df2, "~"),
-                                   identical(dfs, "sub") & identical(type, "latex") ~ paste0(fstat_label, "$_{", df1, ",", df2, "}$"),
+    fstat_label <- dplyr::case_when(identical(dfs, "par") ~
+                                      paste0(fstat_label, "(", df1, ", ", df2, ")"),
+                                   identical(dfs, "sub") & identical(type, "md") ~
+                                     paste0(fstat_label, "~", df1, ",", df2, "~"),
+                                   identical(dfs, "sub") & identical(type, "latex") ~
+                                     paste0(fstat_label, "$_{", df1, ",", df2, "}$"),
                                    .default = fstat_label
     )[1]
     fstat_value <- format_num(f_stat, digits = digits, pzero = TRUE)
@@ -141,12 +146,18 @@ format_stats.lm <- function(x,
   } else if (is.null(term) & model_type == "glm") {
     if (full) {
       stat_label <- dplyr::case_when(
-        italics & identical(type, "md") ~ paste0(format_chr("\u03C7", italics = italics, type = type), "^2^ = "),
-        identical(type, "latex") ~ paste0(format_chr("\\chi", italics = italics, type = type), "$^{2}$ = ")
+        italics & identical(type, "md") ~
+          paste0(format_chr("\u03C7", italics = italics, type = type), "^2^ = "),
+        identical(type, "latex") ~
+          paste0(format_chr("\\chi", italics = italics, type = type), "$^{2}$ = ")
       )
-      paste0("Deviance = ", format_num(summ$deviance, digits = digits), ", ", stat_label, format_num(summ$null.deviance - summ$deviance, digits = digits), ", AIC = ", format_num(summ$aic, digits = digits))
+      paste0("Deviance = ", format_num(summ$deviance, digits = digits),
+             ", ", stat_label,
+             format_num(summ$null.deviance - summ$deviance, digits = digits),
+             ", AIC = ", format_num(summ$aic, digits = digits))
     } else {
-      paste0("Deviance = ", format_num(summ$deviance, digits = digits), ", AIC = ", format_num(summ$aic, digits = digits))
+      paste0("Deviance = ", format_num(summ$deviance, digits = digits),
+             ", AIC = ", format_num(summ$aic, digits = digits))
     }
     # Term-specific statistics for linear and generalized linear models
   } else {
@@ -185,15 +196,21 @@ format_stats.lm <- function(x,
 
     # Build label
     stat_label <- dplyr::case_when(
-      !italics & identical(type, "md") ~ "\u03B2",
-      !italics & identical(type, "latex") ~ "\\textbeta",
-      italics & identical(type, "md") ~ format_chr("\u03B2", italics = TRUE, type = "md"),
-      italics & identical(type, "latex") ~ format_chr("\\beta", italics = TRUE, type = "latex")
+      !italics & identical(type, "md") ~
+        "\u03B2",
+      !italics & identical(type, "latex") ~
+        "\\textbeta",
+      italics & identical(type, "md") ~
+        format_chr("\u03B2", italics = TRUE, type = "md"),
+      italics & identical(type, "latex") ~
+        format_chr("\\beta", italics = TRUE, type = "latex")
     )
 
     # Create statistics string
     if(full) {
-      paste0(stat_label, " = ", stat_value, ", SE = ", se_value, ", ", format_chr(z_lab, italics = italics, type = type), " = ", z_value, ", ", pvalue)
+      paste0(stat_label, " = ", stat_value, ", SE = ", se_value, ", ",
+             format_chr(z_lab, italics = italics, type = type), " = ",
+             z_value, ", ", pvalue)
     } else {
       paste0(stat_label, " = ", stat_value, ", ", pvalue)
     }

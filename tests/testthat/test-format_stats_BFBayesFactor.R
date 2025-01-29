@@ -6,7 +6,7 @@ test_that("format_stats.BFBayesFactor() validates arguments properly", {
   ))
   suppressMessages(expect_error(
     format_stats(test_bf, digits1 = -1),
-    '`digits1` must be a whole number larger than or equal to 0 or `NULL`, not the number -1'
+    "`digits1` must be a whole number larger than or equal to 0 or `NULL`, not the number -1"
   ))
   suppressMessages(expect_error(
     format_stats(test_bf, digits2 = "xxx"),
@@ -14,11 +14,11 @@ test_that("format_stats.BFBayesFactor() validates arguments properly", {
   ))
   suppressMessages(expect_error(
     format_stats(test_bf, digits2 = -1),
-    '`digits2` must be a whole number larger than or equal to 0 or `NULL`, not the number -1'
+    "`digits2` must be a whole number larger than or equal to 0 or `NULL`, not the number -1"
   ))
   suppressMessages(expect_error(
     format_stats(test_bf, cutoff = 0.5),
-    '`cutoff` must be a number larger than or equal to 1 or `NULL`, not the number 0.5'
+    "`cutoff` must be a number larger than or equal to 1 or `NULL`, not the number 0.5"
   ))
   suppressMessages(expect_error(
     format_stats(test_bf, cutoff = "xxx"),
@@ -33,4 +33,3 @@ test_that("format_stats.BFBayesFactor() validates arguments properly", {
     '`type` must be "md" or "latex", not the string "xxx"'
   ))
 })
-

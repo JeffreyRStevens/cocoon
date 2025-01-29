@@ -100,7 +100,7 @@ format_stats.htest <- function(x,
                 full = full,
                 italics = italics,
                 type = type)
-  } else if (grepl("t-test", x$method) | grepl("Wilcoxon", x$method)) {
+  } else if (grepl("t-test", x$method) || grepl("Wilcoxon", x$method)) {
     if (is.null(digits)) {
       digits <- 1
     } else {
@@ -125,4 +125,3 @@ format_stats.htest <- function(x,
     )
   }
 }
-

@@ -88,9 +88,12 @@ format_stats.aov <- function(x,
     identical(type, "md") ~ paste0("_", statlab, "_"),
     identical(type, "latex") ~ paste0("$", statlab, "$")
   )
-  stat_label <- dplyr::case_when(identical(dfs, "par") ~ paste0(stat_label, "(", df1, ", ", df2, ")"),
-                                 identical(dfs, "sub") & identical(type, "md") ~ paste0(stat_label, "~", df1, ",", df2, "~"),
-                                 identical(dfs, "sub") & identical(type, "latex") ~ paste0(stat_label, "$_{", df1, ",", df2, "}$"),
+  stat_label <- dplyr::case_when(identical(dfs, "par") ~
+                                   paste0(stat_label, "(", df1, ", ", df2, ")"),
+                                 identical(dfs, "sub") & identical(type, "md") ~
+                                   paste0(stat_label, "~", df1, ",", df2, "~"),
+                                 identical(dfs, "sub") & identical(type, "latex") ~
+                                   paste0(stat_label, "$_{", df1, ",", df2, "}$"),
                                  .default = stat_label
   )[1]
 

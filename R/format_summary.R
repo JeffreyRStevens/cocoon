@@ -107,14 +107,16 @@ format_summary <- function(x = NULL,
     xinterval <- xtendency - xlower
   } else if (!is.null(values)) {
     check_numeric(values)
-    stopifnot("Argument `values` must be a vector with two or three elements." = length(values) %in% c(2, 3))
+    stopifnot("Argument `values` must be a vector with two or three elements." =
+                length(values) %in% c(2, 3))
     if (length(values) == 2) {
       xtendency <- values[1]
       xinterval <- values[2]
       xlower <- xtendency - xinterval
       xupper <- xtendency + xinterval
     } else {
-      stopifnot("Argument `values` must include the mean followed by the lower CI limit then the upper CI limit." = values[1] >= values[2] & values[1] <= values[3])
+      stopifnot("Argument `values` must include the mean followed by the lower CI limit then the upper CI limit." =
+                  values[1] >= values[2] & values[1] <= values[3])
       xtendency <- values[1]
       xlower <- values[2]
       xupper <- values[3]
@@ -133,30 +135,44 @@ format_summary <- function(x = NULL,
     .default = ""
   )
   mean_lab <- dplyr::case_when(
-    identical(tendlabel, "none") ~ "",
+    identical(tendlabel, "none") ~
+      "",
     identical(tendency, "mean") & identical(tendlabel, "abbr") ~
-      paste0(format_chr("M", italics = italics, type = type), format_sub(subscript, type = type), " = "),
+      paste0(format_chr("M", italics = italics, type = type),
+             format_sub(subscript, type = type), " = "),
     identical(tendency, "mean") & identical(tendlabel, "word") ~
-      paste0(format_chr("Mean", italics = italics, type = type), format_sub(subscript, type = type), " = "),
+      paste0(format_chr("Mean", italics = italics, type = type),
+             format_sub(subscript, type = type), " = "),
     identical(tendency, "median") & identical(tendlabel, "abbr") ~
-      paste0(format_chr("Mdn", italics = italics, type = type), format_sub(subscript, type = type), " = "),
+      paste0(format_chr("Mdn", italics = italics, type = type),
+             format_sub(subscript, type = type), " = "),
     identical(tendency, "median") & identical(tendlabel, "word") ~
-      paste0(format_chr("Median", italics = italics, type = type), format_sub(subscript, type = type), " = ")
+      paste0(format_chr("Median", italics = italics, type = type),
+             format_sub(subscript, type = type), " = ")
   )
   full_mean <- paste0(mean_lab, format_num(xtendency, digits = digits), unit)
 
   # Add error
   error_lab <- dplyr::case_when(
     !errorlabel ~ "",
-    identical(error, "ci") ~ paste0(cilevel * 100, "% CI"),
-    identical(error, "sd") ~ paste0(format_chr("SD", italics = italics, type = type)),
-    identical(error, "se") ~ paste0(format_chr("SE", italics = italics, type = type)),
-    identical(error, "iqr") ~ paste0(format_chr("IQR", italics = italics, type = type))
+    identical(error, "ci") ~
+      paste0(cilevel * 100, "% CI"),
+    identical(error, "sd") ~
+      paste0(format_chr("SD", italics = italics, type = type)),
+    identical(error, "se") ~
+      paste0(format_chr("SE", italics = italics, type = type)),
+    identical(error, "iqr") ~
+      paste0(format_chr("IQR", italics = italics, type = type))
   )
   full_error <- dplyr::case_when(
-    identical(display, "limits") ~ paste0(", ", error_lab, " [", format_num(xlower, digits = digits), ", ", format_num(xupper, digits = digits), "]"),
-    identical(display, "pm") ~ paste0(" \u00b1 ", format_num(xinterval, digits = digits)),
-    identical(display, "par") ~ paste0(" ", "(", error_lab, " = ", format_num(xinterval, digits = digits), ")"),
+    identical(display, "limits") ~
+      paste0(", ", error_lab, " [", format_num(xlower, digits = digits), ", ",
+             format_num(xupper, digits = digits), "]"),
+    identical(display, "pm") ~
+      paste0(" \u00b1 ", format_num(xinterval, digits = digits)),
+    identical(display, "par") ~
+      paste0(" ", "(", error_lab, " = ",
+             format_num(xinterval, digits = digits), ")"),
     .default = ""
   )
   paste0(full_mean, full_error)
@@ -174,7 +190,9 @@ format_mean <- function(x = NULL,
                         units = NULL,
                         display = "none",
                         type = "md") {
-  format_summary(x = x, tendency = tendency, values = values, digits = digits, tendlabel = tendlabel, italics = italics, subscript = subscript, units = units, display = display, type = type)
+  format_summary(x = x, tendency = tendency, values = values, digits = digits,
+                 tendlabel = tendlabel, italics = italics, subscript = subscript,
+                 units = units, display = display, type = type)
 }
 
 #' @rdname format_summary
@@ -192,7 +210,10 @@ format_meanci <- function(x = NULL,
                           cilevel = 0.95,
                           errorlabel = TRUE,
                           type = "md") {
-  format_summary(x = x, tendency = tendency, error = error, values = values, digits = digits, tendlabel = tendlabel, italics = italics, subscript = subscript, units = units, display = display, cilevel = cilevel, errorlabel = errorlabel, type = type)
+  format_summary(x = x, tendency = tendency, error = error, values = values,
+                 digits = digits, tendlabel = tendlabel, italics = italics,
+                 subscript = subscript, units = units, display = display,
+                 cilevel = cilevel, errorlabel = errorlabel, type = type)
 }
 
 #' @rdname format_summary
@@ -209,7 +230,10 @@ format_meanse <- function(x = NULL,
                           display = "par",
                           errorlabel = TRUE,
                           type = "md") {
-  format_summary(x = x, tendency = tendency, error = error, values = values, digits = digits, tendlabel = tendlabel, italics = italics, subscript = subscript, units = units, display = display, errorlabel = errorlabel, type = type)
+  format_summary(x = x, tendency = tendency, error = error, values = values,
+                 digits = digits, tendlabel = tendlabel, italics = italics,
+                 subscript = subscript, units = units, display = display,
+                 errorlabel = errorlabel, type = type)
 }
 
 #' @rdname format_summary
@@ -226,7 +250,10 @@ format_meansd <- function(x = NULL,
                           display = "par",
                           errorlabel = TRUE,
                           type = "md") {
-  format_summary(x = x, tendency = tendency, error = error, values = values, digits = digits, tendlabel = tendlabel, italics = italics, subscript = subscript, units = units, display = display, errorlabel = errorlabel, type = type)
+  format_summary(x = x, tendency = tendency, error = error, values = values,
+                 digits = digits, tendlabel = tendlabel, italics = italics,
+                 subscript = subscript, units = units, display = display,
+                 errorlabel = errorlabel, type = type)
 }
 
 #' @rdname format_summary
@@ -241,7 +268,9 @@ format_median <- function(x = NULL,
                           units = NULL,
                           display = "none",
                           type = "md") {
-  format_summary(x = x, tendency = tendency, values = values, digits = digits, tendlabel = tendlabel, italics = italics, subscript = subscript, units = units, display = display, type = type)
+  format_summary(x = x, tendency = tendency, values = values, digits = digits,
+                 tendlabel = tendlabel, italics = italics, subscript = subscript,
+                 units = units, display = display, type = type)
 }
 
 #' @rdname format_summary
@@ -258,5 +287,8 @@ format_medianiqr <- function(x = NULL,
                              display = "par",
                              errorlabel = TRUE,
                              type = "md") {
-  format_summary(x = x, tendency = tendency, error = error, values = values, digits = digits, tendlabel = tendlabel, italics = italics, subscript = subscript, units = units, display = display, errorlabel = errorlabel, type = type)
+  format_summary(x = x, tendency = tendency, error = error, values = values,
+                 digits = digits, tendlabel = tendlabel, italics = italics,
+                 subscript = subscript, units = units, display = display,
+                 errorlabel = errorlabel, type = type)
 }
