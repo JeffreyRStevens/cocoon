@@ -1,3 +1,4 @@
+
 #' Format linear mixed model statistics
 #'
 #' @description
@@ -62,6 +63,7 @@ format_stats.merMod <- function(x,
                                 type = "md",
                                 ...) {
   # Validate arguments
+  if (is.null(term)) cli::cli_abort("No general model information is available for this type of model. Enter a term.")
   check_character(term)
   check_number_whole(digits, min = 0, allow_null = TRUE)
   check_number_whole(pdigits, min = 1, max = 5)
@@ -92,8 +94,8 @@ format_stats.merMod <- function(x,
     p_value <- coeffs[term_num, "Pr(>|z|)"]
     z_lab <- "z"
     pvalue <- format_p(p_value,
-      digits = pdigits, pzero = pzero,
-      italics = italics, type = type
+                       digits = pdigits, pzero = pzero,
+                       italics = italics, type = type
     )
   }
 
@@ -104,17 +106,24 @@ format_stats.merMod <- function(x,
 
   # Build label
   stat_label <- dplyr::case_when(
-    !italics & identical(type, "md") ~ "\u03B2",
-    !italics & identical(type, "latex") ~ "\\textbeta",
-    italics & identical(type, "md") ~ format_chr("\u03B2", italics = TRUE, type = "md"),
-    italics & identical(type, "latex") ~ format_chr("\\beta", italics = TRUE, type = "latex")
+    !italics & identical(type, "md") ~
+      "\u03B2",
+    !italics & identical(type, "latex") ~
+      "\\textbeta",
+    italics & identical(type, "md") ~
+      format_chr("\u03B2", italics = TRUE, type = "md"),
+    italics & identical(type, "latex") ~
+      format_chr("\\beta", italics = TRUE, type = "latex")
   )
 
   # Create statistics string
   if (full && model_type == "lmer") {
-    paste0(stat_label, " = ", stat_value, ", SE = ", se_value, ", ", format_chr(z_lab, italics = italics, type = type), " = ", z_value)
+    paste0(stat_label, " = ", stat_value, ", SE = ", se_value, ", ",
+           format_chr(z_lab, italics = italics, type = type), " = ", z_value)
   } else if (full && model_type == "glmer") {
-    paste0(stat_label, " = ", stat_value, ", SE = ", se_value, ", ", format_chr(z_lab, italics = italics, type = type), " = ", z_value, ", ", pvalue)
+    paste0(stat_label, " = ", stat_value, ", SE = ", se_value, ", ",
+           format_chr(z_lab, italics = italics, type = type), " = ",
+           z_value, ", ", pvalue)
   } else if (!full && model_type == "lmer") {
     paste0(stat_label, " = ", stat_value)
   } else {

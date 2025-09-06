@@ -1,3 +1,4 @@
+
 #' Format hypothesis test statistics
 #'
 #' This method formats hypothesis test statistics from the class `htest`.
@@ -55,7 +56,7 @@
 #' format_stats(test_corr2)
 #'
 #' # Format t-test
-#' format_stats(test_ttest)
+#'   format_stats(test_ttest)
 #'
 #' # Remove mean and confidence interval
 #' format_stats(test_ttest, full = FALSE)
@@ -93,13 +94,12 @@ format_stats.htest <- function(x,
       digits <- digits
     }
     format_corr(x,
-      digits = digits,
-      pdigits = pdigits,
-      pzero = pzero,
-      full = full,
-      italics = italics,
-      type = type
-    )
+                digits = digits,
+                pdigits = pdigits,
+                pzero = pzero,
+                full = full,
+                italics = italics,
+                type = type)
   } else if (grepl("t-test", x$method) || grepl("Wilcoxon", x$method)) {
     if (is.null(digits)) {
       digits <- 1
@@ -107,22 +107,21 @@ format_stats.htest <- function(x,
       digits <- digits
     }
     format_ttest(x,
-      digits = digits,
-      pdigits = pdigits,
-      pzero = pzero,
-      full = full,
-      italics = italics,
-      dfs = dfs,
-      mean = mean,
-      type = type
-    )
+                 digits = digits,
+                 pdigits = pdigits,
+                 pzero = pzero,
+                 full = full,
+                 italics = italics,
+                 dfs = dfs,
+                 mean = mean,
+                 type = type)
   } else {
     stop(
-      "Objects of method '",
-      x$method,
-      "' are currently not supported.",
-      "\nVisit https://github.com/JeffreyRStevens/cocoon/issues to request support for this method.",
-      call. = FALSE
+      "Objects of method '"
+      , x$method
+      , "' are currently not supported."
+      , "\nVisit https://github.com/JeffreyRStevens/cocoon/issues to request support for this method."
+      , call. = FALSE
     )
   }
 }

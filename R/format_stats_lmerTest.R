@@ -1,3 +1,4 @@
+
 #' Format linear mixed model statistics
 #'
 #' @description
@@ -78,9 +79,8 @@ format_stats.lmerModLmerTest <- function(x,
   z <- coeffs[term_num, "t value"]
   p_value <- coeffs[term_num, "Pr(>|t|)"]
   pvalue <- format_p(p_value,
-    digits = pdigits, pzero = pzero,
-    italics = italics, type = type
-  )
+                     digits = pdigits, pzero = pzero,
+                     italics = italics, type = type)
   z_lab <- "t"
 
 
@@ -91,15 +91,21 @@ format_stats.lmerModLmerTest <- function(x,
 
   # Build label
   stat_label <- dplyr::case_when(
-    !italics & identical(type, "md") ~ "\u03B2",
-    !italics & identical(type, "latex") ~ "\\textbeta",
-    italics & identical(type, "md") ~ format_chr("\u03B2", italics = TRUE, type = "md"),
-    italics & identical(type, "latex") ~ format_chr("\\beta", italics = TRUE, type = "latex")
+    !italics & identical(type, "md") ~
+      "\u03B2",
+    !italics & identical(type, "latex") ~
+      "\\textbeta",
+    italics & identical(type, "md") ~
+      format_chr("\u03B2", italics = TRUE, type = "md"),
+    italics & identical(type, "latex") ~
+      format_chr("\\beta", italics = TRUE, type = "latex")
   )
 
   # Create statistics string
   if (full) {
-    paste0(stat_label, " = ", stat_value, ", SE = ", se_value, ", ", format_chr(z_lab, italics = italics, type = type), " = ", z_value, ", ", pvalue)
+    paste0(stat_label, " = ", stat_value, ", SE = ", se_value, ", ",
+           format_chr(z_lab, italics = italics, type = type), " = ",
+           z_value, ", ", pvalue)
   } else {
     paste0(stat_label, " = ", stat_value, ", ", pvalue)
   }
