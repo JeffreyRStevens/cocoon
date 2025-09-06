@@ -79,7 +79,7 @@ format_stats(test_corr, digits = 3, pdigits = 4, pzero = TRUE)
 format_stats(test_corr2)
 
 # Format t-test
-format_stats(test_ttest)
+  format_stats(test_ttest)
 
 # Remove mean and confidence interval
 format_stats(test_ttest, full = FALSE)
