@@ -3,6 +3,6 @@ bibentry(
   title    = "cocoon: Extract, format, and print statistical output",
   author = "Jeffrey R. Stevens",
   year = "2025",
-  note = "R package version 0.2.0",
+  note = "R package version 0.2.1",
   url = "https://github.com/JeffreyRStevens/cocoon"
 )

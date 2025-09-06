@@ -8,13 +8,13 @@
   "codeRepository": "https://github.com/JeffreyRStevens/cocoon",
   "issueTracker": "https://github.com/JeffreyRStevens/cocoon/issues",
   "license": "https://spdx.org/licenses/GPL-3.0",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "programmingLanguage": {
     "@type": "ComputerLanguage",
     "name": "R",
     "url": "https://r-project.org"
   },
-  "runtimePlatform": "R version 4.4.2 (2024-10-31)",
+  "runtimePlatform": "R version 4.5.1 (2025-06-13)",
   "provider": {
     "@id": "https://cran.r-project.org",
     "@type": "Organization",
@@ -187,7 +187,7 @@
     },
     "SystemRequirements": null
   },
-  "fileSize": "4813.455KB",
+  "fileSize": "4754.886KB",
   "citation": [
     {
       "@type": "SoftwareSourceCode",
@@ -201,7 +201,7 @@
       ],
       "name": "cocoon: Extract, format, and print statistical output",
       "url": "https://github.com/JeffreyRStevens/cocoon",
-      "description": "R package version 0.2.0"
+      "description": "R package version 0.2.1"
     }
   ]
 }
