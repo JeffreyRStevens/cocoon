@@ -1,4 +1,3 @@
-
 test_that("aov ANOVAs are validated properly", {
   suppressMessages(expect_error(
     format_stats(test_aov),

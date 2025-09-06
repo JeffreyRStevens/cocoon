@@ -1,4 +1,3 @@
-
 test_that("easycorrelation correlations are validated properly", {
   suppressMessages(expect_error(
     format_stats(test_easycorr, digits = "xxx"),

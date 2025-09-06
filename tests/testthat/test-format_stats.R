@@ -19,7 +19,6 @@ test_that("unavailable format_stats() methods are aborted", {
     format_stats(test_chisq),
     "Objects of method"
   ))
-
 })
 
 

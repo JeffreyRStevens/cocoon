@@ -12,3 +12,4 @@
 ^codemeta\.json$
 ^CRAN-SUBMISSION$
 ^cran-comments\.md$
+^release_checks\.md$

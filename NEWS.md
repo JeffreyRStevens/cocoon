@@ -1,8 +1,12 @@
+# cocoon (development version)
+
+* Add `exact = TRUE` to `wilcox.test()` in htest testing to prevent warning produced in r-devel.
+
 # cocoon 0.2.0
 
-* Add format_stats() methods for `aov()`, `glm()`, `lme4::glmer()`, `lmerTest::glmer()`, `lm()`, `lme4::lmer()`, and `lmerTest::lmer()`
+* Add format_stats() methods for `aov()`, `glm()`, `lme4::glmer()`, `lmerTest::glmer()`, `lm()`, `lme4::lmer()`, and `lmerTest::lmer()`.
 
-* Add [standalone check functions](https://posit-conf-2024.github.io/programming-r/01-functions-01-advanced.html#standalone-functions-from-rlang) from {rlang}
+* Add [standalone check functions](https://posit-conf-2024.github.io/programming-r/01-functions-01-advanced.html#standalone-functions-from-rlang) from {rlang}.
 
 # cocoon 0.1.0
 

@@ -1,4 +1,3 @@
-
 test_that("lm linear regessions are validated properly", {
   suppressMessages(expect_error(
     format_stats(test_lm, term = "d"),

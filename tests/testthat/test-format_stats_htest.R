@@ -1,4 +1,3 @@
-
 test_that("htest correlations are validated properly", {
   suppressMessages(expect_error(
     format_stats(test_corr, digits = "xxx"),

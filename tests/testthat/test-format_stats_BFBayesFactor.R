@@ -1,4 +1,3 @@
-
 test_that("format_stats.BFBayesFactor() validates arguments properly", {
   suppressMessages(expect_error(
     format_stats(test_bf, digits1 = "xxx"),

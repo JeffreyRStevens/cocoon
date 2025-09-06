@@ -1,4 +1,3 @@
-
 #' Format Bayes factors
 #'
 #' This method formats Bayes factors from the
@@ -60,13 +59,13 @@ format_stats.BFBayesFactor <- function(x,
                                        subscript = "10",
                                        type = "md",
                                        ...) {
-
   format_bf(x,
-            digits1 = digits1,
-            digits2 = digits2,
-            cutoff = cutoff,
-            label = label,
-            italics = italics,
-            subscript = subscript,
-            type = type)
+    digits1 = digits1,
+    digits2 = digits2,
+    cutoff = cutoff,
+    label = label,
+    italics = italics,
+    subscript = subscript,
+    type = type
+  )
 }

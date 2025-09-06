@@ -1,4 +1,3 @@
-
 test_that("lmerTest linear mixed models are validated properly", {
   suppressMessages(expect_error(
     format_stats(test_lmer2),
