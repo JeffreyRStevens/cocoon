@@ -50,16 +50,19 @@
 #'
 #' # Format for LaTeX
 #' format_stats(test_bf, type = "latex")
-format_stats.BFBayesFactor <- function(x,
-                                       digits1 = 1,
-                                       digits2 = 2,
-                                       cutoff = NULL,
-                                       label = "BF",
-                                       italics = TRUE,
-                                       subscript = "10",
-                                       type = "md",
-                                       ...) {
-  format_bf(x,
+format_stats.BFBayesFactor <- function(
+  x,
+  digits1 = 1,
+  digits2 = 2,
+  cutoff = NULL,
+  label = "BF",
+  italics = TRUE,
+  subscript = "10",
+  type = "md",
+  ...
+) {
+  format_bf(
+    x,
     digits1 = digits1,
     digits2 = digits2,
     cutoff = cutoff,

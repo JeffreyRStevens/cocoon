@@ -35,14 +35,16 @@
 #'
 #' # Format Kendall's tau for LaTeX
 #' format_stats(test_corr2, type = "latex")
-format_stats.easycorrelation <- function(x,
-                                         digits = 2,
-                                         pdigits = 3,
-                                         pzero = FALSE,
-                                         full = TRUE,
-                                         italics = TRUE,
-                                         type = "md",
-                                         ...) {
+format_stats.easycorrelation <- function(
+  x,
+  digits = 2,
+  pdigits = 3,
+  pzero = FALSE,
+  full = TRUE,
+  italics = TRUE,
+  type = "md",
+  ...
+) {
   # Validate arguments
   check_number_whole(digits, min = 0, allow_null = TRUE)
   check_number_whole(pdigits, min = 1, max = 5)
@@ -74,7 +76,8 @@ format_stats.easycorrelation <- function(x,
     conf.int = c(x$CI_low, x$CI_high)
   )
   class(y) <- "htest"
-  format_corr(y,
+  format_corr(
+    y,
     digits = digits,
     pdigits = pdigits,
     pzero = pzero,

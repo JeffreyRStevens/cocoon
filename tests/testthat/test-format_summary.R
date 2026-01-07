@@ -40,21 +40,63 @@ test_that("format_summary() works properly", {
     '`display` must be "limits", "pm", "par", or "none", not the string "xxx"'
   ))
   expect_equal(format_summary(x = 1:10), "_M_ = 5.5, 95% CI [3.3, 7.7]")
-  expect_equal(format_summary(values = c(5.5, 1.2)), "_M_ = 5.5, 95% CI [4.3, 6.7]")
-  expect_equal(format_summary(values = c(5.5, 1.2, 7.4)), "_M_ = 5.5, 95% CI [1.2, 7.4]")
-  expect_equal(format_summary(x = 1:10, error = "sd"), "_M_ = 5.5, _SD_ [2.5, 8.5]")
-  expect_equal(format_summary(x = 1:10, error = "se"), "_M_ = 5.5, _SE_ [4.5, 6.5]")
-  expect_equal(format_summary(x = 1:10, digits = 2), "_M_ = 5.50, 95% CI [3.33, 7.67]")
-  expect_equal(format_summary(x = 1:10, tendlabel = "word"), "_Mean_ = 5.5, 95% CI [3.3, 7.7]")
-  expect_equal(format_summary(x = 1:10, tendlabel = "none"), "5.5, 95% CI [3.3, 7.7]")
-  expect_equal(format_summary(x = 1:10, italics = FALSE), "M = 5.5, 95% CI [3.3, 7.7]")
-  expect_equal(format_summary(x = 1:10, subscript = "test"), "_M_~test~ = 5.5, 95% CI [3.3, 7.7]")
-  expect_equal(format_summary(x = 1:10, units = "cm"), "_M_ = 5.5 cm, 95% CI [3.3, 7.7]")
+  expect_equal(
+    format_summary(values = c(5.5, 1.2)),
+    "_M_ = 5.5, 95% CI [4.3, 6.7]"
+  )
+  expect_equal(
+    format_summary(values = c(5.5, 1.2, 7.4)),
+    "_M_ = 5.5, 95% CI [1.2, 7.4]"
+  )
+  expect_equal(
+    format_summary(x = 1:10, error = "sd"),
+    "_M_ = 5.5, _SD_ [2.5, 8.5]"
+  )
+  expect_equal(
+    format_summary(x = 1:10, error = "se"),
+    "_M_ = 5.5, _SE_ [4.5, 6.5]"
+  )
+  expect_equal(
+    format_summary(x = 1:10, digits = 2),
+    "_M_ = 5.50, 95% CI [3.33, 7.67]"
+  )
+  expect_equal(
+    format_summary(x = 1:10, tendlabel = "word"),
+    "_Mean_ = 5.5, 95% CI [3.3, 7.7]"
+  )
+  expect_equal(
+    format_summary(x = 1:10, tendlabel = "none"),
+    "5.5, 95% CI [3.3, 7.7]"
+  )
+  expect_equal(
+    format_summary(x = 1:10, italics = FALSE),
+    "M = 5.5, 95% CI [3.3, 7.7]"
+  )
+  expect_equal(
+    format_summary(x = 1:10, subscript = "test"),
+    "_M_~test~ = 5.5, 95% CI [3.3, 7.7]"
+  )
+  expect_equal(
+    format_summary(x = 1:10, units = "cm"),
+    "_M_ = 5.5 cm, 95% CI [3.3, 7.7]"
+  )
   expect_equal(format_summary(x = 1:10, display = "pm"), "_M_ = 5.5 ± 2.2")
-  expect_equal(format_summary(x = 1:10, display = "par"), "_M_ = 5.5 (95% CI = 2.2)")
-  expect_equal(format_summary(x = 1:10, cilevel = 0.9), "_M_ = 5.5, 90% CI [3.7, 7.3]")
-  expect_equal(format_summary(x = 1:10, errorlabel = FALSE), "_M_ = 5.5,  [3.3, 7.7]")
-  expect_equal(format_summary(x = 1:10, type = "latex"), "$M$ = 5.5, 95% CI [3.3, 7.7]")
+  expect_equal(
+    format_summary(x = 1:10, display = "par"),
+    "_M_ = 5.5 (95% CI = 2.2)"
+  )
+  expect_equal(
+    format_summary(x = 1:10, cilevel = 0.9),
+    "_M_ = 5.5, 90% CI [3.7, 7.3]"
+  )
+  expect_equal(
+    format_summary(x = 1:10, errorlabel = FALSE),
+    "_M_ = 5.5,  [3.3, 7.7]"
+  )
+  expect_equal(
+    format_summary(x = 1:10, type = "latex"),
+    "$M$ = 5.5, 95% CI [3.3, 7.7]"
+  )
   expect_equal(format_mean(x = 1:10), "_M_ = 5.5")
   expect_equal(format_median(x = 1:10), "_Mdn_ = 5.5")
   expect_equal(format_meanci(x = 1:10), "_M_ = 5.5, 95% CI [3.3, 7.7]")

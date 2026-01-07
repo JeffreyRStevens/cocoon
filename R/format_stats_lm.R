@@ -1,4 +1,3 @@
-
 #' Format linear model statistics
 #'
 #' @description
@@ -61,16 +60,18 @@
 #'
 #' # Format for LaTeX
 #' format_stats(test_lm, term = "hp", type = "latex")
-format_stats.lm <- function(x,
-                            term = NULL,
-                            digits = 3,
-                            pdigits = 3,
-                            pzero = FALSE,
-                            full = TRUE,
-                            italics = TRUE,
-                            dfs = "par",
-                            type = "md",
-                            ...) {
+format_stats.lm <- function(
+  x,
+  term = NULL,
+  digits = 3,
+  pdigits = 3,
+  pzero = FALSE,
+  full = TRUE,
+  italics = TRUE,
+  dfs = "par",
+  type = "md",
+  ...
+) {
   # Validate arguments
   check_character(term, allow_null = TRUE)
   check_number_whole(digits, min = 0, allow_null = TRUE)
@@ -108,18 +109,22 @@ format_stats.lm <- function(x,
       identical(type, "md") ~ paste0("_", fstatlab, "_"),
       identical(type, "latex") ~ paste0("$", fstatlab, "$")
     )
-    fstat_label <- dplyr::case_when(identical(dfs, "par") ~
-                                      paste0(fstat_label, "(", df1, ", ", df2, ")"),
-                                   identical(dfs, "sub") & identical(type, "md") ~
-                                     paste0(fstat_label, "~", df1, ",", df2, "~"),
-                                   identical(dfs, "sub") & identical(type, "latex") ~
-                                     paste0(fstat_label, "$_{", df1, ",", df2, "}$"),
-                                   .default = fstat_label
+    fstat_label <- dplyr::case_when(
+      identical(dfs, "par") ~
+        paste0(fstat_label, "(", df1, ", ", df2, ")"),
+      identical(dfs, "sub") & identical(type, "md") ~
+        paste0(fstat_label, "~", df1, ",", df2, "~"),
+      identical(dfs, "sub") & identical(type, "latex") ~
+        paste0(fstat_label, "$_{", df1, ",", df2, "}$"),
+      .default = fstat_label
     )[1]
     fstat_value <- format_num(f_stat, digits = digits, pzero = TRUE)
-    pvalue <- format_p(p_value,
-                       digits = pdigits, pzero = pzero,
-                       italics = italics, type = type
+    pvalue <- format_p(
+      p_value,
+      digits = pdigits,
+      pzero = pzero,
+      italics = italics,
+      type = type
     )
 
     # Create statistics string
@@ -135,29 +140,46 @@ format_stats.lm <- function(x,
       mean_label <- mean_value <- cis <- NULL
     }
 
-    build_string(mean_label = mean_label,
-                 mean_value = mean_value,
-                 cis = cis,
-                 stat_label = stat_label,
-                 stat_value = stat_value,
-                 pvalue = pvalue,
-                 full = full)
+    build_string(
+      mean_label = mean_label,
+      mean_value = mean_value,
+      cis = cis,
+      stat_label = stat_label,
+      stat_value = stat_value,
+      pvalue = pvalue,
+      full = full
+    )
     # Overall statistics for generalized linear model
   } else if (is.null(term) & model_type == "glm") {
     if (full) {
       stat_label <- dplyr::case_when(
         italics & identical(type, "md") ~
-          paste0(format_chr("\u03C7", italics = italics, type = type), "^2^ = "),
+          paste0(
+            format_chr("\u03C7", italics = italics, type = type),
+            "^2^ = "
+          ),
         identical(type, "latex") ~
-          paste0(format_chr("\\chi", italics = italics, type = type), "$^{2}$ = ")
+          paste0(
+            format_chr("\\chi", italics = italics, type = type),
+            "$^{2}$ = "
+          )
       )
-      paste0("Deviance = ", format_num(summ$deviance, digits = digits),
-             ", ", stat_label,
-             format_num(summ$null.deviance - summ$deviance, digits = digits),
-             ", AIC = ", format_num(summ$aic, digits = digits))
+      paste0(
+        "Deviance = ",
+        format_num(summ$deviance, digits = digits),
+        ", ",
+        stat_label,
+        format_num(summ$null.deviance - summ$deviance, digits = digits),
+        ", AIC = ",
+        format_num(summ$aic, digits = digits)
+      )
     } else {
-      paste0("Deviance = ", format_num(summ$deviance, digits = digits),
-             ", AIC = ", format_num(summ$aic, digits = digits))
+      paste0(
+        "Deviance = ",
+        format_num(summ$deviance, digits = digits),
+        ", AIC = ",
+        format_num(summ$aic, digits = digits)
+      )
     }
     # Term-specific statistics for linear and generalized linear models
   } else {
@@ -189,9 +211,12 @@ format_stats.lm <- function(x,
     stat_value <- format_num(estimate, digits = digits, pzero = TRUE)
     se_value <- format_num(se, digits = digits, pzero = TRUE)
     z_value <- format_num(z, digits = digits, pzero = TRUE)
-    pvalue <- format_p(p_value,
-                       digits = pdigits, pzero = pzero,
-                       italics = italics, type = type
+    pvalue <- format_p(
+      p_value,
+      digits = pdigits,
+      pzero = pzero,
+      italics = italics,
+      type = type
     )
 
     # Build label
@@ -207,10 +232,20 @@ format_stats.lm <- function(x,
     )
 
     # Create statistics string
-    if(full) {
-      paste0(stat_label, " = ", stat_value, ", SE = ", se_value, ", ",
-             format_chr(z_lab, italics = italics, type = type), " = ",
-             z_value, ", ", pvalue)
+    if (full) {
+      paste0(
+        stat_label,
+        " = ",
+        stat_value,
+        ", SE = ",
+        se_value,
+        ", ",
+        format_chr(z_lab, italics = italics, type = type),
+        " = ",
+        z_value,
+        ", ",
+        pvalue
+      )
     } else {
       paste0(stat_label, " = ", stat_value, ", ", pvalue)
     }

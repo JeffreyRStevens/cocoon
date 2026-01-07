@@ -13,9 +13,7 @@
 #' @examples
 #' format_num(pi, digits = 2)
 #' format_num(pi, digits = 4)
-format_num <- function(x,
-                       digits = 1,
-                       pzero = TRUE) {
+format_num <- function(x, digits = 1, pzero = TRUE) {
   # Check arguments
   check_numeric(x)
   check_number_whole(digits, min = 0)
@@ -43,9 +41,7 @@ format_num <- function(x,
 #' format_scientific(1111)
 #' # Control number of digits after decimal with digits
 #' format_scientific(1111, digits = 3)
-format_scientific <- function(x,
-                              digits = 1,
-                              type = "md") {
+format_scientific <- function(x, digits = 1, type = "md") {
   # Check arguments
   check_numeric(x)
   check_number_whole(digits, min = 1)
@@ -56,12 +52,20 @@ format_scientific <- function(x,
   num <- gsub("e\\+00$", "", num)
   num <- dplyr::case_when(
     identical(type, "md") ~ gsub("e\\+0?(\\d+)", "\u00D710^\\1^", num),
-    identical(type, "latex") ~ gsub("e\\+0?(\\d+)$", " \\\\times 10\\^\\{\\1\\}", num),
+    identical(type, "latex") ~ gsub(
+      "e\\+0?(\\d+)$",
+      " \\\\times 10\\^\\{\\1\\}",
+      num
+    ),
     .default = num
   )
   num <- dplyr::case_when(
     identical(type, "md") ~ gsub("e\\-0?(\\d+)", "\u00D710^-\\1^", num),
-    identical(type, "latex") ~ gsub("e\\-0?(\\d+)$", " \\\\times 10\\^\\{-\\1\\}", num),
+    identical(type, "latex") ~ gsub(
+      "e\\-0?(\\d+)$",
+      " \\\\times 10\\^\\{-\\1\\}",
+      num
+    ),
     .default = num
   )
   num
@@ -85,9 +89,7 @@ format_scientific <- function(x,
 #' format_chr("Hello world!", type = "latex")
 #' # Remove italics
 #' format_chr("Hello world!", italics = FALSE)
-format_chr <- function(x,
-                       italics = TRUE,
-                       type = "md") {
+format_chr <- function(x, italics = TRUE, type = "md") {
   # Check arguments
   check_string(x)
   check_bool(italics)
@@ -114,8 +116,7 @@ format_chr <- function(x,
 #' format_sub("Hello world!")
 #' # Format in LaTeX syntax
 #' format_sub("Hello world!", type = "latex")
-format_sub <- function(subscript = NULL,
-                       type = "md") {
+format_sub <- function(subscript = NULL, type = "md") {
   # Check arguments
   check_string(subscript, allow_null = TRUE)
   check_match(type, c("md", "latex"))

@@ -51,14 +51,44 @@ test_that("format_bf() works properly", {
   expect_equal(format_bf(0.001234, cutoff = 100), "_BF_~10~ < 0.01")
   expect_equal(format_bf(0.1234, cutoff = 1000), "_BF_~10~ = 0.12")
   expect_equal(format_bf(0.1234, digits2 = 3), "_BF_~10~ = 0.123")
-  expect_equal(format_bf(0.001234, digits2 = 2, cutoff = 1000), "_BF_~10~ < 0.01")
-  expect_equal(format_bf(10^c(-3:4)), c("_BF_~10~ = 1.0×10^-3^", "_BF_~10~ = 1.0×10^-2^", "_BF_~10~ = 0.10", "_BF_~10~ = 1.0", "_BF_~10~ = 10.0", "_BF_~10~ = 100.0", "_BF_~10~ = 1.0×10^3^", "_BF_~10~ = 1.0×10^4^"))
-  expect_equal(format_bf(10^c(-3:4), digits2 = 2, cutoff = 1000), c("_BF_~10~ < 0.001", "_BF_~10~ = 0.01", "_BF_~10~ = 0.10", "_BF_~10~ = 1.0", "_BF_~10~ = 10.0", "_BF_~10~ = 100.0", "_BF_~10~ = 1000", "_BF_~10~ > 1000"))
+  expect_equal(
+    format_bf(0.001234, digits2 = 2, cutoff = 1000),
+    "_BF_~10~ < 0.01"
+  )
+  expect_equal(
+    format_bf(10^c(-3:4)),
+    c(
+      "_BF_~10~ = 1.0×10^-3^",
+      "_BF_~10~ = 1.0×10^-2^",
+      "_BF_~10~ = 0.10",
+      "_BF_~10~ = 1.0",
+      "_BF_~10~ = 10.0",
+      "_BF_~10~ = 100.0",
+      "_BF_~10~ = 1.0×10^3^",
+      "_BF_~10~ = 1.0×10^4^"
+    )
+  )
+  expect_equal(
+    format_bf(10^c(-3:4), digits2 = 2, cutoff = 1000),
+    c(
+      "_BF_~10~ < 0.001",
+      "_BF_~10~ = 0.01",
+      "_BF_~10~ = 0.10",
+      "_BF_~10~ = 1.0",
+      "_BF_~10~ = 10.0",
+      "_BF_~10~ = 100.0",
+      "_BF_~10~ = 1000",
+      "_BF_~10~ > 1000"
+    )
+  )
   expect_equal(format_bf(0.1234, italics = FALSE), "BF~10~ = 0.12")
   expect_equal(format_bf(0.1234, subscript = "01"), "_BF_~01~ = 0.12")
   expect_equal(format_bf(0.1234, subscript = ""), "_BF_ = 0.12")
   expect_equal(format_bf(0.1234, type = "latex"), "$BF$$_{10}$ = 0.12")
-  expect_equal(format_bf(0.1234, type = "latex", italics = FALSE), "BF$_{10}$ = 0.12")
+  expect_equal(
+    format_bf(0.1234, type = "latex", italics = FALSE),
+    "BF$_{10}$ = 0.12"
+  )
   expect_equal(format_bf(0.1234, label = "bf"), "_bf_~10~ = 0.12")
   expect_equal(format_bf(0.1234, label = ""), "0.12")
   skip_on_cran()

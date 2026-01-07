@@ -36,8 +36,14 @@ test_that("format_scientific() works properly", {
   expect_equal(format_scientific(1000), "1.0×10^3^")
   expect_equal(format_scientific(0.00123), "1.2×10^-3^")
   expect_equal(format_scientific(0.00123, digits = 2), "1.23×10^-3^")
-  expect_equal(format_scientific(0.00123, type = "latex"), "1.2 \\times 10^{-3}")
-  expect_equal(format_scientific(0.00123, digits = 2, type = "latex"), "1.23 \\times 10^{-3}")
+  expect_equal(
+    format_scientific(0.00123, type = "latex"),
+    "1.2 \\times 10^{-3}"
+  )
+  expect_equal(
+    format_scientific(0.00123, digits = 2, type = "latex"),
+    "1.23 \\times 10^{-3}"
+  )
 })
 
 test_that("format_chr() formats properly", {

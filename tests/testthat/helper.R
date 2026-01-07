@@ -9,8 +9,18 @@ df <- data.frame(
 test_corr <- cor.test(df$a, df$b)
 test_corr2 <- cor.test(df$a, df$c)
 test_easycorr <- correlation::correlation(df, select = "a", select2 = "c")
-test_easycorr2 <- correlation::correlation(df, select = "a", select2 = "c", method = "spearman")
-test_easycorr3 <- correlation::correlation(df, select = "a", select2 = "c", method = "kendall")
+test_easycorr2 <- correlation::correlation(
+  df,
+  select = "a",
+  select2 = "c",
+  method = "spearman"
+)
+test_easycorr3 <- correlation::correlation(
+  df,
+  select = "a",
+  select2 = "c",
+  method = "kendall"
+)
 test_ttest1 <- t.test(df$a, mu = 5)
 test_ttest <- t.test(df$a, df$b)
 test_ttest2 <- t.test(df$a, c(df$b, 120))
@@ -22,7 +32,11 @@ test_aov <- aov(c ~ a, data = df)
 test_lm <- lm(c ~ a, data = df)
 test_glm <- glm(d ~ a, data = df, family = binomial)
 test_lmer <- suppressMessages(lme4::lmer(c ~ a + (1 | e), data = df))
-test_glmer <- suppressMessages(lme4::glmer(d ~ a + (1 | e), data = df, family = binomial))
+test_glmer <- suppressMessages(lme4::glmer(
+  d ~ a + (1 | e),
+  data = df,
+  family = binomial
+))
 test_lmer2 <- suppressMessages(lmerTest::lmer(c ~ a + (1 | e), data = df))
 test_bf <- BayesFactor::ttestBF(df$a, mu = 5)
 
