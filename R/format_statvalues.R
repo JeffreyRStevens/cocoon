@@ -1,3 +1,75 @@
+#' Format Chi-squared statistics
+#'
+#' @description
+#' This is an internal function called by [format_stats()], which we
+#' recommend using instead.
+#'
+#' @inheritParams format_stats.htest
+#'
+#' @return
+#' A character string of statistical information formatted in Markdown or LaTeX.
+#' @export
+#'
+#' @family functions for printing statistical objects
+#'
+#' @examples
+#' format_stats(chisq.test(matrix(c(12, 5, 7, 7), ncol = 2)))
+format_chisq <- function(
+  x,
+  digits = 1,
+  pdigits = 3,
+  pzero = FALSE,
+  italics = TRUE,
+  dfs = "par",
+  type = "md"
+) {
+  # Format numbers
+  stat_value <- format_num(x$statistic, digits = digits)
+  df <- dplyr::case_when(
+    round(x$parameter, 1) == round(x$parameter) ~
+      format_num(x$parameter, digits = 0),
+    .default = format_num(x$parameter, digits = digits)
+  )
+  n <- sum(x$observed)
+  pvalue <- format_p(
+    x$p.value,
+    digits = pdigits,
+    pzero = pzero,
+    italics = italics,
+    type = type
+  )
+
+  # Build label
+
+  stat_label <- dplyr::case_when(
+    !italics & identical(type, "md") ~
+      "\u03C7\U00B2",
+    !italics & identical(type, "latex") ~
+      "\\textchi$^{2}$",
+    identical(type, "md") ~
+      "\uD835\uDF12\U00B2",
+    identical(type, "latex") ~
+      format_chr("\\chi^{2}", italics = italics, type = type),
+  )
+
+  stat_label <- dplyr::case_when(
+    identical(dfs, "par") ~
+      paste0(stat_label, "(", df, ")"),
+    identical(dfs, "sub") & identical(type, "md") ~
+      paste0(stat_label, "~", df, "~"),
+    identical(dfs, "sub") & identical(type, "latex") ~
+      paste0(stat_label, "$_{", df, "}$"),
+    .default = stat_label
+  )[1]
+
+  # Create statistics string
+  build_string(
+    stat_label = stat_label,
+    stat_value = stat_value,
+    pvalue = pvalue,
+    full = FALSE
+  )
+}
 
 #' Format correlation statistics
 #'
@@ -20,22 +92,19 @@
 #'
 #' @examples
 #' # format_stats(cor.test(mtcars$mpg, mtcars$cyl))
-format_corr <- function(x,
-                        digits,
-                        pdigits,
-                        pzero,
-                        full,
-                        italics,
-                        type,
-                        ...) {
+format_corr <- function(x, digits, pdigits, pzero, full, italics, type, ...) {
   # Check input type
-  stopifnot("Input must be a correlation object." =
-              (inherits(x, what = "htest") && grepl("correlation", x$method)) |
-              inherits(x, what = "easycorrelation"))
+  stopifnot(
+    "Input must be a correlation object." = (inherits(x, what = "htest") &&
+      grepl("correlation", x$method)) |
+      inherits(x, what = "easycorrelation")
+  )
 
   # Validate arguments
-  stopifnot("Input must be a correlation object." =
-              inherits(x, what = "htest") && grepl("correlation", x$method))
+  stopifnot(
+    "Input must be a correlation object." = inherits(x, what = "htest") &&
+      grepl("correlation", x$method)
+  )
   check_number_whole(digits, min = 0, allow_null = TRUE)
   check_number_whole(pdigits, min = 1, max = 5)
   check_bool(pzero)
@@ -57,9 +126,12 @@ format_corr <- function(x,
     cis <- NULL
     full <- FALSE
   }
-  pvalue <- format_p(x$p.value,
-                     digits = pdigits, pzero = pzero,
-                     italics = italics, type = type
+  pvalue <- format_p(
+    x$p.value,
+    digits = pdigits,
+    pzero = pzero,
+    italics = italics,
+    type = type
   )
 
   # Build label
@@ -87,11 +159,13 @@ format_corr <- function(x,
   )
 
   # Create statistics string
-  build_string(cis = cis,
-               stat_label = stat_label,
-               stat_value = stat_value,
-               pvalue = pvalue,
-               full = full)
+  build_string(
+    cis = cis,
+    stat_label = stat_label,
+    stat_value = stat_value,
+    pvalue = pvalue,
+    full = full
+  )
 }
 
 
@@ -115,43 +189,51 @@ format_corr <- function(x,
 #'
 #' @examples
 #' format_stats(t.test(formula = mtcars$mpg ~ mtcars$vs))
-format_ttest <- function(x,
-                         digits,
-                         pdigits,
-                         pzero,
-                         full,
-                         italics,
-                         dfs,
-                         mean,
-                         type) {
+format_ttest <- function(
+  x,
+  digits,
+  pdigits,
+  pzero,
+  full,
+  italics,
+  dfs,
+  mean,
+  type
+) {
   # Format numbers
   ttest_method <- dplyr::case_when(
     grepl("t-test", x$method) ~ "student",
     grepl("Wilcoxon", x$method) ~ "wilcoxon"
   )
 
-  if (ttest_method == "student") { # format data for Student's t-test
+  if (ttest_method == "student") {
+    # format data for Student's t-test
     if (length(x$estimate) == 2) {
       mean_value <- format_num(x$estimate[1] - x$estimate[2], digits = digits)
     } else if (length(x$estimate) == 1) {
       mean_value <- format_num(x$estimate, digits = digits)
     }
     cis <- format_num(x$conf.int, digits = digits)
-    df <- dplyr::case_when(round(x$parameter, 1) == round(x$parameter) ~
-                             format_num(x$parameter, digits = 0),
-                           .default = format_num(x$parameter, digits = digits)
+    df <- dplyr::case_when(
+      round(x$parameter, 1) == round(x$parameter) ~
+        format_num(x$parameter, digits = 0),
+      .default = format_num(x$parameter, digits = digits)
     )
     statlab <- "t"
-  } else { # format data for Wilcoxon tests
+  } else {
+    # format data for Wilcoxon tests
     full <- FALSE
     dfs <- "none"
     df <- ""
     statlab <- attr(x$statistic, "name")
   }
   stat_value <- format_num(x$statistic, digits = digits)
-  pvalue <- format_p(x$p.value,
-                     digits = pdigits, pzero = pzero,
-                     italics = italics, type = type
+  pvalue <- format_p(
+    x$p.value,
+    digits = pdigits,
+    pzero = pzero,
+    italics = italics,
+    type = type
   )
 
   # Build label
@@ -160,13 +242,14 @@ format_ttest <- function(x,
     identical(type, "md") ~ paste0("_", statlab, "_"),
     identical(type, "latex") ~ paste0("$", statlab, "$")
   )
-  stat_label <- dplyr::case_when(identical(dfs, "par") ~
-                                   paste0(stat_label, "(", df, ")"),
-                                 identical(dfs, "sub") & identical(type, "md") ~
-                                   paste0(stat_label, "~", df, "~"),
-                                 identical(dfs, "sub") & identical(type, "latex") ~
-                                   paste0(stat_label, "$_{", df, "}$"),
-                                 .default = stat_label
+  stat_label <- dplyr::case_when(
+    identical(dfs, "par") ~
+      paste0(stat_label, "(", df, ")"),
+    identical(dfs, "sub") & identical(type, "md") ~
+      paste0(stat_label, "~", df, "~"),
+    identical(dfs, "sub") & identical(type, "latex") ~
+      paste0(stat_label, "$_{", df, "}$"),
+    .default = stat_label
   )[1]
 
   # Create statistics string
@@ -181,14 +264,15 @@ format_ttest <- function(x,
     mean_label <- mean_value <- cis <- NULL
   }
 
-  build_string(mean_label = mean_label,
-               mean_value = mean_value,
-               cis = cis,
-               stat_label = stat_label,
-               stat_value = stat_value,
-               pvalue = pvalue,
-               full = full)
-
+  build_string(
+    mean_label = mean_label,
+    mean_value = mean_value,
+    cis = cis,
+    stat_label = stat_label,
+    stat_value = stat_value,
+    pvalue = pvalue,
+    full = full
+  )
 }
 
 #' Format Bayes factors
@@ -247,14 +331,16 @@ format_ttest <- function(x,
 #'
 #' # Format for LaTeX
 #' format_bf(12.4444, type = "latex")
-format_bf <- function(x,
-                      digits1 = 1,
-                      digits2 = 2,
-                      cutoff = NULL,
-                      label = "BF",
-                      italics = TRUE,
-                      subscript = "10",
-                      type = "md") {
+format_bf <- function(
+  x,
+  digits1 = 1,
+  digits2 = 2,
+  cutoff = NULL,
+  label = "BF",
+  italics = TRUE,
+  subscript = "10",
+  type = "md"
+) {
   # Check input type
   if (is.numeric(x)) {
     bf <- x
@@ -275,8 +361,10 @@ format_bf <- function(x,
 
   # Build label
   if (label != "") {
-    bf_lab <- paste0(format_chr(label, italics = italics, type = type),
-                     format_sub(subscript, type = type))
+    bf_lab <- paste0(
+      format_chr(label, italics = italics, type = type),
+      format_sub(subscript, type = type)
+    )
     operator <- " = "
   } else {
     bf_lab <- ""
@@ -287,15 +375,20 @@ format_bf <- function(x,
   if (is.null(cutoff)) {
     bf_value <- dplyr::case_when(
       bf >= 1000 ~ format_scientific(bf, digits = digits1, type = type),
-      bf <= 1 / 10^digits2 ~ format_scientific(bf, digits = digits1, type = type),
+      bf <= 1 / 10^digits2 ~ format_scientific(
+        bf,
+        digits = digits1,
+        type = type
+      ),
       bf >= 1 ~ format_num(bf, digits = digits1),
       bf < 1 ~ format_num(bf, digits = digits2)
     )
   } else {
     bf_value <- dplyr::case_when(
       bf >= cutoff ~ format_num(cutoff, digits = 0),
-      bf <= 1 / cutoff & format_num(1 / cutoff, digits = digits2) ==
-        format_num(0, digits = digits2) ~
+      bf <= 1 / cutoff &
+        format_num(1 / cutoff, digits = digits2) ==
+          format_num(0, digits = digits2) ~
         sub("0$", "1", format_num(1 / cutoff, digits = 3)),
       bf <= 1 / cutoff ~ format_num(1 / cutoff, digits = digits2),
       bf <= 1 / 10^digits2 ~ as.character(1 / 10^digits2),
@@ -363,12 +456,14 @@ format_bf <- function(x,
 #'
 #' # Format for LaTeX
 #' format_p(0.001, type = "latex")
-format_p <- function(x,
-                     digits = 3,
-                     pzero = FALSE,
-                     label = "p",
-                     italics = TRUE,
-                     type = "md") {
+format_p <- function(
+  x,
+  digits = 3,
+  pzero = FALSE,
+  label = "p",
+  italics = TRUE,
+  type = "md"
+) {
   # Check arguments
   check_numeric(x)
   check_number_whole(digits, min = 1, max = 5, allow_null = TRUE)
@@ -402,5 +497,3 @@ format_p <- function(x,
   )
   paste0(p_lab, operator, pvalue)
 }
-
-

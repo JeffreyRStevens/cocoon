@@ -51,11 +51,32 @@ test_that("lmerTest linear mixed models are validated properly", {
 
 
 test_that("formatting lm linear models works properly", {
-  expect_equal(format_stats(test_lmer2, "a"), "_β_ = -0.103, SE = 0.310, _t_ = -0.333, _p_ = .748")
-  expect_equal(format_stats(test_lmer2, "a", digits = 2), "_β_ = -0.10, SE = 0.31, _t_ = -0.33, _p_ = .748")
-  expect_equal(format_stats(test_lmer2, "a", pdigits = 2), "_β_ = -0.103, SE = 0.310, _t_ = -0.333, _p_ = .75")
-  expect_equal(format_stats(test_lmer2, "a", pzero = TRUE), "_β_ = -0.103, SE = 0.310, _t_ = -0.333, _p_ = 0.748")
-  expect_equal(format_stats(test_lmer2, "a", full = FALSE), "_β_ = -0.103, _p_ = .748")
-  expect_equal(format_stats(test_lmer2, "a", italics = FALSE), "β = -0.103, SE = 0.310, t = -0.333, p = .748")
-  expect_equal(format_stats(test_lmer2, "a", type = "latex"), "$\\beta$ = -0.103, SE = 0.310, $t$ = -0.333, $p$ = .748")
+  expect_equal(
+    format_stats(test_lmer2, "a"),
+    "_β_ = -0.103, SE = 0.310, _t_ = -0.333, _p_ = .748"
+  )
+  expect_equal(
+    format_stats(test_lmer2, "a", digits = 2),
+    "_β_ = -0.10, SE = 0.31, _t_ = -0.33, _p_ = .748"
+  )
+  expect_equal(
+    format_stats(test_lmer2, "a", pdigits = 2),
+    "_β_ = -0.103, SE = 0.310, _t_ = -0.333, _p_ = .75"
+  )
+  expect_equal(
+    format_stats(test_lmer2, "a", pzero = TRUE),
+    "_β_ = -0.103, SE = 0.310, _t_ = -0.333, _p_ = 0.748"
+  )
+  expect_equal(
+    format_stats(test_lmer2, "a", full = FALSE),
+    "_β_ = -0.103, _p_ = .748"
+  )
+  expect_equal(
+    format_stats(test_lmer2, "a", italics = FALSE),
+    "β = -0.103, SE = 0.310, t = -0.333, p = .748"
+  )
+  expect_equal(
+    format_stats(test_lmer2, "a", type = "latex"),
+    "$\\beta$ = -0.103, SE = 0.310, $t$ = -0.333, $p$ = .748"
+  )
 })

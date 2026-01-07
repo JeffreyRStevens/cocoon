@@ -1,4 +1,3 @@
-
 #' Format linear mixed model statistics
 #'
 #' @description
@@ -48,15 +47,17 @@
 #'
 #' # Format for LaTeX
 #' format_stats(test_lmer, term = "hp", type = "latex")
-format_stats.lmerModLmerTest <- function(x,
-                                         term = NULL,
-                                         digits = 3,
-                                         pdigits = 3,
-                                         pzero = FALSE,
-                                         full = TRUE,
-                                         italics = TRUE,
-                                         type = "md",
-                                         ...) {
+format_stats.lmerModLmerTest <- function(
+  x,
+  term = NULL,
+  digits = 3,
+  pdigits = 3,
+  pzero = FALSE,
+  full = TRUE,
+  italics = TRUE,
+  type = "md",
+  ...
+) {
   # Validate arguments
   check_character(term)
   check_number_whole(digits, min = 0, allow_null = TRUE)
@@ -78,11 +79,14 @@ format_stats.lmerModLmerTest <- function(x,
   se <- coeffs[term_num, "Std. Error"]
   z <- coeffs[term_num, "t value"]
   p_value <- coeffs[term_num, "Pr(>|t|)"]
-  pvalue <- format_p(p_value,
-                     digits = pdigits, pzero = pzero,
-                     italics = italics, type = type)
+  pvalue <- format_p(
+    p_value,
+    digits = pdigits,
+    pzero = pzero,
+    italics = italics,
+    type = type
+  )
   z_lab <- "t"
-
 
   # Format values
   stat_value <- format_num(estimate, digits = digits, pzero = TRUE)
@@ -103,9 +107,19 @@ format_stats.lmerModLmerTest <- function(x,
 
   # Create statistics string
   if (full) {
-    paste0(stat_label, " = ", stat_value, ", SE = ", se_value, ", ",
-           format_chr(z_lab, italics = italics, type = type), " = ",
-           z_value, ", ", pvalue)
+    paste0(
+      stat_label,
+      " = ",
+      stat_value,
+      ", SE = ",
+      se_value,
+      ", ",
+      format_chr(z_lab, italics = italics, type = type),
+      " = ",
+      z_value,
+      ", ",
+      pvalue
+    )
   } else {
     paste0(stat_label, " = ", stat_value, ", ", pvalue)
   }

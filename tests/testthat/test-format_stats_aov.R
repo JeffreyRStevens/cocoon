@@ -52,12 +52,36 @@ test_that("aov ANOVAs are validated properly", {
 
 test_that("formatting ANOVAs works properly", {
   expect_equal(format_stats(test_aov, "a"), "_F_(1, 8) = 0.1, _p_ = .748")
-  expect_equal(format_stats(test_aov, "a", digits = 2), "_F_(1, 8) = 0.11, _p_ = .748")
-  expect_equal(format_stats(test_aov, "a", pdigits = 2), "_F_(1, 8) = 0.1, _p_ = .75")
-  expect_equal(format_stats(test_aov, "a", pzero = TRUE), "_F_(1, 8) = 0.1, _p_ = 0.748")
-  expect_equal(format_stats(test_aov, "a", italics = FALSE), "F(1, 8) = 0.1, p = .748")
-  expect_equal(format_stats(test_aov, "a", dfs = "sub"), "_F_~1,8~ = 0.1, _p_ = .748")
-  expect_equal(format_stats(test_aov, "a", dfs = "none"), "_F_ = 0.1, _p_ = .748")
-  expect_equal(format_stats(test_aov, "a", type = "latex"), "$F$(1, 8) = 0.1, $p$ = .748")
-  expect_equal(format_stats(test_aov, "a", type = "latex", dfs = "sub"), "$F$$_{1,8}$ = 0.1, $p$ = .748")
+  expect_equal(
+    format_stats(test_aov, "a", digits = 2),
+    "_F_(1, 8) = 0.11, _p_ = .748"
+  )
+  expect_equal(
+    format_stats(test_aov, "a", pdigits = 2),
+    "_F_(1, 8) = 0.1, _p_ = .75"
+  )
+  expect_equal(
+    format_stats(test_aov, "a", pzero = TRUE),
+    "_F_(1, 8) = 0.1, _p_ = 0.748"
+  )
+  expect_equal(
+    format_stats(test_aov, "a", italics = FALSE),
+    "F(1, 8) = 0.1, p = .748"
+  )
+  expect_equal(
+    format_stats(test_aov, "a", dfs = "sub"),
+    "_F_~1,8~ = 0.1, _p_ = .748"
+  )
+  expect_equal(
+    format_stats(test_aov, "a", dfs = "none"),
+    "_F_ = 0.1, _p_ = .748"
+  )
+  expect_equal(
+    format_stats(test_aov, "a", type = "latex"),
+    "$F$(1, 8) = 0.1, $p$ = .748"
+  )
+  expect_equal(
+    format_stats(test_aov, "a", type = "latex", dfs = "sub"),
+    "$F$$_{1,8}$ = 0.1, $p$ = .748"
+  )
 })

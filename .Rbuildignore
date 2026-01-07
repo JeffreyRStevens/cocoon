@@ -13,3 +13,5 @@
 ^CRAN-SUBMISSION$
 ^cran-comments\.md$
 ^release_checks\.md$
+^\.vscode$
+^[.]?air[.]toml$

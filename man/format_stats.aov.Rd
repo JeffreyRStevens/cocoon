@@ -69,6 +69,7 @@ format_stats(test_aov, term = "hp", type = "latex")
 \seealso{
 Other functions for printing statistical objects: 
 \code{\link{format_bf}()},
+\code{\link{format_chisq}()},
 \code{\link{format_corr}()},
 \code{\link{format_stats}()},
 \code{\link{format_stats.BFBayesFactor}()},

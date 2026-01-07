@@ -16,7 +16,7 @@ library(rlang)
 ```
 
 ```{r setup-real, echo = FALSE, message = FALSE}
-library(cocoon)
+devtools::load_all()
 ```
 
 ```{r setup-show, eval = FALSE}
@@ -33,6 +33,32 @@ The `{cocoon}` package uses APA style as the default, but allows more flexible f
 
 Running a statistical test in R typically returns a list with lots of information about the test, often including things like statistical test values and p-values. The aim of the `format_stats()` function is to extract and format statistics for a suite of commonly used statistical objects (correlation and t-tests).
 
+### Chi-squared tests
+
+The `format_stats()` function can input objects returned by the `chisq.test()` to report and format the appropriate Chi-squared test statistic, degrees of freedom, and p-value for both goodness-of-fit tests and tests of independence.
+
+```{r}
+gof <- chisq.test(c(A = 20, B = 15, C = 25))
+toi <- chisq.test(matrix(c(12, 5, 7, 7), ncol = 2))
+```
+
+| Code | Output |
+|-------|-----|
+| `format_stats(gof)` | `r format_stats(gof)` |
+| `format_stats(toi)` | `r format_stats(toi)` |
+
+Format the number of digits of coefficients with `digits` and digits of p-values with `pdigits`. Include the leading zeros for coefficients and p-values with `pzero = TRUE`. Remove italics with  `italics = FALSE`. With `dfs`, format degrees of freedom as parenthetical (`par`) or subscripts (`sub`) or remove them (`none`).
+
+| Code | Output |
+|---------|------|
+| `format_stats(gof)` | `r format_stats(gof)` |
+| `format_stats(gof, digits = 1, pdigits = 2)` | `r format_stats(gof, digits = 1, pdigits = 2)` |
+| `format_stats(gof, pzero = TRUE)` | `r format_stats(gof, pzero = TRUE)` |
+| `format_stats(gof, italics = FALSE)` | `r format_stats(gof, italics = FALSE)` |
+| `format_stats(gof, dfs = "sub")` | `r format_stats(gof, dfs = "sub")` |
+| `format_stats(gof, dfs = "none")` | `r format_stats(gof, dfs = "none")` |
+
+
 ### Correlations
 
 The `format_stats()` function can input objects returned by the `cor.test()` or `correlation::correlation()` function and detects whether the object is from a Pearson, Kendall, or Spearman correlation. It then reports and formats the appropriate correlation coefficient and p-value.
@@ -41,8 +67,18 @@ Let's start by creating a few different correlations.
 
 ```{r}
 mpg_disp_corr_pearson <- cor.test(mtcars$mpg, mtcars$disp, method = "pearson")
-mpg_disp_corr_spearman <- cor.test(mtcars$mpg, mtcars$disp, method = "spearman", exact = FALSE)
-mpg_disp_corr_kendall <- cor.test(mtcars$mpg, mtcars$disp, method = "kendall", exact = FALSE)
+mpg_disp_corr_spearman <- cor.test(
+  mtcars$mpg,
+  mtcars$disp,
+  method = "spearman",
+  exact = FALSE
+)
+mpg_disp_corr_kendall <- cor.test(
+  mtcars$mpg,
+  mtcars$disp,
+  method = "kendall",
+  exact = FALSE
+)
 ```
 
 For Pearson correlations, we get the correlation coefficient and the confidence intervals. Since Spearman and Kendall correlations are non-parametric, confidence intervals are not returned. Confidence intervals can be omitted from Pearson correlations by setting `full = FALSE`.
@@ -77,7 +113,12 @@ ttest_gear_carb <- t.test(mtcars$gear, mtcars$carb)
 ttest_gear_carb_paired <- t.test(mtcars$gear, mtcars$carb, paired = TRUE)
 ttest_gear_carb_onesample <- t.test(mtcars$gear, mu = 4)
 wtest_gear_carb <- wilcox.test(mtcars$gear, mtcars$carb, exact = FALSE)
-wtest_gear_carb_paired <- wilcox.test(mtcars$gear, mtcars$carb, paired = TRUE, exact = FALSE)
+wtest_gear_carb_paired <- wilcox.test(
+  mtcars$gear,
+  mtcars$carb,
+  paired = TRUE,
+  exact = FALSE
+)
 wtest_gear_carb_onesample <- wilcox.test(mtcars$gear, mu = 4, exact = FALSE)
 ```
 
@@ -93,7 +134,7 @@ For Student's t-tests, we get the mean value or difference and the confidence in
 | `format_stats(wtest_gear_carb_paired)` | `r format_stats(wtest_gear_carb_paired)` |
 | `format_stats(wtest_gear_carb_onesample)` | `r format_stats(wtest_gear_carb_onesample)` |
 
-Format the number of digits of coefficients with `digits` and digits of p-values with `pdigits`. Include the leading zeros for coefficients and p-values with `pzero = TRUE`. Remove italics with  `italics = FALSE`.
+Format the number of digits of coefficients with `digits` and digits of p-values with `pdigits`. Include the leading zeros for coefficients and p-values with `pzero = TRUE`. Remove italics with  `italics = FALSE`. With `dfs`, format degrees of freedom as parenthetical (`par`) or subscripts (`sub`) or remove them (`none`).
 
 | Code | Output |
 |---------|------|
@@ -103,6 +144,8 @@ Format the number of digits of coefficients with `digits` and digits of p-values
 | `format_stats(ttest_gear_carb, italics = FALSE)` | `r format_stats(ttest_gear_carb, italics = FALSE)` |
 | `format_stats(wtest_gear_carb)` | `r format_stats(wtest_gear_carb)` |
 | `format_stats(wtest_gear_carb, italics = FALSE)` | `r format_stats(wtest_gear_carb, italics = FALSE)` |
+| `format_stats(ttest_gear_carb, dfs = "sub")` | `r format_stats(ttest_gear_carb, dfs = "sub")` |
+| `format_stats(ttest_gear_carb, dfs = "none")` | `r format_stats(ttest_gear_carb, dfs = "none")` |
 
 ### ANOVAs
 
@@ -140,7 +183,11 @@ glm_am_cyl_hp <- glm(am ~ cyl * hp, data = mtcars, family = binomial)
 summary(glm_am_cyl_hp)
 lmer_mpg_cyl_hp <- lme4::lmer(mpg ~ hp + (1 | cyl), data = mtcars)
 summary(lmer_mpg_cyl_hp)
-glmer_am_cyl_hp <- lme4::glmer(am ~ hp + (1 | cyl), data = mtcars, family = binomial)
+glmer_am_cyl_hp <- lme4::glmer(
+  am ~ hp + (1 | cyl),
+  data = mtcars,
+  family = binomial
+)
 summary(glmer_am_cyl_hp)
 lmer_mpg_cyl_hp2 <- lmerTest::lmer(mpg ~ hp + (1 | cyl), data = mtcars)
 summary(lmer_mpg_cyl_hp2)

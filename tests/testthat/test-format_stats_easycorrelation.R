@@ -43,13 +43,34 @@ test_that("easycorrelation correlations are validated properly", {
 
 
 test_that("formatting easycorrelations works properly", {
-  expect_equal(format_stats(test_easycorr), "_r_ = -.12, 95% CI [-0.70, 0.55], _p_ = .748")
+  expect_equal(
+    format_stats(test_easycorr),
+    "_r_ = -.12, 95% CI [-0.70, 0.55], _p_ = .748"
+  )
   expect_equal(format_stats(test_easycorr2), "_ρ_ = -.03, _p_ = .933")
   expect_equal(format_stats(test_easycorr3), "_τ_ = .00, _p_ = 1.000")
-  expect_equal(format_stats(test_easycorr, digits = 3), "_r_ = -.117, 95% CI [-0.695, 0.553], _p_ = .748")
-  expect_equal(format_stats(test_easycorr, pdigits = 2), "_r_ = -.12, 95% CI [-0.70, 0.55], _p_ = .75")
-  expect_equal(format_stats(test_easycorr, pzero = TRUE), "_r_ = -0.12, 95% CI [-0.70, 0.55], _p_ = 0.748")
-  expect_equal(format_stats(test_easycorr, full = FALSE), "_r_ = -.12, _p_ = .748")
-  expect_equal(format_stats(test_easycorr, italics = FALSE), "r = -.12, 95% CI [-0.70, 0.55], p = .748")
-  expect_equal(format_stats(test_easycorr, type = "latex"), "$r$ = -.12, 95% CI [-0.70, 0.55], $p$ = .748")
+  expect_equal(
+    format_stats(test_easycorr, digits = 3),
+    "_r_ = -.117, 95% CI [-0.695, 0.553], _p_ = .748"
+  )
+  expect_equal(
+    format_stats(test_easycorr, pdigits = 2),
+    "_r_ = -.12, 95% CI [-0.70, 0.55], _p_ = .75"
+  )
+  expect_equal(
+    format_stats(test_easycorr, pzero = TRUE),
+    "_r_ = -0.12, 95% CI [-0.70, 0.55], _p_ = 0.748"
+  )
+  expect_equal(
+    format_stats(test_easycorr, full = FALSE),
+    "_r_ = -.12, _p_ = .748"
+  )
+  expect_equal(
+    format_stats(test_easycorr, italics = FALSE),
+    "r = -.12, 95% CI [-0.70, 0.55], p = .748"
+  )
+  expect_equal(
+    format_stats(test_easycorr, type = "latex"),
+    "$r$ = -.12, 95% CI [-0.70, 0.55], $p$ = .748"
+  )
 })
