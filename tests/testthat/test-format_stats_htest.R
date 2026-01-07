@@ -1,3 +1,75 @@
+test_that("htest Chi-squared tests are validated properly", {
+  suppressMessages(expect_error(
+    format_stats(test_chisq, digits = "xxx"),
+    '`digits` must be a whole number or `NULL`, not the string "xxx"'
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_chisq, digits = -1),
+    "`digits` must be a whole number larger than or equal to 0 or `NULL`, not the number -1"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_chisq, digits = 1.5),
+    "`digits` must be a whole number or `NULL`, not the number 1.5"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_chisq, pdigits = "xxx"),
+    '`pdigits` must be a whole number, not the string "xxx"'
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_chisq, pdigits = 0),
+    "`pdigits` must be a whole number between 1 and 5, not the number 0"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_chisq, pdigits = 7),
+    "`pdigits` must be a whole number between 1 and 5, not the number 7"
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_chisq, pzero = "xxx"),
+    '`pzero` must be `TRUE` or `FALSE`, not the string "xxx"'
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_chisq, full = "xxx"),
+    '`full` must be `TRUE` or `FALSE`, not the string "xxx"'
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_chisq, italics = "xxx"),
+    '`italics` must be `TRUE` or `FALSE`, not the string "xxx"'
+  ))
+  suppressMessages(expect_error(
+    format_stats(test_chisq, type = "xxx"),
+    '`type` must be "md" or "latex", not the string "xxx"'
+  ))
+})
+
+
+test_that("formatting Chi-squared tests works properly", {
+  expect_equal(
+    format_stats(test_chisq),
+    "_χ_²(2) = 2.5, _p_ = .287"
+  )
+  expect_equal(
+    format_stats(test_chisq, digits = 3),
+    "_χ_²(2) = 2.500, _p_ = .287"
+  )
+  expect_equal(
+    format_stats(test_chisq, pdigits = 2),
+    "_χ_²(2) = 2.5, _p_ = .29"
+  )
+  expect_equal(
+    format_stats(test_chisq, pzero = TRUE),
+    "_χ_²(2) = 2.5, _p_ = 0.287"
+  )
+  expect_equal(
+    format_stats(test_chisq, italics = FALSE),
+    "χ²(2) = 2.5, p = .287"
+  )
+  expect_equal(
+    format_stats(test_chisq, type = "latex"),
+    "$\\chi^{2}$(2) = 2.5, $p$ = .287"
+  )
+})
+
+
 test_that("htest correlations are validated properly", {
   suppressMessages(expect_error(
     format_stats(test_corr, digits = "xxx"),

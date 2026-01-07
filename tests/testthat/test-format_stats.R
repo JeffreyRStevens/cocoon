@@ -16,15 +16,16 @@ test_that("unavailable format_stats() methods are aborted", {
     "Objects of class"
   ))
   suppressMessages(expect_error(
-    format_stats(test_chisq),
+    format_stats(test_binom),
     "Objects of method"
   ))
 })
 
 
 test_that("format_stats() works properly for accepted objects", {
-  expect_no_error(format_stats(test_ttest))
+  expect_no_error(format_stats(test_chisq))
   expect_no_error(format_stats(test_corr))
+  expect_no_error(format_stats(test_ttest))
   expect_no_error(format_stats(test_easycorr))
   expect_no_error(format_stats(test_easycorr2))
   expect_no_error(format_stats(test_easycorr3))
