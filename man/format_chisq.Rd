@@ -42,7 +42,7 @@ This is an internal function called by \code{\link[=format_stats]{format_stats()
 recommend using instead.
 }
 \examples{
-format_stats(???)
+format_stats(chisq.test(matrix(c(12, 5, 7, 7), ncol = 2)))
 }
 \seealso{
 Other functions for printing statistical objects: 

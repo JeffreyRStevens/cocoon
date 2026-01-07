@@ -111,7 +111,7 @@ format_corr <- function(x, digits, pdigits, pzero, full, italics, type, ...) {
 #' @family functions for printing statistical objects
 #'
 #' @examples
-#' format_stats(???)
+#' format_stats(chisq.test(matrix(c(12, 5, 7, 7), ncol = 2)))
 format_chisq <- function(
   x,
   digits = 1,
