@@ -17,6 +17,7 @@ RoxygenNote: 7.3.3
 Suggests: 
     BayesFactor,
     correlation,
+    devtools,
     knitr,
     lme4,
     lmerTest,
