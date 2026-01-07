@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">cocoon</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +58,7 @@
       <img src="../logo.png" class="logo" alt=""><h1>cocoon</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/JeffreyRStevens/cocoon/blob/v0.2.1/vignettes/cocoon.Rmd" class="external-link"><code>vignettes/cocoon.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/JeffreyRStevens/cocoon/blob/main/vignettes/cocoon.Rmd" class="external-link"><code>vignettes/cocoon.Rmd</code></a></small>
       <div class="d-none name"><code>cocoon.Rmd</code></div>
     </div>
 
@@ -93,6 +93,75 @@ values and p-values. The aim of the <code><a href="../reference/format_stats.htm
 is to extract and format statistics for a suite of commonly used
 statistical objects (correlation and t-tests).</p>
 <div class="section level3">
+<h3 id="chi-squared-tests">Chi-squared tests<a class="anchor" aria-label="anchor" href="#chi-squared-tests"></a>
+</h3>
+<p>The <code><a href="../reference/format_stats.html">format_stats()</a></code> function can input objects returned
+by the <code><a href="https://rdrr.io/r/stats/chisq.test.html" class="external-link">chisq.test()</a></code> to report and format the appropriate
+Chi-squared test statistic, degrees of freedom, and p-value for both
+goodness-of-fit tests and tests of independence.</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gof</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html" class="external-link">chisq.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>A <span class="op">=</span> <span class="fl">20</span>, B <span class="op">=</span> <span class="fl">15</span>, C <span class="op">=</span> <span class="fl">25</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">toi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/chisq.test.html" class="external-link">chisq.test</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">5</span>, <span class="fl">7</span>, <span class="fl">7</span><span class="op">)</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th>Code</th>
+<th>Output</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>format_stats(gof)</code></td>
+<td>𝜒²(2) = 2.5, <em>p</em> = .287</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(toi)</code></td>
+<td>𝜒²(1) = 0.6, <em>p</em> = .423</td>
+</tr>
+</tbody>
+</table>
+<p>Format the number of digits of coefficients with <code>digits</code>
+and digits of p-values with <code>pdigits</code>. Include the leading
+zeros for coefficients and p-values with <code>pzero = TRUE</code>.
+Remove italics with <code>italics = FALSE</code>. With <code>dfs</code>,
+format degrees of freedom as parenthetical (<code>par</code>) or
+subscripts (<code>sub</code>) or remove them (<code>none</code>).</p>
+<table class="table">
+<colgroup>
+<col width="60%">
+<col width="40%">
+</colgroup>
+<thead><tr class="header">
+<th>Code</th>
+<th>Output</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td><code>format_stats(gof)</code></td>
+<td>𝜒²(2) = 2.5, <em>p</em> = .287</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(gof, digits = 1, pdigits = 2)</code></td>
+<td>𝜒²(2) = 2.5, <em>p</em> = .29</td>
+</tr>
+<tr class="odd">
+<td><code>format_stats(gof, pzero = TRUE)</code></td>
+<td>𝜒²(2) = 2.5, <em>p</em> = 0.287</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(gof, italics = FALSE)</code></td>
+<td>χ²(2) = 2.5, p = .287</td>
+</tr>
+<tr class="odd">
+<td><code>format_stats(gof, dfs = "sub")</code></td>
+<td>𝜒²<sub>2</sub> = 2.5, <em>p</em> = .287</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(gof, dfs = "none")</code></td>
+<td>𝜒² = 2.5, <em>p</em> = .287</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level3">
 <h3 id="correlations">Correlations<a class="anchor" aria-label="anchor" href="#correlations"></a>
 </h3>
 <p>The <code><a href="../reference/format_stats.html">format_stats()</a></code> function can input objects returned
@@ -102,10 +171,20 @@ object is from a Pearson, Kendall, or Spearman correlation. It then
 reports and formats the appropriate correlation coefficient and
 p-value.</p>
 <p>Let’s start by creating a few different correlations.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mpg_disp_corr_pearson</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">disp</span>, method <span class="op">=</span> <span class="st">"pearson"</span><span class="op">)</span></span>
-<span><span class="va">mpg_disp_corr_spearman</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">disp</span>, method <span class="op">=</span> <span class="st">"spearman"</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="va">mpg_disp_corr_kendall</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">disp</span>, method <span class="op">=</span> <span class="st">"kendall"</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">mpg_disp_corr_spearman</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span></span>
+<span>  <span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span>,</span>
+<span>  <span class="va">mtcars</span><span class="op">$</span><span class="va">disp</span>,</span>
+<span>  method <span class="op">=</span> <span class="st">"spearman"</span>,</span>
+<span>  exact <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">mpg_disp_corr_kendall</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.test.html" class="external-link">cor.test</a></span><span class="op">(</span></span>
+<span>  <span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span>,</span>
+<span>  <span class="va">mtcars</span><span class="op">$</span><span class="va">disp</span>,</span>
+<span>  method <span class="op">=</span> <span class="st">"kendall"</span>,</span>
+<span>  exact <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>For Pearson correlations, we get the correlation coefficient and the
 confidence intervals. Since Spearman and Kendall correlations are
 non-parametric, confidence intervals are not returned. Confidence
@@ -200,12 +279,17 @@ difference), confidence intervals for mean value/difference, appropriate
 test statistic, degrees of freedom (for parametric tests), and
 p-value.</p>
 <p>Let’s start by creating a few different t-tests</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ttest_gear_carb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">carb</span><span class="op">)</span></span>
 <span><span class="va">ttest_gear_carb_paired</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">carb</span>, paired <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">ttest_gear_carb_onesample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, mu <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="va">wtest_gear_carb</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">carb</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="va">wtest_gear_carb_paired</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">carb</span>, paired <span class="op">=</span> <span class="cn">TRUE</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">wtest_gear_carb_paired</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test</a></span><span class="op">(</span></span>
+<span>  <span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>,</span>
+<span>  <span class="va">mtcars</span><span class="op">$</span><span class="va">carb</span>,</span>
+<span>  paired <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  exact <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">wtest_gear_carb_onesample</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">gear</span>, mu <span class="op">=</span> <span class="fl">4</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>For Student’s t-tests, we get the mean value or difference and the
 confidence intervals. Means and confidence intervals can be omitted by
@@ -263,7 +347,9 @@ setting <code>full = FALSE</code>.</p>
 <p>Format the number of digits of coefficients with <code>digits</code>
 and digits of p-values with <code>pdigits</code>. Include the leading
 zeros for coefficients and p-values with <code>pzero = TRUE</code>.
-Remove italics with <code>italics = FALSE</code>.</p>
+Remove italics with <code>italics = FALSE</code>. With <code>dfs</code>,
+format degrees of freedom as parenthetical (<code>par</code>) or
+subscripts (<code>sub</code>) or remove them (<code>none</code>).</p>
 <table class="table">
 <colgroup>
 <col width="60%">
@@ -305,6 +391,18 @@ Remove italics with <code>italics = FALSE</code>.</p>
 <td><code>format_stats(wtest_gear_carb, italics = FALSE)</code></td>
 <td>W = 727.5, p = .003</td>
 </tr>
+<tr class="odd">
+<td><code>format_stats(ttest_gear_carb, dfs = "sub")</code></td>
+<td>
+<em>M</em> = 0.9, 95% CI [0.2, 1.5], <em>t</em><sub>43.4</sub> =
+2.8, <em>p</em> = .008</td>
+</tr>
+<tr class="even">
+<td><code>format_stats(ttest_gear_carb, dfs = "none")</code></td>
+<td>
+<em>M</em> = 0.9, 95% CI [0.2, 1.5], <em>t</em> = 2.8, <em>p</em> =
+.008</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -315,7 +413,7 @@ Remove italics with <code>italics = FALSE</code>.</p>
 returned by the <code><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov()</a></code> function. It then reports and formats
 the F statistic, degrees of freedom, and p-value.</p>
 <p>Let’s start by creating an ANOVA</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aov_mpg_cyl_hp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/aov.html" class="external-link">aov</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span> <span class="op">*</span> <span class="va">hp</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">aov_mpg_cyl_hp</span><span class="op">)</span></span>
 <span><span class="co">#&gt;             Df Sum Sq Mean Sq F value   Pr(&gt;F)    </span></span>
@@ -388,7 +486,7 @@ statistics (e.g., R-squared, AIC) for <code><a href="https://rdrr.io/r/stats/lm.
 <code><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm()</a></code> and term-specific statistics (e.g., coefficients,
 p-values) for all models.</p>
 <p>Let’s start by creating some models:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lm_mpg_cyl_hp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span> <span class="op">*</span> <span class="va">hp</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">lm_mpg_cyl_hp</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -459,7 +557,11 @@ p-values) for all models.</p>
 <span><span class="co">#&gt; Correlation of Fixed Effects:</span></span>
 <span><span class="co">#&gt;    (Intr)</span></span>
 <span><span class="co">#&gt; hp -0.645</span></span>
-<span><span class="va">glmer_am_cyl_hp</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/glmer.html" class="external-link">glmer</a></span><span class="op">(</span><span class="va">am</span> <span class="op">~</span> <span class="va">hp</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">cyl</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">mtcars</span>, family <span class="op">=</span> <span class="va">binomial</span><span class="op">)</span></span>
+<span><span class="va">glmer_am_cyl_hp</span> <span class="op">&lt;-</span> <span class="fu">lme4</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/lme4/man/glmer.html" class="external-link">glmer</a></span><span class="op">(</span></span>
+<span>  <span class="va">am</span> <span class="op">~</span> <span class="va">hp</span> <span class="op">+</span> <span class="op">(</span><span class="fl">1</span> <span class="op">|</span> <span class="va">cyl</span><span class="op">)</span>,</span>
+<span>  data <span class="op">=</span> <span class="va">mtcars</span>,</span>
+<span>  family <span class="op">=</span> <span class="va">binomial</span></span>
+<span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">glmer_am_cyl_hp</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Generalized linear mixed model fit by maximum likelihood (Laplace</span></span>
 <span><span class="co">#&gt;   Approximation) [glmerMod]</span></span>
@@ -650,7 +752,7 @@ two arguments. Further, Bayes factors can be very large or very small
 when evidence strongly favors one hypothesis over another. Therefore,
 the <code>cutoff</code> argument set a threshold above which (or below
 1/cutoff) the returned value is truncated (e.g., BF &gt; 1000).</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bf_corr</span> <span class="op">&lt;-</span> <span class="fu">BayesFactor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BayesFactor/man/correlationBF.html" class="external-link">correlationBF</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">mpg</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">disp</span><span class="op">)</span></span>
 <span><span class="va">bf_ttest</span> <span class="op">&lt;-</span> <span class="fu">BayesFactor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BayesFactor/man/ttestBF.html" class="external-link">ttestBF</a></span><span class="op">(</span><span class="va">mtcars</span><span class="op">$</span><span class="va">vs</span>, <span class="va">mtcars</span><span class="op">$</span><span class="va">am</span><span class="op">)</span></span>
 <span><span class="va">bf_lm</span> <span class="op">&lt;-</span> <span class="fu">BayesFactor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BayesFactor/man/lmBF.html" class="external-link">lmBF</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">am</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span></code></pre></div>
@@ -1123,7 +1225,7 @@ number of <code>digits</code> as well as whether output
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

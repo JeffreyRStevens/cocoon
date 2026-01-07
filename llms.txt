@@ -1,0 +1,247 @@
+# cocoon
+
+The goal of [cocoon](https://github.com/JeffreyRStevens/cocoon) is to
+provide functions that flexibly format statistical output in a way that
+can be inserted into R Markdown or Quarto documents. This is analogous
+to the
+[`apa_print()`](https://frederikaust.com/papaja_man/reporting.html#statistical-models-and-tests)
+functions in the [`{papaja}`](https://github.com/crsh/papaja) package,
+but functions in [cocoon](https://github.com/JeffreyRStevens/cocoon) can
+print Markdown or LaTeX syntax. If your output document is a PDF, this
+doesn’t matter. But if your output document is a Word document (as
+required by many journal publishers), Markdown syntax generates editable
+output instead of an image of output. The default style for statistical
+output follows [American Psychological Association
+style](https://apastyle.apa.org/), but many defaults can be over-ridden
+to flexibly format output.
+
+## Installation
+
+You can install the stable released version of
+[cocoon](https://github.com/JeffreyRStevens/cocoon) from
+[CRAN](https://cran.r-project.org/package=cocoon) with:
+
+``` r
+install.packages("cocoon")
+```
+
+You can install the development version of
+[cocoon](https://github.com/JeffreyRStevens/cocoon) from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("remotes")
+remotes::install_github("JeffreyRStevens/cocoon")
+```
+
+## Example
+
+For an example, we’ll create a correlation from the `mtcars` data set.
+
+``` r
+library(cocoon)
+(cars_corr <- cor.test(mtcars$mpg, mtcars$disp))
+#> 
+#>  Pearson's product-moment correlation
+#> 
+#> data:  mtcars$mpg and mtcars$disp
+#> t = -8.7472, df = 30, p-value = 9.38e-10
+#> alternative hypothesis: true correlation is not equal to 0
+#> 95 percent confidence interval:
+#>  -0.9233594 -0.7081376
+#> sample estimates:
+#>        cor 
+#> -0.8475514
+```
+
+Now we can apply the
+[`format_stats()`](https://jeffreyrstevens.github.io/cocoon/reference/format_stats.md)
+function to `cars_corr` to create a Markdown-formatted character string
+for the statistical results. We can embed this as inline R Markdown code
+to generate the results.
+
+#### Code
+
+`` Fuel efficiency and engine displacement were highly correlated (`r format_stats(cars_corr)`). ``
+
+#### Output
+
+Fuel efficiency and engine displacement were highly correlated (*r* =
+-.85, 95% CI \[-0.92, -0.71\], *p* \< .001).
+
+### Control formatting
+
+We can also alter the output to allow other formatting. For instance, we
+may not like APA’s silly rule to remove leading zeros before a value
+that cannot exceed 1 (like correlations and p-values). And we may not
+want to include the confidence limits around the correlation
+coefficient. Finally, maybe we don’t want the statistics labels to be
+italicized.
+
+#### Code
+
+`` Fuel efficiency and engine displacement were highly correlated (`r format_stats(cars_corr, pzero = TRUE, full = FALSE, italics = FALSE)`). ``
+
+#### Output
+
+Fuel efficiency and engine displacement were highly correlated (r =
+-0.85, p \< 0.001).
+
+## Functions and formatting types
+
+- [`format_stats()`](https://jeffreyrstevens.github.io/cocoon/reference/format_stats.md):
+  Statistical objects
+  - Chi-squared tests (output from
+    [`chisq.test()`](https://rdrr.io/r/stats/chisq.test.html))
+  - Correlations (output from
+    [`cor.test()`](https://rdrr.io/r/stats/cor.test.html) and
+    [`correlation::correlation()`](https://easystats.github.io/correlation/reference/correlation.html),
+    including Pearson’s, Kendall’s, and Spearman’s correlations)
+  - Student t-tests, Wilcoxon rank sum, and signed rank tests (output
+    from [`t.test()`](https://rdrr.io/r/stats/t.test.html) and
+    [`wilcox.test()`](https://rdrr.io/r/stats/wilcox.test.html),
+    including one-sample, two-sample independent, and paired tests)
+  - ANOVAs from [`aov()`](https://rdrr.io/r/stats/aov.html)
+  - Linear models from [`lm()`](https://rdrr.io/r/stats/lm.html),
+    generalized linear models from
+    [`glm()`](https://rdrr.io/r/stats/glm.html), linear mixed models
+    from [`lme4::lmer()`](https://rdrr.io/pkg/lme4/man/lmer.html) and
+    [`lmerTest::lmer()`](https://rdrr.io/pkg/lmerTest/man/lmer.html),
+    and generalized linear mixed models from
+    [`lme4::glmer()`](https://rdrr.io/pkg/lme4/man/glmer.html)
+  - Bayes factors (output from
+    [`{BayesFactor}`](https://cran.r-project.org/package=BayesFactor)
+    package)
+- [`format_summary()`](https://jeffreyrstevens.github.io/cocoon/reference/format_summary.md):
+  Means and error (calculates from vector or uses vector of mean and
+  error interval or mean, lower error limit, and upper error limit)
+- [`format_p()`](https://jeffreyrstevens.github.io/cocoon/reference/format_p.md):
+  P-values
+- [`format_bf()`](https://jeffreyrstevens.github.io/cocoon/reference/format_bf.md):
+  Bayes factors (numerics)
+- [`format_scientific()`](https://jeffreyrstevens.github.io/cocoon/reference/format_scientific.md):
+  Scientific notation
+- [`format_num()`](https://jeffreyrstevens.github.io/cocoon/reference/format_num.md):
+  Other numbers
+- [`format_chr()`](https://jeffreyrstevens.github.io/cocoon/reference/format_chr.md):
+  Italicize character strings
+
+## Related packages
+
+- [`{papaja}`](https://github.com/crsh/papaja) - This package uses the
+  `apa_print()` function to convert a number of R statistical objects
+  into R Markdown output. However, it only outputs LaTeX syntax and only
+  generates APA formatted output with minimal flexibility to alter the
+  output.
+- [`{apa}`](https://github.com/dgromer/apa) - This package also converts
+  some R statistical objects to R Markdown output. While it allows other
+  output format such as Markdown, it also only generates APA formatted
+  output with minimal flexibility to alter the output.
+- [`{insight}`](https://easystats.github.io/insight/) - This package
+  extracts information from model objects. It includes
+  [`format_p()`](https://jeffreyrstevens.github.io/cocoon/reference/format_p.md)
+  and
+  [`format_bf()`](https://jeffreyrstevens.github.io/cocoon/reference/format_bf.md)
+  functions that achieves similar goals as in this package, but they do
+  not allow as much control over formatting of the labels or values.
+
+## Citation
+
+To cite [cocoon](https://github.com/JeffreyRStevens/cocoon), use:
+
+Stevens JR (2025). *cocoon: Extract, format, and print statistical
+output*. R package version 0.2.1,
+<https://github.com/JeffreyRStevens/cocoon>.
+
+## Contributing
+
+[Contributions](https://jeffreyrstevens.github.io/cocoon/CONTRIBUTING.html)
+to [cocoon](https://github.com/JeffreyRStevens/cocoon) are most welcome!
+Feel free to check out [open
+issues](https://github.com/JeffreyRStevens/cocoon/issues) for ideas. And
+[pull requests](https://github.com/JeffreyRStevens/cocoon/pulls) are
+encouraged, but you may want to [raise an
+issue](https://github.com/JeffreyRStevens/cocoon/issues/new/choose) or
+[contact the maintainer](mailto:jeffrey.r.stevens@protonmail.com) first.
+
+Please note that the cocoon project is released with a [Contributor Code
+of
+Conduct](https://jeffreyrstevens.github.io/cocoon/CODE_OF_CONDUCT.html).
+By contributing to this project, you agree to abide by its terms.
+
+## Package name
+
+The package name [cocoon](https://github.com/JeffreyRStevens/cocoon)
+captures the main goal of transforming statistical inputs into nicely
+formatted outputs. This mirrors cocoons, which caterpillars build to
+transform into beautiful adult insects.
+[Cocoons](https://en.wikipedia.org/wiki/Pupa) are formally defined as a
+case that the larvae of moths spin around their pupa. So cocoons are
+cases built by moths and some other insects, whereas butterflies produce
+a chrysalis, which forms from their skin.
+
+![Three white moths on fuzzy white
+cocoons.](reference/figures/silkmoths.png)
+
+Photo source: Silk moths from [Wikimedia
+Commons](https://commons.wikimedia.org/wiki/File:6_Monster_Silk_Moths.jpg)
+
+# Package index
+
+## Format statistical objects
+
+- [`format_stats()`](https://jeffreyrstevens.github.io/cocoon/reference/format_stats.md)
+  : Format statistical results
+- [`format_stats(`*`<aov>`*`)`](https://jeffreyrstevens.github.io/cocoon/reference/format_stats.aov.md)
+  : Format ANOVA statistics
+- [`format_stats(`*`<BFBayesFactor>`*`)`](https://jeffreyrstevens.github.io/cocoon/reference/format_stats.BFBayesFactor.md)
+  : Format Bayes factors
+- [`format_stats(`*`<easycorrelation>`*`)`](https://jeffreyrstevens.github.io/cocoon/reference/format_stats.easycorrelation.md)
+  : Format correlation statistics
+- [`format_stats(`*`<htest>`*`)`](https://jeffreyrstevens.github.io/cocoon/reference/format_stats.htest.md)
+  : Format hypothesis test statistics
+- [`format_stats(`*`<lm>`*`)`](https://jeffreyrstevens.github.io/cocoon/reference/format_stats.lm.md)
+  : Format linear model statistics
+- [`format_stats(`*`<lmerModLmerTest>`*`)`](https://jeffreyrstevens.github.io/cocoon/reference/format_stats.lmerModLmerTest.md)
+  : Format linear mixed model statistics
+- [`format_stats(`*`<merMod>`*`)`](https://jeffreyrstevens.github.io/cocoon/reference/format_stats.merMod.md)
+  : Format linear mixed model statistics
+
+## Format statistical values
+
+- [`format_summary()`](https://jeffreyrstevens.github.io/cocoon/reference/format_summary.md)
+  [`format_mean()`](https://jeffreyrstevens.github.io/cocoon/reference/format_summary.md)
+  [`format_meanci()`](https://jeffreyrstevens.github.io/cocoon/reference/format_summary.md)
+  [`format_meanse()`](https://jeffreyrstevens.github.io/cocoon/reference/format_summary.md)
+  [`format_meansd()`](https://jeffreyrstevens.github.io/cocoon/reference/format_summary.md)
+  [`format_median()`](https://jeffreyrstevens.github.io/cocoon/reference/format_summary.md)
+  [`format_medianiqr()`](https://jeffreyrstevens.github.io/cocoon/reference/format_summary.md)
+  : Calculate and format summary statistics of central tendency and
+  error
+- [`format_p()`](https://jeffreyrstevens.github.io/cocoon/reference/format_p.md)
+  : Format p-values
+- [`format_bf()`](https://jeffreyrstevens.github.io/cocoon/reference/format_bf.md)
+  : Format Bayes factors
+- [`format_chisq()`](https://jeffreyrstevens.github.io/cocoon/reference/format_chisq.md)
+  : Format Chi-squared statistics
+- [`format_corr()`](https://jeffreyrstevens.github.io/cocoon/reference/format_corr.md)
+  **\[superseded\]** : Format correlation statistics
+- [`format_ttest()`](https://jeffreyrstevens.github.io/cocoon/reference/format_ttest.md)
+  **\[superseded\]** : Format t-test statistics
+
+## Format numbers/characters
+
+- [`format_num()`](https://jeffreyrstevens.github.io/cocoon/reference/format_num.md)
+  : Format numbers
+- [`format_scientific()`](https://jeffreyrstevens.github.io/cocoon/reference/format_scientific.md)
+  : Format numbers in scientific notation
+- [`format_chr()`](https://jeffreyrstevens.github.io/cocoon/reference/format_chr.md)
+  : Format character strings with italics and type
+- [`format_sub()`](https://jeffreyrstevens.github.io/cocoon/reference/format_sub.md)
+  : Format subscript text
+
+# Articles
+
+### All vignettes
+
+- [cocoon](https://jeffreyrstevens.github.io/cocoon/articles/cocoon.md):
