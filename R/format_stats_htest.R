@@ -1,9 +1,9 @@
-
 #' Format hypothesis test statistics
 #'
 #' This method formats hypothesis test statistics from the class `htest`.
-#' Currently, this includes correlations from [cor.test()] and t-tests and
-#' Wilcoxon tests from [t.test()] and [wilcox.test()]. For correlations, the
+#' Currently, this includes correlations from [cor.test()], Chi-squared tests
+#' from [chisq.test()], and t-tests and Wilcoxon tests from [t.test()] and
+#' [wilcox.test()]. For correlations, the
 #' function detects whether the object is from a Pearson,
 #' Spearman, or Kendall correlation and reports the appropriate correlation
 #' label (r, \eqn{\tau}, \eqn{\rho}). The default output is APA formatted, but
@@ -40,6 +40,7 @@
 #' # Prepare statistical objects
 #' test_corr <- cor.test(mtcars$mpg, mtcars$cyl)
 #' test_corr2 <- cor.test(mtcars$mpg, mtcars$cyl, method = "kendall")
+#' test_chisq <- chisq.test(c(A = 20, B = 15, C = 25))
 #' test_ttest <- t.test(mtcars$vs, mtcars$am)
 #' test_ttest2 <- wilcox.test(mtcars$vs, mtcars$am)
 #'
@@ -55,8 +56,11 @@
 #' # Format Kendall's tau
 #' format_stats(test_corr2)
 #'
+#' # Format Chi-squared test
+#' format_stats(test_chisq)
+#'
 #' # Format t-test
-#'   format_stats(test_ttest)
+#' format_stats(test_ttest)
 #'
 #' # Remove mean and confidence interval
 #' format_stats(test_ttest, full = FALSE)
@@ -66,16 +70,18 @@
 #'
 #' # Format for LaTeX
 #' format_stats(test_ttest2, type = "latex")
-format_stats.htest <- function(x,
-                               digits = NULL,
-                               pdigits = 3,
-                               pzero = FALSE,
-                               full = TRUE,
-                               italics = TRUE,
-                               dfs = "par",
-                               mean = "abbr",
-                               type = "md",
-                               ...) {
+format_stats.htest <- function(
+  x,
+  digits = NULL,
+  pdigits = 3,
+  pzero = FALSE,
+  full = TRUE,
+  italics = TRUE,
+  dfs = "par",
+  mean = "abbr",
+  type = "md",
+  ...
+) {
   # Validate arguments
   check_number_whole(digits, min = 0, allow_null = TRUE)
   check_number_whole(pdigits, min = 1, max = 5)
@@ -93,35 +99,54 @@ format_stats.htest <- function(x,
     } else {
       digits <- digits
     }
-    format_corr(x,
-                digits = digits,
-                pdigits = pdigits,
-                pzero = pzero,
-                full = full,
-                italics = italics,
-                type = type)
+    format_corr(
+      x,
+      digits = digits,
+      pdigits = pdigits,
+      pzero = pzero,
+      full = full,
+      italics = italics,
+      type = type
+    )
+  } else if (grepl("Chi-squared", x$method)) {
+    if (is.null(digits)) {
+      digits <- 1
+    } else {
+      digits <- digits
+    }
+    format_chisq(
+      x,
+      digits = digits,
+      pdigits = pdigits,
+      pzero = pzero,
+      italics = italics,
+      dfs = dfs,
+      type = type
+    )
   } else if (grepl("t-test", x$method) || grepl("Wilcoxon", x$method)) {
     if (is.null(digits)) {
       digits <- 1
     } else {
       digits <- digits
     }
-    format_ttest(x,
-                 digits = digits,
-                 pdigits = pdigits,
-                 pzero = pzero,
-                 full = full,
-                 italics = italics,
-                 dfs = dfs,
-                 mean = mean,
-                 type = type)
+    format_ttest(
+      x,
+      digits = digits,
+      pdigits = pdigits,
+      pzero = pzero,
+      full = full,
+      italics = italics,
+      dfs = dfs,
+      mean = mean,
+      type = type
+    )
   } else {
     stop(
-      "Objects of method '"
-      , x$method
-      , "' are currently not supported."
-      , "\nVisit https://github.com/JeffreyRStevens/cocoon/issues to request support for this method."
-      , call. = FALSE
+      "Objects of method '",
+      x$method,
+      "' are currently not supported.",
+      "\nVisit https://github.com/JeffreyRStevens/cocoon/issues to request support for this method.",
+      call. = FALSE
     )
   }
 }
