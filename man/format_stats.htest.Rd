@@ -49,8 +49,9 @@ A character string of statistical information formatted in Markdown or LaTeX.
 }
 \description{
 This method formats hypothesis test statistics from the class \code{htest}.
-Currently, this includes correlations from \code{\link[=cor.test]{cor.test()}} and t-tests and
-Wilcoxon tests from \code{\link[=t.test]{t.test()}} and \code{\link[=wilcox.test]{wilcox.test()}}. For correlations, the
+Currently, this includes correlations from \code{\link[=cor.test]{cor.test()}}, Chi-squared tests
+from \code{\link[=chisq.test]{chisq.test()}}, and t-tests and Wilcoxon tests from \code{\link[=t.test]{t.test()}} and
+\code{\link[=wilcox.test]{wilcox.test()}}. For correlations, the
 function detects whether the object is from a Pearson,
 Spearman, or Kendall correlation and reports the appropriate correlation
 label (r, \eqn{\tau}, \eqn{\rho}). The default output is APA formatted, but
@@ -63,6 +64,7 @@ Markdown or LaTeX.
 # Prepare statistical objects
 test_corr <- cor.test(mtcars$mpg, mtcars$cyl)
 test_corr2 <- cor.test(mtcars$mpg, mtcars$cyl, method = "kendall")
+test_chisq <- chisq.test(c(A = 20, B = 15, C = 25))
 test_ttest <- t.test(mtcars$vs, mtcars$am)
 test_ttest2 <- wilcox.test(mtcars$vs, mtcars$am)
 
@@ -78,8 +80,11 @@ format_stats(test_corr, digits = 3, pdigits = 4, pzero = TRUE)
 # Format Kendall's tau
 format_stats(test_corr2)
 
+# Format Chi-squared test
+format_stats(test_chisq)
+
 # Format t-test
-  format_stats(test_ttest)
+format_stats(test_ttest)
 
 # Remove mean and confidence interval
 format_stats(test_ttest, full = FALSE)
@@ -93,6 +98,7 @@ format_stats(test_ttest2, type = "latex")
 \seealso{
 Other functions for printing statistical objects: 
 \code{\link{format_bf}()},
+\code{\link{format_chisq}()},
 \code{\link{format_corr}()},
 \code{\link{format_stats}()},
 \code{\link{format_stats.BFBayesFactor}()},

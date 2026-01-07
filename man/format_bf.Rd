@@ -89,6 +89,7 @@ format_bf(12.4444, type = "latex")
 }
 \seealso{
 Other functions for printing statistical objects: 
+\code{\link{format_chisq}()},
 \code{\link{format_corr}()},
 \code{\link{format_stats}()},
 \code{\link{format_stats.BFBayesFactor}()},
