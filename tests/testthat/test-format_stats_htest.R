@@ -45,19 +45,19 @@ test_that("htest Chi-squared tests are validated properly", {
 test_that("formatting Chi-squared tests works properly", {
   expect_equal(
     format_stats(test_chisq),
-    "_χ_²(2) = 2.5, _p_ = .287"
+    "𝜒²(2) = 2.5, _p_ = .287"
   )
   expect_equal(
     format_stats(test_chisq, digits = 3),
-    "_χ_²(2) = 2.500, _p_ = .287"
+    "𝜒²(2) = 2.500, _p_ = .287"
   )
   expect_equal(
     format_stats(test_chisq, pdigits = 2),
-    "_χ_²(2) = 2.5, _p_ = .29"
+    "𝜒²(2) = 2.5, _p_ = .29"
   )
   expect_equal(
     format_stats(test_chisq, pzero = TRUE),
-    "_χ_²(2) = 2.5, _p_ = 0.287"
+    "𝜒²(2) = 2.5, _p_ = 0.287"
   )
   expect_equal(
     format_stats(test_chisq, italics = FALSE),
