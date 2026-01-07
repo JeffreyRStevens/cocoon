@@ -23,6 +23,7 @@ reference:
   - format_summary
   - format_p
   - format_bf
+  - format_chisq
   - format_corr
   - format_ttest
 - title: Format numbers/characters

@@ -1,3 +1,76 @@
+#' Format Chi-squared statistics
+#'
+#' @description
+#' This is an internal function called by [format_stats()], which we
+#' recommend using instead.
+#'
+#' @inheritParams format_stats.htest
+#'
+#' @return
+#' A character string of statistical information formatted in Markdown or LaTeX.
+#' @export
+#'
+#' @family functions for printing statistical objects
+#'
+#' @examples
+#' format_stats(chisq.test(matrix(c(12, 5, 7, 7), ncol = 2)))
+format_chisq <- function(
+  x,
+  digits = 1,
+  pdigits = 3,
+  pzero = FALSE,
+  italics = TRUE,
+  dfs = "par",
+  type = "md"
+) {
+  # Format numbers
+  stat_value <- format_num(x$statistic, digits = digits)
+  df <- dplyr::case_when(
+    round(x$parameter, 1) == round(x$parameter) ~
+      format_num(x$parameter, digits = 0),
+    .default = format_num(x$parameter, digits = digits)
+  )
+  n <- sum(x$observed)
+  pvalue <- format_p(
+    x$p.value,
+    digits = pdigits,
+    pzero = pzero,
+    italics = italics,
+    type = type
+  )
+
+  # Build label
+
+  stat_label <- dplyr::case_when(
+    !italics & identical(type, "md") ~
+      "\u03C7\U00B2",
+    !italics & identical(type, "latex") ~
+      "\\textchi$^{2}$",
+    identical(type, "md") ~
+      "\uD835\uDF12\U00B2",
+    identical(type, "latex") ~
+      format_chr("\\chi^{2}", italics = italics, type = type),
+  )
+
+  stat_label <- dplyr::case_when(
+    identical(dfs, "par") ~
+      paste0(stat_label, "(", df, ")"),
+    identical(dfs, "sub") & identical(type, "md") ~
+      paste0(stat_label, "~", df, "~"),
+    identical(dfs, "sub") & identical(type, "latex") ~
+      paste0(stat_label, "$_{", df, "}$"),
+    .default = stat_label
+  )[1]
+
+  # Create statistics string
+  build_string(
+    stat_label = stat_label,
+    stat_value = stat_value,
+    pvalue = pvalue,
+    full = FALSE
+  )
+}
+
 #' Format correlation statistics
 #'
 #' @encoding UTF-8
@@ -95,79 +168,6 @@ format_corr <- function(x, digits, pdigits, pzero, full, italics, type, ...) {
   )
 }
 
-
-#' Format Chi-squared statistics
-#'
-#' @description
-#' This is an internal function called by [format_stats()], which we
-#' recommend using instead.
-#'
-#' @inheritParams format_stats.htest
-#'
-#' @return
-#' A character string of statistical information formatted in Markdown or LaTeX.
-#' @export
-#'
-#' @family functions for printing statistical objects
-#'
-#' @examples
-#' format_stats(chisq.test(matrix(c(12, 5, 7, 7), ncol = 2)))
-format_chisq <- function(
-  x,
-  digits = 1,
-  pdigits = 3,
-  pzero = FALSE,
-  italics = TRUE,
-  dfs = "par",
-  type = "md"
-) {
-  # Format numbers
-  stat_value <- format_num(x$statistic, digits = digits)
-  df <- dplyr::case_when(
-    round(x$parameter, 1) == round(x$parameter) ~
-      format_num(x$parameter, digits = 0),
-    .default = format_num(x$parameter, digits = digits)
-  )
-  n <- sum(x$observed)
-  pvalue <- format_p(
-    x$p.value,
-    digits = pdigits,
-    pzero = pzero,
-    italics = italics,
-    type = type
-  )
-
-  # Build label
-
-  stat_label <- dplyr::case_when(
-    !italics & identical(type, "md") ~
-      "\u03C7\U00B2",
-    !italics & identical(type, "latex") ~
-      "\\textchi$^{2}$",
-    identical(type, "md") ~
-      paste0(format_chr("\u03C7", italics = italics, type = type), "\U00B2"),
-    identical(type, "latex") ~
-      format_chr("\\chi^{2}", italics = italics, type = type),
-  )
-
-  stat_label <- dplyr::case_when(
-    identical(dfs, "par") ~
-      paste0(stat_label, "(", df, ")"),
-    identical(dfs, "sub") & identical(type, "md") ~
-      paste0(stat_label, "~", df, "~"),
-    identical(dfs, "sub") & identical(type, "latex") ~
-      paste0(stat_label, "$_{", df, "}$"),
-    .default = stat_label
-  )[1]
-
-  # Create statistics string
-  build_string(
-    stat_label = stat_label,
-    stat_value = stat_value,
-    pvalue = pvalue,
-    full = FALSE
-  )
-}
 
 #' Format t-test statistics
 #'

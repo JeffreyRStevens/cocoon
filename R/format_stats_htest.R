@@ -1,9 +1,9 @@
 #' Format hypothesis test statistics
 #'
 #' This method formats hypothesis test statistics from the class `htest`.
-#' Currently, this includes correlations from [cor.test()], Chi-squared tests
-#' from [chisq.test()], and t-tests and Wilcoxon tests from [t.test()] and
-#' [wilcox.test()]. For correlations, the
+#' Currently, this includes Chi-squared tests from [chisq.test()],
+#' correlations from [cor.test()], and t-tests and Wilcoxon tests from
+#' [t.test()] and [wilcox.test()]. For correlations, the
 #' function detects whether the object is from a Pearson,
 #' Spearman, or Kendall correlation and reports the appropriate correlation
 #' label (r, \eqn{\tau}, \eqn{\rho}). The default output is APA formatted, but
@@ -38,11 +38,14 @@
 #'
 #' @examples
 #' # Prepare statistical objects
+#' test_chisq <- chisq.test(c(A = 20, B = 15, C = 25))
 #' test_corr <- cor.test(mtcars$mpg, mtcars$cyl)
 #' test_corr2 <- cor.test(mtcars$mpg, mtcars$cyl, method = "kendall")
-#' test_chisq <- chisq.test(c(A = 20, B = 15, C = 25))
 #' test_ttest <- t.test(mtcars$vs, mtcars$am)
 #' test_ttest2 <- wilcox.test(mtcars$vs, mtcars$am)
+#'
+#' # Format Chi-squared test
+#' format_stats(test_chisq)
 #'
 #' # Format correlation
 #' format_stats(test_corr)
@@ -55,9 +58,6 @@
 #'
 #' # Format Kendall's tau
 #' format_stats(test_corr2)
-#'
-#' # Format Chi-squared test
-#' format_stats(test_chisq)
 #'
 #' # Format t-test
 #' format_stats(test_ttest)
@@ -93,22 +93,7 @@ format_stats.htest <- function(
   check_string(type)
   check_match(type, c("md", "latex"))
 
-  if (grepl("correlation", x$method)) {
-    if (is.null(digits)) {
-      digits <- 2
-    } else {
-      digits <- digits
-    }
-    format_corr(
-      x,
-      digits = digits,
-      pdigits = pdigits,
-      pzero = pzero,
-      full = full,
-      italics = italics,
-      type = type
-    )
-  } else if (grepl("Chi-squared", x$method)) {
+  if (grepl("Chi-squared", x$method)) {
     if (is.null(digits)) {
       digits <- 1
     } else {
@@ -121,6 +106,21 @@ format_stats.htest <- function(
       pzero = pzero,
       italics = italics,
       dfs = dfs,
+      type = type
+    )
+  } else if (grepl("correlation", x$method)) {
+    if (is.null(digits)) {
+      digits <- 2
+    } else {
+      digits <- digits
+    }
+    format_corr(
+      x,
+      digits = digits,
+      pdigits = pdigits,
+      pzero = pzero,
+      full = full,
+      italics = italics,
       type = type
     )
   } else if (grepl("t-test", x$method) || grepl("Wilcoxon", x$method)) {
