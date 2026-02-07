@@ -1,6 +1,9 @@
 # Changelog
 
-## cocoon (development version)
+## cocoon 0.3.0
+
+- Add format_stats() methods for
+  [`chisq.test()`](https://rdrr.io/r/stats/chisq.test.html)
 
 ## cocoon 0.2.1
 
