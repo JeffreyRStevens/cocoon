@@ -1,4 +1,6 @@
-# cocoon (development version)
+# cocoon 0.3.0
+
+* Add format_stats() methods for `chisq.test()`
 
 # cocoon 0.2.1
 
