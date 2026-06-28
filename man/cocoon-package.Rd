@@ -22,5 +22,10 @@ Useful links:
 \author{
 \strong{Maintainer}: Jeffrey R. Stevens \email{jeffrey.r.stevens@protonmail.com} (\href{https://orcid.org/0000-0003-2375-1360}{ORCID}) [copyright holder]
 
+Authors:
+\itemize{
+  \item Jeffrey R. Stevens \email{jeffrey.r.stevens@protonmail.com} (\href{https://orcid.org/0000-0003-2375-1360}{ORCID}) [copyright holder]
+}
+
 }
 \keyword{internal}

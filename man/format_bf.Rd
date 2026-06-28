@@ -88,17 +88,17 @@ format_bf(12.4444, label = "")
 format_bf(12.4444, type = "latex")
 }
 \seealso{
-Other functions for printing statistical objects: 
-\code{\link{format_chisq}()},
-\code{\link{format_corr}()},
-\code{\link{format_stats}()},
-\code{\link{format_stats.BFBayesFactor}()},
-\code{\link{format_stats.aov}()},
-\code{\link{format_stats.easycorrelation}()},
-\code{\link{format_stats.htest}()},
-\code{\link{format_stats.lm}()},
-\code{\link{format_stats.lmerModLmerTest}()},
-\code{\link{format_stats.merMod}()},
-\code{\link{format_ttest}()}
+Other functions for printing statistical objects:
+\code{\link[=format_chisq]{format_chisq()}},
+\code{\link[=format_corr]{format_corr()}},
+\code{\link[=format_stats]{format_stats()}},
+\code{\link[=format_stats.BFBayesFactor]{format_stats.BFBayesFactor()}},
+\code{\link[=format_stats.aov]{format_stats.aov()}},
+\code{\link[=format_stats.easycorrelation]{format_stats.easycorrelation()}},
+\code{\link[=format_stats.htest]{format_stats.htest()}},
+\code{\link[=format_stats.lm]{format_stats.lm()}},
+\code{\link[=format_stats.lmerModLmerTest]{format_stats.lmerModLmerTest()}},
+\code{\link[=format_stats.merMod]{format_stats.merMod()}},
+\code{\link[=format_ttest]{format_ttest()}}
 }
 \concept{functions for printing statistical objects}
