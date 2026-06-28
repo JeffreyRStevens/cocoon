@@ -1,6 +1,7 @@
 # cocoon
 
 ``` r
+
 library(cocoon)
 ```
 
@@ -43,6 +44,7 @@ format the appropriate Chi-squared test statistic, degrees of freedom,
 and p-value for both goodness-of-fit tests and tests of independence.
 
 ``` r
+
 gof <- chisq.test(c(A = 20, B = 15, C = 25))
 toi <- chisq.test(matrix(c(12, 5, 7, 7), ncol = 2))
 ```
@@ -81,6 +83,7 @@ correlation coefficient and p-value.
 Let’s start by creating a few different correlations.
 
 ``` r
+
 mpg_disp_corr_pearson <- cor.test(mtcars$mpg, mtcars$disp, method = "pearson")
 mpg_disp_corr_spearman <- cor.test(
   mtcars$mpg,
@@ -102,25 +105,25 @@ non-parametric, confidence intervals are not returned. Confidence
 intervals can be omitted from Pearson correlations by setting
 `full = FALSE`.
 
-| Code                                                | Output                                           |
-|-----------------------------------------------------|--------------------------------------------------|
-| `format_stats(mpg_disp_corr_pearson)`               | *r* = -.85, 95% CI \[-0.92, -0.71\], *p* \< .001 |
-| `format_stats(mpg_disp_corr_pearson, full = FALSE)` | *r* = -.85, *p* \< .001                          |
-| `format_stats(mpg_disp_corr_spearman)`              | *ρ* = -.91, *p* \< .001                          |
-| `format_stats(mpg_disp_corr_kendall)`               | *τ* = -.77, *p* \< .001                          |
+| Code | Output |
+|----|----|
+| `format_stats(mpg_disp_corr_pearson)` | *r* = -.85, 95% CI \[-0.92, -0.71\], *p* \< .001 |
+| `format_stats(mpg_disp_corr_pearson, full = FALSE)` | *r* = -.85, *p* \< .001 |
+| `format_stats(mpg_disp_corr_spearman)` | *ρ* = -.91, *p* \< .001 |
+| `format_stats(mpg_disp_corr_kendall)` | *τ* = -.77, *p* \< .001 |
 
 Format the number of digits of coefficients with `digits` and digits of
 p-values with `pdigits`. Include the leading zeros for coefficients and
 p-values with `pzero = TRUE`. Remove italics with `italics = FALSE`.
 
-| Code                                                           | Output                                             |
-|----------------------------------------------------------------|----------------------------------------------------|
-| `format_stats(mpg_disp_corr_pearson)`                          | *r* = -.85, 95% CI \[-0.92, -0.71\], *p* \< .001   |
-| `format_stats(mpg_disp_corr_pearson, digits = 1, pdigits = 2)` | *r* = -.8, 95% CI \[-0.9, -0.7\], *p* \< .01       |
-| `format_stats(mpg_disp_corr_pearson, pzero = TRUE)`            | *r* = -0.85, 95% CI \[-0.92, -0.71\], *p* \< 0.001 |
-| `format_stats(mpg_disp_corr_pearson, italics = FALSE)`         | r = -.85, 95% CI \[-0.92, -0.71\], p \< .001       |
-| `format_stats(mpg_disp_corr_spearman, italics = FALSE)`        | ρ = -.91, p \< .001                                |
-| `format_stats(mpg_disp_corr_kendall, italics = FALSE)`         | τ = -.77, p \< .001                                |
+| Code | Output |
+|----|----|
+| `format_stats(mpg_disp_corr_pearson)` | *r* = -.85, 95% CI \[-0.92, -0.71\], *p* \< .001 |
+| `format_stats(mpg_disp_corr_pearson, digits = 1, pdigits = 2)` | *r* = -.8, 95% CI \[-0.9, -0.7\], *p* \< .01 |
+| `format_stats(mpg_disp_corr_pearson, pzero = TRUE)` | *r* = -0.85, 95% CI \[-0.92, -0.71\], *p* \< 0.001 |
+| `format_stats(mpg_disp_corr_pearson, italics = FALSE)` | r = -.85, 95% CI \[-0.92, -0.71\], p \< .001 |
+| `format_stats(mpg_disp_corr_spearman, italics = FALSE)` | ρ = -.91, p \< .001 |
+| `format_stats(mpg_disp_corr_kendall, italics = FALSE)` | τ = -.77, p \< .001 |
 
 ### T-tests
 
@@ -138,6 +141,7 @@ of freedom (for parametric tests), and p-value.
 Let’s start by creating a few different t-tests
 
 ``` r
+
 ttest_gear_carb <- t.test(mtcars$gear, mtcars$carb)
 ttest_gear_carb_paired <- t.test(mtcars$gear, mtcars$carb, paired = TRUE)
 ttest_gear_carb_onesample <- t.test(mtcars$gear, mu = 4)
@@ -155,15 +159,15 @@ For Student’s t-tests, we get the mean value or difference and the
 confidence intervals. Means and confidence intervals can be omitted by
 setting `full = FALSE`.
 
-| Code                                                    | Output                                                      |
-|---------------------------------------------------------|-------------------------------------------------------------|
-| `format_stats(ttest_gear_carb)`                         | *M* = 0.9, 95% CI \[0.2, 1.5\], *t*(43.4) = 2.8, *p* = .008 |
-| `format_stats(ttest_gear_carb_paired)`                  | *M* = 0.9, 95% CI \[0.3, 1.4\], *t*(31) = 3.1, *p* = .004   |
-| `format_stats(ttest_gear_carb_onesample)`               | *M* = 3.7, 95% CI \[3.4, 4.0\], *t*(31) = -2.4, *p* = .023  |
-| `format_stats(ttest_gear_carb_onesample, full = FALSE)` | *t*(31) = -2.4, *p* = .023                                  |
-| `format_stats(wtest_gear_carb)`                         | *W* = 727.5, *p* = .003                                     |
-| `format_stats(wtest_gear_carb_paired)`                  | *V* = 267.0, *p* = .004                                     |
-| `format_stats(wtest_gear_carb_onesample)`               | *V* = 52.5, *p* = .027                                      |
+| Code | Output |
+|----|----|
+| `format_stats(ttest_gear_carb)` | *M* = 0.9, 95% CI \[0.2, 1.5\], *t*(43.4) = 2.8, *p* = .008 |
+| `format_stats(ttest_gear_carb_paired)` | *M* = 0.9, 95% CI \[0.3, 1.4\], *t*(31) = 3.1, *p* = .004 |
+| `format_stats(ttest_gear_carb_onesample)` | *M* = 3.7, 95% CI \[3.4, 4.0\], *t*(31) = -2.4, *p* = .023 |
+| `format_stats(ttest_gear_carb_onesample, full = FALSE)` | *t*(31) = -2.4, *p* = .023 |
+| `format_stats(wtest_gear_carb)` | *W* = 727.5, *p* = .003 |
+| `format_stats(wtest_gear_carb_paired)` | *V* = 267.0, *p* = .004 |
+| `format_stats(wtest_gear_carb_onesample)` | *V* = 52.5, *p* = .027 |
 
 Format the number of digits of coefficients with `digits` and digits of
 p-values with `pdigits`. Include the leading zeros for coefficients and
@@ -171,16 +175,16 @@ p-values with `pzero = TRUE`. Remove italics with `italics = FALSE`.
 With `dfs`, format degrees of freedom as parenthetical (`par`) or
 subscripts (`sub`) or remove them (`none`).
 
-| Code                                                     | Output                                                           |
-|----------------------------------------------------------|------------------------------------------------------------------|
-| `format_stats(ttest_gear_carb)`                          | *M* = 0.9, 95% CI \[0.2, 1.5\], *t*(43.4) = 2.8, *p* = .008      |
+| Code | Output |
+|----|----|
+| `format_stats(ttest_gear_carb)` | *M* = 0.9, 95% CI \[0.2, 1.5\], *t*(43.4) = 2.8, *p* = .008 |
 | `format_stats(ttest_gear_carb, digits = 2, pdigits = 2)` | *M* = 0.88, 95% CI \[0.24, 1.51\], *t*(43.40) = 2.79, *p* \< .01 |
-| `format_stats(ttest_gear_carb, pzero = TRUE)`            | *M* = 0.9, 95% CI \[0.2, 1.5\], *t*(43.4) = 2.8, *p* = 0.008     |
-| `format_stats(ttest_gear_carb, italics = FALSE)`         | M = 0.9, 95% CI \[0.2, 1.5\], t(43.4) = 2.8, p = .008            |
-| `format_stats(wtest_gear_carb)`                          | *W* = 727.5, *p* = .003                                          |
-| `format_stats(wtest_gear_carb, italics = FALSE)`         | W = 727.5, p = .003                                              |
-| `format_stats(ttest_gear_carb, dfs = "sub")`             | *M* = 0.9, 95% CI \[0.2, 1.5\], *t*_(43.4) = 2.8, *p* = .008     |
-| `format_stats(ttest_gear_carb, dfs = "none")`            | *M* = 0.9, 95% CI \[0.2, 1.5\], *t* = 2.8, *p* = .008            |
+| `format_stats(ttest_gear_carb, pzero = TRUE)` | *M* = 0.9, 95% CI \[0.2, 1.5\], *t*(43.4) = 2.8, *p* = 0.008 |
+| `format_stats(ttest_gear_carb, italics = FALSE)` | M = 0.9, 95% CI \[0.2, 1.5\], t(43.4) = 2.8, p = .008 |
+| `format_stats(wtest_gear_carb)` | *W* = 727.5, *p* = .003 |
+| `format_stats(wtest_gear_carb, italics = FALSE)` | W = 727.5, p = .003 |
+| `format_stats(ttest_gear_carb, dfs = "sub")` | *M* = 0.9, 95% CI \[0.2, 1.5\], *t*_(43.4) = 2.8, *p* = .008 |
+| `format_stats(ttest_gear_carb, dfs = "none")` | *M* = 0.9, 95% CI \[0.2, 1.5\], *t* = 2.8, *p* = .008 |
 
 ### ANOVAs
 
@@ -193,6 +197,7 @@ and formats the F statistic, degrees of freedom, and p-value.
 Let’s start by creating an ANOVA
 
 ``` r
+
 aov_mpg_cyl_hp <- aov(mpg ~ cyl * hp, data = mtcars)
 summary(aov_mpg_cyl_hp)
 #>             Df Sum Sq Mean Sq F value   Pr(>F)    
@@ -216,14 +221,14 @@ p-values with `pzero = TRUE`. Remove italics with `italics = FALSE`.
 With `dfs`, format degrees of freedom as parenthetical (`par`) or
 subscripts (`sub`) or remove them (`none`).
 
-| Code                                                                  | Output                          |
-|-----------------------------------------------------------------------|---------------------------------|
-| `format_stats(aov_mpg_cyl_hp, term = "cyl")`                          | *F*(1, 28) = 92.5, *p* \< .001  |
-| `format_stats(aov_mpg_cyl_hp, term = "cyl:hp")`                       | *F*(1, 28) = 5.0, *p* = .033    |
-| `format_stats(aov_mpg_cyl_hp, term = "cyl", digits = 2, pdigits = 2)` | *F*(1, 28) = 92.47, *p* \< .01  |
-| `format_stats(aov_mpg_cyl_hp, term = "cyl", pzero = TRUE)`            | *F*(1, 28) = 92.5, *p* \< 0.001 |
-| `format_stats(aov_mpg_cyl_hp, term = "cyl", italics = FALSE)`         | F(1, 28) = 92.5, p \< .001      |
-| `format_stats(aov_mpg_cyl_hp, term = "cyl", dfs = "sub")`             | *F*_(1,28) = 92.5, *p* \< .001  |
+| Code | Output |
+|----|----|
+| `format_stats(aov_mpg_cyl_hp, term = "cyl")` | *F*(1, 28) = 92.5, *p* \< .001 |
+| `format_stats(aov_mpg_cyl_hp, term = "cyl:hp")` | *F*(1, 28) = 5.0, *p* = .033 |
+| `format_stats(aov_mpg_cyl_hp, term = "cyl", digits = 2, pdigits = 2)` | *F*(1, 28) = 92.47, *p* \< .01 |
+| `format_stats(aov_mpg_cyl_hp, term = "cyl", pzero = TRUE)` | *F*(1, 28) = 92.5, *p* \< 0.001 |
+| `format_stats(aov_mpg_cyl_hp, term = "cyl", italics = FALSE)` | F(1, 28) = 92.5, p \< .001 |
+| `format_stats(aov_mpg_cyl_hp, term = "cyl", dfs = "sub")` | *F*_(1,28) = 92.5, *p* \< .001 |
 
 ### Linear models
 
@@ -243,6 +248,7 @@ can report overall model statistics (e.g., R-squared, AIC) for
 Let’s start by creating some models:
 
 ``` r
+
 lm_mpg_cyl_hp <- lm(mpg ~ cyl * hp, data = mtcars)
 summary(lm_mpg_cyl_hp)
 #> 
@@ -380,12 +386,12 @@ To extract overall model statistics from
 [`format_stats()`](https://jeffreyrstevens.github.io/cocoon/reference/format_stats.md),
 pass the `lm` or `glm` object but omit any terms.
 
-| Code                                        | Output                                         |
-|---------------------------------------------|------------------------------------------------|
-| `format_stats(lm_mpg_cyl_hp)`               | *R*² = 0.757, *F*(3, 28) = 33.113, *p* \< .001 |
-| `format_stats(lm_mpg_cyl_hp, full = FALSE)` | *R*² = 0.757, *p* \< .001                      |
-| `format_stats(glm_am_cyl_hp)`               | Deviance = 28.619, *χ*² = 14.611, AIC = 36.619 |
-| `format_stats(glm_am_cyl_hp, full = FALSE)` | Deviance = 28.619, AIC = 36.619                |
+| Code | Output |
+|----|----|
+| `format_stats(lm_mpg_cyl_hp)` | *R*² = 0.757, *F*(3, 28) = 33.113, *p* \< .001 |
+| `format_stats(lm_mpg_cyl_hp, full = FALSE)` | *R*² = 0.757, *p* \< .001 |
+| `format_stats(glm_am_cyl_hp)` | Deviance = 28.619, *χ*² = 14.611, AIC = 36.619 |
+| `format_stats(glm_am_cyl_hp, full = FALSE)` | Deviance = 28.619, AIC = 36.619 |
 
 To extract term-specific statistics, pass the object and a character
 string describing which term to extract. Apply
@@ -397,18 +403,18 @@ zeros for coefficients and p-values with `pzero = TRUE`. Remove italics
 with `italics = FALSE`. With `dfs`, format degrees of freedom as
 parenthetical (`par`) or subscripts (`sub`) or remove them (`none`).
 
-| Code                                                                 | Output                                               |
-|----------------------------------------------------------------------|------------------------------------------------------|
-| `format_stats(lm_mpg_cyl_hp, term = "cyl")`                          | *β* = -4.119, SE = 0.988, *t* = -4.168, *p* \< .001  |
-| `format_stats(lm_mpg_cyl_hp, term = "cyl:hp")`                       | *β* = 0.020, SE = 0.009, *t* = 2.240, *p* = .033     |
-| `format_stats(glm_am_cyl_hp, term = "cyl")`                          | *β* = -1.749, SE = 0.839, *z* = -2.084, *p* = .037   |
-| `format_stats(lmer_mpg_cyl_hp, term = "hp")`                         | *β* = -0.030, SE = 0.015, *t* = -2.088               |
-| `format_stats(glmer_am_cyl_hp, term = "hp")`                         | *β* = 0.022, SE = 0.017, *z* = 1.300, *p* = .194     |
-| `format_stats(lmer_mpg_cyl_hp2, term = "hp")`                        | *β* = -0.030, SE = 0.015, *t* = -2.088, *p* = .046   |
-| `format_stats(lm_mpg_cyl_hp, term = "cyl", digits = 2, pdigits = 2)` | *β* = -4.12, SE = 0.99, *t* = -4.17, *p* \< .01      |
-| `format_stats(lm_mpg_cyl_hp, term = "cyl", pzero = TRUE)`            | *β* = -4.119, SE = 0.988, *t* = -4.168, *p* \< 0.001 |
-| `format_stats(lm_mpg_cyl_hp, term = "cyl", italics = FALSE)`         | β = -4.119, SE = 0.988, t = -4.168, p \< .001        |
-| `format_stats(lm_mpg_cyl_hp, term = "cyl", dfs = "sub")`             | *β* = -4.119, SE = 0.988, *t* = -4.168, *p* \< .001  |
+| Code | Output |
+|----|----|
+| `format_stats(lm_mpg_cyl_hp, term = "cyl")` | *β* = -4.119, SE = 0.988, *t* = -4.168, *p* \< .001 |
+| `format_stats(lm_mpg_cyl_hp, term = "cyl:hp")` | *β* = 0.020, SE = 0.009, *t* = 2.240, *p* = .033 |
+| `format_stats(glm_am_cyl_hp, term = "cyl")` | *β* = -1.749, SE = 0.839, *z* = -2.084, *p* = .037 |
+| `format_stats(lmer_mpg_cyl_hp, term = "hp")` | *β* = -0.030, SE = 0.015, *t* = -2.088 |
+| `format_stats(glmer_am_cyl_hp, term = "hp")` | *β* = 0.022, SE = 0.017, *z* = 1.300, *p* = .194 |
+| `format_stats(lmer_mpg_cyl_hp2, term = "hp")` | *β* = -0.030, SE = 0.015, *t* = -2.088, *p* = .046 |
+| `format_stats(lm_mpg_cyl_hp, term = "cyl", digits = 2, pdigits = 2)` | *β* = -4.12, SE = 0.99, *t* = -4.17, *p* \< .01 |
+| `format_stats(lm_mpg_cyl_hp, term = "cyl", pzero = TRUE)` | *β* = -4.119, SE = 0.988, *t* = -4.168, *p* \< 0.001 |
+| `format_stats(lm_mpg_cyl_hp, term = "cyl", italics = FALSE)` | β = -4.119, SE = 0.988, t = -4.168, p \< .001 |
+| `format_stats(lm_mpg_cyl_hp, term = "cyl", dfs = "sub")` | *β* = -4.119, SE = 0.988, *t* = -4.168, *p* \< .001 |
 
 ### Bayes factors
 
@@ -433,6 +439,7 @@ which (or below 1/cutoff) the returned value is truncated (e.g., BF \>
 1000).
 
 ``` r
+
 bf_corr <- BayesFactor::correlationBF(mtcars$mpg, mtcars$disp)
 bf_ttest <- BayesFactor::ttestBF(mtcars$vs, mtcars$am)
 bf_lm <- BayesFactor::lmBF(mpg ~ am, data = mtcars)
@@ -454,13 +461,13 @@ the label. Italics can be removed with `italics = FALSE`, and the
 subscript can be set to 01 (`subscript = "01"`) or removed
 (`subscript = ""`).
 
-| Code                                                                           | Output              |
-|--------------------------------------------------------------------------------|---------------------|
-| `format_stats(bf_lm)`                                                          | *BF*₁₀ = 87.3       |
-| `format_stats(bf_lm, italics = FALSE)`                                         | BF₁₀ = 87.3         |
-| `format_stats(bf_lm, subscript = "")`                                          | *BF* = 87.3         |
+| Code | Output |
+|----|----|
+| `format_stats(bf_lm)` | *BF*₁₀ = 87.3 |
+| `format_stats(bf_lm, italics = FALSE)` | BF₁₀ = 87.3 |
+| `format_stats(bf_lm, subscript = "")` | *BF* = 87.3 |
 | `format_stats(bf_lm, label = "Bayes factor", italics = FALSE, subscript = "")` | Bayes factor = 87.3 |
-| `format_stats(bf_lm, label = "")`                                              | 87.3                |
+| `format_stats(bf_lm, label = "")` | 87.3 |
 
 ## Formatting statistical values
 
@@ -495,12 +502,12 @@ And if you don’t want to include error, use
 or
 [`format_median()`](https://jeffreyrstevens.github.io/cocoon/reference/format_summary.md).
 
-| Code                                       | Output                            |
-|--------------------------------------------|-----------------------------------|
+| Code | Output |
+|----|----|
 | `format_summary(mtcars$mpg, error = "ci")` | *M* = 20.1, 95% CI \[17.9, 22.3\] |
-| `format_meanci(mtcars$mpg)`                | *M* = 20.1, 95% CI \[17.9, 22.3\] |
-| `format_medianiqr(mtcars$mpg)`             | *Mdn* = 19.2 (*IQR* = 7.4)        |
-| `format_mean(mtcars$mpg)`                  | *M* = 20.1                        |
+| `format_meanci(mtcars$mpg)` | *M* = 20.1, 95% CI \[17.9, 22.3\] |
+| `format_medianiqr(mtcars$mpg)` | *Mdn* = 19.2 (*IQR* = 7.4) |
+| `format_mean(mtcars$mpg)` | *M* = 20.1 |
 
 #### Pre-calculated summaries
 
@@ -544,14 +551,14 @@ The presence of the error label is controlled by the logical argument
 confidence intervals, the `cilevel` argument takes a numeric scalar from
 0-1 to define the confidence level.
 
-| Code                                            | Output                            |
-|-------------------------------------------------|-----------------------------------|
-| `format_meanci(mtcars$mpg)`                     | *M* = 20.1, 95% CI \[17.9, 22.3\] |
-| `format_meanci(mtcars$mpg, display = "pm")`     | *M* = 20.1 ± 2.2                  |
-| `format_meanci(mtcars$mpg, display = "par")`    | *M* = 20.1 (95% CI = 2.2)         |
-| `format_meanci(mtcars$mpg, display = "none")`   | *M* = 20.1                        |
-| `format_meanci(mtcars$mpg, errorlabel = FALSE)` | *M* = 20.1, \[17.9, 22.3\]        |
-| `format_meanci(mtcars$mpg, cilevel = 0.90)`     | *M* = 20.1, 90% CI \[18.3, 21.9\] |
+| Code | Output |
+|----|----|
+| `format_meanci(mtcars$mpg)` | *M* = 20.1, 95% CI \[17.9, 22.3\] |
+| `format_meanci(mtcars$mpg, display = "pm")` | *M* = 20.1 ± 2.2 |
+| `format_meanci(mtcars$mpg, display = "par")` | *M* = 20.1 (95% CI = 2.2) |
+| `format_meanci(mtcars$mpg, display = "none")` | *M* = 20.1 |
+| `format_meanci(mtcars$mpg, errorlabel = FALSE)` | *M* = 20.1, \[17.9, 22.3\] |
+| `format_meanci(mtcars$mpg, cilevel = 0.90)` | *M* = 20.1, 90% CI \[18.3, 21.9\] |
 
 ### P-values
 
@@ -587,19 +594,19 @@ package, sometimes you may have Bayes factors from other sources. The
 function formats Bayes factors from numeric values (either single scalar
 elements or vectors).
 
-| Code                                                                       | Output                          |
-|----------------------------------------------------------------------------|---------------------------------|
-| `format_bf(4321)`                                                          | *BF*₁₀ = 4.3×10³                |
-| `format_bf(4321, digits1 = 2)`                                             | *BF*₁₀ = 4.32×10³               |
-| `format_bf(4321, cutoff = 1000)`                                           | *BF*₁₀ \> 1000                  |
-| `format_bf(0.04321)`                                                       | *BF*₁₀ = 0.04                   |
-| `format_bf(0.04321, digits2 = 3)`                                          | *BF*₁₀ = 0.043                  |
-| `format_bf(0.04321, cutoff = 10)`                                          | *BF*₁₀ \< 0.10                  |
-| `format_bf(4321, italics = FALSE)`                                         | BF₁₀ = 4.3×10³                  |
-| `format_bf(4321, subscript = "")`                                          | *BF* = 4.3×10³                  |
-| `format_bf(4321, label = "Bayes factor", italics = FALSE, subscript = "")` | Bayes factor = 4.3×10³          |
-| `format_bf(4321, label = "")`                                              | 4.3×10³                         |
-| `format_bf(c(4321, 0.04321))`                                              | *BF*₁₀ = 4.3×10³, *BF*₁₀ = 0.04 |
+| Code | Output |
+|----|----|
+| `format_bf(4321)` | *BF*₁₀ = 4.3×10³ |
+| `format_bf(4321, digits1 = 2)` | *BF*₁₀ = 4.32×10³ |
+| `format_bf(4321, cutoff = 1000)` | *BF*₁₀ \> 1000 |
+| `format_bf(0.04321)` | *BF*₁₀ = 0.04 |
+| `format_bf(0.04321, digits2 = 3)` | *BF*₁₀ = 0.043 |
+| `format_bf(0.04321, cutoff = 10)` | *BF*₁₀ \< 0.10 |
+| `format_bf(4321, italics = FALSE)` | BF₁₀ = 4.3×10³ |
+| `format_bf(4321, subscript = "")` | *BF* = 4.3×10³ |
+| `format_bf(4321, label = "Bayes factor", italics = FALSE, subscript = "")` | Bayes factor = 4.3×10³ |
+| `format_bf(4321, label = "")` | 4.3×10³ |
+| `format_bf(c(4321, 0.04321))` | *BF*₁₀ = 4.3×10³, *BF*₁₀ = 0.04 |
 
 ## Formatting numbers
 

@@ -2,6 +2,8 @@
 
 ## cocoon 0.3.0
 
+CRAN release: 2026-02-07
+
 - Add format_stats() methods for
   [`chisq.test()`](https://rdrr.io/r/stats/chisq.test.html)
 

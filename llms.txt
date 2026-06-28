@@ -22,6 +22,7 @@ You can install the stable released version of
 [CRAN](https://cran.r-project.org/package=cocoon) with:
 
 ``` r
+
 install.packages("cocoon")
 ```
 
@@ -30,6 +31,7 @@ You can install the development version of
 [GitHub](https://github.com/) with:
 
 ``` r
+
 # install.packages("remotes")
 remotes::install_github("JeffreyRStevens/cocoon")
 ```
@@ -39,6 +41,7 @@ remotes::install_github("JeffreyRStevens/cocoon")
 For an example, we’ll create a correlation from the `mtcars` data set.
 
 ``` r
+
 library(cocoon)
 (cars_corr <- cor.test(mtcars$mpg, mtcars$disp))
 #> 

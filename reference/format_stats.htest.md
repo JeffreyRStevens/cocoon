@@ -110,10 +110,9 @@ Other functions for printing statistical objects:
 test_chisq <- chisq.test(c(A = 20, B = 15, C = 25))
 test_corr <- cor.test(mtcars$mpg, mtcars$cyl)
 test_corr2 <- cor.test(mtcars$mpg, mtcars$cyl, method = "kendall")
-#> Warning: Cannot compute exact p-value with ties
+#> Warning: cannot compute exact p-value with ties
 test_ttest <- t.test(mtcars$vs, mtcars$am)
 test_ttest2 <- wilcox.test(mtcars$vs, mtcars$am)
-#> Warning: cannot compute exact p-value with ties
 
 # Format Chi-squared test
 format_stats(test_chisq)
@@ -149,5 +148,5 @@ format_stats(test_ttest, dfs = "none", mean = "word")
 
 # Format for LaTeX
 format_stats(test_ttest2, type = "latex")
-#> [1] "$W$ = 528.0, $p$ = .808"
+#> [1] "$W$ = 528.0, $p$ = 1.000"
 ```
