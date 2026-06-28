@@ -266,14 +266,14 @@ test_that("formatting t-tests works properly", {
   )
   suppressMessages(expect_equal(
     format_stats(test_ttest3),
-    "_V_ = 27.0, _p_ = .634"
+    "_V_ = 32.0, _p_ = .664"
   ))
   suppressMessages(expect_equal(
     format_stats(test_ttest4),
-    "_W_ = 40.5, _p_ = .495"
+    "_W_ = 40.5, _p_ = .510"
   ))
   suppressMessages(expect_equal(
     format_stats(test_ttest5),
-    "_W_ = 40.5, _p_ = .323"
+    "_W_ = 40.5, _p_ = .330"
   ))
 })
