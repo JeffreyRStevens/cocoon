@@ -1,5 +1,14 @@
 # Changelog
 
+## cocoon 0.3.1
+
+- Fix changes in
+  [`wilcox.test()`](https://rdrr.io/r/stats/wilcox.test.html) coming in
+  devel versions of R. Changed test case to `exact = TRUE` because in
+  the devel version, “`exact = FALSE` always computes the asymptotic
+  approximation of the conditional/permutation distribution, using the
+  same test statistic in both cases”.
+
 ## cocoon 0.3.0
 
 CRAN release: 2026-02-07

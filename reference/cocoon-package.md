@@ -18,3 +18,8 @@ Useful links:
 
 **Maintainer**: Jeffrey R. Stevens <jeffrey.r.stevens@protonmail.com>
 ([ORCID](https://orcid.org/0000-0003-2375-1360)) \[copyright holder\]
+
+Authors:
+
+- Jeffrey R. Stevens <jeffrey.r.stevens@protonmail.com>
+  ([ORCID](https://orcid.org/0000-0003-2375-1360)) \[copyright holder\]

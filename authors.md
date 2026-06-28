@@ -11,14 +11,14 @@
 Source:
 [`inst/CITATION`](https://github.com/JeffreyRStevens/cocoon/blob/main/inst/CITATION)
 
-Stevens JR (2025). *cocoon: Extract, format, and print statistical
-output*. R package version 0.3.0,
+Stevens JR (2026). *cocoon: Extract, format, and print statistical
+output*. R package version 0.3.1,
 <https://github.com/JeffreyRStevens/cocoon>.
 
     @Manual{,
       title = {cocoon: Extract, format, and print statistical output},
       author = {Jeffrey R. Stevens},
-      year = {2025},
-      note = {R package version 0.3.0},
+      year = {2026},
+      note = {R package version 0.3.1},
       url = {https://github.com/JeffreyRStevens/cocoon},
     }
