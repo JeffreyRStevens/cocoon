@@ -1,3 +1,7 @@
+# cocoon 0.3.1
+
+* Fix changes in `wilcox.test()` coming in devel versions of R. Changed test case to `exact = TRUE` because in the devel version, "`exact = FALSE` always computes the asymptotic approximation of the conditional/permutation distribution, using the same test statistic in both cases".
+
 # cocoon 0.3.0
 
 * Add format_stats() methods for `chisq.test()`
