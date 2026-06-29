@@ -9,7 +9,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/JeffreyRStevens/cocoon/blob/main/inst/CITATION)
+[`inst/CITATION`](https://github.com/JeffreyRStevens/cocoon/blob/v0.3.1/inst/CITATION)
 
 Stevens JR (2026). *cocoon: Extract, format, and print statistical
 output*. R package version 0.3.1,

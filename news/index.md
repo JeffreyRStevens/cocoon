@@ -2,6 +2,8 @@
 
 ## cocoon 0.3.1
 
+CRAN release: 2026-06-28
+
 - Fix changes in
   [`wilcox.test()`](https://rdrr.io/r/stats/wilcox.test.html) coming in
   devel versions of R. Changed test case to `exact = TRUE` because in
