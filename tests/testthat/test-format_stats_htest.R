@@ -153,8 +153,16 @@ test_that("formatting correlations works properly", {
     "_τ_ = 1.00, _p_ < .001"
   )
   expect_equal(
+    format_stats(cor.test(df$a, df$b, method = "kendall"), type = "latex"),
+    "$\\tau$ = 1.00, $p$ < .001"
+  )
+  expect_equal(
     format_stats(cor.test(df$a, df$b, method = "spearman")),
     "_ρ_ = 1.00, _p_ < .001"
+  )
+  expect_equal(
+    format_stats(cor.test(df$a, df$b, method = "spearman"), type = "latex"),
+    "$\\rho$ = 1.00, $p$ < .001"
   )
 })
 

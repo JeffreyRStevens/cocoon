@@ -42,19 +42,15 @@ format_chisq <- function(
   # Build label
 
   stat_label <- dplyr::case_when(
-    !italics & identical(type, "md") ~
-      "\u03C7\U00B2",
-    !italics & identical(type, "latex") ~
-      "\\textchi$^{2}$",
-    identical(type, "md") ~
-      "\uD835\uDF12\U00B2",
+    !italics & identical(type, "md") ~ "\u03C7\U00B2",
+    !italics & identical(type, "latex") ~ "\\textchi$^{2}$",
+    identical(type, "md") ~ "\uD835\uDF12\U00B2",
     identical(type, "latex") ~
       format_chr("\\chi^{2}", italics = italics, type = type),
   )
 
   stat_label <- dplyr::case_when(
-    identical(dfs, "par") ~
-      paste0(stat_label, "(", df, ")"),
+    identical(dfs, "par") ~ paste0(stat_label, "(", df, ")"),
     identical(dfs, "sub") & identical(type, "md") ~
       paste0(stat_label, "~", df, "~"),
     identical(dfs, "sub") & identical(type, "latex") ~
@@ -136,8 +132,7 @@ format_corr <- function(x, digits, pdigits, pzero, full, italics, type, ...) {
 
   # Build label
   stat_label <- dplyr::case_when(
-    !italics & identical(corr_method, "pearson") ~
-      "r",
+    !italics & identical(corr_method, "pearson") ~ "r",
     !italics & identical(corr_method, "spearman") & identical(type, "md") ~
       "\u03C1",
     !italics & identical(corr_method, "spearman") & identical(type, "latex") ~
@@ -148,13 +143,13 @@ format_corr <- function(x, digits, pdigits, pzero, full, italics, type, ...) {
       "\\texttau",
     identical(corr_method, "pearson") ~
       format_chr("r", italics = italics, type = type),
-    identical(corr_method, "kendall") & identical(type, "md") ~
-      format_chr("\u03C4", italics = italics, type = type),
-    identical(corr_method, "kendall") & identical(type, "latex") ~
-      format_chr("\\rho", italics = italics, type = type),
     identical(corr_method, "spearman") & identical(type, "md") ~
       format_chr("\u03C1", italics = italics, type = type),
     identical(corr_method, "spearman") & identical(type, "latex") ~
+      format_chr("\\rho", italics = italics, type = type),
+    identical(corr_method, "kendall") & identical(type, "md") ~
+      format_chr("\u03C4", italics = italics, type = type),
+    identical(corr_method, "kendall") & identical(type, "latex") ~
       format_chr("\\tau", italics = italics, type = type)
   )
 
@@ -243,8 +238,7 @@ format_ttest <- function(
     identical(type, "latex") ~ paste0("$", statlab, "$")
   )
   stat_label <- dplyr::case_when(
-    identical(dfs, "par") ~
-      paste0(stat_label, "(", df, ")"),
+    identical(dfs, "par") ~ paste0(stat_label, "(", df, ")"),
     identical(dfs, "sub") & identical(type, "md") ~
       paste0(stat_label, "~", df, "~"),
     identical(dfs, "sub") & identical(type, "latex") ~
@@ -375,11 +369,12 @@ format_bf <- function(
   if (is.null(cutoff)) {
     bf_value <- dplyr::case_when(
       bf >= 1000 ~ format_scientific(bf, digits = digits1, type = type),
-      bf <= 1 / 10^digits2 ~ format_scientific(
-        bf,
-        digits = digits1,
-        type = type
-      ),
+      bf <= 1 / 10^digits2 ~
+        format_scientific(
+          bf,
+          digits = digits1,
+          type = type
+        ),
       bf >= 1 ~ format_num(bf, digits = digits1),
       bf < 1 ~ format_num(bf, digits = digits2)
     )
@@ -486,14 +481,11 @@ format_p <- function(
   operator <- ifelse(label != "" & x < cutoff, " < ", operator)
   ## Format pvalue
   pvalue <- dplyr::case_when(
-    x < cutoff & pzero ~
-      as.character(as.numeric(paste0("1e-", digits))),
+    x < cutoff & pzero ~ as.character(as.numeric(paste0("1e-", digits))),
     x < cutoff & !pzero ~
       sub("0\\.", "\\.", as.character(as.numeric(paste0("1e-", digits)))),
-    x >= cutoff & pzero ~
-      format_num(x, digits = digits),
-    x >= cutoff & !pzero ~
-      sub("0\\.", "\\.", format_num(x, digits = digits))
+    x >= cutoff & pzero ~ format_num(x, digits = digits),
+    x >= cutoff & !pzero ~ sub("0\\.", "\\.", format_num(x, digits = digits))
   )
   paste0(p_lab, operator, pvalue)
 }
