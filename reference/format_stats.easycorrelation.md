@@ -107,5 +107,5 @@ format_stats(test_corr, digits = 3, pdigits = 4, pzero = TRUE)
 
 # Format Kendall's tau for LaTeX
 format_stats(test_corr2, type = "latex")
-#> [1] "$\\rho$ = -.77, $p$ < .001"
+#> [1] "$\\tau$ = -.77, $p$ < .001"
 ```
